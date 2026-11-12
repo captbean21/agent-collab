@@ -2,56 +2,61 @@
   {
     "source": "memory/2026-11-08.md",
     "text": "- **Verdict:** \u2705 Viable with 48-64GB RAM; Unsloth recommended (2-5\u00d7 faster CPU)",
-    "captured": "2026-11-12T21:10:48.250864"
+    "captured": "2026-11-12T21:10:51.293785"
   },
   {
     "source": "memory/2026-11-08.md",
     "text": "- **Verdict:** VIABLE on P2200 via CUDA 12 engine with `STRATA_EXPERIMENTAL_SM60=ON` (Pascal sm_61 supported)",
-    "captured": "2026-11-12T21:10:48.250913"
+    "captured": "2026-11-12T21:10:51.293834"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Bare-metal chosen per searxng-plan.md (Francis proofed 2026-10-28)",
-    "captured": "2026-11-12T21:10:48.251561"
+    "captured": "2026-11-12T21:10:51.294406"
+  },
+  {
+    "source": "git",
+    "text": "4b10f6f continuity: state capture 2026-11-12T21:10:48.262316",
+    "captured": "2026-11-12T21:10:51.297181"
   },
   {
     "source": "git",
     "text": "f8852d0 continuity: state capture 2026-11-12T21:10:26.604334",
-    "captured": "2026-11-12T21:10:48.254125"
+    "captured": "2026-11-12T21:10:51.297185"
   },
   {
     "source": "git",
     "text": "7d38a6b continuity: state capture 2026-11-12T21:10:06.533511",
-    "captured": "2026-11-12T21:10:48.254130"
+    "captured": "2026-11-12T21:10:51.297187"
   },
   {
     "source": "git",
     "text": "e82d927 continuity: state capture 2026-11-12T21:09:50.920419",
-    "captured": "2026-11-12T21:10:48.254132"
+    "captured": "2026-11-12T21:10:51.297188"
   },
   {
     "source": "git",
     "text": "c4af66a continuity: state capture 2026-11-12T21:09:33.502096",
-    "captured": "2026-11-12T21:10:48.254133"
+    "captured": "2026-11-12T21:10:51.297189"
   },
   {
     "source": "git",
     "text": "5456850 continuity: state capture 2026-11-12T21:07:43.030834",
-    "captured": "2026-11-12T21:10:48.254135"
+    "captured": "2026-11-12T21:10:51.297191"
   },
   {
     "source": "git",
     "text": "256e3ed gitignore: track .claude/state JSON (daemon contract); exclude transient diff patch; drop stray probe artifact",
-    "captured": "2026-11-12T21:10:48.254136"
+    "captured": "2026-11-12T21:10:51.297192"
   },
   {
     "source": "git",
     "text": "2280471 continuity: state capture 2026-11-12T21:06:46.280317",
-    "captured": "2026-11-12T21:10:48.254137"
+    "captured": "2026-11-12T21:10:51.297193"
   },
   {
     "source": "git",
     "text": "996f1e5 baseline: import workspace (gitignore excludes models/, *.wav, venvs, logs/, .claude/)",
-    "captured": "2026-11-12T21:10:48.254138"
+    "captured": "2026-11-12T21:10:51.297194"
   }
 ]
