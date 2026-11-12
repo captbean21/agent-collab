@@ -2,21 +2,31 @@
   {
     "source": "memory/2026-11-08.md",
     "text": "- **Verdict:** \u2705 Viable with 48-64GB RAM; Unsloth recommended (2-5\u00d7 faster CPU)",
-    "captured": "2026-11-12T21:06:46.272069"
+    "captured": "2026-11-12T21:07:43.020968"
   },
   {
     "source": "memory/2026-11-08.md",
     "text": "- **Verdict:** VIABLE on P2200 via CUDA 12 engine with `STRATA_EXPERIMENTAL_SM60=ON` (Pascal sm_61 supported)",
-    "captured": "2026-11-12T21:06:46.272118"
+    "captured": "2026-11-12T21:07:43.021018"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Bare-metal chosen per searxng-plan.md (Francis proofed 2026-10-28)",
-    "captured": "2026-11-12T21:06:46.272716"
+    "captured": "2026-11-12T21:07:43.021623"
+  },
+  {
+    "source": "git",
+    "text": "256e3ed gitignore: track .claude/state JSON (daemon contract); exclude transient diff patch; drop stray probe artifact",
+    "captured": "2026-11-12T21:07:43.024073"
+  },
+  {
+    "source": "git",
+    "text": "2280471 continuity: state capture 2026-11-12T21:06:46.280317",
+    "captured": "2026-11-12T21:07:43.024078"
   },
   {
     "source": "git",
     "text": "996f1e5 baseline: import workspace (gitignore excludes models/, *.wav, venvs, logs/, .claude/)",
-    "captured": "2026-11-12T21:06:46.275019"
+    "captured": "2026-11-12T21:07:43.024080"
   }
 ]
