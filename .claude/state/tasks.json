@@ -2,251 +2,251 @@
   {
     "source": "memory/2026-11-12.md",
     "text": "- Tried `rook-research` equivalent via `research/run_research_hybrid.py` (timer exists but runner log never created; ran manually). Topics hit: context-window-management, config-drift-detection, self-correction-loops.",
-    "captured": "2026-11-12T22:50:51.782405"
+    "captured": "2026-11-12T22:55:51.806886"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Cleaned junk appended by unfiltered generic fetches (rgvcontractors contractor page, abc.net.au login page, duplicate RIVA 2603.02345v1 abstract, duplicate 18:05 section) before posting summary.",
-    "captured": "2026-11-12T22:50:51.782406"
+    "captured": "2026-11-12T22:55:51.806887"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Lesson: hybrid runner trusts SearXNG results blindly \u2014 non-arxiv generic fetches append login/spam pages as \"findings\"; needs a relevance/domain filter or fetch-quality gate before append. Low-relevance arXiv items are correctly abstract-only.",
-    "captured": "2026-11-12T22:50:51.782408"
+    "captured": "2026-11-12T22:55:51.806889"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- My 13:30 wind-down claims (\"no GPU usable\", \"mode-000 nodes\", \"CPU-only build\") were STALE \u2014 never re-ran nvidia-smi / unit check before reporting. The 12:45 and 13:10 entries already had GPU passthrough RESOLVED & VERIFIED (Bean/Antigravity).",
-    "captured": "2026-11-12T22:50:51.782409"
+    "captured": "2026-11-12T22:55:51.806891"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Verified live truth: llama.cpp rebuilt `GGML_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES=61`, `libggml-cuda.so` + CMakeCache confirm; deepseek-coder active since 12:38 (PID 6837) with `--fit on --spec-draft-ngl 99 -c 8192 --parallel 2`; nvidia-smi works (driver 550.163.01, P2200, 1663 MiB); SearXNG serves on 8888 (HTML + JSON ok); `rook-research.service` oneshot ran twice (13:50 + 18:04) producing `logs/research-runner.log` + updated `research/.research_state.json`; uwsgi-app@searxng was deliberately purged by Bean \u2014 not broken.",
-    "captured": "2026-11-12T22:50:51.782411"
+    "captured": "2026-11-12T22:55:51.806893"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Lesson logged: verify LIVE before reporting; memory is not authoritative without a check. `live-state-verification` skill created for this.",
-    "captured": "2026-11-12T22:50:51.782413"
+    "captured": "2026-11-12T22:55:51.806894"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Hardened `spikes/001-session-continuity-daemon/daemon.py`: excluded `.claude`/`.git`/`logs`/`__pycache__`/`node_modules` from watcher, debounce 5s, periodic capture every 300s (was 10s commit storm), empty captures skip git commit.",
-    "captured": "2026-11-12T22:50:51.782415"
+    "captured": "2026-11-12T22:55:51.806896"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Installed unit: unit copied to `/etc/systemd/system/`, `daemon-reload`, `enable --now`. Active since 13:49:53 (PID 8999); captures ticking (`.claude/state/metadata.json` updated 20:04).",
-    "captured": "2026-11-12T22:50:51.782416"
+    "captured": "2026-11-12T22:55:51.806898"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- `logs/research-runner.log`: first run 13:50, second 18:04 \u2014 both RC=0, appended real findings. 18:04 timer run confirmed via journal.",
-    "captured": "2026-11-12T22:50:51.782418"
+    "captured": "2026-11-12T22:55:51.806900"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- `run_research_hybrid.py`: plain `python3` for web_fetch subprocess changed to `sys.executable`.",
-    "captured": "2026-11-12T22:50:51.782419"
+    "captured": "2026-11-12T22:55:51.806901"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- ROOT CAUSE of missing log: file did not exist until first manual start; service had never run since timer enabled 13:10.",
-    "captured": "2026-11-12T22:50:51.782421"
+    "captured": "2026-11-12T22:55:51.806903"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Git backing is a NO-OP: workspace is NOT a git repo (git rev-parse rc=128), `git user.name`/`user.email` both unset globally, daemon's git section is silently swallowed by `try/except`. State capture works; commit history does not.",
-    "captured": "2026-11-12T22:50:51.782422"
+    "captured": "2026-11-12T22:55:51.806904"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- `session-continuity` skill updated with the two pitfalls (root-owned cron logs, silent daemon journal).",
-    "captured": "2026-11-12T22:50:51.782424"
+    "captured": "2026-11-12T22:55:51.806906"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- (1) no git backing fix: git init + .gitignore (exclude models/ 12G of 29G workspace, *.wav, *.tar.gz, venv, logs) + repo-local identity only; ~50 small commits/day; rollback = rm -rf .git.",
-    "captured": "2026-11-12T22:50:51.782426"
+    "captured": "2026-11-12T22:55:51.806908"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- (2) root-owned `logs/research-runner.log` (644 root:root): minimal fix `chown rook:rook logs/research-runner.log`; permanent fix drop `StandardOutput=append:` + shell redirect as rook, `StandardOutput=null`, unit edit + daemon-reload.",
-    "captured": "2026-11-12T22:50:51.782427"
+    "captured": "2026-11-12T22:55:51.806910"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- (3) daemon prints buffered \u2192 journal empty: add `Environment=PYTHONUNBUFFERED=1` + restart; alternative flush=True in code.",
-    "captured": "2026-11-12T22:50:51.782429"
+    "captured": "2026-11-12T22:55:51.806912"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- None applied \u2014 no Bean go-ahead yet. `--summarize` deliberately left OUT of timer/runner until Bean enables it.",
-    "captured": "2026-11-12T22:50:51.782430"
+    "captured": "2026-11-12T22:55:51.806913"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- `research/topics.txt`: added 4th field `search_query` (technical phrasing); kept notes as scoring keywords.",
-    "captured": "2026-11-12T22:50:51.782432"
+    "captured": "2026-11-12T22:55:51.806915"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- `run_research_hybrid.py` changes:",
-    "captured": "2026-11-12T22:50:51.782434"
+    "captured": "2026-11-12T22:55:51.806917"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- `SEARXNG /search?categories=science`; allowlist ALLOWED_HOSTS (arxiv, doi.org, semanticscholar.org, openreview.net, aclanthology.org, proceedings.mlr.press, dl.acm.org, ieeexplore.ieee.org, openalex/crossref/europepmc, openaccess.thecvf.com, papers.neurips.cc, **youtube.com/youtu.be ALLOWED** \u2014 Bean wants future channel monitoring for financial episodes, do NOT blacklist YouTube).",
-    "captured": "2026-11-12T22:50:51.782436"
+    "captured": "2026-11-12T22:55:51.806919"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Dedup via state key `seen` (canonical: arxiv:<id-no-version> or host+path).",
-    "captured": "2026-11-12T22:50:51.782438"
+    "captured": "2026-11-12T22:55:51.806921"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- `relevance_score` keyword weighting with GENERIC_TERMS stopout; `rerank_score` = max(keyword, LLM).",
-    "captured": "2026-11-12T22:50:51.782440"
+    "captured": "2026-11-12T22:55:51.806923"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- `llm_relevance` calls DeepSeek 5001 for 0-3 rating; falls back to keyword score on failure. `--no-llm` opt-out.",
-    "captured": "2026-11-12T22:50:51.782441"
+    "captured": "2026-11-12T22:55:51.806924"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Two-phase: score all candidates, deep-fetch ONLY top 2 (score>=2); rest get abstracts.",
-    "captured": "2026-11-12T22:50:51.782443"
+    "captured": "2026-11-12T22:55:51.806926"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- CLI flags: `--topic <slug>`, `--dry-run`, `--limit` (default 8), `--top` (default 3), `--summarize`, `--no-llm`.",
-    "captured": "2026-11-12T22:50:51.782444"
+    "captured": "2026-11-12T22:55:51.806928"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- `sys.executable` fix landed 13:49; `crontab`/timer unchanged (18:04 already ran; next 00:04 UTC).",
-    "captured": "2026-11-12T22:50:51.782446"
+    "captured": "2026-11-12T22:55:51.806929"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Backups: `research/run_research_hybrid.py.bak.1794515530`, `research/topics.txt.bak.1794515530`.",
-    "captured": "2026-11-12T22:50:51.782448"
+    "captured": "2026-11-12T22:55:51.806931"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Test results: `--topic session-continuity --dry-run` \u2192 8 arXiv-heavy results, keywords score 0\u2192 rebuilt; `--topic self-correction-loops --dry-run --summarize` \u2192 keyword score 0 flawed (abstract lacks literal \"self-consistency\"); LLM rerank returned **3 for ALL 8 papers** \u2014 flat-lines, no discrimination; `2310.01798 (LLMs Cannot Self-Correct)` score 0 keyword yet LLM says 3.",
-    "captured": "2026-11-12T22:50:51.782449"
+    "captured": "2026-11-12T22:55:51.806933"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Real run `--topic self-correction-loops --summarize` (20:39): wrote 8 findings, appended FULL entry for 2601.00828 but contained `[Summarizer Fallback: timed out]` + raw page text: `web_fetch.py` 45s httpx timeout vs ~8k chars is too small for DeepSeek-Coder on P2200. `--summarize` as currently wired = silently degrades to raw content.",
-    "captured": "2026-11-12T22:50:51.782451"
+    "captured": "2026-11-12T22:55:51.806934"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Honest status: triage plumbing = PASS (8/8 arXiv, no wiki/election junk); summary quality = FAIL (timeout); LLM calibration = FAIL (flat 3s); deep-fetch cap worked (top 2 only).",
-    "captured": "2026-11-12T22:50:51.782452"
+    "captured": "2026-11-12T22:55:51.806936"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Next fixes proposed, awaiting Bean: raise web_fetch summarizer timeout to ~150s + cut payload to first ~3000 chars; re-prompt 2-shot 0-3 rubric or default `--no-llm` until calibrated; one more real topic to confirm stability.",
-    "captured": "2026-11-12T22:50:51.782454"
+    "captured": "2026-11-12T22:55:51.806937"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- YouTube must stay allowed; future work = monitor followed channels, scrape, push financial-episode overviews (Bean request; summarizer currently broken for that size \u2014 fix timeout first).",
-    "captured": "2026-11-12T22:50:51.782455"
+    "captured": "2026-11-12T22:55:51.806939"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- `research-runner.log`, state, timers, units, uwsgi, deepseek-coder, GPU: left unchanged. The 3 pending DRAFT fixes from 20:09 still await approval.",
-    "captured": "2026-11-12T22:50:51.782457"
+    "captured": "2026-11-12T22:55:51.806940"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- `tools/web_fetch.py`: summarize path now sends only the first **3000 chars** (was 25k prompt with full content), httpx timeout **45s \u2192 180s**, `max_tokens` 1024 \u2192 512, docstring/help text corrected (engine is DeepSeek-Coder-V2-Lite on 5001, not \"Qwen 3B\"). Live test: `arxiv.org/abs/2601.00828v1 --summarize` \u2192 real structured summary in **~42s** (previously always fell back to raw content).",
-    "captured": "2026-11-12T22:50:51.782459"
+    "captured": "2026-11-12T22:55:51.806942"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- `run_research_hybrid.py`: subprocess budget **90s \u2192 210s** when `--summarize` (90s otherwise). `llm_relevance` kept but **opt-in only** (`--llm`) \u2014 local DeepSeek emits `3` for unrelated abstracts (verified wing-CFD probe); `--no-llm` replaced by default-off, keyword scorer authoritative. `rerank_score(use_llm=False)` default.",
-    "captured": "2026-11-12T22:50:51.782460"
+    "captured": "2026-11-12T22:55:51.806944"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Keyword scorer made synonym-aware (self-consistent/self-correct/reflection family +1.5 weight per family hit) + now also scores `search` query tokens, not just notes. Calibration after fix: 2310.01798\u21923, 2601.00828\u21922, 2402.07087\u21922, 2502.19613\u21923 (was all 0).",
-    "captured": "2026-11-12T22:50:51.782462"
+    "captured": "2026-11-12T22:55:51.806945"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- New dry-runs: `self-correction-loops --dry-run` \u2192 **no usable results** (confirms state `seen` dedup from 20:39 run works; not a bug). `argument-mapping --dry-run` \u2192 fresh 8 arXiv results, scores 2\u20133, top-2 deep fetch honoured, 0 writes. 20:39 real run stays appended in `self-correction-loops.md` with a degraded FULL entry (timed-out summarizer fallback) \u2014 leave in place.",
-    "captured": "2026-11-12T22:50:51.782463"
+    "captured": "2026-11-12T22:55:51.806947"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- LLM rerank honest status: **still uncalibrated**, now default OFF; do NOT re-enable without re-testing wing-CFD probe against a candidate prompt.",
-    "captured": "2026-11-12T22:50:51.782465"
+    "captured": "2026-11-12T22:55:51.806948"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- RESEARCH_TOOLS_GUIDE.md updated: topics.txt 4-field format, `--summarize` semantics + real cost (~40s), runner quality flags (`--dry-run`, `--topic`, `--limit`, `--llm`), allowlist incl. YouTube.",
-    "captured": "2026-11-12T22:50:51.782466"
+    "captured": "2026-11-12T22:55:51.806950"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- YouTube deliberately remains ALLOWED in the science SearXNG allowlist (Bean: future channel monitoring \u2192 scrape \u2192 push financial-episode overviews). Nothing blacklisted.",
-    "captured": "2026-11-12T22:50:51.782468"
+    "captured": "2026-11-12T22:55:51.806952"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Still pending Bean approval: the 3 DRAFT fixes (git baseline, root-owned log chown/permanent unit fix, PYTHONUNBUFFERED). Timer unchanged (next run 00:04 UTC); timer itself does NOT pass `--summarize`.",
-    "captured": "2026-11-12T22:50:51.782469"
+    "captured": "2026-11-12T22:55:51.806953"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Real run `--topic argument-mapping --summarize` (20:51): PASS for plumbing \u2014 8 results, score 2\u20133, top-2 deep fetch honoured, `argument-mapping.md` appended (FULL entry for 2605.13793 contains a REAL summary from the fixed web_fetch path, not raw content).",
-    "captured": "2026-11-12T22:50:51.782472"
+    "captured": "2026-11-12T22:55:51.806955"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Found fault: score-3 candidate `arxiv.org/pdf/2506.16383.pdf` deep fetch \u2192 `deep_fetch: \"timeout\"`. Root cause VERIFIED: web_fetch does `trafilatura.extract()` on the PDF URL; it cannot extract PDF text \u2192 \"Could not extract readable text\" \u2192 fetch_url_generic returned None. Retested abs page `arxiv.org/abs/2506.16383 --summarize`: PASS, ~35s, real summary.",
-    "captured": "2026-11-12T22:50:51.782473"
+    "captured": "2026-11-12T22:55:51.806957"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Fix landed in `run_research_hybrid.py`: new `normalize_fetch_url()` rewrites arXiv `/pdf/<id>(.pdf)?` URLs to `/abs/<id>` before fetching. Dry-run after fix still works (argument-mapping now \"No usable results\" \u2014 correct `seen` dedup from the 20:51 run, NOT a bug).",
-    "captured": "2026-11-12T22:50:51.782475"
+    "captured": "2026-11-12T22:55:51.806959"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- LLM rerank STILL uncalibrated (scores 3 for wing-CFD) \u2192 now opt-in only via `--llm`; keyword scorer authoritative; default is OFF. Docs/memory updated to say so.",
-    "captured": "2026-11-12T22:50:51.782476"
+    "captured": "2026-11-12T22:55:51.806961"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- `argument-mapping.md` already contains the 20:51 cycle \u2014 do NOT rerun the real topic again or it will append a duplicate section. Next timer cycle (00:04 UTC) will run on its own and will deep-fetch the PDF\u2192abs normalization automatically.",
-    "captured": "2026-11-12T22:50:51.782478"
+    "captured": "2026-11-12T22:55:51.806962"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Accidents during baseline: .gitignore initially excluded all .claude/ (broke daemon contract) \u2014 fixed to keep state JSON; probe line accidentally appended to memory log \u2014 stripped; .gitignore-check-probe accidentally committed in 256e3ed \u2014 removed via re-commit; empty marker commits 0227f42/6207b9e/2280471 reshuffled, final history: 996f1e5 baseline, then one gitignore/probe-fix commit + continuity captures. Working tree had .claude/ untracked until final commit; final head is clean at time of report except 4 pre-existing modified files from smoke test (next bullet).",
-    "captured": "2026-11-12T22:50:51.782480"
+    "captured": "2026-11-12T22:55:51.806965"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- SMOKE TEST SIDE EFFECT (my call, beyond the 3-fix scope): I ran `systemctl start rook-research.service` to verify the unit. It executed a full real cycle. FIRST attempt CRASHED with KeyError in run_research_hybrid.py (arXiv-API-failure candidate missing \"log\" key \u2014 bug from the two-phase restructure). Research files were NOT written by the crashed run (crash before append). I then fixed the bug (api-failure path now sets entry[\"log\"] + generic-fetch fallback) and re-ran: exit 0, appended 8 sources each to session-continuity.md, context-window-management.md, cpu-background-inference.md; logs/research-runner.log root-opened fd gone, now rook-owned append via shell redirect; log shows no traceback after fix. These 3 files + research/.research_state.json + run_research_hybrid.py (fix) are MODIFIED in working tree, NOT committed (no git push/commit of research outputs without Bean go-ahead).",
-    "captured": "2026-11-12T22:50:51.782482"
+    "captured": "2026-11-12T22:55:51.806967"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Net: 3 fixes done + verified. Unintended but real research-cycle side effect from smoke test \u2014 Bean decision needed: keep the appended findings (they're legitimate arXiv/science-query results) or git restore the 3 topic files to discard.",
-    "captured": "2026-11-12T22:50:51.782483"
+    "captured": "2026-11-12T22:55:51.806969"
   },
   {
     "source": "spikes/001-session-continuity-daemon",
     "text": "# Spike: Session Continuity Bridge Daemon\n\n## Question\nCan a lightweight Python daemon persist agent session state (task list, decisions, recent diffs) to a local git-backed store and restore it on co",
-    "captured": "2026-11-12T22:50:51.782598"
+    "captured": "2026-11-12T22:55:51.807121"
   }
 ]
