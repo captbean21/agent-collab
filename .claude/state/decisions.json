@@ -1,0 +1,22 @@
+[
+  {
+    "source": "memory/2026-11-08.md",
+    "text": "- **Verdict:** \u2705 Viable with 48-64GB RAM; Unsloth recommended (2-5\u00d7 faster CPU)",
+    "captured": "2026-11-12T21:06:46.272069"
+  },
+  {
+    "source": "memory/2026-11-08.md",
+    "text": "- **Verdict:** VIABLE on P2200 via CUDA 12 engine with `STRATA_EXPERIMENTAL_SM60=ON` (Pascal sm_61 supported)",
+    "captured": "2026-11-12T21:06:46.272118"
+  },
+  {
+    "source": "memory/2026-11-12.md",
+    "text": "- Bare-metal chosen per searxng-plan.md (Francis proofed 2026-10-28)",
+    "captured": "2026-11-12T21:06:46.272716"
+  },
+  {
+    "source": "git",
+    "text": "996f1e5 baseline: import workspace (gitignore excludes models/, *.wav, venvs, logs/, .claude/)",
+    "captured": "2026-11-12T21:06:46.275019"
+  }
+]

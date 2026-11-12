@@ -22,6 +22,6 @@ musicgen_test/
 *.tgz
 logs/
 # --- local runtime state ---
-.claude/
+.claude/state/recent_diffs.patch
 *.pyc
 .DS_Store
