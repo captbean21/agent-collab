@@ -1,0 +1,29 @@
+📊 **Daily Research Digest** — 2026-11-11
+*5 topic(s) updated:*
+
+• **self-correction-loops** — 06:05 UTC
+  1. https://arxiv.org/abs/2402.07087 (Self-Correcting Self-Consuming Loops)
+  2. https://arxiv.org/abs/2604.23366 (GSAR Grounding Framework)
+  3. https://arxiv.org/html/2402.07087v2
+
+• **cpu-background-inference** — 06:05 UTC
+  1. https://arxiv.org/html/2505.06461v1 (CPU vs GPU LLM Inference)
+  2. https://arxiv.org/html/2603.22774v1 (CPU-Induced Slowdowns Multi-GPU)
+  3. https://arxiv.org/abs/2611.01393 (Layer-wise CPU-GPU Scheduling)
+
+• **session-continuity** — 06:05 UTC
+  1. https://github.com/anthropics/claude-code/issues/60058
+  2. https://github.com/pattty847/CopeNet/blob/main/docs/SESSION-CONTINUITY.md
+  3. https://github.com/github/copilot-cli/issues/667
+
+• **context-window-management** — 00:06 UTC
+  1. https://arxiv.org/abs/2608.17188
+  2. https://github.com/google/adk-python/discussions/826
+  3. https://arxiv.org/abs/2510.06727
+
+• **config-drift-detection** — 00:06 UTC
+  1. https://github.com/DriftGuard/DriftGuard
+  2. https://github.com/Pratik1566/config-drift-detector
+  3. https://github.com/oneuptime/blog/tree/master/posts/2026-02-26-configuration-drift-detection-gitops
+
+📖 Full index: `~/workspace/research/INDEX.md`

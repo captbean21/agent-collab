@@ -1,0 +1,13 @@
+# Agent Robustness & Cleverness — Research Aggregator Topics
+# One per line: topic_slug | priority (1-5) | notes
+
+context-window-management | 5 | sliding windows, KV eviction policies, hierarchical memory
+cpu-background-inference | 5 | 1.5B-3B models on CPU, zero VRAM contention
+structured-output-gbnf | 4 | llama.cpp grammars for reliable tool calls
+self-correction-loops | 5 | Reflexion, self-consistency, bounded iterations
+local-embedding-rerank | 4 | BGE-M3, Jina, mixedbread — full local retrieval
+argument-mapping | 3 | claim decomposition, evidence linking, confidence scoring
+config-drift-detection | 5 | hash configs, alert, auto-rollback
+session-continuity | 5 | memory log format, cold-start skill
+auto-skill-synthesis | 4 | from traces → skill draft → test → promote
+model-routing-cascades | 3 | small→large escalation, Pareto optimization

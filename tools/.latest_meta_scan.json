@@ -1,0 +1,23 @@
+{
+  "timestamp": "2026-11-07T14:16:26.689480+00:00",
+  "patterns_found": 82,
+  "clusters": 5,
+  "proposals_created": 2,
+  "top_clusters": [
+    {
+      "type": "tool_sequence",
+      "desc": "search \u2192 search \u2192 search",
+      "freq": 7
+    },
+    {
+      "type": "tool_sequence",
+      "desc": "edit \u2192 edit \u2192 edit",
+      "freq": 4
+    },
+    {
+      "type": "tool_sequence",
+      "desc": "search \u2192 Search \u2192 search",
+      "freq": 3
+    }
+  ]
+}

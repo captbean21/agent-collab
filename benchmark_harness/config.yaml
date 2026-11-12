@@ -1,0 +1,144 @@
+# Benchmark Harness Configuration
+# Dry-runnable on CPU today; GPU flags activate when T340 arrives
+
+models:
+  # Priority 1: Qwen2.5-1.5B (best sub-2B tool calling per Research 1/6)
+  - id: qwen2.5-1.5b-instruct
+    repo: "bartowski/Qwen2.5-1.5B-Instruct-GGUF"
+    file: "Qwen2.5-1.5B-Instruct-Q4_K_M.gguf"
+    size_b: 1.5
+    quantization: "Q4_K_M"
+    context: 4096
+    gpu_layers: 0        # 0 = CPU only (dry-run); 35 = full offload on P2200 (7B)
+    draft_model: null    # Set for speculative decoding
+    tags: ["cpu-viable", "tool-calling-strong", "bfcl-ceiling-65"]
+
+  # Priority 2: Llama-3.2-3B (best 3B general + tool calling)
+  - id: llama-3.2-3b-instruct
+    repo: "bartowski/Llama-3.2-3B-Instruct-GGUF"
+    file: "Llama-3.2-3B-Instruct-Q4_K_M.gguf"
+    size_b: 3.0
+    quantization: "Q4_K_M"
+    context: 4096
+    gpu_layers: 0        # 0 = CPU; 35 = full offload on P2200
+    draft_model: null
+    tags: ["cpu-viable", "128k-ctx", "general-strong"]
+
+  # Priority 3: Deepseek-Coder-1.3B (code-specialized, tool calling)
+  - id: deepseek-coder-1.3b-instruct
+    repo: "bartowski/DeepSeek-Coder-V2-Lite-Instruct-GGUF"
+    file: "DeepSeek-Coder-V2-Lite-Instruct-Q4_K_M.gguf"
+    size_b: 1.3
+    quantization: "Q4_K_M"
+    context: 4096
+    gpu_layers: 0
+    draft_model: null
+    tags: ["cpu-viable", "code-specialized", "function-calling"]
+
+  # Optional: Speculative draft models (for future GPU testing)
+  - id: qwen2.5-0.5b-instruct
+    repo: "bartowski/Qwen2.5-0.5B-Instruct-GGUF"
+    file: "Qwen2.5-0.5B-Instruct-Q4_K_M.gguf"
+    size_b: 0.5
+    quantization: "Q4_K_M"
+    context: 4096
+    gpu_layers: 0
+    tags: ["draft-model", "speculative-decoding"]
+
+inference:
+  # llama.cpp server settings (shared)
+  server:
+    host: "127.0.0.1"
+    port: 8080
+    n_ctx: 4096
+    n_batch: 512
+    n_ubatch: 512
+    flash_attn: true
+    mlock: true
+    no_mmap: false
+    parallel: 1
+    cpu_threads: 6
+    cpu_threads_batch: 6
+    cont_batching: true
+    defrag_thold: 0.1
+
+  # Client request settings
+  client:
+    temperature: 0.0      # Deterministic for benchmarking
+    top_p: 1.0
+    top_k: 1
+    min_p: 0.0
+    repeat_penalty: 1.0
+    max_tokens: 512
+    stream: false
+
+benchmark:
+  # BFCL subset (research-validated)
+  bfcl:
+    version: "v3"
+    categories:
+      - "simple"
+      - "parallel"
+      - "multiple"
+      - "parallel_multiple"
+      - "relevance"
+      - "multi_turn"
+    # Limit for dry-run; full set on T340
+    max_samples_per_category: 10
+    # Custom tool schemas to test
+    custom_tools: true
+
+  # SLM-ToolCall-100 (from Paper 3: 2609.07370)
+  slm_toolcall:
+    enabled: true
+    max_samples: 50
+
+  # Custom FOL/GSM8K (from Paper 4: 2410.18890v1)
+  custom_reasoning:
+    enabled: true
+    fol_samples: 20
+    gsm8k_samples: 20
+
+  # Metrics to collect
+  metrics:
+    - "tokens_per_second"
+    - "time_to_first_token_ms"
+    - "latency_p50_ms"
+    - "latency_p99_ms"
+    - "memory_peak_gb"
+    - "cpu_percent_avg"
+    - "gpu_power_w"       # Requires nvidia-smi (skipped on CPU dry-run)
+    - "gpu_temp_c"        # Requires nvidia-smi
+    - "bfcl_overall_pct"
+    - "bfcl_multi_turn_pct"
+    - "relevance_detection_pct"
+    - "tool_call_accuracy_pct"
+    - "energy_per_token_j"  # Computed from power + tok/s
+
+  # Run configuration
+  runs:
+    warmup: 2
+    measured: 5
+    cooldown_seconds: 5
+
+  # Output
+  output_dir: "./results"
+  format: ["json", "csv", "markdown"]
+  timestamp_format: "%Y%m%d_%H%M%S"
+
+# Hardware profiles (auto-detected or manual)
+hardware:
+  current:
+    cpu_cores: 6
+    cpu_threads: 12
+    ram_gb: 64
+    gpu: null
+    gpu_vram_gb: 0
+  t340_target:
+    cpu_cores: 6
+    cpu_threads: 12
+    ram_gb: 64
+    gpu: "Quadro P2200"
+    gpu_vram_gb: 5
+    gpu_compute: "sm_61"
+    cuda_version: "12.9"

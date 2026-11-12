@@ -1,0 +1,10 @@
+[package]
+name = "vulkan_synth"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ash = { version = "0.37", features = ["entry", "vk1_3"] }
+wav = "0.6"
+anyhow = "1.0"
+libloading = "0.8"

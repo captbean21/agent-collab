@@ -1,0 +1,1738 @@
+{
+  "last_researched": {
+    "context-window-management": "2026-11-12T18:04:42.722714Z",
+    "self-correction-loops": "2026-11-12T20:39:20.990609Z",
+    "cpu-background-inference": "2026-11-12T18:04:22.267971Z",
+    "config-drift-detection": "2026-11-12T18:04:53.148106Z",
+    "session-continuity": "2026-11-12T18:04:32.522789Z",
+    "argument-mapping": "2026-11-12T20:51:21.016093Z"
+  },
+  "source_fetch_depth": {
+    "2026-11-07T21:52:59.700850Z": [
+      {
+        "url": "https://arxiv.org/html/2505.06461v1",
+        "arxiv_id": "2505.06461v1",
+        "depth": "full",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-07 21:50 UTC",
+        "deep_fetch_time": "2026-11-07 22:11 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2603.22774v1",
+        "arxiv_id": "2603.22774v1",
+        "depth": "full",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-07 21:50 UTC",
+        "deep_fetch_time": "2026-11-07 22:13 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2606.23001",
+        "arxiv_id": "2606.23001",
+        "depth": "full",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-07 21:50 UTC",
+        "deep_fetch_time": "2026-11-07 22:15 UTC"
+      },
+      {
+        "url": "https://github.com/Elshayib",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-07 21:51 UTC"
+      },
+      {
+        "url": "https://github.com/Pratik1566/config-drift-detector",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-07 21:51 UTC"
+      },
+      {
+        "url": "https://github.com/DriftGuard/DriftGuard",
+        "depth": "failed",
+        "status": "fetch_failed",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-07 21:51 UTC"
+      },
+      {
+        "url": "https://github.com/anthropics/claude-code/issues/60058",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-07 21:52 UTC"
+      },
+      {
+        "url": "https://github.com/pattty847/CopeNet/blob/main/docs/SESSION-CONTINUITY.md",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-07 21:52 UTC"
+      },
+      {
+        "url": "https://github.com/github/copilot-cli/issues/667",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-07 21:52 UTC"
+      }
+    ],
+    "2026-11-07T22:35:59.672933Z": [
+      {
+        "url": "https://arxiv.org/abs/2608.17188",
+        "arxiv_id": "2608.17188",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-07 22:35 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2608.21690",
+        "arxiv_id": "2608.21690",
+        "depth": "abstract",
+        "status": "success",
+        "deep_fetch": "timeout",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-07 22:35 UTC"
+      },
+      {
+        "url": "https://github.com/google/adk-python/discussions/826",
+        "depth": "full",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-07 22:35 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2402.07087",
+        "arxiv_id": "2402.07087",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-07 22:35 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2402.07087v2",
+        "arxiv_id": "2402.07087v2",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-07 22:35 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2605.17305v1",
+        "arxiv_id": "2605.17305v1",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-07 22:35 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2505.06461v1",
+        "arxiv_id": "2505.06461v1",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-07 22:35 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2603.22774v1",
+        "arxiv_id": "2603.22774v1",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-07 22:35 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2606.23001",
+        "arxiv_id": "2606.23001",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-07 22:35 UTC"
+      }
+    ],
+    "2026-11-08T00:07:16.236740Z": [
+      {
+        "url": "https://github.com/Pratik1566/config-drift-detector",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-08 00:06 UTC"
+      },
+      {
+        "url": "https://github.com/DriftGuard/DriftGuard",
+        "depth": "failed",
+        "status": "fetch_failed",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-08 00:06 UTC"
+      },
+      {
+        "url": "https://github.com/Coding-Dev-Tools/configdrift",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-08 00:06 UTC"
+      },
+      {
+        "url": "https://github.com/pattty847/CopeNet/blob/main/docs/SESSION-CONTINUITY.md",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-08 00:07 UTC"
+      },
+      {
+        "url": "https://github.com/talgolan/session-continuity",
+        "depth": "failed",
+        "status": "fetch_failed",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-08 00:07 UTC"
+      },
+      {
+        "url": "https://github.com/topics/session-continuity",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-08 00:07 UTC"
+      }
+    ],
+    "2026-11-08T03:02:09.224645Z": [
+      {
+        "url": "https://arxiv.org/abs/2608.17188",
+        "arxiv_id": "2608.17188",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-08 03:01 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2608.21690",
+        "arxiv_id": "2608.21690",
+        "depth": "abstract",
+        "status": "success",
+        "deep_fetch": "timeout",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-08 03:01 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2511.17516v1",
+        "arxiv_id": "2511.17516v1",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-08 03:01 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2402.07087",
+        "arxiv_id": "2402.07087",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-08 03:01 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2402.07087v2",
+        "arxiv_id": "2402.07087v2",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-08 03:01 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2606.21724",
+        "arxiv_id": "2606.21724",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-08 03:01 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2603.22774v1",
+        "arxiv_id": "2603.22774v1",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-08 03:02 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2505.06461v1",
+        "arxiv_id": "2505.06461v1",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-08 03:02 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2606.23001",
+        "arxiv_id": "2606.23001",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-08 03:02 UTC"
+      }
+    ],
+    "2026-11-08T06:08:22.000000Z": [
+      {
+        "url": "https://github.com/DriftGuard/DriftGuard",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-08 06:08 UTC"
+      },
+      {
+        "url": "https://github.com/Pratik1566/config-drift-detector",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-08 06:08 UTC"
+      },
+      {
+        "url": "https://github.com/oneuptime/blog/tree/master/posts/2026-02-26-configuration-drift-detection-gitops",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-08 06:08 UTC"
+      }
+    ],
+    "2026-11-08T14:07:18.553453Z": [
+      {
+        "url": "https://github.com/pattty847/CopeNet/blob/main/docs/SESSION-CONTINUITY.md",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-08 14:06 UTC"
+      },
+      {
+        "url": "https://github.com/talgolan/session-continuity",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-08 14:06 UTC"
+      },
+      {
+        "url": "https://github.com/topics/session-continuity",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-08 14:06 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2608.17188",
+        "arxiv_id": "2608.17188",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-08 14:07 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2608.21690",
+        "arxiv_id": "2608.21690",
+        "depth": "full",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-08 14:07 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2510.06727",
+        "arxiv_id": "2510.06727",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-08 14:07 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2402.07087",
+        "arxiv_id": "2402.07087",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-08 14:07 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2402.07087v2",
+        "arxiv_id": "2402.07087v2",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-08 14:07 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2606.21724",
+        "arxiv_id": "2606.21724",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-08 14:07 UTC"
+      }
+    ],
+    "2026-11-08T18:05:24.112587Z": [
+      {
+        "url": "https://arxiv.org/html/2505.06461v1",
+        "arxiv_id": "2505.06461v1",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-08 18:04 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2603.22774v1",
+        "arxiv_id": "2603.22774v1",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-08 18:04 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2606.23001",
+        "arxiv_id": "2606.23001",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-08 18:04 UTC"
+      },
+      {
+        "url": "https://github.com/DriftGuard/DriftGuard",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-08 18:05 UTC"
+      },
+      {
+        "url": "https://github.com/Pratik1566/config-drift-detector",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-08 18:05 UTC"
+      },
+      {
+        "url": "https://github.com/oneuptime/blog/tree/master/posts/2026-02-26-configuration-drift-detection-gitops",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-08 18:05 UTC"
+      },
+      {
+        "url": "https://github.com/pattty847/CopeNet/blob/main/docs/SESSION-CONTINUITY.md",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-08 18:05 UTC"
+      },
+      {
+        "url": "https://github.com/talgolan/session-continuity",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-08 18:05 UTC"
+      },
+      {
+        "url": "https://github.com/topics/session-continuity",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-08 18:05 UTC"
+      }
+    ],
+    "2026-11-09T00:07:21.657287Z": [
+      {
+        "url": "https://arxiv.org/abs/2608.17188",
+        "depth": "full",
+        "status": "api_failed",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-09 00:05 UTC"
+      },
+      {
+        "url": "https://github.com/google/adk-python/discussions/826",
+        "depth": "full",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-09 00:05 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2604.01664v1",
+        "arxiv_id": "2604.01664v1",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-09 00:05 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2604.23366",
+        "depth": "full",
+        "status": "api_failed",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-09 00:06 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2402.07087",
+        "depth": "full",
+        "status": "api_failed",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-09 00:06 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2606.17175v1",
+        "arxiv_id": "2606.17175v1",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-09 00:06 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2505.06461v1",
+        "arxiv_id": "2505.06461v1",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-09 00:07 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2603.22774v1",
+        "depth": "full",
+        "status": "api_failed",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-09 00:07 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2606.23001",
+        "depth": "full",
+        "status": "api_failed",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-09 00:07 UTC"
+      }
+    ],
+    "2026-11-09T06:06:17.999520Z": [
+      {
+        "url": "https://github.com/DriftGuard/DriftGuard",
+        "depth": "failed",
+        "status": "fetch_failed"
+      },
+      {
+        "url": "https://github.com/Elshayib",
+        "depth": "failed",
+        "status": "fetch_failed"
+      },
+      {
+        "url": "https://github.com/Pratik1566/config-drift-detector",
+        "depth": "failed",
+        "status": "fetch_failed"
+      },
+      {
+        "url": "https://github.com/anthropics/claude-code/issues/60058",
+        "depth": "failed",
+        "status": "fetch_failed",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-09 06:06 UTC"
+      },
+      {
+        "url": "https://github.com/pattty847/CopeNet/blob/main/docs/SESSION-CONTINUITY.md",
+        "depth": "failed",
+        "status": "fetch_failed",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-09 06:06 UTC"
+      },
+      {
+        "url": "https://github.com/github/copilot-cli/issues/667",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-09 06:06 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2608.17188",
+        "arxiv_id": "2608.17188",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-09 06:06 UTC"
+      },
+      {
+        "url": "https://github.com/google/adk-python/discussions/826",
+        "depth": "full",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-09 06:06 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2604.01664v1",
+        "arxiv_id": "2604.01664v1",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-09 06:06 UTC"
+      }
+    ],
+    "2026-11-09T12:05:30.981109Z": [
+      {
+        "url": "https://github.com/DriftGuard/DriftGuard",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-09 12:05 UTC"
+      },
+      {
+        "url": "https://github.com/Elshayib",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-09 12:05 UTC"
+      },
+      {
+        "url": "https://github.com/Pratik1566/config-drift-detector",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-09 12:05 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2402.07087",
+        "arxiv_id": "2402.07087",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-09 12:05 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2402.07087v2",
+        "arxiv_id": "2402.07087v2",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-09 12:05 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2606.21724",
+        "arxiv_id": "2606.21724",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-09 12:05 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2505.06461v1",
+        "arxiv_id": "2505.06461v1",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-09 12:05 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2603.22774v1",
+        "arxiv_id": "2603.22774v1",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-09 12:05 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2606.23001",
+        "arxiv_id": "2606.23001",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-09 12:05 UTC"
+      }
+    ],
+    "2026-11-09T18:05:51.972938Z": [
+      {
+        "url": "https://github.com/pattty847/CopeNet/blob/main/docs/SESSION-CONTINUITY.md",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-09 18:05 UTC"
+      },
+      {
+        "url": "https://github.com/mohammeddevsec-sys/session-continuity",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-09 18:05 UTC"
+      },
+      {
+        "url": "https://github.com/talgolan/session-continuity",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-09 18:05 UTC"
+      },
+      {
+        "url": "https://github.com/sickn33/agentic-awesome-skills/blob/main/skills/context-window-management/SKILL.md",
+        "depth": "full",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-09 18:05 UTC"
+      },
+      {
+        "url": "https://github.com/nibzard/awesome-agentic-patterns/blob/main/patterns/context-window-anxiety-management.md",
+        "depth": "full",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-09 18:05 UTC"
+      },
+      {
+        "url": "https://docs.github.com/en/copilot/concepts/prompting-and-context/context-management",
+        "depth": "full",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-09 18:05 UTC"
+      },
+      {
+        "url": "https://github.com/Coding-Dev-Tools/configdrift",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-09 18:05 UTC"
+      },
+      {
+        "url": "https://github.com/DriftGuard/DriftGuard",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-09 18:05 UTC"
+      },
+      {
+        "url": "https://github.com/Pratik1566/config-drift-detector",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-09 18:05 UTC"
+      }
+    ],
+    "2026-11-10T00:06:33.415587Z": [
+      {
+        "url": "https://arxiv.org/abs/2402.07087",
+        "depth": "full",
+        "status": "api_failed",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-10 00:05 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2604.23366",
+        "depth": "full",
+        "status": "api_failed",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-10 00:05 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2402.07087v2",
+        "depth": "full",
+        "status": "api_failed",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-10 00:05 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.01393",
+        "depth": "full",
+        "status": "api_failed",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-10 00:06 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2603.22774v1",
+        "depth": "full",
+        "status": "api_failed",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-10 00:06 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2505.06461v1",
+        "depth": "full",
+        "status": "api_failed",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-10 00:06 UTC"
+      },
+      {
+        "url": "https://github.com/anthropics/claude-code/issues/60058",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-10 00:06 UTC"
+      },
+      {
+        "url": "https://github.com/pattty847/CopeNet/blob/main/docs/SESSION-CONTINUITY.md",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-10 00:06 UTC"
+      },
+      {
+        "url": "https://github.com/github/copilot-cli/issues/667",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-10 00:06 UTC"
+      }
+    ],
+    "2026-11-10T06:06:16.921753Z": [
+      {
+        "url": "https://arxiv.org/abs/2608.17188",
+        "depth": "full",
+        "status": "api_failed",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-10 06:05 UTC"
+      },
+      {
+        "url": "https://github.com/google/adk-python/discussions/826",
+        "depth": "full",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-10 06:05 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2604.01664v1",
+        "depth": "full",
+        "status": "api_failed",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-10 06:05 UTC"
+      },
+      {
+        "url": "https://github.com/Elshayib",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-10 06:05 UTC"
+      },
+      {
+        "url": "https://github.com/janinelurenana",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-10 06:05 UTC"
+      },
+      {
+        "url": "https://github.com/SiteQ8/ConduitShield",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-10 06:05 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2604.23366",
+        "depth": "full",
+        "status": "api_failed",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-10 06:06 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2503.06072v2",
+        "depth": "full",
+        "status": "api_failed",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-10 06:06 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2606.17175v1",
+        "depth": "full",
+        "status": "api_failed",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-10 06:06 UTC"
+      }
+    ],
+    "2026-11-10T12:05:40.870636Z": [
+      {
+        "url": "https://arxiv.org/abs/2611.01393",
+        "arxiv_id": "2611.01393",
+        "depth": "full",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-10 12:05 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2505.06461v1",
+        "arxiv_id": "2505.06461v1",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-10 12:05 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2603.22774v1",
+        "arxiv_id": "2603.22774v1",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-10 12:05 UTC"
+      },
+      {
+        "url": "https://github.com/pattty847/CopeNet/blob/main/docs/SESSION-CONTINUITY.md",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-10 12:05 UTC"
+      },
+      {
+        "url": "https://github.com/chris-patenaude/session-continuity-protocal",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-10 12:05 UTC"
+      },
+      {
+        "url": "https://github.com/mohammeddevsec-sys/session-continuity",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-10 12:05 UTC"
+      },
+      {
+        "url": "https://docs.github.com/en/copilot/concepts/prompting-and-context/context-management",
+        "depth": "full",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-10 12:05 UTC"
+      },
+      {
+        "url": "https://github.com/sickn33/agentic-awesome-skills/blob/main/skills/context-window-management/SKILL.md",
+        "depth": "full",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-10 12:05 UTC"
+      },
+      {
+        "url": "https://github.com/nibzard/awesome-agentic-patterns/blob/main/patterns/context-window-anxiety-management.md",
+        "depth": "full",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-10 12:05 UTC"
+      }
+    ],
+    "2026-11-10T18:08:27.511879Z": [
+      {
+        "url": "https://github.com/DriftGuard/DriftGuard",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-10 18:06 UTC"
+      },
+      {
+        "url": "https://github.com/Coding-Dev-Tools/configdrift",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-10 18:06 UTC"
+      },
+      {
+        "url": "https://github.com/ryjen/config-drift-guard/releases/tag/demo-video-2026-10-18",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-10 18:06 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2402.07087",
+        "depth": "full",
+        "status": "api_failed",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-10 18:07 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2402.07087v2",
+        "depth": "full",
+        "status": "api_failed",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-10 18:07 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2606.21724",
+        "depth": "full",
+        "status": "api_failed",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-10 18:07 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.01393",
+        "depth": "full",
+        "status": "api_failed",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-10 18:08 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2603.22774v1",
+        "depth": "full",
+        "status": "api_failed",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-10 18:08 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2505.06461v1",
+        "depth": "full",
+        "status": "api_failed",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-10 18:08 UTC"
+      }
+    ],
+    "2026-11-11T00:06:16.795647Z": [
+      {
+        "url": "https://github.com/anthropics/claude-code/issues/60058",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-11 00:05 UTC"
+      },
+      {
+        "url": "https://github.com/github/copilot-cli/issues/667",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-11 00:05 UTC"
+      },
+      {
+        "url": "https://github.com/jonny981/claude-tandem",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-11 00:05 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2608.17188",
+        "depth": "full",
+        "status": "api_failed",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-11 00:06 UTC"
+      },
+      {
+        "url": "https://github.com/google/adk-python/discussions/826",
+        "depth": "full",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-11 00:06 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2510.06727",
+        "depth": "full",
+        "status": "api_failed",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-11 00:06 UTC"
+      },
+      {
+        "url": "https://github.com/Elshayib",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-11 00:06 UTC"
+      },
+      {
+        "url": "https://github.com/janinelurenana",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-11 00:06 UTC"
+      },
+      {
+        "url": "https://github.com/SiteQ8/ConduitShield",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-11 00:06 UTC"
+      }
+    ],
+    "2026-11-11T06:05:38.947293Z": [
+      {
+        "url": "https://arxiv.org/abs/2402.07087",
+        "arxiv_id": "2402.07087",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-11 06:05 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2604.23366",
+        "arxiv_id": "2604.23366",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-11 06:05 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2402.07087v2",
+        "arxiv_id": "2402.07087v2",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-11 06:05 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2505.06461v1",
+        "arxiv_id": "2505.06461v1",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-11 06:05 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2603.22774v1",
+        "arxiv_id": "2603.22774v1",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-11 06:05 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.01393",
+        "arxiv_id": "2611.01393",
+        "depth": "full",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-11 06:05 UTC"
+      },
+      {
+        "url": "https://github.com/anthropics/claude-code/issues/60058",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-11 06:05 UTC"
+      },
+      {
+        "url": "https://github.com/pattty847/CopeNet/blob/main/docs/SESSION-CONTINUITY.md",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-11 06:05 UTC"
+      },
+      {
+        "url": "https://github.com/github/copilot-cli/issues/667",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-11 06:05 UTC"
+      }
+    ],
+    "2026-11-12T00:05:05.983872Z": [],
+    "2026-11-12T06:05:29.758514Z": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Central_processing_unit",
+        "depth": "full",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-12 06:04 UTC"
+      },
+      {
+        "url": "https://www.howtogeek.com/694869/what-is-a-cpu-and-what-does-it-do/",
+        "depth": "full",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-12 06:04 UTC"
+      },
+      {
+        "url": "https://www.jbhifi.com.au/collections/computer-parts-accessories/cpu",
+        "depth": "failed",
+        "status": "fetch_failed",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-12 06:04 UTC"
+      },
+      {
+        "url": "https://getsession.org/",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-12 06:05 UTC"
+      },
+      {
+        "url": "https://session.sydney/",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-12 06:05 UTC"
+      },
+      {
+        "url": "https://getsession.org/download",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-12 06:05 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2608.17188",
+        "depth": "full",
+        "status": "api_failed",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-12 06:05 UTC"
+      },
+      {
+        "url": "https://dictionary.cambridge.org/dictionary/english/context",
+        "depth": "full",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-12 06:05 UTC"
+      },
+      {
+        "url": "https://www.contexto.me/",
+        "depth": "full",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-12 06:05 UTC"
+      }
+    ],
+    "2026-11-12T06:06:49.863262Z": [
+      {
+        "url": "https://techlasi.com/pc/how-to-open-a-config-file-step-by-step-guide/",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-12 06:06 UTC"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Configuration_file",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-12 06:06 UTC"
+      },
+      {
+        "url": "https://github.com/openshift/machine-config-operator/blob/main/docs/MachineConfigDaemon.md",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-12 06:06 UTC"
+      },
+      {
+        "url": "https://www.smh.com.au/",
+        "depth": "full",
+        "status": "success",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-12 06:06 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2604.23366",
+        "depth": "full",
+        "status": "api_failed",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-12 06:06 UTC"
+      },
+      {
+        "url": "https://www.reddit.com/r/motorcycles/comments/29tkij/bluetooth_headsets_sena_smh1010_sena_smh1011_or/",
+        "depth": "failed",
+        "status": "fetch_failed",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-12 06:06 UTC"
+      },
+      {
+        "url": "https://www.facebook.com/",
+        "depth": "failed",
+        "status": "fetch_failed"
+      },
+      {
+        "url": "https://www.facebook.com/login.php/",
+        "depth": "failed",
+        "status": "fetch_failed"
+      },
+      {
+        "url": "https://l.facebook.com/facebook/",
+        "depth": "failed",
+        "status": "fetch_failed"
+      }
+    ],
+    "2026-11-12T06:07:30.559526Z": [
+      {
+        "url": "https://www.tved.net.au/recorded-webinars/wb6sep26/recorded-interactive-webinar-who-really-owns-land-trusts-titles-and",
+        "depth": "failed",
+        "status": "fetch_failed",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-12 06:07 UTC"
+      },
+      {
+        "url": "https://www.api.org.au/?webinar_topic=land-ownership",
+        "depth": "full",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-12 06:07 UTC"
+      },
+      {
+        "url": "https://www.api.org.au/professional-development/events-webinars-online-courses/on-demand/",
+        "depth": "full",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-12 06:07 UTC"
+      },
+      {
+        "url": "https://getsession.org/",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-12 06:07 UTC"
+      },
+      {
+        "url": "https://session.sydney/",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-12 06:07 UTC"
+      },
+      {
+        "url": "https://getsession.org/download",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-12 06:07 UTC"
+      },
+      {
+        "url": "https://dictionary.cambridge.org/dictionary/english/context",
+        "depth": "full",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-12 06:07 UTC"
+      },
+      {
+        "url": "https://www.contexto.me/",
+        "depth": "full",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-12 06:07 UTC"
+      },
+      {
+        "url": "https://www.merriam-webster.com/dictionary/context",
+        "depth": "failed",
+        "status": "fetch_failed",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-12 06:07 UTC"
+      }
+    ],
+    "2026-11-12T12:09:17.610115Z": [
+      {
+        "url": "https://arxiv.org/abs/2603.02345",
+        "arxiv_id": "2603.02345",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-12 12:07 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2603.02345v1",
+        "arxiv_id": "2603.02345v1",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-12 12:07 UTC"
+      },
+      {
+        "url": "https://www.zhihu.com/question/51169382",
+        "depth": "failed",
+        "status": "fetch_failed",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-12 12:07 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2402.07087",
+        "arxiv_id": "2402.07087",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-12 12:08 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2606.21724",
+        "arxiv_id": "2606.21724",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-12 12:08 UTC"
+      },
+      {
+        "url": "https://clipart-library.com/small-christmas-clipart.html",
+        "depth": "failed",
+        "status": "fetch_failed",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-12 12:08 UTC"
+      },
+      {
+        "url": "https://en.m.wikipedia.org/wiki/Central_processing_unit",
+        "depth": "failed",
+        "status": "fetch_failed",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-12 12:09 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2504.11750v1",
+        "arxiv_id": "2504.11750v1",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-12 12:09 UTC"
+      },
+      {
+        "url": "https://arxiv.org/pdf/2311.00502",
+        "arxiv_id": "2311.00502",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-12 12:09 UTC"
+      }
+    ],
+    "2026-11-12T13:50:35.237934Z": [
+      {
+        "url": "https://getsession.org/",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-12 13:50 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/1711.04886",
+        "arxiv_id": "1711.04886",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-12 13:50 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2403.19730",
+        "arxiv_id": "2403.19730",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-12 13:50 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2608.17188",
+        "arxiv_id": "2608.17188",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-12 13:50 UTC"
+      },
+      {
+        "url": "https://dictionary.cambridge.org/dictionary/english/context",
+        "depth": "full",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-12 13:50 UTC"
+      },
+      {
+        "url": "https://www.context.net.au/",
+        "depth": "full",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-12 13:50 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2603.02345",
+        "arxiv_id": "2603.02345",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-12 13:50 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2603.02345v1",
+        "arxiv_id": "2603.02345v1",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-12 13:50 UTC"
+      },
+      {
+        "url": "https://www.youtube.com/",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-12 13:50 UTC"
+      }
+    ],
+    "2026-11-12T18:04:34.523083Z": [
+      {
+        "url": "https://www.scorptec.com.au/",
+        "depth": "failed",
+        "status": "fetch_failed",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-12 18:04 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2402.07087",
+        "arxiv_id": "2402.07087",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-12 18:04 UTC"
+      },
+      {
+        "url": "https://www.scorptec.com.au/contact_us",
+        "depth": "failed",
+        "status": "fetch_failed",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-12 18:04 UTC"
+      },
+      {
+        "url": "https://support.google.com/sites/answer/98081?hl=de",
+        "depth": "full",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-12 18:04 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2604.07609",
+        "arxiv_id": "2604.07609",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-12 18:04 UTC"
+      },
+      {
+        "url": "https://support.google.com/sites/answer/98081?hl=pt",
+        "depth": "full",
+        "status": "success",
+        "topic": "cpu-background-inference",
+        "timestamp": "2026-11-12 18:04 UTC"
+      },
+      {
+        "url": "https://en.m.wikipedia.org/wiki/Next_Australian_federal_election",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-12 18:04 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/1711.04886",
+        "arxiv_id": "1711.04886",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-12 18:04 UTC"
+      },
+      {
+        "url": "https://www.aph.gov.au/About_Parliament/Parliamentary_departments/Parliamentary_Library/Research/FlagPost/2025/August/When_is_the_next_federal_election",
+        "depth": "full",
+        "status": "success",
+        "topic": "session-continuity",
+        "timestamp": "2026-11-12 18:04 UTC"
+      }
+    ],
+    "2026-11-12T18:05:03.860446Z": [
+      {
+        "url": "https://claude.ai/login-Claude",
+        "depth": "failed",
+        "status": "fetch_failed",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-12 18:04 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2608.17188",
+        "arxiv_id": "2608.17188",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-12 18:04 UTC"
+      },
+      {
+        "url": "https://claude.ai/",
+        "depth": "failed",
+        "status": "fetch_failed",
+        "topic": "context-window-management",
+        "timestamp": "2026-11-12 18:04 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2603.02345",
+        "arxiv_id": "2603.02345",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-12 18:04 UTC"
+      },
+      {
+        "url": "https://account.abc.net.au/login-password",
+        "depth": "full",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-12 18:04 UTC"
+      },
+      {
+        "url": "https://arxiv.org/html/2603.02345v1",
+        "arxiv_id": "2603.02345v1",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "config-drift-detection",
+        "timestamp": "2026-11-12 18:04 UTC"
+      },
+      {
+        "url": "https://rgvcontractors.com/contractors/jesses-auto-electric/",
+        "depth": "full",
+        "status": "success",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-12 18:05 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2402.07087",
+        "arxiv_id": "2402.07087",
+        "depth": "abstract",
+        "status": "success",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-12 18:05 UTC"
+      },
+      {
+        "url": "https://preferredmechanic.com/auto-electrical-specialists/pharr-hidalgo-tx/",
+        "depth": "failed",
+        "status": "fetch_failed",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-12 18:05 UTC"
+      }
+    ],
+    "2026-11-12T20:39:22.990926Z": [
+      {
+        "url": "http://arxiv.org/abs/2601.00828v1",
+        "arxiv_id": "2601.00828v1",
+        "depth": "full",
+        "status": "success",
+        "score": 3,
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-12 20:39 UTC"
+      },
+      {
+        "url": "https://arxiv.org/pdf/2506.10406.pdf",
+        "arxiv_id": "2506.10406",
+        "depth": "abstract",
+        "status": "success",
+        "score": 3,
+        "deep_fetch": "timeout",
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-12 20:39 UTC"
+      },
+      {
+        "url": "http://arxiv.org/abs/2504.16021v1",
+        "arxiv_id": "2504.16021v1",
+        "depth": "abstract",
+        "status": "success",
+        "score": 3,
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-12 20:39 UTC"
+      },
+      {
+        "url": "https://arxiv.org/pdf/2511.10621.pdf",
+        "arxiv_id": "2511.10621",
+        "depth": "abstract",
+        "status": "success",
+        "score": 3,
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-12 20:39 UTC"
+      },
+      {
+        "url": "http://arxiv.org/abs/2502.19613",
+        "arxiv_id": "2502.19613",
+        "depth": "abstract",
+        "status": "success",
+        "score": 3,
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-12 20:39 UTC"
+      },
+      {
+        "url": "http://arxiv.org/abs/2410.09008v3",
+        "arxiv_id": "2410.09008v3",
+        "depth": "abstract",
+        "status": "success",
+        "score": 3,
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-12 20:39 UTC"
+      },
+      {
+        "url": "https://arxiv.org/pdf/2512.18605.pdf",
+        "arxiv_id": "2512.18605",
+        "depth": "abstract",
+        "status": "success",
+        "score": 3,
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-12 20:39 UTC"
+      },
+      {
+        "url": "http://arxiv.org/abs/2310.01798",
+        "arxiv_id": "2310.01798",
+        "depth": "abstract",
+        "status": "success",
+        "score": 3,
+        "topic": "self-correction-loops",
+        "timestamp": "2026-11-12 20:39 UTC"
+      }
+    ],
+    "2026-11-12T20:51:23.016284Z": [
+      {
+        "url": "http://arxiv.org/abs/2607.20430v1",
+        "arxiv_id": "2607.20430v1",
+        "depth": "abstract",
+        "status": "success",
+        "score": 2,
+        "topic": "argument-mapping",
+        "timestamp": "2026-11-12 20:51 UTC"
+      },
+      {
+        "url": "https://arxiv.org/pdf/2506.16383.pdf",
+        "arxiv_id": "2506.16383",
+        "depth": "abstract",
+        "status": "success",
+        "score": 3,
+        "deep_fetch": "timeout",
+        "topic": "argument-mapping",
+        "timestamp": "2026-11-12 20:51 UTC"
+      },
+      {
+        "url": "https://arxiv.org/abs/2605.13793",
+        "arxiv_id": "2605.13793",
+        "depth": "full",
+        "status": "success",
+        "score": 3,
+        "topic": "argument-mapping",
+        "timestamp": "2026-11-12 20:51 UTC"
+      },
+      {
+        "url": "http://arxiv.org/abs/2011.00633v1",
+        "arxiv_id": "2011.00633v1",
+        "depth": "abstract",
+        "status": "success",
+        "score": 2,
+        "topic": "argument-mapping",
+        "timestamp": "2026-11-12 20:51 UTC"
+      },
+      {
+        "url": "https://arxiv.org/pdf/2510.24303.pdf",
+        "arxiv_id": "2510.24303",
+        "depth": "abstract",
+        "status": "success",
+        "score": 3,
+        "topic": "argument-mapping",
+        "timestamp": "2026-11-12 20:51 UTC"
+      },
+      {
+        "url": "http://arxiv.org/abs/2407.19740v1",
+        "arxiv_id": "2407.19740v1",
+        "depth": "abstract",
+        "status": "success",
+        "score": 2,
+        "topic": "argument-mapping",
+        "timestamp": "2026-11-12 20:51 UTC"
+      },
+      {
+        "url": "http://arxiv.org/abs/2310.05210v1",
+        "arxiv_id": "2310.05210v1",
+        "depth": "abstract",
+        "status": "success",
+        "score": 2,
+        "topic": "argument-mapping",
+        "timestamp": "2026-11-12 20:51 UTC"
+      },
+      {
+        "url": "https://arxiv.org/pdf/2508.02584.pdf",
+        "arxiv_id": "2508.02584",
+        "depth": "abstract",
+        "status": "success",
+        "score": 3,
+        "topic": "argument-mapping",
+        "timestamp": "2026-11-12 20:51 UTC"
+      }
+    ]
+  },
+  "seen": [
+    "arxiv:2601.00828",
+    "arxiv:2506.10406",
+    "arxiv:2504.16021",
+    "arxiv:2511.10621",
+    "arxiv:2502.19613",
+    "arxiv:2410.09008",
+    "arxiv:2512.18605",
+    "arxiv:2310.01798",
+    "arxiv:2607.20430",
+    "arxiv:2506.16383",
+    "arxiv:2605.13793",
+    "arxiv:2011.00633",
+    "arxiv:2510.24303",
+    "arxiv:2407.19740",
+    "arxiv:2310.05210",
+    "arxiv:2508.02584"
+  ]
+}

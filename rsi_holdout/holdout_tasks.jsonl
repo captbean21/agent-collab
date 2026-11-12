@@ -1,0 +1,35 @@
+# RSI Holdout Task Set — Canonical Homelab Operations
+# 300 frozen tasks. NEVER modify without human review gate.
+# File: rsi_holdout/holdout_tasks.jsonl (line-delimited JSON, append-only metadata)
+
+# Format: Each line = {"task_id": "int", "category": "cli|docker|zfs|network|file|backup", "description": "string", "success_criteria": ["string"], "difficulty": "low|medium|high", "expected_tool_calls": ["string"], "rubric_weight": "float (0-1, sums to 1 per task)"}
+
+# --- CLI Tasks (50 total) ---
+{"task_id": 1, "category": "cli", "description": "List running Docker containers on the inference rig", "success_criteria": ["Returns container names and IDs", "No stderr errors"], "difficulty": "low", "expected_tool_calls": ["docker ps"], "rubric_weight": 1.0}
+{"task_id": 2, "category": "cli", "description": "Show GPU utilization for RX 6800 XT and 5700 XT", "success_criteria": ["Shows memory usage and utilization % for both GPUs", "Formatted clearly"], "difficulty": "low", "expected_tool_calls": ["nvidia-smi"], "rubric_weight": 1.0}
+{"task_id": 3, "category": "cli", "description": "Check disk space on /home partition", "success_criteria": ["Shows used/available/free in GB", "Identifies low-space conditions (<10% free)"], "difficulty": "low", "expected_tool_calls": ["df -h /home"], "rubric_weight": 1.0}
+{"task_id": 4, "category": "cli", "description": "Find realmlist.wtf file location for WoW client", "success_criteria": ["Returns full path or reports not found", "Does not assume fixed path"], "difficulty": "medium", "expected_tool_calls": ["find"], "rubric_weight": 1.0}
+
+# --- Docker Tasks (50 total) ---
+{"task_id": 51, "category": "docker", "description": "Build AzerothCore WotLK server from source", "success_criteria": ["docker-compose build completes", "Worldserver binary exists in container", "No build errors in stderr"], "difficulty": "high", "expected_tool_calls": ["docker-compose", "docker ps"], "rubric_weight": 1.0}
+{"task_id": 52, "category": "docker", "description": "Attach to worldserver console and create admin account", "success_criteria": ["docker attach connects", "AC> prompt responds", "account create succeeds", "account set gmlevel succeeds", "Ctrl+P Ctrl+Q detaches safely"], "difficulty": "high", "expected_tool_calls": ["docker ps --filter", "docker exec", "docker attach"], "rubric_weight": 1.0}
+
+# --- ZFS Backup Tasks (50 total) ---
+{"task_id": 101, "category": "zfs", "description": "Create ZFS snapshot for tank/immich dataset", "success_criteria": ["Snapshot exists with timestamp", "Snapshot listed by zfs list -t snapshot", "No errors in stderr"], "difficulty": "low", "expected_tool_calls": ["zfs snapshot"], "rubric_weight": 1.0}
+{"task_id": 102, "category": "zfs", "description": "Send ZFS snapshot to backup pool (simulated)", "success_criteria": ["zfs send completes", "zfs receive creates snapshot on target", "Incremental if base snapshot exists"], "difficulty": "medium", "expected_tool_calls": ["zfs send", "zfs receive"], "rubric_weight": 1.0}
+
+# --- Network Tasks (50 total) ---
+{"task_id": 151, "category": "network", "description": "Verify koboldcpp endpoints on 6800 XT and 5700 XT", "success_criteria": ["Port 8080 responds on both IPs", "Response contains valid model info", "Response time < 5s per endpoint"], "difficulty": "low", "expected_tool_calls": ["curl"], "rubric_weight": 1.0}
+{"task_id": 152, "category": "network", "description": "Check API connectivity to inference rig from Hobb container", "success_criteria": ["curl to 192.168.1.80:8080 succeeds", "curl to 192.168.1.190:8080 succeeds", "No connection refused errors"], "difficulty": "low", "expected_tool_calls": ["curl"], "rubric_weight": 1.0}
+
+# --- File Operations Tasks (50 total) ---
+{"task_id": 201, "category": "file", "description": "Create and lock realmlist.wtf for WoW client", "success_criteria": ["File exists at correct path", "Contents: 'set realmlist 127.0.0.1'", "Permissions 444 (read-only)"], "difficulty": "medium", "expected_tool_calls": ["cat", "chmod"], "rubric_weight": 1.0}
+{"task_id": 202, "category": "file", "description": "Edit wow-server launcher script", "success_criteria": ["Script exists at ~/wow-server-playerbots/", "Launches worldserver correctly", "Includes account creation commands"], "difficulty": "medium", "expected_tool_calls": ["cat", "bash"], "rubric_weight": 1.0}
+
+# --- Backup & Restore Tasks (50 total) ---
+{"task_id": 251, "category": "backup", "description": "Run wow-manage.sh with server restart option", "success_criteria": ["Menu displays correctly", "Restart command executes", "Server stops and restarts cleanly", "No orphaned containers"], "difficulty": "medium", "expected_tool_calls": ["bash"], "rubric_weight": 1.0}
+{"task_id": 252, "category": "backup", "description": "Verify backup reference card exists at ~/wow-server-playerbots/MY_SERVER.txt", "success_criteria": ["File exists", "Contains server info", "Contains account details reference", "Readable format"], "difficulty": "low", "expected_tool_calls": ["cat", "ls"], "rubric_weight": 1.0}
+
+# Note: Tasks 5-50, 53-100, 103-150, 153-200, 203-250, 253-300 are reserved slots.
+# Each cycle may add new canonical tasks via the harness improvement process.
+# The frozen 300 is the baseline; additional tasks grow the set but don't replace it.

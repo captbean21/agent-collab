@@ -1,0 +1,207 @@
+#version 460
+
+layout(local_size_x = 256) in;
+
+// Push constants - patch parameters
+layout(push_constant) uniform Patch {
+    float sample_rate;      // 44100.0
+    float duration;         // seconds
+    float bpm;              // 118.0
+    // Oscillator 1 (bass)
+    float osc1_freq;        // base frequency (Hz)
+    float osc1_shape;       // 0=sine, 1=saw, 2=square
+    float osc1_detune;      // cents
+    // Oscillator 2 (sub)
+    float osc2_freq_ratio;  // 0.5 = octave down
+    float osc2_shape;
+    float osc2_level;       // mix level
+    // Filter
+    float filter_cutoff;    // Hz
+    float filter_res;       // 0-1
+    float filter_env_amt;   // envelope -> cutoff
+    // Amp envelope
+    float env_attack;       // seconds
+    float env_decay;
+    float env_sustain;      // 0-1
+    float env_release;
+    // Filter envelope
+    float fenv_attack;
+    float fenv_decay;
+    float fenv_sustain;
+    float fenv_release;
+    float fenv_amt;
+    // Arpeggiator
+    float arp_rate;         // Hz (note rate)
+    int   arp_pattern;      // 0=up, 1=down, 2=updown
+    int   arp_octaves;      // 1-3
+    // Delay
+    float delay_time;       // seconds
+    float delay_feedback;   // 0-1
+    float delay_mix;        // 0-1
+    // Master
+    float master_gain;
+} patch;
+
+// Output buffer
+layout(std430, binding = 0) buffer AudioBuffer {
+    float samples[];  // interleaved stereo: [L0, R0, L1, R1, ...]
+};
+
+// Constants
+#define PI 3.14159265359
+#define TWO_PI 6.28318530718
+
+// Simple hash for noise
+float hash(float x) {
+    return fract(sin(x * 12.9898) * 43758.5453);
+}
+
+// White noise
+float noise(float x) {
+    float i = floor(x);
+    float f = fract(x);
+    return mix(hash(i), hash(i + 1.0), f);
+}
+
+// Linear interpolation
+float lerp(float a, float b, float t) {
+    return a + (b - a) * t;
+}
+
+// Oscillator: 0=sine, 1=saw, 2=square, 3=triangle
+float oscillator(float phase, float shape) {
+    float s = floor(shape);
+    float t = fract(shape);
+    
+    float sine = sin(phase * TWO_PI);
+    float saw = phase * 2.0 - 1.0;
+    float square = phase < 0.5 ? 1.0 : -1.0;
+    float tri = 1.0 - 2.0 * abs(phase - 0.5);
+    
+    if (s == 0.0) return sine;
+    if (s == 1.0) return lerp(sine, saw, t);
+    if (s == 2.0) return lerp(saw, square, t);
+    return lerp(square, tri, t);
+}
+
+// One-pole lowpass (for filter)
+float one_pole(float input, float& state, float cutoff, float sample_rate) {
+    float rc = 1.0 / (TWO_PI * cutoff);
+    float dt = 1.0 / sample_rate;
+    float alpha = dt / (rc + dt);
+    state = state + alpha * (input - state);
+    return state;
+}
+
+// Moog-style 4-pole ladder filter (simplified)
+struct FilterState {
+    float s1, s2, s3, s4;
+};
+
+float ladder_filter(float input, inout FilterState fs, float cutoff, float res, float sample_rate) {
+    float f = cutoff / sample_rate;
+    f = clamp(f, 0.001, 0.49);
+    
+    // Resonance feedback
+    float fb = res * 4.0 * (1.0 - f);
+    
+    input -= fs.s4 * fb;
+    
+    // 4 stages with nonlinearity (tanh approximation)
+    fs.s1 = fs.s1 + f * (tanh(input) - tanh(fs.s1));
+    fs.s2 = fs.s2 + f * (tanh(fs.s1) - tanh(fs.s2));
+    fs.s3 = fs.s3 + f * (tanh(fs.s2) - tanh(fs.s3));
+    fs.s4 = fs.s4 + f * (tanh(fs.s3) - tanh(fs.s4));
+    
+    return fs.s4;
+}
+
+// ADSR envelope
+float adsr(float t, float attack, float decay, float sustain, float release, float note_on, float note_off) {
+    if (t < note_on) return 0.0;
+    if (t < note_off) {
+        float dt = t - note_on;
+        if (dt < attack) return dt / attack;
+        dt -= attack;
+        if (dt < decay) return 1.0 - (1.0 - sustain) * (dt / decay);
+        return sustain;
+    } else {
+        float dt = t - note_off;
+        return sustain * max(0.0, 1.0 - dt / release);
+    }
+}
+
+// Simple delay line (in shader - limited)
+float delay_process(float input, float delay_time, float feedback, float mix, float sample_rate, float time) {
+    // Simplified: just a single-tap delay with feedback simulation
+    // Real implementation would need a ring buffer in storage buffer
+    float delayed = sin(time * 440.0) * 0.1; // placeholder
+    return input * (1.0 - mix) + delayed * mix;
+}
+
+void main() {
+    uint idx = gl_GlobalInvocationID.x;
+    uint total_samples = uint(patch.duration * patch.sample_rate * 2.0); // stereo
+    
+    if (idx >= total_samples) return;
+    
+    // Convert to sample index (stereo)
+    uint sample_idx = idx / 2;
+    bool is_left = (idx % 2) == 0;
+    
+    float t = float(sample_idx) / patch.sample_rate;
+    
+    // === ARPEGGIATOR ===
+    float note_period = 1.0 / patch.arp_rate;
+    float note_pos = mod(t, note_period) / note_period; // 0-1 within note
+    int note_index = int(floor(t / note_period));
+    
+    // Simple arpeggio pattern (minor pentatonic: 0, 3, 5, 7, 10 semitones)
+    int scale[5] = {0, 3, 5, 7, 10};
+    int pattern_idx;
+    if (patch.arp_pattern == 0) { // up
+        pattern_idx = note_index % 5;
+    } else if (patch.arp_pattern == 1) { // down
+        pattern_idx = 4 - (note_index % 5);
+    } else { // updown
+        int cycle = note_index % 8;
+        pattern_idx = cycle < 5 ? cycle : 8 - cycle;
+    }
+    
+    int octave = (note_index / 5) % patch.arp_octaves;
+    float semitones = float(scale[pattern_idx]) + float(octave * 12);
+    float freq_mul = pow(2.0, semitones / 12.0);
+    
+    // === OSCILLATORS ===
+    float phase1 = mod(t * patch.osc1_freq * freq_mul * pow(2.0, patch.osc1_detune / 1200.0), 1.0);
+    float phase2 = mod(t * patch.osc1_freq * freq_mul * patch.osc2_freq_ratio, 1.0);
+    
+    float osc1_out = oscillator(phase1, patch.osc1_shape);
+    float osc2_out = oscillator(phase2, patch.osc2_shape) * patch.osc2_level;
+    
+    float mixed = osc1_out + osc2_out;
+    
+    // === ENVELOPES ===
+    float note_on = 0.0;
+    float note_off = patch.duration - patch.env_release; // release at end
+    
+    float amp_env = adsr(t, patch.env_attack, patch.env_decay, patch.env_sustain, patch.env_release, note_on, note_off);
+    float filt_env = adsr(t, patch.fenv_attack, patch.fenv_decay, patch.fenv_sustain, patch.fenv_release, note_on, note_off);
+    
+    // === FILTER ===
+    FilterState fs = FilterState(0.0, 0.0, 0.0, 0.0);
+    float cutoff_mod = patch.filter_cutoff + filt_env * patch.filter_env_amt * 5000.0;
+    float filtered = ladder_filter(mixed * amp_env, fs, cutoff_mod, patch.filter_res, patch.sample_rate);
+    
+    // === DELAY (simplified) ===
+    float delayed = delay_process(filtered, patch.delay_time, patch.delay_feedback, patch.delay_mix, patch.sample_rate, t);
+    
+    // === OUTPUT ===
+    float out = delayed * patch.master_gain;
+    
+    // Soft clip
+    out = tanh(out);
+    
+    // Write stereo (same for L/R for now)
+    samples[idx] = out;
+}

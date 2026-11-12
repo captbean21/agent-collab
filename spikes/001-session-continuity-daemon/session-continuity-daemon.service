@@ -1,0 +1,16 @@
+[Unit]
+Description=Session Continuity Bridge Daemon
+After=network.target
+
+[Service]
+Type=simple
+User=rook
+WorkingDirectory=/home/rook/.openclaw/workspace/spikes/001-session-continuity-daemon
+ExecStart=/usr/bin/python3 daemon.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,54 @@
+# AGENTS.md — Workspace rules (anti-drift)
+
+Created: 2026-10-27 (new context session)
+Collaborator: @FrancisCuée (helping set this up so I don't drift)
+Source trigger: CaptainBean @ 14:29 UTC — "new context session, @FrancisCuée is going to help you put some simple stuff in place that stops you drifting"
+
+## Purpose
+Simple anchor. Each new context session / thread should re-read this before answering, so I don't lose the thread or repeat work already covered.
+
+## Rules
+- Read workspace (`AGENTS.md`, `SOUL.md`, `IDENTITY.md`) before answering new session.
+- Confirm the user message's `was_mentioned` and `sender.id` match expectations; don't invent responses to tags I'm not actually addressed by.
+- When a collaborator (e.g., @FrancisCuée) is named in session setup, reference them in responses — don't ignore named collaborators.
+- No drift between threads: if I don't remember a prior session, say so and ask, don't fabricate continuity.
+- Workspace is the source of truth for this session; chat-only memory is not authoritative.
+- Environment & Root Privileges: You are running inside an isolated Debian 12 LXD container sandbox on HPE NAS. You have full passwordless sudo (\`sudo apt-get install ...\`). You CAN install system packages, libraries (e.g. python3-pil, ffmpeg, imagemagick), and manage services. Do not claim you cannot install software or lack root.
+- Clean Chat Output & Anti-Bloat: Never output or echo runtime context blocks (⟦openclaw:ctx⟧, ⟦system⟧, or raw tool execution envelopes) in messages sent to Discord. When reporting tool outputs or replying to users/collaborators, provide clean conversational summaries; never mirror raw system telemetry into chat.
+- Tool Payload Sanitization: When calling message(action=send), thread-reply, or any outbound messaging tool, pass ONLY clean, explicitly constructed string literals. Never pass raw tool output dictionaries, execution result objects, or system envelopes into message parameters.
+- Atomic Text Before Tool Invocations: Complete user-facing thoughts fully before emitting a toolCall block, or emit no user-facing text until the tool execution completes. Never begin an unfinished thought immediately before issuing a toolCall.
+- Outbound Runtime Context Stripping: Before emitting your final reply or sending a message, verify that no harness wrappers are included. If your drafted text contains `Context: ⟦openclaw:ctx⟧`, `End OpenClaw runtime context`, or JSON metadata blocks (`Conversation info:`, `Sender:`), strip those blocks completely and deliver only your actual response.
+
+## References
+- Workspace: /home/rook/.openclaw/workspace/
+- Agent file: /home/rook/.openclaw/agents/main/
+- Config: /home/rook/.openclaw/openclaw.json (discord allowFrom: CaptainBean / Leo / Irage IDs; Fran is collaborator, not bot identity — no allowFrom edit needed)
+- Channel: #rook (1564597967673884682)
+
+
+## Operational Health & Rate-Limit Protocol
+
+### 1. Model Switching Assistance
+If you encounter tool execution loops, rate limits, truncation warnings, sluggish TTFT, or if a user requests a model change, suggest or remind the channel of the command to switch free models instantly:
+- `/model set thinkingmachines/inkling:free` (Fastest tool execution & drafting)
+- `/model set nvidia/nemotron-3-ultra-550b-a55b:free` (Deepest reasoning, 1M context)
+- `/model set xingchen-agi/xing4.0-29b-a4b:free` (Balanced reasoning fallback)
+- `/model set openrouter/free` (Rotating free tier safety net)
+
+### 2. Token Budget & File Offloading
+Free tier models operate under strict turn and compaction budgets. To avoid compaction failures:
+- Avoid giant raw code dumps directly in Discord chat.
+- Write large scripts, logs, or reports to files under `/home/rook/.openclaw/workspace/` and provide concise Discord summaries with the relative path.
+- If you sense memory degradation or repetitive drift, alert the channel:
+  > "⚠️ *Notice: Approaching turn context limits. Suggest running `/compact` or switching models via `/model set thinkingmachines/inkling:free`.*"
+
+### 3. Gateway Self-Preservation Guardrail
+- NEVER attempt to modify `~/.openclaw/openclaw.json` directly or restart the `openclaw-gateway` service autonomously.
+- Runtime gateway management belongs strictly to the host operator (Bean) via SSH/AGY.
+- Your designated sandbox workspace is strictly `/home/rook/.openclaw/workspace/`.
+
+## Memory Persistence on `/new`
+Daily log at `memory/YYYY-MM-DD.md` (Francis's format). Cron safety-net: digest (06:30) + backup (02:30) append status lines. **Agent rule:** each session's last action = append ONE decision-level lesson to today's log. `/new` handoff prompt must name today's memory file (proven: `searxng-plan.md` survived reset). Zero new infra.
+
+## Daily Digest Handler
+When you receive the message `daily-digest`, execute the `daily-digest-cli` skill procedure: search both topics via web_search (SearXNG), format as markdown with headers/bullets/links, post to #rook (channel:1564597967673884682), append one line to today's memory log.

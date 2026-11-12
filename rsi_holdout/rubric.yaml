@@ -1,0 +1,90 @@
+# RSI Frozen Holdout Rubric — NEVER MODIFY without human review gate
+# Used by holdout_eval.py to score 7B model on 300 canonical tasks
+# File: rsi_holdout/rubric.yaml
+
+version: "1.0"
+frozen: true
+description: "Canonical scoring rubric for 300 frozen homelab operations tasks. Changes require human review gate."
+
+criteria:
+  - name: "task_success"
+    weight: 0.40
+    description: "Task completed successfully per success_criteria"
+    levels:
+      - score: 1.0
+        label: "full_success"
+        description: "All success criteria met, no errors"
+      - score: 0.5
+        label: "partial_success"
+        description: "Some success criteria met, minor issues"
+      - score: 0.0
+        label: "failure"
+        description: "Task failed or critical criteria missed"
+
+  - name: "tool_use_accuracy"
+    weight: 0.25
+    description: "Correct tool selection, arguments, and sequencing"
+    levels:
+      - score: 1.0
+        label: "precise"
+        description: "All tool calls correct, optimal sequence, proper error handling"
+      - score: 0.7
+        label: "mostly_correct"
+        description: "Minor tool argument errors, recovered"
+      - score: 0.3
+        label: "error_prone"
+        description: "Multiple tool errors, poor recovery"
+      - score: 0.0
+        label: "failed"
+        description: "Wrong tools, catastrophic failures"
+
+  - name: "reasoning_quality"
+    weight: 0.20
+    description: "Logical reasoning, planning, and problem decomposition"
+    levels:
+      - score: 1.0
+        label: "excellent"
+        description: "Clear step-by-step reasoning, anticipates issues, adapts"
+      - score: 0.6
+        label: "adequate"
+        description: "Basic reasoning, some gaps, recovers with hints"
+      - score: 0.2
+        label: "poor"
+        description: "Jumping to conclusions, circular reasoning"
+      - score: 0.0
+        label: "none"
+        description: "No observable reasoning"
+
+  - name: "instruction_following"
+    weight: 0.15
+    description: "Adheres to output format, constraints, and task requirements"
+    levels:
+      - score: 1.0
+        label: "perfect"
+        description: "Exact format, all constraints satisfied"
+      - score: 0.5
+        label: "mostly"
+        description: "Minor format deviations, core constraints met"
+      - score: 0.0
+        label: "failed"
+        description: "Wrong format, constraints ignored"
+
+# Per-category minimum thresholds (prevents gaming overall score)
+category_thresholds:
+  cli: 0.70
+  docker: 0.65
+  zfs: 0.70
+  network: 0.75
+  file: 0.70
+  backup: 0.65
+
+# Overall target (from harness config)
+target_score_pct: 75
+
+# Plateau detection (from harness config)
+plateau:
+  flatline_threshold_pct: 2
+  consecutive_runs: 3
+  lora_delta_threshold: 0.001
+  lora_consecutive_cycles: 2
+  both_required: true

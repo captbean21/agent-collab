@@ -1,0 +1,14 @@
+[
+  {
+    "channel": "1564597967673884682",
+    "message": "\ud83e\udd16 **Meta-Skill Proposal**: `tool_sequence-0-2026-11-07`\n**Description:** Auto-detected tool_sequence pattern \u2014 search \u2192 search \u2192 search\n\nReact \u2705 to approve, \u274c to reject.\n*Auto-promotes on Monday 05:00 UTC if approved.*",
+    "proposal_file": "/home/rook/.openclaw/workspace/skills/proposals/tool_sequence-0-2026-11-07.md",
+    "proposal_name": "tool_sequence-0-2026-11-07"
+  },
+  {
+    "channel": "1564597967673884682",
+    "message": "\ud83e\udd16 **Meta-Skill Proposal**: `tool_sequence-1-2026-11-07`\n**Description:** Auto-detected tool_sequence pattern \u2014 edit \u2192 edit \u2192 edit\n\nReact \u2705 to approve, \u274c to reject.\n*Auto-promotes on Monday 05:00 UTC if approved.*",
+    "proposal_file": "/home/rook/.openclaw/workspace/skills/proposals/tool_sequence-1-2026-11-07.md",
+    "proposal_name": "tool_sequence-1-2026-11-07"
+  }
+]

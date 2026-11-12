@@ -1,0 +1,13 @@
+# Agent Robustness & Cleverness — Research Aggregator Topics
+# One per line: topic_slug | priority (1-5) | notes | search_query
+
+context-window-management | 5 | sliding windows, KV eviction policies, hierarchical memory | "context window" LLM "KV cache" eviction OR compression
+cpu-background-inference | 5 | 1.5B-3B models on CPU, zero VRAM contention | small language model CPU inference 1B 3B quantization llama.cpp
+structured-output-gbnf | 4 | llama.cpp grammars for reliable tool calls | llama.cpp GBNF grammar structured output constrained decoding
+self-correction-loops | 5 | Reflexion, self-consistency, bounded iterations | Reflexion self-consistency LLM self-correction reasoning
+local-embedding-rerank | 4 | BGE-M3, Jina, mixedbread — full local retrieval | BGE-M3 embedding reranker retrieval RAG
+argument-mapping | 3 | claim decomposition, evidence linking, confidence scoring | argument mining claim evidence LLM
+config-drift-detection | 5 | hash configs, alert, auto-rollback | configuration drift detection hashing alert rollback
+session-continuity | 5 | agent session state persistence, cold-start restore, memory log | LLM agent session memory persistence context resume
+auto-skill-synthesis | 4 | from traces → skill draft → test → promote | LLM agent skill synthesis from traces self-improvement
+model-routing-cascades | 3 | small→large escalation, Pareto optimization | LLM model routing cascades escalation cost quality

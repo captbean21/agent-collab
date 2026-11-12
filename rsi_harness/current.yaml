@@ -1,0 +1,86 @@
+# RSI Harness Config — Live (patched each cycle)
+# Source of truth for nightly training run. Human review gate required for any change.
+
+cycle: 0
+last_updated_utc: "2026-10-31T14:00:00Z"
+base_model: "qwen2.5-7b-instruct-q4_k_m.gguf"
+training_gpu: "5700 XT (8 GB)"
+
+# Frozen holdout set — NEVER CHANGE without human gate
+holdout:
+  tasks_file: "rsi_holdout/holdout_tasks.jsonl"
+  task_count: 300
+  rubric_file: "rsi_holdout/rubric.yaml"
+  target_score_pct: 75
+  flatline_threshold_pct: 2
+  flatline_runs_required: 3
+
+# LoRA training config
+lora:
+  rank: 64
+  alpha: 128
+  dropout: 0.05
+  learning_rate: 2e-4
+  epochs: 3
+  batch_size: 4
+  gradient_accumulation: 8
+  max_seq_len: 4096
+  optimizer: "adamw_8bit"
+  scheduler: "cosine"
+  warmup_steps: 50
+
+# Training prompt template (used to generate trajectories)
+training_prompt:
+  system: |
+    You are a homelab operations agent. Execute the given task using available tools.
+    Be precise, check exit codes, verify results before proceeding.
+  user_template: |
+    Task: {{task_description}}
+    
+    Available tools: {{tools_list}}
+    
+    Execute step by step. After each tool call, observe the result before continuing.
+    If a tool fails, analyze the error and try an alternative approach.
+    
+    Format your response as:
+    THOUGHT: <reasoning>
+    TOOL: <tool_name>
+    ARGS: <json_args>
+    OBSERVATION: <result>
+    ...repeat until task complete...
+    FINAL: <summary>
+
+# Nightly scheduler config
+scheduler:
+  cron: "0 2 * * *"  # 02:00 UTC daily
+  timezone: "UTC"
+  max_runtime_minutes: 180
+  retry_on_failure: 1
+  log_dir: "rsi_cycles/"
+
+# Plateau gate (2-of-2 trigger)
+plateau_gate:
+  holdout_flatline:
+    enabled: true
+    threshold_pct: 2
+    consecutive_runs: 3
+  lora_delta_exhausted:
+    enabled: true
+    delta_norm_threshold: 0.001
+    consecutive_cycles: 2
+  both_required: true  # AND gate
+
+# Human review gate (MANDATORY)
+human_gate:
+  required: true
+  review_channel: "channel:1565679021121871895"  # #debate-club
+  reviewer_ids:
+    - "169033840197632000"  # CaptainBean
+  timeout_hours: 48
+  auto_reject_on_timeout: true
+
+# Revision history tracking
+revision_history:
+  enabled: true
+  log_file_pattern: "rsi_cycles/YYYY-MM-DD-cycle-N.jsonl"
+  retention_days: 90

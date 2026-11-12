@@ -1,0 +1,27 @@
+# --- large model & venv payloads (12G+ each; never commit) ---
+models/
+kev_classifier/
+nli_test_venv/
+minilm_test_venv/
+gliner_test_venv/
+musicgen_test/
+**/node_modules/
+**/__pycache__/
+**/.venv/
+# --- generated media / archives / logs ---
+*.gguf
+*.safetensors
+*.bin
+*.pt
+*.onnx
+*.wav
+*.mp3
+*.flac
+*.ogg
+*.tar.gz
+*.tgz
+logs/
+# --- local runtime state ---
+.claude/
+*.pyc
+.DS_Store
