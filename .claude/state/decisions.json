@@ -2,66 +2,66 @@
   {
     "source": "memory/2026-11-08.md",
     "text": "- **Verdict:** \u2705 Viable with 48-64GB RAM; Unsloth recommended (2-5\u00d7 faster CPU)",
-    "captured": "2026-11-13T03:50:53.271604"
+    "captured": "2026-11-13T03:55:53.296325"
   },
   {
     "source": "memory/2026-11-08.md",
     "text": "- **Verdict:** VIABLE on P2200 via CUDA 12 engine with `STRATA_EXPERIMENTAL_SM60=ON` (Pascal sm_61 supported)",
-    "captured": "2026-11-13T03:50:53.271653"
+    "captured": "2026-11-13T03:55:53.296385"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Bare-metal chosen per searxng-plan.md (Francis proofed 2026-10-28)",
-    "captured": "2026-11-13T03:50:53.272235"
+    "captured": "2026-11-13T03:55:53.296967"
+  },
+  {
+    "source": "git",
+    "text": "7cf3fd9 continuity: state capture 2026-11-13T03:50:53.283338",
+    "captured": "2026-11-13T03:55:53.299913"
   },
   {
     "source": "git",
     "text": "3f3c84f continuity: state capture 2026-11-13T03:45:53.258203",
-    "captured": "2026-11-13T03:50:53.275151"
+    "captured": "2026-11-13T03:55:53.299918"
   },
   {
     "source": "git",
     "text": "e644d94 continuity: state capture 2026-11-13T03:40:53.233806",
-    "captured": "2026-11-13T03:50:53.275156"
+    "captured": "2026-11-13T03:55:53.299920"
   },
   {
     "source": "git",
     "text": "bbdcf59 continuity: state capture 2026-11-13T03:35:53.208882",
-    "captured": "2026-11-13T03:50:53.275157"
+    "captured": "2026-11-13T03:55:53.299921"
   },
   {
     "source": "git",
     "text": "61004d5 continuity: state capture 2026-11-13T03:30:53.183920",
-    "captured": "2026-11-13T03:50:53.275159"
+    "captured": "2026-11-13T03:55:53.299922"
   },
   {
     "source": "git",
     "text": "bc88e9e continuity: state capture 2026-11-13T03:25:53.158915",
-    "captured": "2026-11-13T03:50:53.275160"
+    "captured": "2026-11-13T03:55:53.299923"
   },
   {
     "source": "git",
     "text": "a4680ce continuity: state capture 2026-11-13T03:20:53.133805",
-    "captured": "2026-11-13T03:50:53.275161"
+    "captured": "2026-11-13T03:55:53.299925"
   },
   {
     "source": "git",
     "text": "70070d8 continuity: state capture 2026-11-13T03:15:53.109147",
-    "captured": "2026-11-13T03:50:53.275162"
+    "captured": "2026-11-13T03:55:53.299926"
   },
   {
     "source": "git",
     "text": "f1240fb continuity: state capture 2026-11-13T03:10:53.084562",
-    "captured": "2026-11-13T03:50:53.275163"
+    "captured": "2026-11-13T03:55:53.299927"
   },
   {
     "source": "git",
     "text": "26a598a continuity: state capture 2026-11-13T03:05:53.059712",
-    "captured": "2026-11-13T03:50:53.275165"
-  },
-  {
-    "source": "git",
-    "text": "cf52e6d continuity: state capture 2026-11-13T03:00:53.034873",
-    "captured": "2026-11-13T03:50:53.275166"
+    "captured": "2026-11-13T03:55:53.299928"
   }
 ]
