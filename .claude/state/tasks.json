@@ -2,251 +2,251 @@
   {
     "source": "memory/2026-11-12.md",
     "text": "- RESEARCH_TOOLS_GUIDE.md updated: topics.txt 4-field format, `--summarize` semantics + real cost (~40s), runner quality flags (`--dry-run`, `--topic`, `--limit`, `--llm`), allowlist incl. YouTube.",
-    "captured": "2026-11-14T02:11:47.105536"
+    "captured": "2026-11-14T02:16:47.131030"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- YouTube deliberately remains ALLOWED in the science SearXNG allowlist (Bean: future channel monitoring \u2192 scrape \u2192 push financial-episode overviews). Nothing blacklisted.",
-    "captured": "2026-11-14T02:11:47.105538"
+    "captured": "2026-11-14T02:16:47.131032"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Still pending Bean approval: the 3 DRAFT fixes (git baseline, root-owned log chown/permanent unit fix, PYTHONUNBUFFERED). Timer unchanged (next run 00:04 UTC); timer itself does NOT pass `--summarize`.",
-    "captured": "2026-11-14T02:11:47.105540"
+    "captured": "2026-11-14T02:16:47.131034"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Real run `--topic argument-mapping --summarize` (20:51): PASS for plumbing \u2014 8 results, score 2\u20133, top-2 deep fetch honoured, `argument-mapping.md` appended (FULL entry for 2605.13793 contains a REAL summary from the fixed web_fetch path, not raw content).",
-    "captured": "2026-11-14T02:11:47.105542"
+    "captured": "2026-11-14T02:16:47.131036"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Found fault: score-3 candidate `arxiv.org/pdf/2506.16383.pdf` deep fetch \u2192 `deep_fetch: \"timeout\"`. Root cause VERIFIED: web_fetch does `trafilatura.extract()` on the PDF URL; it cannot extract PDF text \u2192 \"Could not extract readable text\" \u2192 fetch_url_generic returned None. Retested abs page `arxiv.org/abs/2506.16383 --summarize`: PASS, ~35s, real summary.",
-    "captured": "2026-11-14T02:11:47.105544"
+    "captured": "2026-11-14T02:16:47.131038"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Fix landed in `run_research_hybrid.py`: new `normalize_fetch_url()` rewrites arXiv `/pdf/<id>(.pdf)?` URLs to `/abs/<id>` before fetching. Dry-run after fix still works (argument-mapping now \"No usable results\" \u2014 correct `seen` dedup from the 20:51 run, NOT a bug).",
-    "captured": "2026-11-14T02:11:47.105545"
+    "captured": "2026-11-14T02:16:47.131040"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- LLM rerank STILL uncalibrated (scores 3 for wing-CFD) \u2192 now opt-in only via `--llm`; keyword scorer authoritative; default is OFF. Docs/memory updated to say so.",
-    "captured": "2026-11-14T02:11:47.105547"
+    "captured": "2026-11-14T02:16:47.131042"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- `argument-mapping.md` already contains the 20:51 cycle \u2014 do NOT rerun the real topic again or it will append a duplicate section. Next timer cycle (00:04 UTC) will run on its own and will deep-fetch the PDF\u2192abs normalization automatically.",
-    "captured": "2026-11-14T02:11:47.105549"
+    "captured": "2026-11-14T02:16:47.131044"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Accidents during baseline: .gitignore initially excluded all .claude/ (broke daemon contract) \u2014 fixed to keep state JSON; probe line accidentally appended to memory log \u2014 stripped; .gitignore-check-probe accidentally committed in 256e3ed \u2014 removed via re-commit; empty marker commits 0227f42/6207b9e/2280471 reshuffled, final history: 996f1e5 baseline, then one gitignore/probe-fix commit + continuity captures. Working tree had .claude/ untracked until final commit; final head is clean at time of report except 4 pre-existing modified files from smoke test (next bullet).",
-    "captured": "2026-11-14T02:11:47.105551"
+    "captured": "2026-11-14T02:16:47.131046"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- SMOKE TEST SIDE EFFECT (my call, beyond the 3-fix scope): I ran `systemctl start rook-research.service` to verify the unit. It executed a full real cycle. FIRST attempt CRASHED with KeyError in run_research_hybrid.py (arXiv-API-failure candidate missing \"log\" key \u2014 bug from the two-phase restructure). Research files were NOT written by the crashed run (crash before append). I then fixed the bug (api-failure path now sets entry[\"log\"] + generic-fetch fallback) and re-ran: exit 0, appended 8 sources each to session-continuity.md, context-window-management.md, cpu-background-inference.md; logs/research-runner.log root-opened fd gone, now rook-owned append via shell redirect; log shows no traceback after fix. These 3 files + research/.research_state.json + run_research_hybrid.py (fix) are MODIFIED in working tree, NOT committed (no git push/commit of research outputs without Bean go-ahead).",
-    "captured": "2026-11-14T02:11:47.105553"
+    "captured": "2026-11-14T02:16:47.131048"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Net: 3 fixes done + verified. Unintended but real research-cycle side effect from smoke test \u2014 Bean decision needed: keep the appended findings (they're legitimate arXiv/science-query results) or git restore the 3 topic files to discard.",
-    "captured": "2026-11-14T02:11:47.105555"
+    "captured": "2026-11-14T02:16:47.131050"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- 21:04\u201321:12: Three DRAFT fixes applied + verified:",
-    "captured": "2026-11-14T02:11:47.105557"
+    "captured": "2026-11-14T02:16:47.131052"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Git history post-baseline: `996f1e5` baseline \u2192 `2280471` continuity capture (state) \u2192 `256e3ed` gitignore fix + stray probe drop (this commit removed accidental `.gitignore-check-probe`; brief resets reshuffled, final history: baseline \u2192 capture \u2192 gitignore/probe-fix). Working tree contains uncommitted research outputs: `research/session-continuity.md`, `context-window-management.md`, `cpu-background-inference.md`, `.research_state.json`, `run_research_hybrid.py` (bug fix + PDF\u2192abs normalize + summarize fixes + LLM opt-in), plus `memory/2026-11-12.md`.",
-    "captured": "2026-11-14T02:11:47.105560"
+    "captured": "2026-11-14T02:16:47.131056"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- SMOKE-TEST SIDE EFFECT (my call, beyond scope, must surface to Bean): `systemctl start rook-research.service` ran a FULL real cycle. First attempt CRASHED with `KeyError: 'log'` \u2014 my two-phase restructure left arXiv-API-failure candidates without `entry[\"log\"]`. Crashed BEFORE any file appends/state save (tree untouched). Fixed: api-failure path now sets `entry[\"log\"]` (DEPTH_FAILED entry) and `score=0`; Phase-2 non-arXiv/API-fail now reuses `c[\"log\"]` for DEPTH_FULL/fallback annotation. Re-ran: exit 0; **8 sources appended to session-continuity.md, context-window-management.md, cpu-background-inference.md**; 18:04 timer-era outputs already in those files remain (duplicate-findings cosmetic issue pre-exists for self-correction-loops.md).",
-    "captured": "2026-11-14T02:11:47.105562"
+    "captured": "2026-11-14T02:16:47.131058"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Do NOT `git restore` research outputs silently \u2014 Bean's call: keep the three topic files (legitimate science-query findings) or discard them.",
-    "captured": "2026-11-14T02:11:47.105563"
+    "captured": "2026-11-14T02:16:47.131059"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Git commit cadence noisy: daemon makes ~5-min capture commits (31+ by 23:02; latest auto-commits every 5 min). Recommended tightening: commit only when `git status --porcelain` non-trivial or when workspace-relevant files changed; keep periodic capture in-memory otherwise. Awaiting Bean go.",
-    "captured": "2026-11-14T02:11:47.105565"
+    "captured": "2026-11-14T02:16:47.131061"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- 22:58: user asked \"are the fixes applied?\" \u2014 verified live: units active, journal populated, timer intact (next 2026-11-13 00:04 UTC, last 18:04:03), log rook-owned, 238 files tracked, 6 modified-but-uncommitted.",
-    "captured": "2026-11-14T02:11:47.105567"
+    "captured": "2026-11-14T02:16:47.131063"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- 23:00: recommended moving forward = (1) split-commit the 6 dirty files (research outputs as one commit; bug fix + memory/docs as another), (2) tighten daemon commit cadence, (3) leave timer unchanged until Bean chooses (`--summarize` off), (4) keep duplicate-findings cleanup as low-priority, (5) inspect 00:04 UTC cycle for KeyError-path regression. Awaiting Bean on commits; nothing pushed (local repo only).",
-    "captured": "2026-11-14T02:11:47.105569"
+    "captured": "2026-11-14T02:16:47.131064"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- 23:02 token-rails audit (post-HPE migration), all checked live or on disk:",
-    "captured": "2026-11-14T02:11:47.105570"
+    "captured": "2026-11-14T02:16:47.131066"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- `/home/rook/.openclaw/openclaw.json`: `tools.loopDetection.enabled=true`; `agents.defaults.timeoutSeconds=900`; `subagents` bounds (`maxSpawnDepth:1`, `maxChildrenPerAgent:2`, `runTimeoutSeconds:900`); model fallback ladder includes `local/deepseek-moe`; primary `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free`. Gateway/service restart not done (Bean owns restarts).",
-    "captured": "2026-11-14T02:11:47.105572"
+    "captured": "2026-11-14T02:16:47.131068"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- `AGENTS.md` \u00a72 (staged offload + write-to-disk + `/compact`/switch notice) and \u00a76 (web_fetch/yt_transcript/qwen_coder local offload) both present (AGENTS.md read-only, not edited).",
-    "captured": "2026-11-14T02:11:47.105575"
+    "captured": "2026-11-14T02:16:47.131070"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- `staged-large-output-generation` skill present in catalog (Nov 9 method: `exec`+heredoc, one file/turn, no prose in file-write turns). `repeat_guard.py` exists but is an un-wired tool, not an automatic gate. `transcript_compact.py` exists, not auto-triggered.",
-    "captured": "2026-11-14T02:11:47.105577"
+    "captured": "2026-11-14T02:16:47.131072"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Free-tier 4,096 output ceiling is model-side; cannot be removed, only mitigated. Session shows 8 compactions, \"degraded history\", inkling-2-small (switched from rate-limited Nemotron earlier today), context 107k/1.0m (10%), 98% cache hit \u2014 headroom OK.",
-    "captured": "2026-11-14T02:11:47.105579"
+    "captured": "2026-11-14T02:16:47.131075"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- Suggested to Bean: model-choice lever (`local/deepseek-moe` for free local work; higher-output model for large authoring) and whether to pin staged-large-output as mandatory for big file writes (awaiting answer).",
-    "captured": "2026-11-14T02:11:47.105581"
+    "captured": "2026-11-14T02:16:47.131077"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- 18:04 timer cycle still ran with old code (pre-fix) \u2014 the 00:04 UTC cycle will be first to exercise PDF\u2192abs normalization + KeyError fix + seeded `seen` dedup end-to-end. Watch `logs/research-runner.log` for that run.",
-    "captured": "2026-11-14T02:11:47.105583"
+    "captured": "2026-11-14T02:16:47.131078"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- 00:04 checklist if asked: does log contain traceback? do topic files append cleanly? does state `seen` avoid dup IDs? (Dry-run already passes on argument-mapping; self-correction-loops dry-run shows correct dedup = \"No usable results\".)",
-    "captured": "2026-11-14T02:11:47.105585"
+    "captured": "2026-11-14T02:16:47.131080"
   },
   {
     "source": "memory/2026-11-12.md",
     "text": "- 2026-11-12 flush note: the 21:04\u201323:32 block above is repo-specific (units, repo baseline, research runner); treat the token-rails audit items as session/runtime notes, not durable config changes.",
-    "captured": "2026-11-14T02:11:47.105587"
+    "captured": "2026-11-14T02:16:47.131082"
   },
   {
     "source": "memory/2026-11-13.md",
     "text": "- cpu-background-inference",
-    "captured": "2026-11-14T02:11:47.105685"
+    "captured": "2026-11-14T02:16:47.131159"
   },
   {
     "source": "memory/2026-11-13.md",
     "text": "- self-correction-loops",
-    "captured": "2026-11-14T02:11:47.105689"
+    "captured": "2026-11-14T02:16:47.131162"
   },
   {
     "source": "memory/2026-11-13.md",
     "text": "- config-drift-detection",
-    "captured": "2026-11-14T02:11:47.105690"
+    "captured": "2026-11-14T02:16:47.131164"
   },
   {
     "source": "memory/2026-11-13.md",
     "text": "- context-window-management",
-    "captured": "2026-11-14T02:11:47.105692"
+    "captured": "2026-11-14T02:16:47.131166"
   },
   {
     "source": "memory/2026-11-13.md",
     "text": "- 15:30 UTC: State backup uploaded \u2014 87 files, 512",
-    "captured": "2026-11-14T02:11:47.105694"
+    "captured": "2026-11-14T02:16:47.131168"
   },
   {
     "source": "memory/2026-11-13.md",
     "text": "- `yt-dlp` upgraded `2023.03.04` \u2192 `2026.10.26` (pip `--break-system-packages`)",
-    "captured": "2026-11-14T02:11:47.105697"
+    "captured": "2026-11-14T02:16:47.131170"
   },
   {
     "source": "memory/2026-11-13.md",
     "text": "- Installed `curl_cffi` (browser TLS impersonation) + `yt-dlp-ejs` (JS challenge solver)",
-    "captured": "2026-11-14T02:11:47.105698"
+    "captured": "2026-11-14T02:16:47.131172"
   },
   {
     "source": "memory/2026-11-13.md",
     "text": "- Pointed yt-dlp at `/usr/bin/node` (v24.22.2) via `--js-runtimes node` \u2192 solves YouTube JS challenges",
-    "captured": "2026-11-14T02:11:47.105700"
+    "captured": "2026-11-14T02:16:47.131174"
   },
   {
     "source": "memory/2026-11-13.md",
     "text": "- **bgutil PO token provider built from source** at `~/bgutil-ytdlp-pot-provider/` (no Docker on box; built with tsc, runs `build/main.js --port 4416`). Systemd service `bgutil-pot.service` \u2014 active, auto-restart, survives reboot. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-14T02:11:47.105701"
+    "captured": "2026-11-14T02:16:47.131175"
   },
   {
     "source": "memory/2026-11-13.md",
     "text": "- Plugin installed globally to `/home/rook/.local/lib/python3.11/site-packages/yt_dlp_plugins/` so yt-dlp auto-discovers it (`Plugin directories` now populated). <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-14T02:11:47.105703"
+    "captured": "2026-11-14T02:16:47.131177"
   },
   {
     "source": "memory/2026-11-13.md",
     "text": "- `tools/yt_ratelimit.py` \u2014 global rate governor, persists to `.claude/state/yt_ratelimit.json`",
-    "captured": "2026-11-14T02:11:47.105705"
+    "captured": "2026-11-14T02:16:47.131179"
   },
   {
     "source": "memory/2026-11-13.md",
     "text": "- 1 caption request per video (NO retry on failure)",
-    "captured": "2026-11-14T02:11:47.105707"
+    "captured": "2026-11-14T02:16:47.131181"
   },
   {
     "source": "memory/2026-11-13.md",
     "text": "- 30s spacing between caption requests, 8s between any YT request",
-    "captured": "2026-11-14T02:11:47.105709"
+    "captured": "2026-11-14T02:16:47.131183"
   },
   {
     "source": "memory/2026-11-13.md",
     "text": "- Max 6 caption requests per rolling hour",
-    "captured": "2026-11-14T02:11:47.105711"
+    "captured": "2026-11-14T02:16:47.131185"
   },
   {
     "source": "memory/2026-11-13.md",
     "text": "- On 429 \u2192 30 min global cooldown, zero retries",
-    "captured": "2026-11-14T02:11:47.105713"
+    "captured": "2026-11-14T02:16:47.131187"
   },
   {
     "source": "memory/2026-11-13.md",
     "text": "- `tools/yt_subtitles.py` \u2014 rate-limited subtitle fetcher (yt-dlp+bgutil, single attempt, auto-backoff, 429 detection)",
-    "captured": "2026-11-14T02:11:47.105714"
+    "captured": "2026-11-14T02:16:47.131188"
   },
   {
     "source": "memory/2026-11-13.md",
     "text": "- `tools/yt_transcript.py` \u2014 rewritten to use `fetch_subtitles` + `_parse_srt`; dropped blocked `youtube-transcript-api` path. Validated syntax+import OK. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-14T02:11:47.105716"
+    "captured": "2026-11-14T02:16:47.131190"
   },
   {
     "source": "memory/2026-11-13.md",
     "text": "- `config/yt_watch_channels.json` \u2014 3 channels: Rebel Capitalist (UCNjyEXSvYUUCzagFAKmaJ1Q, real estate/macro), Kai Explains (UCgUfJoPtkt7-RiiuYh4vmGA, AI hardware/local inference), NerdNest (UCiC38Llz5e3qR6EaQAGlWvw, Linux gaming)",
-    "captured": "2026-11-14T02:11:47.105719"
+    "captured": "2026-11-14T02:16:47.131193"
   },
   {
     "source": "memory/2026-11-13.md",
     "text": "- `tools/yt_watch_rss.py` \u2014 RSS poller (zero API keys)",
-    "captured": "2026-11-14T02:11:47.105723"
+    "captured": "2026-11-14T02:16:47.131194"
   },
   {
     "source": "memory/2026-11-13.md",
     "text": "- `/etc/systemd/system/rook-yt-watch.{service,timer}` \u2014 every 15 min, Persistent=true",
-    "captured": "2026-11-14T02:11:47.105725"
+    "captured": "2026-11-14T02:16:47.131196"
   },
   {
     "source": "memory/2026-11-13.md",
     "text": "- `/etc/systemd/system/bgutil-pot.service` \u2014 PO token server",
-    "captured": "2026-11-14T02:11:47.105820"
+    "captured": "2026-11-14T02:16:47.131197"
   },
   {
     "source": "memory/2026-11-13.md",
     "text": "- Discord thread `#\ud83d\udcc8 Finance Watch - 2026-11-13` (1570795138504986706); first Rebel Capitalist summary posted (1570795202812190771) <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-14T02:11:47.105823"
+    "captured": "2026-11-14T02:16:47.131199"
   },
   {
     "source": "spikes/001-session-continuity-daemon",
     "text": "# Spike: Session Continuity Bridge Daemon\n\n## Question\nCan a lightweight Python daemon persist agent session state (task list, decisions, recent diffs) to a local git-backed store and restore it on co",
-    "captured": "2026-11-14T02:11:47.105952"
+    "captured": "2026-11-14T02:16:47.131326"
   }
 ]
