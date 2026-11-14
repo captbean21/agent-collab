@@ -2,251 +2,251 @@
   {
     "source": "memory/2026-11-14.md",
     "text": "- `ifixit_en_all_2025-06.zim` \u2014 **3.45 GB** (`content-length: 3446756392`) \u2014 repairs/teardowns",
-    "captured": "2026-11-14T08:01:49.438951"
+    "captured": "2026-11-14T08:06:49.465554"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- `libretexts.org_en_bio_2025-01.zim` \u2014 biology textbook",
-    "captured": "2026-11-14T08:01:49.438953"
+    "captured": "2026-11-14T08:06:49.465555"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Categories live: `other`, `ifixit`, `libretexts`, `gutenberg`, `wikivoyage`, `stack_exchange`, `devdocs`, `maps`",
-    "captured": "2026-11-14T08:01:49.438954"
+    "captured": "2026-11-14T08:06:49.465557"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Skip full `wikipedia_en_all_maxi` (~100 GB+)",
-    "captured": "2026-11-14T08:01:49.438956"
+    "captured": "2026-11-14T08:06:49.465559"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- `download.kiwix.org` and `library.kiwix.org` now **301-redirect** to `hub.kiwix.org` / `lb.download.kiwix.org`. Follow redirects (`curl -L`), and the real `Content-Length` only appears after following (direct HEAD returns 302 with no size).",
-    "captured": "2026-11-14T08:01:49.438958"
+    "captured": "2026-11-14T08:06:49.465560"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- `lb.download.kiwix.org/zim/wikipedia/` serves a **flat listing** (files directly in dir), not subdirs \u2014 my `/wikipedia_en_all/` 404 was a wrong path assumption, not a missing file.",
-    "captured": "2026-11-14T08:01:49.438959"
+    "captured": "2026-11-14T08:06:49.465562"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- `ifixit_en_all_2026-03.zim` \u2192 404; only `2025-06` exists.",
-    "captured": "2026-11-14T08:01:49.438961"
+    "captured": "2026-11-14T08:06:49.465564"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Session model: `openrouter/baidu/ernie-5.5-flash-preview:free`; config primary `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free`",
-    "captured": "2026-11-14T08:01:49.438966"
+    "captured": "2026-11-14T08:06:49.465569"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Gateway: OpenClaw 2026.11.3 (847611d), systemd user service, pid 1005",
-    "captured": "2026-11-14T08:01:49.438968"
+    "captured": "2026-11-14T08:06:49.465571"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- `doctor --lint` surfaced two pre-existing warnings NOT touched (Bean decisions): gateway auth off; DM principals share a session bucket across 6 Discord users (context-leak risk)",
-    "captured": "2026-11-14T08:01:49.438970"
+    "captured": "2026-11-14T08:06:49.465573"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Local DeepSeek confirmed working earlier this session (`deepseek-coder.service` active, `/health` ok, returned `PONG`)",
-    "captured": "2026-11-14T08:01:49.438971"
+    "captured": "2026-11-14T08:06:49.465574"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Prompt caching is a **hit rate**, not a memory size. Reused prefix \u2192 hit; changed prefix \u2192 miss. You cannot make the cached region larger than the prompt you send.",
-    "captured": "2026-11-14T08:01:49.438974"
+    "captured": "2026-11-14T08:06:49.465577"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- On our two free-tier models, `cache_read` and `cache_write` pricing are both `None`, and `prompt_caching` is **not** in `supported_parameters`. So provider-side priced caching isn't in play at all.",
-    "captured": "2026-11-14T08:01:49.438975"
+    "captured": "2026-11-14T08:06:49.465578"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- The `94% hit \u00b7 103k cached` figures in `/status` are OpenClaw's local prefix-reuse diagnostic, not evidence of a working provider cache tier. Read it as a diagnostic, not a knob.",
-    "captured": "2026-11-14T08:01:49.438977"
+    "captured": "2026-11-14T08:06:49.465580"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Two real levers to cut per-turn tokens: keep `/compact` occasional (each compaction rebuilds the prefix and *destroys* cache hits next turn), and never paste large files into chat (write to disk, summarise in chat \u2014 already AGENTS.md rule 2).",
-    "captured": "2026-11-14T08:01:49.438979"
+    "captured": "2026-11-14T08:06:49.465582"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Video: \"Deepseek V4.1 Flash Runs With No GPU Just 64GB RAM\" (channel: Kai / @kaiexplainsYT).",
-    "captured": "2026-11-14T08:01:49.438982"
+    "captured": "2026-11-14T08:06:49.465585"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Blocker: YouTube IP-blocked the host (timedtext 429, youtube_transcript_api `IpBlocked`, yt-dlp caption 429).",
-    "captured": "2026-11-14T08:01:49.438983"
+    "captured": "2026-11-14T08:06:49.465587"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Fix that worked: youtube_transcript_api through a free HTTP proxy from proxyscrape (1.20.101.19:8080) \u2192 full 27,022-char transcript to /tmp/wiMs92u-dk0.txt.",
-    "captured": "2026-11-14T08:01:49.438985"
+    "captured": "2026-11-14T08:06:49.465588"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Local summarizer at 127.0.0.1:5001 timed out at the 45s urllib limit (CPU-only DS-Coder-V2-Lite). Summarised in-context instead.",
-    "captured": "2026-11-14T08:01:49.438987"
+    "captured": "2026-11-14T08:06:49.465590"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Lesson: when captions 429/IpBlocked, try proxy path before declaring unavailable; and the 45s timeout in yt_transcript.py is too tight for CPU decode.",
-    "captured": "2026-11-14T08:01:49.438988"
+    "captured": "2026-11-14T08:06:49.465591"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Root cause: `timeout=45` urllib ceiling left over from the Qwen 3B llama-cli path. 5001 server (DeepSeek-Coder-V2-Lite, CPU-only) needs ~150s for a 4k-char prompt + 1200 tokens.",
-    "captured": "2026-11-14T08:01:49.438990"
+    "captured": "2026-11-14T08:06:49.465593"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Changes: `SUMMARIZE_TIMEOUT=180` env-overridable; new `_local_summarize()` helper; rewrote `summarize_with_local_gpu` as two-stage (extract facts from 10k-char excerpt, then compress to structured summary) so it sees more of the video; error label no longer says \"GPU\".",
-    "captured": "2026-11-14T08:01:49.438992"
+    "captured": "2026-11-14T08:06:49.465595"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Verified: ran on wiMs92u-dk0, 168.9s, correct 284.33B / 155 GB / 76.87 GB / 8.66 tok/s / 82.7 Terminal Bench vs Opus 4.8's 85.0. Backup at /tmp/yt_transcript.py.bak.*",
-    "captured": "2026-11-14T08:01:49.438994"
+    "captured": "2026-11-14T08:06:49.465597"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Limitation found: 4k-char slice loses the back half \u2014 the 60.8% perplexity and Atomic Chat ladder didn't surface. Wants map-reduce or a chunk loop.",
-    "captured": "2026-11-14T08:01:49.438995"
+    "captured": "2026-11-14T08:06:49.465598"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Measured: 24 GB RAM total, 12.8 GB free, 4 GB swap, P2200 5 GB @6% util, Xeon E-2126G 6c, live deepseek-coder RSS 17.6 GB.",
-    "captured": "2026-11-14T08:01:49.438997"
+    "captured": "2026-11-14T08:06:49.465600"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Effective ceiling for a second model: ~11-12 GB weights + ~1 GB KV/overhead.",
-    "captured": "2026-11-14T08:01:49.438999"
+    "captured": "2026-11-14T08:06:49.465602"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Best candidate: Qwen3-30B-A3B (Apache-2.0, native 256k ctx). UD-IQ2_M 10.85 GB @32k = recommended start; UD-TQ1_0 8.09 GB fallback; UD-IQ3_XXS 12.91 GB too tight.",
-    "captured": "2026-11-14T08:01:49.439001"
+    "captured": "2026-11-14T08:06:49.465603"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- gemma-4-31B dense = 31B active/token, ~3-5 tok/s on 6c, rejected. DeepSeek V3.x = 671B, impossible.",
-    "captured": "2026-11-14T08:01:49.439002"
+    "captured": "2026-11-14T08:06:49.465605"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- This llama.cpp build (0.9.0-dev, b12283) shipped ONLY llama-server \u2014 no llama-cli/llama-quantize, so pre-quantised GGUFs only.",
-    "captured": "2026-11-14T08:01:49.439004"
+    "captured": "2026-11-14T08:06:49.465607"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- P2200 cannot help: Pascal, no bf16, 5 GB < weights. Real lever = more RAM (16 GB DIMMs \u2192 64-96 GB enables DS-V3.1-class 4-bit).",
-    "captured": "2026-11-14T08:01:49.439005"
+    "captured": "2026-11-14T08:06:49.465608"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Awaiting Bean's go to download + benchmark on a second port.",
-    "captured": "2026-11-14T08:01:49.439007"
+    "captured": "2026-11-14T08:06:49.465610"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- 06:05 UTC: Daily digest posted \u2014 2 sections with real links",
-    "captured": "2026-11-14T08:01:49.439009"
+    "captured": "2026-11-14T08:06:49.465611"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Control: 8k + --parallel 1 works, generates ~14 tok/s, survives.",
-    "captured": "2026-11-14T08:01:49.439010"
+    "captured": "2026-11-14T08:06:49.465613"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- 16k default (CUDA0 KV offload) -> LOADS then DIES on first token. KV=4320 MiB (4096 CPU + 640 CUDA0) + 892 MiB compute buffer.",
-    "captured": "2026-11-14T08:01:49.439012"
+    "captured": "2026-11-14T08:06:49.465615"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- 16k + `-nkvo` -> WORKS. KV stays in RAM, generates, survives. Free RAM after load ~6 GB.",
-    "captured": "2026-11-14T08:01:49.439014"
+    "captured": "2026-11-14T08:06:49.465616"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- 24k + `-nkvo` -> short prompt works (14.3 tok/s), but a realistic 2k-token prompt killed it. Edge, not safe.",
-    "captured": "2026-11-14T08:01:49.439015"
+    "captured": "2026-11-14T08:06:49.465618"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- 32k + `-nkvo` -> loads, DIES on first token. KV would be ~8.6 GB; too big for 24 GB box with 17.6 GB already used by 5001.",
-    "captured": "2026-11-14T08:01:49.439017"
+    "captured": "2026-11-14T08:06:49.465620"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Realistic 37.5k-char (~9.4k token) prompt at 16k: prefill slows 142->104->80->66->50 tok/s as cache fills, and the request blew past 240s. Prefill is the bottleneck, not VRAM.",
-    "captured": "2026-11-14T08:01:49.439019"
+    "captured": "2026-11-14T08:06:49.465621"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Verified live 5001 unaffected throughout; all probes killed, RAM back to ~13.1 GB used.",
-    "captured": "2026-11-14T08:01:49.439020"
+    "captured": "2026-11-14T08:06:49.465623"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- CONCLUSION: 16k + -nkvo is the only safe upgrade on this box. 32k needs more RAM. q8_0 KV is not usable (FA disabled on Pascal P2200).",
-    "captured": "2026-11-14T08:01:49.439022"
+    "captured": "2026-11-14T08:06:49.465625"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Step 1 benchmark: GPU-resident KV (12k, --kv-offload) prefill 193 tok/s but decode 1.02 tok/s; -nkvo (32k) prefill 100 tok/s, decode 5.60 tok/s, 132.4s total. -ngl 99 impossible: 9,768 MiB on 5,120 MiB card. WINNER: -nkvo.",
-    "captured": "2026-11-14T08:01:49.439024"
+    "captured": "2026-11-14T08:06:49.465626"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Step 2 applied: deepseek-coder.service now `-c 32768 --parallel 1 --cont-batching -nkvo --spec-draft-ngl 99`. Live, n_ctx=32768.",
-    "captured": "2026-11-14T08:01:49.439025"
+    "captured": "2026-11-14T08:06:49.465628"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- BORK: I first wrote `--nkvo` (invalid; correct is `-nkvo` / `--no-kv-offload`) -> auto-restart loop. Fixed. Backup: deepseek-coder.service.bak.1794640646",
-    "captured": "2026-11-14T08:01:49.439027"
+    "captured": "2026-11-14T08:06:49.465630"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Step 3: SUMMARIZE_TIMEOUT 180->300, FETCH_EXCERPT_CHARS 10000->24000.",
-    "captured": "2026-11-14T08:01:49.439029"
+    "captured": "2026-11-14T08:06:49.465631"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- REAL BUG FOUND: _local_summarize was one blocking call; 300s timeout threw away all generated text. Foreground repro: TimeoutError at exactly 300s while server still generating (task 10, 166 tok, 0.76 tok/s).",
-    "captured": "2026-11-14T08:01:49.439030"
+    "captured": "2026-11-14T08:06:49.465633"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- FIX: rewrote _local_summarize to stream SSE (`\"stream\": True`), per-read timeout, keeps partial output as `[stream stopped: ...]`. Backup: /tmp/yt_transcript.py.bak.streaming",
-    "captured": "2026-11-14T08:01:49.439032"
+    "captured": "2026-11-14T08:06:49.465635"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Step 4 chunking: added CHUNK_CHARS=12000 and _split_chunks(); summarize_with_local_gpu now map-reduce (extract per chunk, tag PART i/N, merge, compress). Verified lossless: 27,022 chars -> [12000,12000,3022].",
-    "captured": "2026-11-14T08:01:49.439034"
+    "captured": "2026-11-14T08:06:49.465636"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- KEY PERF FINDING: decode at high KV occupancy is ~0.7 tok/s vs ~14 tok/s cold-slot. A 24k-char excerpt with 900 max_tokens = ~20 min. Prefill is NOT the bottleneck (100-193 tok/s); DECODE is. My earlier \"prefill is the ceiling\" claim was wrong.",
-    "captured": "2026-11-14T08:01:49.439035"
+    "captured": "2026-11-14T08:06:49.465638"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- STILL OPEN: single-pass vs chunked quality comparison. Single-pass run (task 182) in flight at 244 tok / 0.71 tok/s when session paused.",
-    "captured": "2026-11-14T08:01:49.439037"
+    "captured": "2026-11-14T08:06:49.465640"
   },
   {
     "source": "spikes/001-session-continuity-daemon",
     "text": "# Spike: Session Continuity Bridge Daemon\n\n## Question\nCan a lightweight Python daemon persist agent session state (task list, decisions, recent diffs) to a local git-backed store and restore it on co",
-    "captured": "2026-11-14T08:01:49.439163"
+    "captured": "2026-11-14T08:06:49.465768"
   }
 ]
