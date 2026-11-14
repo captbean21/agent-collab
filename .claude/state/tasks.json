@@ -1,252 +1,252 @@
 [
   {
     "source": "memory/2026-11-13.md",
-    "text": "- 30s spacing between caption requests, 8s between any YT request",
-    "captured": "2026-11-14T05:51:48.396804"
-  },
-  {
-    "source": "memory/2026-11-13.md",
-    "text": "- Max 6 caption requests per rolling hour",
-    "captured": "2026-11-14T05:51:48.396806"
-  },
-  {
-    "source": "memory/2026-11-13.md",
-    "text": "- On 429 \u2192 30 min global cooldown, zero retries",
-    "captured": "2026-11-14T05:51:48.396808"
-  },
-  {
-    "source": "memory/2026-11-13.md",
-    "text": "- `tools/yt_subtitles.py` \u2014 rate-limited subtitle fetcher (yt-dlp+bgutil, single attempt, auto-backoff, 429 detection)",
-    "captured": "2026-11-14T05:51:48.396810"
-  },
-  {
-    "source": "memory/2026-11-13.md",
-    "text": "- `tools/yt_transcript.py` \u2014 rewritten to use `fetch_subtitles` + `_parse_srt`; dropped blocked `youtube-transcript-api` path. Validated syntax+import OK. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-14T05:51:48.396812"
-  },
-  {
-    "source": "memory/2026-11-13.md",
-    "text": "- `config/yt_watch_channels.json` \u2014 3 channels: Rebel Capitalist (UCNjyEXSvYUUCzagFAKmaJ1Q, real estate/macro), Kai Explains (UCgUfJoPtkt7-RiiuYh4vmGA, AI hardware/local inference), NerdNest (UCiC38Llz5e3qR6EaQAGlWvw, Linux gaming)",
-    "captured": "2026-11-14T05:51:48.396814"
-  },
-  {
-    "source": "memory/2026-11-13.md",
-    "text": "- `tools/yt_watch_rss.py` \u2014 RSS poller (zero API keys)",
-    "captured": "2026-11-14T05:51:48.396816"
-  },
-  {
-    "source": "memory/2026-11-13.md",
     "text": "- `/etc/systemd/system/rook-yt-watch.{service,timer}` \u2014 every 15 min, Persistent=true",
-    "captured": "2026-11-14T05:51:48.396817"
+    "captured": "2026-11-14T05:55:02.394561"
   },
   {
     "source": "memory/2026-11-13.md",
     "text": "- `/etc/systemd/system/bgutil-pot.service` \u2014 PO token server",
-    "captured": "2026-11-14T05:51:48.396819"
+    "captured": "2026-11-14T05:55:02.394562"
   },
   {
     "source": "memory/2026-11-13.md",
     "text": "- Discord thread `#\ud83d\udcc8 Finance Watch - 2026-11-13` (1570795138504986706); first Rebel Capitalist summary posted (1570795202812190771) <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-14T05:51:48.396821"
+    "captured": "2026-11-14T05:55:02.394564"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- `baidu/ernie-5.5-flash-preview:free` \u2192 real **1,024,000** ctx, max output 921,600 (was capped 131,072 / 8,192)",
-    "captured": "2026-11-14T05:51:48.396900"
+    "captured": "2026-11-14T05:55:02.394641"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- `nvidia/nemotron-3-ultra-550b-a55b:free` \u2192 real **1,000,000** ctx, max output 65,536 (was capped 131,072 / 8,192)",
-    "captured": "2026-11-14T05:51:48.396903"
+    "captured": "2026-11-14T05:55:02.394644"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- First pass: ctx 1,000,000 / 1,024,000, maxTokens 65,536",
-    "captured": "2026-11-14T05:51:48.396905"
+    "captured": "2026-11-14T05:55:02.394647"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- **Final (Bean's call 23:14): both models = 262,144 ctx, 12,288 output** \u2014 `contextWindow` and `contextTokens` both set. Schema confirms `contextTokens` caps *active input*, `contextWindow` is the native window.",
-    "captured": "2026-11-14T05:51:48.396907"
+    "captured": "2026-11-14T05:55:02.394648"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Gateway accepted without restart (\"Change will apply without restarting the gateway\"); `/status` now reads `68k/262k`.",
-    "captured": "2026-11-14T05:51:48.396909"
+    "captured": "2026-11-14T05:55:02.394650"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- **#192522** \u2014 closed. `/status` during a turn kills it. Fixed narrowly by **PR #192585**, which marked only status replies `contextFreeCommand`.",
-    "captured": "2026-11-14T05:51:48.396912"
+    "captured": "2026-11-14T05:55:02.394653"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- **#194451** \u2014 **still OPEN**. \"/think (and other directives) sent during an agent turn still kill the turn\u2026 #192585 only covered /status.\" Labels: `P1`, `impact:message-loss`, `impact:session-state`, diamond lobster rating. 34 issues match the error family.",
-    "captured": "2026-11-14T05:51:48.396913"
+    "captured": "2026-11-14T05:55:02.394655"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Beta check: downloaded `openclaw@2026.11.5-beta.2` and inspected `dist/` \u2014 the same `SqliteTranscriptMutationConflictError` throw is **still present**. `latest` = 2026.11.3 = what we run. **An update will NOT fix this**; only the open PR for #194451 will.",
-    "captured": "2026-11-14T05:51:48.396915"
+    "captured": "2026-11-14T05:55:02.394657"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- `sun8i-h2-plus-bananapi-m2-zero.dts` present upstream (200)",
-    "captured": "2026-11-14T05:51:48.396919"
+    "captured": "2026-11-14T05:55:02.394660"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- `bananapi_m2_zero_defconfig` present in u-boot (200)",
-    "captured": "2026-11-14T05:51:48.396920"
+    "captured": "2026-11-14T05:55:02.394662"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Francis's addition: Banana Pi's own wiki/S3 still hosts official legacy 3.4-kernel images if \"zero build effort\" is the goal.",
-    "captured": "2026-11-14T05:51:48.396922"
+    "captured": "2026-11-14T05:55:02.394664"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- **Alpine minirootfs armv7** \u2014 `alpine-minirootfs-3.24.3-armv7.tar.gz`, ~5 MB. Correct call for a 512 MB H2+ board (Debian bookworm+ gets sluggish).",
-    "captured": "2026-11-14T05:51:48.396924"
+    "captured": "2026-11-14T05:55:02.394665"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Debian armhf netboot (200, plus `SD-card-images/`), Ubuntu ports armhf (200).",
-    "captured": "2026-11-14T05:51:48.396926"
+    "captured": "2026-11-14T05:55:02.394667"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- `wikipedia_en_top_nopic_2026-09.zim` \u2014 **2.75 GB** (`content-length: 2745850723`)",
-    "captured": "2026-11-14T05:51:48.396928"
+    "captured": "2026-11-14T05:55:02.394669"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- `wikipedia_en_medicine_maxi_2026-10.zim` \u2014 **1.86 GB** (`content-length: 1864210320`) \u2014 highest value per byte",
-    "captured": "2026-11-14T05:51:48.396930"
+    "captured": "2026-11-14T05:55:02.394671"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- `ifixit_en_all_2025-06.zim` \u2014 **3.45 GB** (`content-length: 3446756392`) \u2014 repairs/teardowns",
-    "captured": "2026-11-14T05:51:48.396932"
+    "captured": "2026-11-14T05:55:02.394673"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- `libretexts.org_en_bio_2025-01.zim` \u2014 biology textbook",
-    "captured": "2026-11-14T05:51:48.396933"
+    "captured": "2026-11-14T05:55:02.394674"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Categories live: `other`, `ifixit`, `libretexts`, `gutenberg`, `wikivoyage`, `stack_exchange`, `devdocs`, `maps`",
-    "captured": "2026-11-14T05:51:48.396935"
+    "captured": "2026-11-14T05:55:02.394676"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Skip full `wikipedia_en_all_maxi` (~100 GB+)",
-    "captured": "2026-11-14T05:51:48.396937"
+    "captured": "2026-11-14T05:55:02.394678"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- `download.kiwix.org` and `library.kiwix.org` now **301-redirect** to `hub.kiwix.org` / `lb.download.kiwix.org`. Follow redirects (`curl -L`), and the real `Content-Length` only appears after following (direct HEAD returns 302 with no size).",
-    "captured": "2026-11-14T05:51:48.396939"
+    "captured": "2026-11-14T05:55:02.394680"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- `lb.download.kiwix.org/zim/wikipedia/` serves a **flat listing** (files directly in dir), not subdirs \u2014 my `/wikipedia_en_all/` 404 was a wrong path assumption, not a missing file.",
-    "captured": "2026-11-14T05:51:48.396941"
+    "captured": "2026-11-14T05:55:02.394681"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- `ifixit_en_all_2026-03.zim` \u2192 404; only `2025-06` exists.",
-    "captured": "2026-11-14T05:51:48.396943"
+    "captured": "2026-11-14T05:55:02.394683"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Session model: `openrouter/baidu/ernie-5.5-flash-preview:free`; config primary `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free`",
-    "captured": "2026-11-14T05:51:48.396948"
+    "captured": "2026-11-14T05:55:02.394688"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Gateway: OpenClaw 2026.11.3 (847611d), systemd user service, pid 1005",
-    "captured": "2026-11-14T05:51:48.396950"
+    "captured": "2026-11-14T05:55:02.394690"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- `doctor --lint` surfaced two pre-existing warnings NOT touched (Bean decisions): gateway auth off; DM principals share a session bucket across 6 Discord users (context-leak risk)",
-    "captured": "2026-11-14T05:51:48.396952"
+    "captured": "2026-11-14T05:55:02.394691"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Local DeepSeek confirmed working earlier this session (`deepseek-coder.service` active, `/health` ok, returned `PONG`)",
-    "captured": "2026-11-14T05:51:48.396953"
+    "captured": "2026-11-14T05:55:02.394693"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Prompt caching is a **hit rate**, not a memory size. Reused prefix \u2192 hit; changed prefix \u2192 miss. You cannot make the cached region larger than the prompt you send.",
-    "captured": "2026-11-14T05:51:48.396956"
+    "captured": "2026-11-14T05:55:02.394695"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- On our two free-tier models, `cache_read` and `cache_write` pricing are both `None`, and `prompt_caching` is **not** in `supported_parameters`. So provider-side priced caching isn't in play at all.",
-    "captured": "2026-11-14T05:51:48.396957"
+    "captured": "2026-11-14T05:55:02.394697"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- The `94% hit \u00b7 103k cached` figures in `/status` are OpenClaw's local prefix-reuse diagnostic, not evidence of a working provider cache tier. Read it as a diagnostic, not a knob.",
-    "captured": "2026-11-14T05:51:48.396959"
+    "captured": "2026-11-14T05:55:02.394699"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Two real levers to cut per-turn tokens: keep `/compact` occasional (each compaction rebuilds the prefix and *destroys* cache hits next turn), and never paste large files into chat (write to disk, summarise in chat \u2014 already AGENTS.md rule 2).",
-    "captured": "2026-11-14T05:51:48.396961"
+    "captured": "2026-11-14T05:55:02.394700"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Video: \"Deepseek V4.1 Flash Runs With No GPU Just 64GB RAM\" (channel: Kai / @kaiexplainsYT).",
-    "captured": "2026-11-14T05:51:48.396964"
+    "captured": "2026-11-14T05:55:02.394703"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Blocker: YouTube IP-blocked the host (timedtext 429, youtube_transcript_api `IpBlocked`, yt-dlp caption 429).",
-    "captured": "2026-11-14T05:51:48.396965"
+    "captured": "2026-11-14T05:55:02.394705"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Fix that worked: youtube_transcript_api through a free HTTP proxy from proxyscrape (1.20.101.19:8080) \u2192 full 27,022-char transcript to /tmp/wiMs92u-dk0.txt.",
-    "captured": "2026-11-14T05:51:48.396967"
+    "captured": "2026-11-14T05:55:02.394707"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Local summarizer at 127.0.0.1:5001 timed out at the 45s urllib limit (CPU-only DS-Coder-V2-Lite). Summarised in-context instead.",
-    "captured": "2026-11-14T05:51:48.396969"
+    "captured": "2026-11-14T05:55:02.394708"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Lesson: when captions 429/IpBlocked, try proxy path before declaring unavailable; and the 45s timeout in yt_transcript.py is too tight for CPU decode.",
-    "captured": "2026-11-14T05:51:48.396970"
+    "captured": "2026-11-14T05:55:02.394710"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Root cause: `timeout=45` urllib ceiling left over from the Qwen 3B llama-cli path. 5001 server (DeepSeek-Coder-V2-Lite, CPU-only) needs ~150s for a 4k-char prompt + 1200 tokens.",
-    "captured": "2026-11-14T05:51:48.396972"
+    "captured": "2026-11-14T05:55:02.394712"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Changes: `SUMMARIZE_TIMEOUT=180` env-overridable; new `_local_summarize()` helper; rewrote `summarize_with_local_gpu` as two-stage (extract facts from 10k-char excerpt, then compress to structured summary) so it sees more of the video; error label no longer says \"GPU\".",
-    "captured": "2026-11-14T05:51:48.396974"
+    "captured": "2026-11-14T05:55:02.394713"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Verified: ran on wiMs92u-dk0, 168.9s, correct 284.33B / 155 GB / 76.87 GB / 8.66 tok/s / 82.7 Terminal Bench vs Opus 4.8's 85.0. Backup at /tmp/yt_transcript.py.bak.*",
-    "captured": "2026-11-14T05:51:48.396976"
+    "captured": "2026-11-14T05:55:02.394715"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Limitation found: 4k-char slice loses the back half \u2014 the 60.8% perplexity and Atomic Chat ladder didn't surface. Wants map-reduce or a chunk loop.",
-    "captured": "2026-11-14T05:51:48.396977"
+    "captured": "2026-11-14T05:55:02.394716"
+  },
+  {
+    "source": "memory/2026-11-14.md",
+    "text": "- Measured: 24 GB RAM total, 12.8 GB free, 4 GB swap, P2200 5 GB @6% util, Xeon E-2126G 6c, live deepseek-coder RSS 17.6 GB.",
+    "captured": "2026-11-14T05:55:02.394718"
+  },
+  {
+    "source": "memory/2026-11-14.md",
+    "text": "- Effective ceiling for a second model: ~11-12 GB weights + ~1 GB KV/overhead.",
+    "captured": "2026-11-14T05:55:02.394724"
+  },
+  {
+    "source": "memory/2026-11-14.md",
+    "text": "- Best candidate: Qwen3-30B-A3B (Apache-2.0, native 256k ctx). UD-IQ2_M 10.85 GB @32k = recommended start; UD-TQ1_0 8.09 GB fallback; UD-IQ3_XXS 12.91 GB too tight.",
+    "captured": "2026-11-14T05:55:02.394726"
+  },
+  {
+    "source": "memory/2026-11-14.md",
+    "text": "- gemma-4-31B dense = 31B active/token, ~3-5 tok/s on 6c, rejected. DeepSeek V3.x = 671B, impossible.",
+    "captured": "2026-11-14T05:55:02.394730"
+  },
+  {
+    "source": "memory/2026-11-14.md",
+    "text": "- This llama.cpp build (0.9.0-dev, b12283) shipped ONLY llama-server \u2014 no llama-cli/llama-quantize, so pre-quantised GGUFs only.",
+    "captured": "2026-11-14T05:55:02.394731"
+  },
+  {
+    "source": "memory/2026-11-14.md",
+    "text": "- P2200 cannot help: Pascal, no bf16, 5 GB < weights. Real lever = more RAM (16 GB DIMMs \u2192 64-96 GB enables DS-V3.1-class 4-bit).",
+    "captured": "2026-11-14T05:55:02.394733"
+  },
+  {
+    "source": "memory/2026-11-14.md",
+    "text": "- Awaiting Bean's go to download + benchmark on a second port.",
+    "captured": "2026-11-14T05:55:02.394735"
   },
   {
     "source": "spikes/001-session-continuity-daemon",
     "text": "# Spike: Session Continuity Bridge Daemon\n\n## Question\nCan a lightweight Python daemon persist agent session state (task list, decisions, recent diffs) to a local git-backed store and restore it on co",
-    "captured": "2026-11-14T05:51:48.397105"
+    "captured": "2026-11-14T05:55:02.394854"
   }
 ]
