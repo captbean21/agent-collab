@@ -2,251 +2,251 @@
   {
     "source": "memory/2026-11-14.md",
     "text": "- P2200 cannot help: Pascal, no bf16, 5 GB < weights. Real lever = more RAM (16 GB DIMMs \u2192 64-96 GB enables DS-V3.1-class 4-bit).",
-    "captured": "2026-11-14T20:06:53.531840"
+    "captured": "2026-11-14T20:11:53.559234"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Awaiting Bean's go to download + benchmark on a second port.",
-    "captured": "2026-11-14T20:06:53.531841"
+    "captured": "2026-11-14T20:11:53.559235"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- 06:05 UTC: Daily digest posted \u2014 2 sections with real links",
-    "captured": "2026-11-14T20:06:53.531843"
+    "captured": "2026-11-14T20:11:53.559237"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Control: 8k + --parallel 1 works, generates ~14 tok/s, survives.",
-    "captured": "2026-11-14T20:06:53.531845"
+    "captured": "2026-11-14T20:11:53.559239"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- 16k default (CUDA0 KV offload) -> LOADS then DIES on first token. KV=4320 MiB (4096 CPU + 640 CUDA0) + 892 MiB compute buffer.",
-    "captured": "2026-11-14T20:06:53.531846"
+    "captured": "2026-11-14T20:11:53.559240"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- 16k + `-nkvo` -> WORKS. KV stays in RAM, generates, survives. Free RAM after load ~6 GB.",
-    "captured": "2026-11-14T20:06:53.531848"
+    "captured": "2026-11-14T20:11:53.559242"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- 24k + `-nkvo` -> short prompt works (14.3 tok/s), but a realistic 2k-token prompt killed it. Edge, not safe.",
-    "captured": "2026-11-14T20:06:53.531849"
+    "captured": "2026-11-14T20:11:53.559243"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- 32k + `-nkvo` -> loads, DIES on first token. KV would be ~8.6 GB; too big for 24 GB box with 17.6 GB already used by 5001.",
-    "captured": "2026-11-14T20:06:53.531851"
+    "captured": "2026-11-14T20:11:53.559245"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Realistic 37.5k-char (~9.4k token) prompt at 16k: prefill slows 142->104->80->66->50 tok/s as cache fills, and the request blew past 240s. Prefill is the bottleneck, not VRAM.",
-    "captured": "2026-11-14T20:06:53.531853"
+    "captured": "2026-11-14T20:11:53.559247"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Verified live 5001 unaffected throughout; all probes killed, RAM back to ~13.1 GB used.",
-    "captured": "2026-11-14T20:06:53.531854"
+    "captured": "2026-11-14T20:11:53.559248"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- CONCLUSION: 16k + -nkvo is the only safe upgrade on this box. 32k needs more RAM. q8_0 KV is not usable (FA disabled on Pascal P2200).",
-    "captured": "2026-11-14T20:06:53.531856"
+    "captured": "2026-11-14T20:11:53.559250"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Step 1 benchmark: GPU-resident KV (12k, --kv-offload) prefill 193 tok/s but decode 1.02 tok/s; -nkvo (32k) prefill 100 tok/s, decode 5.60 tok/s, 132.4s total. -ngl 99 impossible: 9,768 MiB on 5,120 MiB card. WINNER: -nkvo.",
-    "captured": "2026-11-14T20:06:53.531858"
+    "captured": "2026-11-14T20:11:53.559252"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Step 2 applied: deepseek-coder.service now `-c 32768 --parallel 1 --cont-batching -nkvo --spec-draft-ngl 99`. Live, n_ctx=32768.",
-    "captured": "2026-11-14T20:06:53.531859"
+    "captured": "2026-11-14T20:11:53.559253"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- BORK: I first wrote `--nkvo` (invalid; correct is `-nkvo` / `--no-kv-offload`) -> auto-restart loop. Fixed. Backup: deepseek-coder.service.bak.1794640646",
-    "captured": "2026-11-14T20:06:53.531861"
+    "captured": "2026-11-14T20:11:53.559255"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Step 3: SUMMARIZE_TIMEOUT 180->300, FETCH_EXCERPT_CHARS 10000->24000.",
-    "captured": "2026-11-14T20:06:53.531862"
+    "captured": "2026-11-14T20:11:53.559257"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- REAL BUG FOUND: _local_summarize was one blocking call; 300s timeout threw away all generated text. Foreground repro: TimeoutError at exactly 300s while server still generating (task 10, 166 tok, 0.76 tok/s).",
-    "captured": "2026-11-14T20:06:53.531864"
+    "captured": "2026-11-14T20:11:53.559258"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- FIX: rewrote _local_summarize to stream SSE (`\"stream\": True`), per-read timeout, keeps partial output as `[stream stopped: ...]`. Backup: /tmp/yt_transcript.py.bak.streaming",
-    "captured": "2026-11-14T20:06:53.531866"
+    "captured": "2026-11-14T20:11:53.559260"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Step 4 chunking: added CHUNK_CHARS=12000 and _split_chunks(); summarize_with_local_gpu now map-reduce (extract per chunk, tag PART i/N, merge, compress). Verified lossless: 27,022 chars -> [12000,12000,3022].",
-    "captured": "2026-11-14T20:06:53.531867"
+    "captured": "2026-11-14T20:11:53.559262"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- KEY PERF FINDING: decode at high KV occupancy is ~0.7 tok/s vs ~14 tok/s cold-slot. A 24k-char excerpt with 900 max_tokens = ~20 min. Prefill is NOT the bottleneck (100-193 tok/s); DECODE is. My earlier \"prefill is the ceiling\" claim was wrong.",
-    "captured": "2026-11-14T20:06:53.531869"
+    "captured": "2026-11-14T20:11:53.559263"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- STILL OPEN: single-pass vs chunked quality comparison. Single-pass run (task 182) in flight at 244 tok / 0.71 tok/s when session paused.",
-    "captured": "2026-11-14T20:06:53.531870"
+    "captured": "2026-11-14T20:11:53.559265"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- **Decision lesson (2026-11-14, Option 3 rollout):** `systemctl start` on an already-active unit is a **no-op** \u2014 the old `-c 32768 -nkvo` kept serving for ~45 min while `/health` said OK, masking the config change. Caught it only by reading argv from `/proc/$(pgrep llama-server)/cmdline`. Rule: after any unit edit, use `restart` (not `start`) and verify effective flags from `/proc`, not from the health endpoint. Second lesson: decode speed tracks **KV occupancy**, not KV location \u2014 `-nkvo` and q8_0 KV are dead ends on Pascal P2200 (no Flash Attention). Tuning knob is chunk size, not context length. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-14T20:06:53.531872"
+    "captured": "2026-11-14T20:11:53.559266"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- **GPU ASR works on P2200 \u2014 faster-whisper, NOT whisper.cpp (10:00 UTC).** When YouTube timedtext is 429-blocked, download audio with a non-web player client (`--extractor-args youtube:player_client=default,-web`; only the *caption* endpoint is throttled, media is fine) and transcribe locally.",
-    "captured": "2026-11-14T20:06:53.531874"
+    "captured": "2026-11-14T20:11:53.559268"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- **Do not build whisper.cpp here.** It compiled for >15 min and never finished: the CUDA path builds hundreds of MMQ template instances even with `GGML_CUDA_FORCE_CUBLAS=ON`. Abandoned, artifacts removed.",
-    "captured": "2026-11-14T20:06:53.531876"
+    "captured": "2026-11-14T20:11:53.559270"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- **Use `faster-whisper` in a venv** (`python3 -m venv /tmp/fw && /tmp/fw/bin/pip install faster-whisper`). `ctranslate2.get_cuda_device_count()` = 1.",
-    "captured": "2026-11-14T20:06:53.531877"
+    "captured": "2026-11-14T20:11:53.559271"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- **`compute_type=\"float16\"` FAILS on Pascal** \u2014 \"target device or backend do not support efficient float16 computation.\" Use **`float32`**. (P2200 is CC 6.1, no bf16.)",
-    "captured": "2026-11-14T20:06:53.531879"
+    "captured": "2026-11-14T20:11:53.559273"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Measured on 18:48 of audio: `base.en` load 10s + transcribe 15.5s = **73x realtime**; `small.en` 19s + 41.1s = **27x**. Quality: small.en fixes \"rebel capitals\"\u2192\"rebel capitalists\". Prefer small.en when accuracy matters, base.en when speed does.",
-    "captured": "2026-11-14T20:06:53.531881"
+    "captured": "2026-11-14T20:11:53.559275"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Also fixed a real `yt_transcript.py` bug: default `--lang` was `en`, but videos with no manual subs publish under `en-orig`, so the tool reported \"no captions\" when auto-captions existed. Default is now `en-orig,en`. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-14T20:06:53.531883"
+    "captured": "2026-11-14T20:11:53.559277"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- 12:07 UTC: research-cycle cron ran with --limit 12 after default --limit 8 returned \"No usable results found\" (all top arXiv hits already in seen-list; science-first filter narrows to arxiv/europepmc). 3/3 priority-5 topics completed: session-continuity, self-correction-loops, context-window-management. Findings appended to research/*.md; state updated. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-14T20:06:53.531884"
+    "captured": "2026-11-14T20:11:53.559279"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- YT pipeline finalized: P2200 faster-whisper float32 (small.en ~27-32x realtime, no whisper.cpp), deepseek-coder service -c 4096, CHUNK_CHARS=7000 lossless; 67-min gaming video transcribed 125s, map-reduce summary 103s. Skill `youtube-video-summarize-onrequest` reordered: captions once -> GPU ASR -> summarize -> proxy last resort. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-14T20:06:53.531886"
+    "captured": "2026-11-14T20:11:53.559280"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- OPEN (new session): add `--content-type` branch to tools/yt_transcript.py (technical vs narrative extraction prompts; forbid boilerplate \"no specific numerical data provided\" bullets); verify by re-running BillsGaming video L7TBo2gRZwU summary. /tmp/bills_transcript.txt (12,556 chars) and /tmp/bills_summary.txt exist; move under workspace if needed. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-14T20:06:53.531888"
+    "captured": "2026-11-14T20:11:53.559282"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- PENDING DOC: update sys-ops rook.md with finalized pipeline (launch: P2200 faster-whisper float32 + -c 4096). LOCAL_AI_GUIDE.md still stale (\"Context Size: 8,192 tokens\") \u2014 actual service is -c 4096. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-14T20:06:53.531889"
+    "captured": "2026-11-14T20:11:53.559284"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- OpenRouter free tier is account-level AND provider/model-specific (Ernie 1k vs Nemo ~350 observed); a 429 does not prove a shared 1k cap hit. `openrouter-free-tier-capacity-audit` skill patched accordingly. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-14T20:06:53.531891"
+    "captured": "2026-11-14T20:11:53.559285"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- Degraded history notice hit at ~2 compactions; wrap sessions before this. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-14T20:06:53.531892"
+    "captured": "2026-11-14T20:11:53.559287"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- 12:45 UTC (continuation): `tools/yt_transcript.py` gained `--content-type {technical,narrative}` \u2014 map/reduce/format prompts and system prompts branch per type; explicit ban on \"no numerical data provided\" bullets and on non-verbatim quotes. Verified by re-running L7TBo2gRZwU in narrative mode: boilerplate gone (0 occurrences), names/quotes mostly grounded, but the local 2.4B engine still paraphrases quotes slightly and mislabels one fight outcome \u2014 treat output as distilled, not transcription. LOCAL_AI_GUIDE.md / AGENTS.md / DEEPSEEK_DEPLOYMENT_PLAN.md updated to actual production state (`-c 4096`, drafter on P2200, faster-whisper note).",
-    "captured": "2026-11-14T20:06:53.531894"
+    "captured": "2026-11-14T20:11:53.559288"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- automated-agent-design",
-    "captured": "2026-11-14T20:06:53.531896"
+    "captured": "2026-11-14T20:11:53.559290"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- star-rejection-sampling",
-    "captured": "2026-11-14T20:06:53.531897"
+    "captured": "2026-11-14T20:11:53.559292"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- auto-skill-synthesis",
-    "captured": "2026-11-14T20:06:53.531899"
+    "captured": "2026-11-14T20:11:53.559293"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- context-window-management",
-    "captured": "2026-11-14T20:06:53.531900"
+    "captured": "2026-11-14T20:11:53.559295"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- self-correction-loops",
-    "captured": "2026-11-14T20:06:53.531902"
+    "captured": "2026-11-14T20:11:53.559297"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- cpu-background-inference",
-    "captured": "2026-11-14T20:06:53.531904"
+    "captured": "2026-11-14T20:11:53.559298"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- config-drift-detection",
-    "captured": "2026-11-14T20:06:53.531905"
+    "captured": "2026-11-14T20:11:53.559300"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- 15:30 UTC: State backup uploaded \u2014 91 files, 512",
-    "captured": "2026-11-14T20:06:53.531907"
+    "captured": "2026-11-14T20:11:53.559301"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- auto-skill-synthesis",
-    "captured": "2026-11-14T20:06:53.531909"
+    "captured": "2026-11-14T20:11:53.559303"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- automated-agent-design",
-    "captured": "2026-11-14T20:06:53.531910"
+    "captured": "2026-11-14T20:11:53.559305"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- self-correction-loops",
-    "captured": "2026-11-14T20:06:53.531912"
+    "captured": "2026-11-14T20:11:53.559307"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- star-rejection-sampling",
-    "captured": "2026-11-14T20:06:53.531913"
+    "captured": "2026-11-14T20:11:53.559308"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- context-window-management",
-    "captured": "2026-11-14T20:06:53.531915"
+    "captured": "2026-11-14T20:11:53.559310"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- cpu-background-inference",
-    "captured": "2026-11-14T20:06:53.531917"
+    "captured": "2026-11-14T20:11:53.559312"
   },
   {
     "source": "memory/2026-11-14.md",
     "text": "- config-drift-detection",
-    "captured": "2026-11-14T20:06:53.531919"
+    "captured": "2026-11-14T20:11:53.559313"
   },
   {
     "source": "spikes/001-session-continuity-daemon",
     "text": "# Spike: Session Continuity Bridge Daemon\n\n## Question\nCan a lightweight Python daemon persist agent session state (task list, decisions, recent diffs) to a local git-backed store and restore it on co",
-    "captured": "2026-11-14T20:06:53.532044"
+    "captured": "2026-11-14T20:11:53.559457"
   }
 ]
