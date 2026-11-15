@@ -2,56 +2,56 @@
   {
     "source": "memory/2026-11-12.md",
     "text": "- Bare-metal chosen per searxng-plan.md (Francis proofed 2026-10-28)",
-    "captured": "2026-11-15T11:11:58.709708"
+    "captured": "2026-11-15T11:16:58.737289"
+  },
+  {
+    "source": "git",
+    "text": "a8360df continuity: state capture 2026-11-15T11:11:58.722223",
+    "captured": "2026-11-15T11:16:58.741644"
   },
   {
     "source": "git",
     "text": "e690d6c continuity: state capture 2026-11-15T11:06:58.694170",
-    "captured": "2026-11-15T11:11:58.713930"
+    "captured": "2026-11-15T11:16:58.741648"
   },
   {
     "source": "git",
     "text": "a913ce2 continuity: state capture 2026-11-15T11:01:58.666686",
-    "captured": "2026-11-15T11:11:58.713935"
+    "captured": "2026-11-15T11:16:58.741650"
   },
   {
     "source": "git",
     "text": "4971961 continuity: state capture 2026-11-15T10:56:58.639022",
-    "captured": "2026-11-15T11:11:58.713936"
+    "captured": "2026-11-15T11:16:58.741651"
   },
   {
     "source": "git",
     "text": "8495e74 continuity: state capture 2026-11-15T10:51:58.611671",
-    "captured": "2026-11-15T11:11:58.713937"
+    "captured": "2026-11-15T11:16:58.741652"
   },
   {
     "source": "git",
     "text": "588e476 continuity: state capture 2026-11-15T10:46:58.583936",
-    "captured": "2026-11-15T11:11:58.713939"
+    "captured": "2026-11-15T11:16:58.741654"
   },
   {
     "source": "git",
     "text": "5c2e5cd continuity: state capture 2026-11-15T10:41:58.556879",
-    "captured": "2026-11-15T11:11:58.713940"
+    "captured": "2026-11-15T11:16:58.741655"
   },
   {
     "source": "git",
     "text": "fc43430 continuity: state capture 2026-11-15T10:36:58.529193",
-    "captured": "2026-11-15T11:11:58.713941"
+    "captured": "2026-11-15T11:16:58.741656"
   },
   {
     "source": "git",
     "text": "ad6b59a continuity: state capture 2026-11-15T10:31:58.501674",
-    "captured": "2026-11-15T11:11:58.713942"
+    "captured": "2026-11-15T11:16:58.741657"
   },
   {
     "source": "git",
     "text": "80b1425 continuity: state capture 2026-11-15T10:26:58.474219",
-    "captured": "2026-11-15T11:11:58.713944"
-  },
-  {
-    "source": "git",
-    "text": "dee7357 continuity: state capture 2026-11-15T10:21:58.446991",
-    "captured": "2026-11-15T11:11:58.713945"
+    "captured": "2026-11-15T11:16:58.741659"
   }
 ]
