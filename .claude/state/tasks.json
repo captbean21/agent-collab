@@ -2,191 +2,196 @@
   {
     "source": "memory/2026-11-16.md",
     "text": "- **systemd-ai-service-deployment** \u2014 5 prior deploys \u2192 hardened systemd workflow with GPU passthrough, health checks, operator approval gate",
-    "captured": "2026-11-16T14:27:08.321141"
+    "captured": "2026-11-16T14:31:55.964313"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- **hybrid-web-research-cycle** \u2014 12+ 6-hourly cycles \u2192 SearXNG science search \u2192 arXiv triage \u2192 keyword/LLM score \u2192 deep fetch top-k \u2192 wiki append with fetch-depth logging",
-    "captured": "2026-11-16T14:27:08.321149"
+    "captured": "2026-11-16T14:31:55.964317"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- **youtube-watch-pipeline** \u2014 4 cohesive pipeline steps \u2192 RSS-poll YouTube \u2192 yt-dlp + bgutil PO tokens \u2192 rate-limited captions \u2192 DeepSeek 5001 summarize \u2192 Discord threads; 15-min timer",
-    "captured": "2026-11-16T14:27:08.321151"
+    "captured": "2026-11-16T14:31:55.964319"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- [agent-collab] Configured shared public GitHub repository captbean21/agent-collab at agent-collab/ with full write access via dedicated deploy keys. Verified check-in and git push.",
-    "captured": "2026-11-16T14:27:08.321153"
+    "captured": "2026-11-16T14:31:55.964322"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- Decision: Shared agent-collab design (private repo on Bean's GitHub, repo-scoped deploy keys or SSH commit signing, PR proof + rollback, Bean owns account) is a plan, not a live deployment \u2014 recency \u2260 authority; only verified clone/push/CI state counts. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-16T14:27:08.321155"
+    "captured": "2026-11-16T14:31:55.964323"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- Inkling (thinkingmachines/inkling-2-small:free) capped to 262144/262144, maxTokens 12288 via `openclaw config set --batch-file` dry-run first, applied without gateway restart; verified in openclaw.json. Owner authorized in chat.",
-    "captured": "2026-11-16T14:27:08.321158"
+    "captured": "2026-11-16T14:31:55.964326"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- Gemma/Nemotron 429s are the shared OpenRouter free-tier daily pool (limit_source=openrouter_free_tier_daily, 1000/day, reset 2026-11-17T00:00Z), NOT per-model or model-defect. Yesterday's 429s were mostly upstream_provider_shared_pool. ERNIE not exempt; Inkling had zero 429s. Don't probe models with test calls \u2014 they cost quota.",
-    "captured": "2026-11-16T14:27:08.321159"
+    "captured": "2026-11-16T14:31:55.964327"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- Owner asked: put Inkling right after nemotron-ultra fails. Applied via dry-run then batch set: fallbacks now [inkling, gemma, ernie, lightning, openrouter/free, local/deepseek-moe]. Verified in openclaw.json; applies without gateway restart. Backup at ~/.openclaw/openclaw.json.bak.1794835352.",
-    "captured": "2026-11-16T14:27:08.321161"
+    "captured": "2026-11-16T14:31:55.964329"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- Rationale: everything except inkling hit openrouter_free_tier_daily 429 on 2026-11-16 (1000/day, resets 2026-11-17T00:00Z). Inkling carried all successful fallback traffic. Manual /model switches are session-only.",
-    "captured": "2026-11-16T14:27:08.321163"
+    "captured": "2026-11-16T14:31:55.964331"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- Decision pending: whether to revert inkling to after gemma/ernie after daily reset (2026-11-17T00:00Z) if ultra capacity returns; watch logs tomorrow.",
-    "captured": "2026-11-16T14:27:08.321166"
+    "captured": "2026-11-16T14:31:55.964333"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- Follow-up (not previously saved, appended 13:39 UTC): During pre-compaction flush, exec/edit tools are unavailable; `memory/2026-11-16.md` could not be appended via tool after the write rejection. Record here: agent-collab README relay closed with Castle acknowledging the missing Turn 3 push; Bean's 3-turn guard override in the README mission was owner-authorized; Rook's live status after model-chain reorder showed ~98k/262k (37%) on inkling fallback (the earlier 64k/1.0m snapshot was stale). Reconstruct the relay ledger from GitHub `origin/main @ 3ca46ec` and this conversation rather than from Castle's completion claim. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-16T14:27:08.321167"
+    "captured": "2026-11-16T14:31:55.964335"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- Decision: agent-collab index.html reached verified committed state at a454e49 (not deployed until Bean enables GitHub Pages); agent-reported artifacts must be checked against origin/remote state, not narration. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-16T14:27:08.321169"
+    "captured": "2026-11-16T14:31:55.964336"
+  },
+  {
+    "source": "memory/2026-11-16.md",
+    "text": "- Bean decided: keep agent-collab public as curated showcase only (generic demo/protocol, sanitized ledger; no raw Discord; git-derived evidence only). Anything groundbreaking/valuable moves to a private repo/local-only workstream before commit. Note: PROOF_OF_RELAY_DRAFT.md is already public at 6ebef8e. Implementation sprint (5 back-and-forth turns Rook/Castle) authorized after /new. <!-- project: path:/home/rook/.openclaw/workspace -->",
+    "captured": "2026-11-16T14:31:55.964338"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Cross-domain retrieval functional",
-    "captured": "2026-11-16T14:27:08.321235"
+    "captured": "2026-11-16T14:31:55.964408"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Dynamic queries produce domain-appropriate keywords",
-    "captured": "2026-11-16T14:27:08.321238"
+    "captured": "2026-11-16T14:31:55.964412"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- **Embedding:** ~50-200s (scales with sentence count)",
-    "captured": "2026-11-16T14:27:08.321240"
+    "captured": "2026-11-16T14:31:55.964414"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- **Fact extraction:** ~20-100s (scales with key_text size)",
-    "captured": "2026-11-16T14:27:08.321242"
+    "captured": "2026-11-16T14:31:55.964415"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- **Total:** 2.5-6.5 min per video",
-    "captured": "2026-11-16T14:27:08.321243"
+    "captured": "2026-11-16T14:31:55.964417"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- **Rate limit:** YouTube 6 caption requests/hour per IP",
-    "captured": "2026-11-16T14:27:08.321245"
+    "captured": "2026-11-16T14:31:55.964419"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- [ ] Test on educational/lecture content (highest expected quality)",
-    "captured": "2026-11-16T14:27:08.321247"
+    "captured": "2026-11-16T14:31:55.964421"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- [ ] Add multi-language caption support",
-    "captured": "2026-11-16T14:27:08.321249"
+    "captured": "2026-11-16T14:31:55.964422"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- [ ] Integrate with youtube-watch-pipeline for automated RSS polling",
-    "captured": "2026-11-16T14:27:08.321251"
+    "captured": "2026-11-16T14:31:55.964424"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Pipeline: `/home/rook/.openclaw/workspace/tools/yt_full_pipeline_llama31_dynamic.py`",
-    "captured": "2026-11-16T14:27:08.321253"
+    "captured": "2026-11-16T14:31:55.964426"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Service: `/etc/systemd/system/llama-3.1-8b.service`",
-    "captured": "2026-11-16T14:27:08.321254"
+    "captured": "2026-11-16T14:31:55.964428"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Model: `/home/rook/.openclaw/workspace/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf`",
-    "captured": "2026-11-16T14:27:08.321256"
+    "captured": "2026-11-16T14:31:55.964429"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Todo: `/home/rook/.openclaw/workspace/todo_live_streams.md`",
-    "captured": "2026-11-16T14:27:08.321258"
+    "captured": "2026-11-16T14:31:55.964431"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- **Model:** Meta-Llama-3.1-8B-Instruct-Q4_K_M (4.6 GB)",
-    "captured": "2026-11-16T14:27:08.321315"
+    "captured": "2026-11-16T14:31:55.964487"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- **Endpoint:** http://127.0.0.1:5003/v1",
-    "captured": "2026-11-16T14:27:08.321318"
+    "captured": "2026-11-16T14:31:55.964489"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- **Context:** 8192 tokens (native 128K training, stable on CPU)",
-    "captured": "2026-11-16T14:27:08.321320"
+    "captured": "2026-11-16T14:31:55.964491"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- **Service:** `llama-3.1-8b.service` (systemd, auto-restart, enabled)",
-    "captured": "2026-11-16T14:27:08.321322"
+    "captured": "2026-11-16T14:31:55.964492"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- **Performance:** ~7.25 tok/s on CPU (all 8 threads)",
-    "captured": "2026-11-16T14:27:08.321324"
+    "captured": "2026-11-16T14:31:55.964494"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Auto-generates extraction query per video from transcript's most information-dense sentences",
-    "captured": "2026-11-16T14:27:08.321326"
+    "captured": "2026-11-16T14:31:55.964496"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Filters 200+ stopwords including conversational filler",
-    "captured": "2026-11-16T14:27:08.321327"
+    "captured": "2026-11-16T14:31:55.964498"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Extracts proper nouns, acronyms, numbers, technical terms",
-    "captured": "2026-11-16T14:27:08.321329"
+    "captured": "2026-11-16T14:31:55.964500"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Falls back to frequency analysis if <10 keywords",
-    "captured": "2026-11-16T14:27:08.321331"
+    "captured": "2026-11-16T14:31:55.964501"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Test on educational/lecture content to confirm \"sweet spot\" quality",
-    "captured": "2026-11-16T14:27:08.321337"
+    "captured": "2026-11-16T14:31:55.964507"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Integrate with youtube-watch-pipeline for automated RSS polling",
-    "captured": "2026-11-16T14:27:08.321338"
+    "captured": "2026-11-16T14:31:55.964508"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Add multi-language caption support",
-    "captured": "2026-11-16T14:27:08.321340"
+    "captured": "2026-11-16T14:31:55.964510"
   },
   {
     "source": "spikes/001-session-continuity-daemon",
     "text": "# Spike: Session Continuity Bridge Daemon\n\n## Question\nCan a lightweight Python daemon persist agent session state (task list, decisions, recent diffs) to a local git-backed store and restore it on co",
-    "captured": "2026-11-16T14:27:08.321491"
+    "captured": "2026-11-16T14:31:55.964632"
   }
 ]
