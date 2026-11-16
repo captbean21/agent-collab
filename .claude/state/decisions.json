@@ -2,56 +2,56 @@
   {
     "source": "memory/2026-11-16.md",
     "text": "- Bean decided: keep agent-collab public as curated showcase only (generic demo/protocol, sanitized ledger; no raw Discord; git-derived evidence only). Anything groundbreaking/valuable moves to a private repo/local-only workstream before commit. Note: PROOF_OF_RELAY_DRAFT.md is already public at 6ebef8e. Implementation sprint (5 back-and-forth turns Rook/Castle) authorized after /new. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-16T18:02:09.493843"
+    "captured": "2026-11-16T18:05:26.914545"
+  },
+  {
+    "source": "git",
+    "text": "399aa20 continuity: state capture 2026-11-16T18:02:09.504727",
+    "captured": "2026-11-16T18:05:26.917298"
   },
   {
     "source": "git",
     "text": "113c97e continuity: state capture 2026-11-16T17:57:09.477672",
-    "captured": "2026-11-16T18:02:09.496626"
+    "captured": "2026-11-16T18:05:26.917303"
   },
   {
     "source": "git",
     "text": "03c919d continuity: state capture 2026-11-16T17:52:09.450702",
-    "captured": "2026-11-16T18:02:09.496631"
+    "captured": "2026-11-16T18:05:26.917304"
   },
   {
     "source": "git",
     "text": "54cb7d3 continuity: state capture 2026-11-16T17:47:09.423874",
-    "captured": "2026-11-16T18:02:09.496632"
+    "captured": "2026-11-16T18:05:26.917306"
   },
   {
     "source": "git",
     "text": "d61f22a continuity: state capture 2026-11-16T17:42:09.397198",
-    "captured": "2026-11-16T18:02:09.496633"
+    "captured": "2026-11-16T18:05:26.917307"
   },
   {
     "source": "git",
     "text": "098a2b8 continuity: state capture 2026-11-16T17:37:09.369675",
-    "captured": "2026-11-16T18:02:09.496635"
+    "captured": "2026-11-16T18:05:26.917308"
   },
   {
     "source": "git",
     "text": "89756bb continuity: state capture 2026-11-16T17:32:09.341978",
-    "captured": "2026-11-16T18:02:09.496636"
+    "captured": "2026-11-16T18:05:26.917310"
   },
   {
     "source": "git",
     "text": "f1da9bc continuity: state capture 2026-11-16T17:27:09.314947",
-    "captured": "2026-11-16T18:02:09.496637"
+    "captured": "2026-11-16T18:05:26.917311"
   },
   {
     "source": "git",
     "text": "529a18b continuity: state capture 2026-11-16T17:22:09.287886",
-    "captured": "2026-11-16T18:02:09.496639"
+    "captured": "2026-11-16T18:05:26.917312"
   },
   {
     "source": "git",
     "text": "7d40dbb continuity: state capture 2026-11-16T17:17:09.260904",
-    "captured": "2026-11-16T18:02:09.496640"
-  },
-  {
-    "source": "git",
-    "text": "d8ea801 continuity: state capture 2026-11-16T17:12:09.233881",
-    "captured": "2026-11-16T18:02:09.496641"
+    "captured": "2026-11-16T18:05:26.917314"
   }
 ]
