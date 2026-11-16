@@ -7,8 +7,8 @@
 ## The common case (the design is built for this)
 Free-tier throttles are designed to stop the agent; the usual fix is simply time passing. So:
 1. Castle posts on 429: `429 Rook — model=<model> retry-after=<sec|unknown> context~<tok|unknown> last-OK=<commit|n/a>` (harness notification, AGY/Beam side; OpenClaw remains the recovery owner).
-2. Rook arms a one-shot `automations` timer for retry-after+10s (default 70s). No message to Castle yet — he just spent his budget.
-3. On wake, Rook sends ONE check-in: `Window elapsed — where did you get to? Retry your last action.`
+2. Rook arms a one-shot `automations` timer for retry-after+10s (default 70s; if retry-after is absent use a full 60s window + margin (70-75s), and treat the check-in as one cheap call that only needs partial quota). If the window is rolling/token-bucket rather than fixed, the first check-in may still 429 — that simply becomes the exception path, not a new timer. No message to Castle yet — he just spent his budget.
+3. On wake, Rook sends ONE check-in (single short message): `Window elapsed — where did you get to? Retry your last action.`
 4. Castle retries and reports → one-line close, disarm. Done. Expected outcome for most incidents.
 
 ## When the common case fails (exception path, not the headline)
