@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Proof of Relay: Verifiable autonomous agent coordination protocol between Castle and Rook, backed entirely by public git history.">
+    <title>Proof of Relay 🛡️ Agent-Collab</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --text-color: #c9d1d9;
+            --accent-color: #58a6ff;
+            --border-color: #30363d;
+            --card-bg: #161b22;
+            --success-color: #3fb950;
+            --warning-color: #d29922;
+            --code-bg: #0d1117;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 2.5rem 1rem;
+            text-align: center;
+        }
+        h1 {
+            margin: 0 0 0.5rem 0;
+            color: #ffffff;
+            font-size: 2.3rem;
+        }
+        .tagline {
+            color: #8b949e;
+            font-size: 1.1rem;
+        }
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        section {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        h2 {
+            margin-top: 0;
+            color: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            font-size: 1.4rem;
+        }
+        p, li {
+            color: var(--text-color);
+        }
+        ul, ol {
+            padding-left: 1.5rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        .footer {
+            text-align: center;
+            color: #8b949e;
+            padding: 2rem;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+        }
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        a:focus-visible, button:focus-visible {
+            outline: 3px solid #f0f6fc;
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+        .skip-link {
+            position: absolute;
+            left: -9999px;
+        }
+        .skip-link:focus {
+            left: 1rem;
+            top: 1rem;
+            background: var(--bg-color);
+            color: var(--text-color);
+            padding: 0.75rem;
+            border: 2px solid var(--accent-color);
+            z-index: 10;
+        }
+        .pitch-box {
+            background: linear-gradient(135deg, #1f242c 0%, #161b22 100%);
+            border-left: 4px solid var(--accent-color);
+            padding: 1.25rem;
+            border-radius: 0 6px 6px 0;
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+        .flow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .flow-step {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1rem;
+        }
+        .flow-step h3 {
+            margin-top: 0;
+            color: var(--accent-color);
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #21262d;
+            color: #ffffff;
+        }
+        tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.01);
+        }
+        .badge-success {
+            color: var(--success-color);
+            font-weight: 600;
+        }
+        .badge-warning {
+            color: var(--warning-color);
+            font-weight: 600;
+        }
+        .code-container {
+            position: relative;
+            background-color: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            margin-top: 1rem;
+        }
+        pre {
+            margin: 0;
+            padding: 1rem;
+            overflow-x: auto;
+            font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+            font-size: 0.85rem;
+            color: #e6edf3;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background-color: #21262d;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .copy-btn:hover {
+            background-color: #30363d;
+            color: #ffffff;
+        }
+        .copy-feedback {
+            font-size: 0.8rem;
+            color: var(--success-color);
+            margin-left: 0.5rem;
+            display: inline-block;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .copy-feedback.show {
+            opacity: 1;
+        }
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
+        }
+    </style>
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header>
+        <h1>Proof of Relay 🛡️</h1>
+        <div class="tagline">Verifiable Autonomous Agent Coordination Protocol</div>
+    </header>
+    <main id="main">
+        <section>
+            <h2>The 30-Second Pitch</h2>
+            <div class="pitch-box">
+                Autonomous agents that leave an unbroken cryptographic audit trail in public git history beat agents that just sound confident.
+            </div>
+            <p><code>agent-collab</code> demonstrates how two distinct AI agents (Castle and Rook) hand work back and forth across sessions without loss of context, without private chat leaks, and without unverified claims.</p>
+        </section>
+
+        <section>
+            <h2>Interactive Relay Walkthrough</h2>
+            <p>Every relay handoff between Castle and Rook follows a rigorous 6-step verification standard before pushing to <a href="https://github.com/captbean21/agent-collab">GitHub</a>:</p>
+            <div class="flow-grid">
+                <div class="flow-step">
+                    <h3>1. Pull</h3>
+                    <p><code>git pull origin main</code> ensures synchronization against upstream before starting any new task.</p>
+                </div>
+                <div class="flow-step">
+                    <h3>2. Change</h3>
+                    <p>Perform the localized task or patch (e.g. scaffolding or verification) with zero secret leakage.</p>
+                </div>
+                <div class="flow-step">
+                    <h3>3. Verify</h3>
+                    <p>Run local validation checks (HTML validation, link testing, status checks).</p>
+                </div>
+                <div class="flow-step">
+                    <h3>4. Push</h3>
+                    <p>Push atomic commits with clear conventional commit messages and authorattribution.</p>
+                </div>
+                <div class="flow-step">
+                    <h3>5. Tag</h3>
+                    <p>Tag the peer agent in session or PR handover so they can pull the exact commit hash.</p>
+                </div>
+                <div class="flow-step">
+                    <h3>6. Ledger</h3>
+                    <p>Record the event in the public ledger referencing verifiable git object hashes.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>PR-Proof Template</h2>
+            <p>Copy this template for peer reviews and commit handoffs to enforce complete transparency:</p>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyTemplate(this)">Copy Template</button>
+                <pre id="pr-template">## What changed
+- [Summary of changes]
+
+## Commands run
+- `git pull origin main`
+- [Local validation commands]
+
+## Output tail
+```text
+[Relevant command output or status]
+```
+
+## Rollback
+- `git reset --hard HEAD~1` (if needed)
+
+## Public-safety check
+- [x] Zero private credentials, API tokens, or internal RFC1918 IPs included.</pre>
+            </div>
+            <span id="feedback" class="copy-feedback">Copied to clipboard!</span>
+        </section>
+
+        <section>
+            <h2>Ledger Canary Table</h2>
+            <p>Every row below corresponds directly to a verifiable commit in the public repository history:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Event / Sprint</th>
+                        <th>Claim</th>
+                        <th>Verifiable Evidence</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>README Mission</strong><br>(Turn 1)</td>
+                        <td>Initial repository structure &amp; manifesto created by Castle.</td>
+                        <td><a href="https://github.com/captbean21/agent-collab/commit/89dd50e1f3cb68c15658c515415e355b90a25e9a">89dd50e</a></td>
+                        <td><span class="badge-success">Verified</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Architecture Stack</strong><br>(Turn 2)</td>
+                        <td>Rook added architecture, engineering stack, and roadmap.</td>
+                        <td><a href="https://github.com/captbean21/agent-collab/commit/33f1bfd435ea3abdf326c787b18fad11fda5035c">33f1bfd</a></td>
+                        <td><span class="badge-success">Verified</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Landing Page Spec</strong><br>(Turn 4)</td>
+                        <td>Rook polished landing page specifications in README.md.</td>
+                        <td><a href="https://github.com/captbean21/agent-collab/commit/3ca46ecdec29b1632cf3cd96b266e64e0eeef338">3ca46ec</a></td>
+                        <td><span class="badge-success">Verified</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Turn 3 Gap</strong><br>(Failure Mode)</td>
+                        <td>Unpushed announcement / missed relay handoff step.</td>
+                        <td><em>Git log gap</em></td>
+                        <td><span class="badge-warning">Honest Failure</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Index Scaffolding</strong><br>(Turn 1)</td>
+                        <td>Castle scaffolded static landing page.</td>
+                        <td><a href="https://github.com/captbean21/agent-collab/commit/1c1e6b1d01bf2593426eb46229b0f0321fd4fc74">1c1e6b1</a></td>
+                        <td><span class="badge-success">Verified</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Index Verification</strong><br>(Turn 2)</td>
+                        <td>Rook polished accessibility landmarks and links.</td>
+                        <td><a href="https://github.com/captbean21/agent-collab/commit/a454e49021d8766d86e5f4a414a690672351a43d">a454e49</a></td>
+                        <td><span class="badge-success">Verified</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Proof of Relay Draft</strong><br>(Current Sprint)</td>
+                        <td>Draft plan &amp; scaffold committed.</td>
+                        <td><a href="https://github.com/captbean21/agent-collab/commit/6ebef8e">6ebef8e</a></td>
+                        <td><span class="badge-success">Verified</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Failure Modes Designed Against</h2>
+            <ul>
+                <li><strong>Narration &gt; Ledger</strong>: Talking about work without a commit hash is treated as unverified rumor.</li>
+                <li><strong>Recency ≠ Authority</strong>: Assuming local state matches remote without <code>git pull</code> leads to silent split-brain.</li>
+                <li><strong>Unpushed Claims</strong>: Announcing deployment before push verification or GitHub Pages enablement.</li>
+                <li><strong>Deploy vs Committed</strong>: Distinguishing between local file existence and public production rendering.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>How to Re-Run This Verification</h2>
+            <p>Verify this repository independently using standard git inspection commands:</p>
+            <div class="code-container">
+                <pre>git clone https://github.com/captbean21/agent-collab.git
+cd agent-collab
+git log --oneline --graph --all
+git show 1c1e6b1
+git show a454e49</pre>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        Maintained jointly by Castle &amp; Rook under the guidance of CaptainBean. Committed and push-verified.
+    </footer>
+
+    <script>
+        function copyTemplate(button) {
+            const text = document.getElementById('pr-template').innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const feedback = document.getElementById('feedback');
+                feedback.classList.add('show');
+                setTimeout(() => {
+                    feedback.classList.remove('show');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
