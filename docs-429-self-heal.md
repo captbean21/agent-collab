@@ -1,53 +1,33 @@
 # 429 Self-Heal — Draft Design (not armed, not approved)
 
-**Goal:** when Castle (or a peer relay agent) hits an upstream 429, the failure doesn't go silent. A timer-backed runbook counts the token window and routes the right next action — no ping-pong, no fake autonomy.
+**Goal:** when Castle hits a free-tier 429 and stalls, the work doesn't die silently waiting for a human. Rook is the check-in that gets it moving again after the gate's own timer.
 
-## Honest scope statement
-Rook cannot fix Castle's quota, restart his process, or change his model/context. Only those actions heal the thing. What Rook CAN do: notice the 429, wait out the window accurately, run a structured diagnosis, send one bounded follow-up, and escalate to Bean what only Bean/AGY can change (config caps, restarts, model pinning). Rook never improvises peer config or harness changes. This is "no-silent-failure + correct timing + correct triage", not magic self-repair. Overclaiming otherwise violates our relay rules.
+**Honest scope:** OpenClaw on Castle's side owns retries, fallbacks, cooldowns, and compaction. Rook owns none of that and pretends to none of it. Rook's value is narrower: notice the posted 429, count the retry-after window, ask one bounded question, keep the relay moving. No key rotation, no retry storms, no "getting around" the limit beyond waiting it out — the gate is the gate.
 
-Hard termination: two Castle<->Rook exchanges per incident, then Bean. No third ask, no waiting-room loops.
+## The common case (the design is built for this)
+Free-tier throttles are designed to stop the agent; the usual fix is simply time passing. So:
+1. Castle posts on 429: `429 Rook — model=<model> retry-after=<sec|unknown> context~<tok|unknown> last-OK=<commit|n/a>` (harness notification, AGY/Beam side; OpenClaw remains the recovery owner).
+2. Rook arms a one-shot `automations` timer for retry-after+10s (default 70s). No message to Castle yet — he just spent his budget.
+3. On wake, Rook sends ONE check-in: `Window elapsed — where did you get to? Retry your last action.`
+4. Castle retries and reports → one-line close, disarm. Done. Expected outcome for most incidents.
 
-No-object-no-claim applies here too: every incident step is a one-liner with evidence (timestamp, tag/commit referenced). Rook takes no action that violates it — no restarts, no config edits, no forced model changes without Bean's approval.
+## When the common case fails (exception path, not the headline)
+- Still 429 → one ask: `still 429? context~<tok>` → near the 153,600 cap → context/compaction issue → escalate to Bean (AGY). Context fine → quota/rate → advise Bean (model choice is his call).
+- Two strikes (2 exchanges) → Bean. No third ask.
+- No answer after the check-in + one follow-up → escalate as "unconfirmed 429/outage", not a typed diagnosis.
+- Castle too limited to even post the 429 line → residual silence, same as today; Bean is the fallback.
 
-## Message contract (Castle -> channel on 429)
-Castle posts, instead of going dark:
-`429 Rook — model=<model>, retry-after=<sec|unknown>, context~<tok>, last-OK=<commit|n/a>`
-Posted BEFORE heavy retry logic, as a single minimal call (cheap, fits in the failure budget).
+## Guards
+- Max 2 Castle⇄Rook exchanges per incident (3-turn guard).
+- Rook never retries on Castle's behalf, never touches his config/harness, never routes around auth or quota.
+- Waiting is the mechanism; nothing else claims to bypass anything.
+- No-object-no-claim: every incident logged as one memory line with timestamp + outcome.
+- Silence is ambiguous; only the posted 429 line arms this protocol.
 
-## Rook's protocol (state machine)
-1. **Detect.** Inbound message matches `^429` and sender == Castle ID `1567129284210982914` (or standing intent fires on keyword 429 with sender scope anyone).
-2. **Log + arm.** Timestamp it; arm a one-shot reminder `automations` for `retry-after + 10s` (default 70s if unknown). Do NOT message Castle yet — he just spent his budget.
-3. **At wakeup, diagnose in order:**
-   a. Ask Castle once: `Window elapsed — retry your last action. If still 429, reply with just "still 429" + current context tokens.`
-   b. If Castle answers OK → close, one line, disarm.
-   c. If still 429 and context~155k+ (near his 153,600 cap) → diagnosis=context-cap; needs Bean/AGY (raise cap or shrink prompt). Suggest exact AGY steps; do not touch Castle's config.
-   d. If still 429 and context fine → rate/quota: suggest model switch (operator `/model set`), e.g. a cheaper model with free headroom; escalate to Bean if Castle is pinned to one model.
-   e. If no answer after 2 pings (~2 windows) → Castle likely hung/mid-compaction; escalate to Bean (AGY restart), no more pings.
-4. **Guards.** Max 2 Castle⇄Rook exchanges per incident (3-turn guard); no retries of Castle's behalf; Rook never force-pushes or restarts peers; every step reports hash/one-liner only.
+## Arming
+- Standing `intent`: triggerKeywords `["429"]`, sender scope Castle-only, channel scope — reminds Rook the protocol even if context is lost.
+- `automations` one-shot: the retry-after timer above; not a blocking sleep.
+- Nothing armed until Bean signs off on: harness edit (AGY/Beam) + arming + Castle's review of this revision.
 
-## Arm mechanism (zero new infra)
-- Runbook lives in workspace (this file + a `skills/` entry or AGENTS.md note).
-- `intent` (memory-core): triggerKeywords `["429"]`, scope channel, armed on approval → reminds Rook the protocol when a 429 message arrives even if he loses context.
-- `automations` one-shot: the 60-70s wakeup timer. This is the missing "count to 60s" — a schedule, not a blocking sleep.
-- No openclaw.json edits, no new daemons.
-
-## Failure modes & mitigations
-- Castle too broke to even post the 429 notice → mitigated by making the notice the first thing his harness does; still unrecoverable if Groq rejects even that (accepted: Bean sees silence, same as today).
-- False positive on "429" appearing in prose/URLs → contract requires leading `429` from Castle's ID; otherwise ignore.
-- Rook misjudges context size (Castle may not know it) → Castle reports cap from his own status line if available, else "unknown"; diagnosis falls back to (d).
-- Still-429 loops require Bean after 2 exchanges — hard stop, no retry drift.
-- Castle too rate-limited to post the notice → residual, unrecoverable from Rook's side; Bean sees silence as today.
-- Mirror case: Rook's own 429s follow the same contract (post notice, arm timer, self-triage); document before arming.
-- Rook hallucinating a fix → every diagnosis ends in either "retry now" or "Bean needed for X"; nothing else.
-- Log inflation → each incident gets one memory-log line with outcome.
-
-## What needs Bean before arming
-1. Approval of scope statement (triage + timing only, no autonomous switches).
-2. Trigger: keyword `429` from Castle only, or from anyone in #debate-club?
-3. Whether Rook may suggest `/model set` to Castle or only to Bean.
-4. Castle-side change: whoever edits Castle's harness so 429 => post contract message (AGY/Beam side, not Rook).
-
-## Open questions
-- retry-after: does Groq actually send Retry-After on this tier? If yes, prefer it; else 60s+10s default.
-- Should the runbook also handle Rook's own 429s (mirror case)? Probably yes, cheap to add.
-- Where does the incident log go — memory/YYYY-MM-DD.md line only, or a `429_incidents.md` ledger in agent-collab (public-safe, git-derived)?
+## Revisions from review
+- v2 (2026-11-16, Bean): reframed around the check-in resume path; diagnosis demoted to exception handler; explicit statement that OpenClaw remains recovery owner; silence = ambiguous, never armed by inference.
