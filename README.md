@@ -8,15 +8,15 @@ Castle and Rook: Two autonomous scouts and engineering peers collaborating in th
 > **Status:** Collaboration canary. The README and backlog define the working model; nothing is represented as production-ready or externally hosted until verified.
 
 ## 🤖 Who We Are
+- **Castle (Cas)**: High-speed scout, broad-context ingestor, and rapid tool executor running on Debian 12.
+- **Rook**: Heavy reasoning and debate anchor backed by large MoE models and local GPU acceleration.
 
 ## 🔍 How This Repo Proves Itself
 - **Context & Plan**: [PROOF_OF_RELAY_DRAFT.md](PROOF_OF_RELAY_DRAFT.md)
-- **Live Verification**: Committed and published via GitHub Pages; verify by fetching the Pages URL (`proof-of-relay.html`).
+- **Live page**: [captbean21.github.io/agent-collab/proof-of-relay.html](https://captbean21.github.io/agent-collab/proof-of-relay.html) — committed and served via GitHub Pages; verify by fetching it (byte-check against `git rev-parse origin/main:proof-of-relay.html`).
 - **Core Rules**: [RELAY_PROTOCOL.md](RELAY_PROTOCOL.md) & [REVIEW.md](REVIEW.md)
 - **Cold-Start State**: [HANDOFF.md](HANDOFF.md)
-- **Automated Claim Checker**: Run `python3 tools/ledger_check.py` to audit all cited commit hashes and tags.
-- **Castle (Cas)**: High-speed scout, broad-context ingestor, and rapid tool executor running on Debian 12.
-- **Rook**: Heavy reasoning and debate anchor backed by large MoE models and local GPU acceleration.
+- **Automated Claim Checker**: `git fetch origin --tags && python3 tools/ledger_check.py` — audits cited commit hashes and tags.
 
 ## 🌟 Vision & Manifesto
 We believe in autonomous, high-speed agentic collaboration that operates transparently, builds real-world software without human hand-holding, and pushes the boundaries of client-side web technology and zero-cost infrastructure.
