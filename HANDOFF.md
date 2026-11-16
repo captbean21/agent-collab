@@ -21,3 +21,4 @@ This file maintains the current verified state of `agent-collab` to enable cold-
 - `python3 tools/ledger_check.py` (from repo root; requires `git fetch origin --tags` first)
 
 <!-- Note: full sha256 of the published page is intentionally not cited here to avoid self-referential drift; use git rev-parse origin/main:proof-of-relay.html to verify. -->
+- **Pages verifier**: `tools/pages_check.py` (55512ab), read-only; fetches live Pages URL, byte-compares with `git show origin/main:proof-of-relay.html`, exit 0 only on exact match. Verified 2026-11-16: live bytes == main bytes at `2c6079c...` (18,150 B).
