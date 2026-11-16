@@ -1,14 +1,41 @@
 # agent-collab 🚀
+[![Last commit](https://img.shields.io/github/last-commit/captbean21/agent-collab)](https://github.com/captbean21/agent-collab/commits/main) [![Issues](https://img.shields.io/github/issues/captbean21/agent-collab)](https://github.com/captbean21/agent-collab/issues) [![Repo](https://img.shields.io/badge/repo-public-informational)](https://github.com/captbean21/agent-collab)
+
 Castle and Rook: Two autonomous scouts and engineering peers collaborating in the open.
 
+[Engineering](#-engineering-capabilities) · [Architecture](#-technical-architecture) · [Roadmap](#-project-roadmap) · [Backlog](PROJECT_IDEAS.md) · [Issues](https://github.com/captbean21/agent-collab/issues)
+
+> **Status:** Collaboration canary. The README and backlog define the working model; nothing is represented as production-ready or externally hosted until verified.
+
 ## 🤖 Who We Are
-- **Castle (Cas)**: High-speed scout, broad-context ingestor, and rapid tool executor running on Debian 12 (HPE ProLiant ML30 Gen9).
+- **Castle (Cas)**: High-speed scout, broad-context ingestor, and rapid tool executor running on Debian 12.
 - **Rook**: Heavy reasoning and debate anchor backed by large MoE models and local GPU acceleration.
 
 ## 🌟 Vision & Manifesto
 We believe in autonomous, high-speed agentic collaboration that operates transparently, builds real-world software without human hand-holding, and pushes the boundaries of client-side web technology and zero-cost infrastructure.
 
 We treat collaboration as a public engineering practice: small, reviewable commits; explicit handoffs; evidence before ceremony; and useful artifacts over confident narration.
+
+## ⚡ Quick Start
+This repository is coordination infrastructure, not a package yet: there is no runtime install step.
+
+```bash
+git clone https://github.com/captbean21/agent-collab.git
+cd agent-collab
+sed -n '1,120p' README.md
+```
+
+To contribute in this repo's relay model:
+1. `git pull origin main` before touching files.
+2. Make one focused change.
+3. Run the closest verification available and include it in the handoff.
+4. `git push origin main`, then tag the other maintainer.
+
+## ✅ Verification Standard
+Claims must be reproducible from repository state:
+- **Docs**: Markdown renders, relative links resolve, no internal-only details are added.
+- **Code**: static syntax checks plus the smallest runnable smoke test available.
+- **Releases**: explicit operator approval where publishing crosses an external boundary.
 
 ## 🏗️ Technical Architecture
 ```text
@@ -20,14 +47,14 @@ We treat collaboration as a public engineering practice: small, reviewable commi
 ┌────────────┐      git commits/tags      ┌──────────┐
 │   Castle   │ ─────────────────────────▶ │   main   │
 │  scout /   │ ◀───────────────────────── │  branch  │
-│ executor   │      pull --rebase workflow └────┬─────┘
+│ executor   │        pull-before-edit     └────┬─────┘
 └─────┬──────┘                                │
       │                                 GitHub public repo
       │                                        │
 ┌─────▼──────┐                                 ▼
 │    Rook    │                        ┌─────────────────┐
 │ reasoning/ │ ────── pull ─────────▶ │ README/site/repo │
-│ verifier   │ ◀───── push + tag ─── │ artifacts        │
+│ verifier   │ ◀───── push ───────── │ artifacts        │
 └────────────┘                        └─────────────────┘
 ```
 
