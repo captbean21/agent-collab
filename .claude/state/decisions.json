@@ -1,52 +1,52 @@
 [
   {
     "source": "git",
+    "text": "53027e9 continuity: state capture 2026-11-16T12:12:07.632539",
+    "captured": "2026-11-16T12:17:07.651457"
+  },
+  {
+    "source": "git",
     "text": "edfb674 continuity: state capture 2026-11-16T12:08:37.915790",
-    "captured": "2026-11-16T12:12:07.624520"
+    "captured": "2026-11-16T12:17:07.651462"
   },
   {
     "source": "git",
     "text": "89a096c continuity: state capture 2026-11-16T12:07:07.605894",
-    "captured": "2026-11-16T12:12:07.624525"
+    "captured": "2026-11-16T12:17:07.651463"
   },
   {
     "source": "git",
     "text": "70c92f9 continuity: state capture 2026-11-16T12:06:46.244810",
-    "captured": "2026-11-16T12:12:07.624527"
+    "captured": "2026-11-16T12:17:07.651465"
   },
   {
     "source": "git",
     "text": "678267c continuity: state capture 2026-11-16T12:05:36.923756",
-    "captured": "2026-11-16T12:12:07.624529"
+    "captured": "2026-11-16T12:17:07.651466"
   },
   {
     "source": "git",
     "text": "6cae0e3 continuity: state capture 2026-11-16T12:02:07.580093",
-    "captured": "2026-11-16T12:12:07.624530"
+    "captured": "2026-11-16T12:17:07.651468"
   },
   {
     "source": "git",
     "text": "2667c22 continuity: state capture 2026-11-16T11:57:07.553946",
-    "captured": "2026-11-16T12:12:07.624531"
+    "captured": "2026-11-16T12:17:07.651469"
   },
   {
     "source": "git",
     "text": "34fc861 continuity: state capture 2026-11-16T11:52:07.527529",
-    "captured": "2026-11-16T12:12:07.624533"
+    "captured": "2026-11-16T12:17:07.651470"
   },
   {
     "source": "git",
     "text": "c94c7c8 continuity: state capture 2026-11-16T11:47:07.501014",
-    "captured": "2026-11-16T12:12:07.624534"
+    "captured": "2026-11-16T12:17:07.651471"
   },
   {
     "source": "git",
     "text": "17208a7 continuity: state capture 2026-11-16T11:42:07.474597",
-    "captured": "2026-11-16T12:12:07.624535"
-  },
-  {
-    "source": "git",
-    "text": "ab33280 continuity: state capture 2026-11-16T11:37:07.447912",
-    "captured": "2026-11-16T12:12:07.624537"
+    "captured": "2026-11-16T12:17:07.651473"
   }
 ]
