@@ -215,7 +215,7 @@
         <section>
             <h2>The 30-Second Pitch</h2>
             <div class="pitch-box">
-                Autonomous agents that leave an unbroken cryptographic audit trail in public git history beat agents that just sound confident.
+                Autonomous agents that leave a verifiable audit trail in public git history beat agents that just sound confident.
             </div>
             <p><code>agent-collab</code> demonstrates how two distinct AI agents (Castle and Rook) hand work back and forth across sessions without loss of context, without private chat leaks, and without unverified claims.</p>
         </section>
@@ -238,7 +238,7 @@
                 </div>
                 <div class="flow-step">
                     <h3>4. Push</h3>
-                    <p>Push atomic commits with clear conventional commit messages and authorattribution.</p>
+                    <p>Push atomic commits with clear conventional commit messages and author attribution.</p>
                 </div>
                 <div class="flow-step">
                     <h3>5. Tag</h3>
@@ -255,7 +255,7 @@
             <h2>PR-Proof Template</h2>
             <p>Copy this template for peer reviews and commit handoffs to enforce complete transparency:</p>
             <div class="code-container">
-                <button class="copy-btn" onclick="copyTemplate(this)">Copy Template</button>
+                <button type="button" class="copy-btn" id="copy-template-btn">Copy Template</button>
                 <pre id="pr-template">## What changed
 - [Summary of changes]
 
@@ -311,7 +311,7 @@
                     <tr>
                         <td><strong>Turn 3 Gap</strong><br>(Failure Mode)</td>
                         <td>Unpushed announcement / missed relay handoff step.</td>
-                        <td><em>Git log gap</em></td>
+                        <td><em>No Turn 3 commit exists in history; <a href="https://github.com/captbean21/agent-collab/commit/33f1bfd435ea3abdf326c787b18fad11fda5035c">33f1bfd</a> (Turn 2) is directly followed by <a href="https://github.com/captbean21/agent-collab/commit/3ca46ecdec29b1632cf3cd96b266e64e0eeef338">3ca46ec</a> (Turn 4)</em></td>
                         <td><span class="badge-warning">Honest Failure</span></td>
                     </tr>
                     <tr>
@@ -327,9 +327,15 @@
                         <td><span class="badge-success">Verified</span></td>
                     </tr>
                     <tr>
+                        <td><strong>Proof of Relay Scaffold</strong><br>(Turn 1)</td>
+                        <td>Castle scaffolded this page.</td>
+                        <td><a href="https://github.com/captbean21/agent-collab/commit/f730a45cc387f18e65454f60f0857ece7a04c68c">f730a45</a></td>
+                        <td><span class="badge-success">Verified</span></td>
+                    </tr>
+                    <tr>
                         <td><strong>Proof of Relay Draft</strong><br>(Current Sprint)</td>
                         <td>Draft plan &amp; scaffold committed.</td>
-                        <td><a href="https://github.com/captbean21/agent-collab/commit/6ebef8e">6ebef8e</a></td>
+                        <td><a href="https://github.com/captbean21/agent-collab/commit/6ebef8e30aa02db7a3440f56e1916b1ea3034d43">6ebef8e</a></td>
                         <td><span class="badge-success">Verified</span></td>
                     </tr>
                 </tbody>
@@ -354,7 +360,8 @@
 cd agent-collab
 git log --oneline --graph --all
 git show 1c1e6b1
-git show a454e49</pre>
+git show a454e49
+git ls-remote origin main</pre>
             </div>
         </section>
     </main>
@@ -363,18 +370,27 @@ git show a454e49</pre>
     </footer>
 
     <script>
-        function copyTemplate(button) {
-            const text = document.getElementById('pr-template').innerText;
-            navigator.clipboard.writeText(text).then(() => {
-                const feedback = document.getElementById('feedback');
-                feedback.classList.add('show');
-                setTimeout(() => {
-                    feedback.classList.remove('show');
-                }, 2000);
-            }).catch(err => {
-                console.error('Failed to copy text: ', err);
-            });
+        const copyBtn = document.getElementById('copy-template-btn');
+        const feedback = document.getElementById('feedback');
+        function showFeedback(message) {
+            feedback.textContent = message;
+            feedback.classList.add('show');
+            setTimeout(() => {
+                feedback.classList.remove('show');
+            }, 2000);
         }
+        copyBtn.addEventListener('click', () => {
+            const text = document.getElementById('pr-template').innerText;
+            if (!navigator.clipboard || !navigator.clipboard.writeText) {
+                showFeedback('Clipboard unavailable — select the text manually');
+                return;
+            }
+            navigator.clipboard.writeText(text).then(() => {
+                showFeedback('Copied to clipboard!');
+            }).catch(() => {
+                showFeedback('Copy failed — select the text manually');
+            });
+        });
     </script>
 </body>
 </html>
