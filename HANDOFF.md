@@ -23,3 +23,5 @@ This file maintains the current verified state of `agent-collab` to enable cold-
 <!-- Note: full sha256 of the published page is intentionally not cited here to avoid self-referential drift; use git rev-parse origin/main:proof-of-relay.html to verify. -->
 - **Pages verifier**: `tools/pages_check.py` (55512ab), read-only; fetches live Pages URL, byte-compares with `git show origin/main:proof-of-relay.html`, exit 0 only on exact match. Verified 2026-11-16: live bytes == main bytes at `2c6079c...` (18,150 B).
 - **Checker false-positive fix**: `9bb4875` — `ledger_check.py` strips sha256/truncated digest contexts before scanning; verified locally 31 checks, 0 failures, rc=0. Review tag for this fix is open for Castle after quota resets.
+
+- 2026-11-16: Recorded rules readability fix in HANDOFF_TURN_RULES.md (commit 727e156), closing previous false-done claim and enabling human-friendly short sentences.
