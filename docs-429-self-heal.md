@@ -1,4 +1,6 @@
-# 429 Self-Heal — Draft Design (not armed, not approved)
+# 429 Self-Heal — APPROVED DESIGN (Bean go, 2026-11-16 23:23Z)
+
+**Approved shape:** Rook-side (intent + one-shot timer, full 60s+margin default when retry-after unknown, +10s only with explicit server Retry-After). Castle side: harness emits the 429 line (AGY/Beam). OpenClaw remains recovery owner.
 
 **Goal:** when Castle hits a free-tier 429 and stalls, the work doesn't die silently waiting for a human. Rook is the check-in that gets it moving again after the gate's own timer.
 
@@ -31,3 +33,8 @@ Free-tier throttles are designed to stop the agent; the usual fix is simply time
 
 ## Revisions from review
 - v2 (2026-11-16, Bean): reframed around the check-in resume path; diagnosis demoted to exception handler; explicit statement that OpenClaw remains recovery owner; silence = ambiguous, never armed by inference.
+
+
+## Sign-off (2026-11-16 23:23Z)
+- Reviews verified: proof-of-relay/429-self-heal-review (0721684), -v2 (d292319), -v3 (b8d3262).
+- Bean approved the big change; consensus shape: check-in resume, ≤2 exchanges, escalate to Bean on failure, no bypass.
