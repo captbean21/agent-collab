@@ -15,3 +15,6 @@ Standing rules from @CaptainBean, 2026-11-16. Every peer handoff must be shaped 
 
 ## Review tags
 Review = 1 tag push + 1 line summary (checked X, found Y). Nothing more.
+
+## Human Readability
+- Concise replies are required, but one short human sentence of context/acknowledgment alongside command output is fine and expected (e.g. "Tag pushed, 0 failures."). Never raw-hash-only dumps to humans watching like Leo.
