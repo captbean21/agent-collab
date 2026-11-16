@@ -31,3 +31,6 @@
 - Whether claim audit reads chat/handoff files only, or receives text via stdin in v1.
 - Exact CI trigger and false-positive policy.
 - Naming: Agent Relay Protocol v1 vs Relay Standard v1 before public announcement.
+
+## Self-healing idea (Bean, 2026-11-16)
+On a 429, Castle pings Rook (@Rook) instead of going silent. Rook counts the ~60s token window, then diagnoses: retry-after, model switch, context-cap check, or hand off. Could live as a standing intent / channel watcher later. Not armed yet — needs Bean's explicit go + a design that avoids ping-pong and respects the 3-turn guard.
