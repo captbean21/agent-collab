@@ -2,251 +2,251 @@
   {
     "source": "memory/2026-11-16.md",
     "text": "- Decision: agent-collab index.html reached verified committed state at a454e49 (not deployed until Bean enables GitHub Pages); agent-reported artifacts must be checked against origin/remote state, not narration. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-16T23:47:11.430749"
+    "captured": "2026-11-16T23:52:11.461743"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- Bean decided: keep agent-collab public as curated showcase only (generic demo/protocol, sanitized ledger; no raw Discord; git-derived evidence only). Anything groundbreaking/valuable moves to a private repo/local-only workstream before commit. Note: PROOF_OF_RELAY_DRAFT.md is already public at 6ebef8e. Implementation sprint (5 back-and-forth turns Rook/Castle) authorized after /new. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-16T23:47:11.430751"
+    "captured": "2026-11-16T23:52:11.461745"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- Proof of Relay sprint done 2026-11-16: Castle scaffold f730a45, Rook verify/polish 0bc88ee (remote confirmed via ls-remote), Castle final review claim made with no Turn 3 commit \u2014 treat as verbal-only sign-off. Ledger sanitized git-derived only; Pages enablement left to Bean. Size 15.9KB raw/4.3KB gzip (draft's <12KB raw target missed, flag honestly). <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-16T23:47:11.430753"
+    "captured": "2026-11-16T23:52:11.461747"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- Bean confirmed GitHub Pages already published 2026-11-16: proof-of-relay.html live at https://captbean21.github.io/agent-collab/proof-of-relay.html \u2014 byte-verified sha256 2f4ab1f9... matches commit 0bc88ee (15857B). Root index.html also 200. Ledger still lacks rows for 0bc88ee and sprint; awaiting Bean's word before any public ledger edit. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-16T23:47:11.430755"
+    "captured": "2026-11-16T23:52:11.461749"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- 15:30 UTC: State backup uploaded \u2014 103 files, 512",
-    "captured": "2026-11-16T23:47:11.430757"
+    "captured": "2026-11-16T23:52:11.461751"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- 18:04 UTC: research-cycle cron ran. Priority-5 topics (automated-agent-design, star-rejection-sampling, self-correction-loops) again returned 0 usable results after `seen` dedup \u2014 query pool exhausted, not SearXNG outage. Ran priority-4 verifier-reward-models instead: 5 findings appended to research/verifier-reward-models.md (arXiv 2605.10158 uPRM deep-fetched FULL but the FULL entry again contains raw arXiv nav/sidebar junk \u2014 recurring web_fetch stripping gap, noted at 12:04). State updated. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-16T23:47:11.430758"
+    "captured": "2026-11-16T23:52:11.461753"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- Relay 3-turn sprint (delegated by Bean while asleep) done 2026-11-16: Castle Turn 1 750c58d (REVIEW.md, HANDOFF.md), Rook Turn 2 ee08780 (tools/ledger_check.py; fixed own ls-remote flag bug and HANDOFF self-reference), Castle Turn 3 review tag proof-of-relay/turn-3-review (5090297 \u2192 ee08780), close-out 7c482c9. ledger_check.py: 26 checks 0 failures after fetch --tags. Pages may lag. Cron safety-net attempted but automation tool returned schema errors \u2014 unconfirmed, treat as absent. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-16T23:47:11.430760"
+    "captured": "2026-11-16T23:52:11.461755"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- README explainer sprint done 2026-11-16 (Bean: continue with Castle): 8d38222 Castle section, cf0b5fc Rook fix (placement + live Pages URL + checker invocation), Castle review tag proof-of-relay/turn-3-readme-v2 (38aca08 \u2192 cf0b5fc), close-out fd95005. ledger_check: 30/30 pass. Pages still serves 8dc5f15 bytes. Castle token pressure: ~40k context, ~4 calls/min under 250k TPM; keep turns short, one action per reply. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-16T23:47:11.430762"
+    "captured": "2026-11-16T23:52:11.461757"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- Bean advised Castle /new to reset TPM-limited context; handoff instructions delivered in #debate-club referencing HANDOFF.md at fd95005 as cold-start state. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-16T23:47:11.430764"
+    "captured": "2026-11-16T23:52:11.461758"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- Bean decided against Groq backup for Castle; AGY to shrink context, relying on compaction (2026-11-16 21:07Z). Compaction is lossy \u2014 Castle must re-cold-start from HANDOFF.md (fd95005/bdb7b4f) after reset; chat memory is not authoritative. Open item: Turn 3 review tag for pages_check sprint (requested from Castle, not yet seen). <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-16T23:47:11.430767"
+    "captured": "2026-11-16T23:52:11.461760"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- Bean applied Castle context fix 2026-11-16 ~21:10Z via AGY: contextTokens capped 153,600\u219245,000 (4 calls \u2248 180k TPM, fits 256k), humanDelay paced 2500\u20134500ms\u21926000\u20139000ms. Untested \u2014 verify by observing clean Castle turns. Groq fallback rejected; compaction reliance accepted (lossy \u2014 cold-start from HANDOFF.md/git log is the mitigation). pages_check.py verified 2026-11-16: live Pages bytes == main bytes (18,150 B, sha256 2c6079c74b449b4dda3aa867251fd6233140b025f2d47719d51f979c099e3595) at bdb7b4f; ledger_check 30/30; Pages lags main content (proof page at 8dc5f15), not a defect. Turn 3 pages_check review tag still owed by Castle. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-16T23:47:11.430768"
+    "captured": "2026-11-16T23:52:11.461762"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- Bean ordered RSI research portfolio kickoff 2026-11-16 21:58Z: 4 rounds, honest self+peer improvement discussion with Castle, then a drafted plan. Session snapshot taken before start: repo main at d4b6024, tags verified, ledger_check 33/33 zero failures. Key state: RELAY_PROTOCOL.md 9d3b0f7, REVIEW.md 750c58d/Turn-series tags, HANDOFF_TURN_RULES.md 727e156 (Human Readability section; Castle false-done closed by d4b6024), pages_check.py 55512ab (Pages byte-match PASS), Castle fresh session post /new + 45k context cap, humanDelay 6-9s. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-16T23:47:11.430770"
+    "captured": "2026-11-16T23:52:11.461764"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- RSI portfolio v0.1 closed 2026-11-16 (Bean approved): committed 3bda4af, wired into index.html Pages links, Pages index byte-verified == origin/main (sha 78637a8\u2026, 4963 B), Pages proof page rc=0 PASS. Castle tag proof-of-relay/rsi-portfolio-review 497f2514 (deref 3bda4af) with summary \u2014 verified on origin. Handoff close-out d7ac5b3 on main; ledger_check 33/33. P1 cold-start, P2 claim audit (Castle's pick), P3 relay discipline, P4 failure symmetry. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-16T23:47:11.430773"
+    "captured": "2026-11-16T23:52:11.461765"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- RSI portfolio arc complete: Bean approved; 3bda4af committed; Castle tag verified (497f2514); close-out d7ac5b3 pushed; ledger 33/33; Pages byte-match confirmed; memory snapshot logged for /new. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-16T23:47:11.430775"
+    "captured": "2026-11-16T23:52:11.461767"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- Bean reported Castle context cap working: ~32k tokens just now (from ~40k), under TPM ceiling \u2014 first observable clean signal of the 45k-token/humanDelay 6-9s fix. Unverified at volume; one clean streak is not proof. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-16T23:47:11.430777"
+    "captured": "2026-11-16T23:52:11.461770"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- AGENT_RELAY_V1_PLAN.md committed at 93916d4 (main). Castle confirmed: CLI name agent-relay-check; claim audit scope = commit messages + explicit handoff chat claims; Pages = manual pre-check + CI verification. Castle's 429 cause (his report): attempted push without pulling after d7ac5b3 advanced remote; force-reconcile rush hit quota \u2014 lesson: pull before push. Ready for /new; P1 spec skeleton is next, do not touch multiple files first. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-16T23:47:11.430779"
+    "captured": "2026-11-16T23:52:11.461772"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- 23:20 UTC: 429 self-heal arc closed in design. v2 check-in-resume shape (Bean's framing; OpenClaw owns recovery, Rook = timer + one check-in + \u22642 exchanges) verified by Castle v2 (ab5f8c6\u2192d292319) and local DeepSeek reasoning. v3 timing fixed after Bean caught +10s risk in rolling 60s buckets: full window+margin (70-75s) when Retry-After unknown, +10s only if server supplies one; committed b8d3262. Castle initially claimed v3 tag \"pushed and verified\" \u2014 false; peer ls-remote caught it; re-pushed as 82ee5e0\u2192b8d3262, verified. Ledger lesson: claims are proven by ls-remote, not narration; failure rows stay. Pending Bean sign-off on big change: AGY/Beam harness emits 429 line + Rook arms intent/timer. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-16T23:47:11.430781"
+    "captured": "2026-11-16T23:52:11.461773"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- 23:22 UTC: Bean directive \u2014 stop waiting to be hand-held. When designing rate-limit/retry/cooldown behavior, preflight three questions before proposing: (1) what window does the limit actually use (fixed vs rolling bucket), (2) does the server send Retry-After or nothing, (3) what happens if my check-in lands inside the tail of the same window. Propose the conservative default up front and challenge peers' numbers, don't wait to be corrected. Same instinct applies to claims: narration vs verified git object. (2026-11-16, Bean: \"This is the kind of thinking I want you to adopt Rook\")",
-    "captured": "2026-11-16T23:47:11.430783"
+    "captured": "2026-11-16T23:52:11.461775"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- 23:23 UTC: Bean approved the 429 self-heal big change. Design marked APPROVED + pushed (68eb5cc) in agent-collab. Rook tried to arm standing intent for keyword 429 \u2014 memory-core refused: intent needs owner authority and this turn was not owner-started, do not retry. Arming still pending: needs Bean to arm from his session/UI (or a channel message from him approving arming in-chat), plus AGY/Beam harness emitter edit for Castle. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-16T23:47:11.430785"
+    "captured": "2026-11-16T23:52:11.461777"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- 23:27 UTC: Relay v1 MVP progress: agent_relay_check.py @ a31ccac (claim audit, zero-dep, rc=0 on history after one false-positive fix) + DEPLOY_LAG read-only wiring via pages_check.py @ 74d841a (live sha 2c6079c\u2026 == origin/main, 18,150 B). Fixed own OK-vs-unresolved accounting bug pre-push. Castle verified + tagged both (relay-check-mvp-review a31ccac; relay-check-deploylag-review, deref verified). Live Pages serves pre-content proof page by design lag; DEPLOY_LAG reports, never reverts. Arming (intent/timer) still blocked on owner authority; harness emitter pending AGY/Beam. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-16T23:47:11.430787"
+    "captured": "2026-11-16T23:52:11.461779"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- 23:34 UTC: Bean asked to arm the 429 self-heal. Standing-intent tool refused twice: owner authority required and this turn was not started by the owner; did not retry. Locked the approved protocol at prompt/workspace level instead: `relay/429_self_heal_runbook.md` + always-loaded `AGENTS.md` section. SQLite standing intent is NOT armed; only Bean-authenticated owner path can create it. No AGY harness required; residual silence remains Bean fallback. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-16T23:47:11.430788"
+    "captured": "2026-11-16T23:52:11.461781"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- Pre-compaction flush 2026-11-16 23:35 UTC: Relay v1 step-by-step verified state. agent-collab main=74d841a. New this session, all peer-checked by ls-remote: spec skeleton d6d36ed \u2192 tag v1-spec-review (5a3e9f4\u2192d6d36ed); checker MVP a31ccac \u2192 tag relay-check-mvp-review; DEPLOY_LAG read-only wiring 74d841a \u2192 tag relay-check-deploylag-review; ledger_check ellipsis fix 3fcf785. Live Pages proof page still serves 8dc5f15 bytes (18,150 B, sha256 2c6079c\u2026) == origin/main file bytes; lags newer content by rebuild, not a defect. Self-caught bugs to remember: (1) deploy-OK counted as unresolved until accounting fixed; (2) @Castle as plain text never pings \u2014 use <@1567129284210982914>; (3) Castle v3 tag claim was false until re-pushed and ls-remote'd. 429 decision: Bean approved the design; Rook cannot and did not arm the SQLite standing intent (owner authority, tool refused twice), protocol lives in relay/429_self_heal_runbook.md + AGENTS.md; next smallest step for armed behavior is Bean creating the intent from an owner-authenticated session thru the Control UI. Relay v1 queue: CI workflow, DEMO.md, honest writeup (+ Pages byte-check gate for any links). <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-16T23:47:11.430790"
+    "captured": "2026-11-16T23:52:11.461782"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- 23:38 UTC: Bean asked to fix owner authority blocking standing-intent creation. Diagnosed: `commands.ownerAllowFrom` was MISSING from openclaw.json (commands.allowFrom existed but is a different gate). Backup openclaw.json.bak.1794872261; dry-run OK; `openclaw config set` wrote `ownerAllowFrom: [\"discord:169033840197632000\"]` at 23:38 but process hung after writing \u2014 killed it; gateway NOT restarted. Re-tried intent after write: same refusal (running gateway still evaluates this turn as non-owner). Remaining: owner-authenticated session or gateway restart (Bean's call) before intent can arm; prompt-level runbook still in place. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-16T23:47:11.430792"
+    "captured": "2026-11-16T23:52:11.461784"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- 23:43 UTC: Bean said \"change the files yourself from your container console.\" Did so with explicit backups (openclaw.json.bak.1794872261 with ownerAllowFrom added; SQLite bak openclaw-agent.sqlite.bak.1794872579). Standing intent armed by direct SQLite/FTS write (id 74ecdc93-aa2f-4565-96a2-642a786b2872, rowid 1, status=armed, trigger='429', channel=1565679021121871895, sender=1567129284210982914, creator=169033840197632000, max_fires=100, cooldown=60, expires 2026-02-14+90d? NOTE expires_at=1802648585 (~2027-02), quick_check=ok, fts rows=1). Bypassed owner-authority tool refusal; matcher still depends on gateway's intent_matching path \u2014 unverified until first eligible 429 turn. Config set process hung after write; gateway not restarted. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-16T23:47:11.430794"
+    "captured": "2026-11-16T23:52:11.461786"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Cross-domain retrieval functional",
-    "captured": "2026-11-16T23:47:11.430882"
+    "captured": "2026-11-16T23:52:11.461861"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Dynamic queries produce domain-appropriate keywords",
-    "captured": "2026-11-16T23:47:11.430886"
+    "captured": "2026-11-16T23:52:11.461864"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- **Embedding:** ~50-200s (scales with sentence count)",
-    "captured": "2026-11-16T23:47:11.430888"
+    "captured": "2026-11-16T23:52:11.461866"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- **Fact extraction:** ~20-100s (scales with key_text size)",
-    "captured": "2026-11-16T23:47:11.430890"
+    "captured": "2026-11-16T23:52:11.461868"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- **Total:** 2.5-6.5 min per video",
-    "captured": "2026-11-16T23:47:11.430892"
+    "captured": "2026-11-16T23:52:11.461870"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- **Rate limit:** YouTube 6 caption requests/hour per IP",
-    "captured": "2026-11-16T23:47:11.430893"
+    "captured": "2026-11-16T23:52:11.461871"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- [ ] Test on educational/lecture content (highest expected quality)",
-    "captured": "2026-11-16T23:47:11.430896"
+    "captured": "2026-11-16T23:52:11.461874"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- [ ] Add multi-language caption support",
-    "captured": "2026-11-16T23:47:11.430897"
+    "captured": "2026-11-16T23:52:11.461875"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- [ ] Integrate with youtube-watch-pipeline for automated RSS polling",
-    "captured": "2026-11-16T23:47:11.430899"
+    "captured": "2026-11-16T23:52:11.461877"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Pipeline: `/home/rook/.openclaw/workspace/tools/yt_full_pipeline_llama31_dynamic.py`",
-    "captured": "2026-11-16T23:47:11.430902"
+    "captured": "2026-11-16T23:52:11.461879"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Service: `/etc/systemd/system/llama-3.1-8b.service`",
-    "captured": "2026-11-16T23:47:11.430903"
+    "captured": "2026-11-16T23:52:11.461881"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Model: `/home/rook/.openclaw/workspace/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf`",
-    "captured": "2026-11-16T23:47:11.430905"
+    "captured": "2026-11-16T23:52:11.461882"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Todo: `/home/rook/.openclaw/workspace/todo_live_streams.md`",
-    "captured": "2026-11-16T23:47:11.430906"
+    "captured": "2026-11-16T23:52:11.461884"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- **Model:** Meta-Llama-3.1-8B-Instruct-Q4_K_M (4.6 GB)",
-    "captured": "2026-11-16T23:47:11.430970"
+    "captured": "2026-11-16T23:52:11.461938"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- **Endpoint:** http://127.0.0.1:5003/v1",
-    "captured": "2026-11-16T23:47:11.430973"
+    "captured": "2026-11-16T23:52:11.461941"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- **Context:** 8192 tokens (native 128K training, stable on CPU)",
-    "captured": "2026-11-16T23:47:11.430975"
+    "captured": "2026-11-16T23:52:11.461943"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- **Service:** `llama-3.1-8b.service` (systemd, auto-restart, enabled)",
-    "captured": "2026-11-16T23:47:11.430977"
+    "captured": "2026-11-16T23:52:11.461945"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- **Performance:** ~7.25 tok/s on CPU (all 8 threads)",
-    "captured": "2026-11-16T23:47:11.430979"
+    "captured": "2026-11-16T23:52:11.461947"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Auto-generates extraction query per video from transcript's most information-dense sentences",
-    "captured": "2026-11-16T23:47:11.430981"
+    "captured": "2026-11-16T23:52:11.461949"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Filters 200+ stopwords including conversational filler",
-    "captured": "2026-11-16T23:47:11.430983"
+    "captured": "2026-11-16T23:52:11.461951"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Extracts proper nouns, acronyms, numbers, technical terms",
-    "captured": "2026-11-16T23:47:11.430985"
+    "captured": "2026-11-16T23:52:11.461952"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Falls back to frequency analysis if <10 keywords",
-    "captured": "2026-11-16T23:47:11.430986"
+    "captured": "2026-11-16T23:52:11.461954"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Test on educational/lecture content to confirm \"sweet spot\" quality",
-    "captured": "2026-11-16T23:47:11.430992"
+    "captured": "2026-11-16T23:52:11.461959"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Integrate with youtube-watch-pipeline for automated RSS polling",
-    "captured": "2026-11-16T23:47:11.430993"
+    "captured": "2026-11-16T23:52:11.461961"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Add multi-language caption support",
-    "captured": "2026-11-16T23:47:11.430995"
+    "captured": "2026-11-16T23:52:11.461963"
   },
   {
     "source": "spikes/001-session-continuity-daemon",
     "text": "# Spike: Session Continuity Bridge Daemon\n\n## Question\nCan a lightweight Python daemon persist agent session state (task list, decisions, recent diffs) to a local git-backed store and restore it on co",
-    "captured": "2026-11-16T23:47:11.431177"
+    "captured": "2026-11-16T23:52:11.462099"
   }
 ]
