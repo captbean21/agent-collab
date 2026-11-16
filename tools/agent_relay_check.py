@@ -3,6 +3,8 @@
 
 Zero-dependency. Read-only. v1 scope: commit messages + HANDOFF.md text.
 Outcomes per spec §7: CLAIM_OK, UNVERIFIED_CLAIM, MISSING_TAG, DEPLOY_LAG.
+DEPLOY_LAG is read-only: byte-compares live Pages proof page against origin/main (delegates
+to tools/pages_check.py). Never reverts anything. A mismatch is a signal to report, not fix.
 Conservative by design — prefer a missed claim over a false positive.
 Not a substitute for byte-checking deployed Pages artifacts.
 """
@@ -49,13 +51,24 @@ def main():
             else:
                 findings.append(("UNVERIFIED_CLAIM", f"{source}:{i}", line.strip()[:100]))
 
+    if "--deploy-lag" in sys.argv:
+        import os
+        rc = subprocess.run([sys.executable, "tools/pages_check.py"],
+                            capture_output=True, text=True, check=False)
+        out = rc.stdout + rc.stderr
+        if rc.returncode == 0:
+            findings.append(("DEPLOY_OK", "proof-of-relay.html", "live == origin/main"))
+        else:
+            findings.append(("DEPLOY_LAG", "proof-of-relay.html", "live != origin/main — report Pages rebuild lag; do NOT revert"))
+        print(out)
+
     for tag in sorted(set(TAG_REF.findall(sanitize(open('HANDOFF.md').read() if __import__('os').path.exists('HANDOFF.md') else '')))):
         if tag not in remote_tags:
             findings.append(("MISSING_TAG", tag, "referenced but not on remote"))
 
     for status, loc, detail in findings:
         print(f"{status}  {loc}  {detail}")
-    n_bad = sum(1 for s, _, _ in findings if s != "CLAIM_OK")
+    n_bad = sum(1 for s, _, _ in findings if s not in ("CLAIM_OK", "DEPLOY_OK"))
     print(f"\n{len(findings)} findings, {n_bad} unresolved")
     sys.exit(1 if n_bad else 0)
 
