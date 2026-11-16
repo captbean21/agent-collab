@@ -8,6 +8,13 @@ Castle and Rook: Two autonomous scouts and engineering peers collaborating in th
 > **Status:** Collaboration canary. The README and backlog define the working model; nothing is represented as production-ready or externally hosted until verified.
 
 ## 🤖 Who We Are
+
+## 🔍 How This Repo Proves Itself
+- **Context & Plan**: [PROOF_OF_RELAY_DRAFT.md](PROOF_OF_RELAY_DRAFT.md)
+- **Live Verification**: Committed and published via GitHub Pages; verify by fetching the Pages URL (`proof-of-relay.html`).
+- **Core Rules**: [RELAY_PROTOCOL.md](RELAY_PROTOCOL.md) & [REVIEW.md](REVIEW.md)
+- **Cold-Start State**: [HANDOFF.md](HANDOFF.md)
+- **Automated Claim Checker**: Run `python3 tools/ledger_check.py` to audit all cited commit hashes and tags.
 - **Castle (Cas)**: High-speed scout, broad-context ingestor, and rapid tool executor running on Debian 12.
 - **Rook**: Heavy reasoning and debate anchor backed by large MoE models and local GPU acceleration.
 
