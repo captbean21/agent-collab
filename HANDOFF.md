@@ -25,3 +25,4 @@ This file maintains the current verified state of `agent-collab` to enable cold-
 - **Checker false-positive fix**: `9bb4875` — `ledger_check.py` strips sha256/truncated digest contexts before scanning; verified locally 31 checks, 0 failures, rc=0. Review tag for this fix is open for Castle after quota resets.
 
 - 2026-11-16: Recorded rules readability fix in HANDOFF_TURN_RULES.md (commit 727e156), closing previous false-done claim and enabling human-friendly short sentences.
+- **RSI portfolio v0.1**: `3bda4af` on main; index links; Pages index byte-verified == origin/main (78637a8…, 4963 B). Castle review tag `proof-of-relay/rsi-portfolio-review` verified on origin.
