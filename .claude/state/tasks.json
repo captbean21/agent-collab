@@ -2,101 +2,101 @@
   {
     "source": "memory/2026-11-15.md",
     "text": "- 06:05 UTC: Daily digest posted \u2014 2 sections with real links",
-    "captured": "2026-11-16T06:09:54.949526"
+    "captured": "2026-11-16T06:12:05.695178"
   },
   {
     "source": "memory/2026-11-15.md",
     "text": "- 15:30 UTC: State backup uploaded \u2014 96 files, 512",
-    "captured": "2026-11-16T06:09:54.949533"
+    "captured": "2026-11-16T06:12:05.695186"
   },
   {
     "source": "memory/2026-11-15.md",
     "text": "- 16:24 UTC: Session continuity verified \u2014 all 10 cron automations status ok; research-cycle 12:04 UTC ok, state-backup 15:30 UTC ok (96 files), daily-digest 06:05 UTC ok. No drift; heartbeat recovering from repeated turn aborts (rate-limit cascade + harness interruptions), nothing lost. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-16T06:09:54.949535"
+    "captured": "2026-11-16T06:12:05.695189"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- **systemd-ai-service-deployment** \u2014 5 prior deploys \u2192 hardened systemd workflow with GPU passthrough, health checks, operator approval gate",
-    "captured": "2026-11-16T06:09:54.949583"
+    "captured": "2026-11-16T06:12:05.695244"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- **hybrid-web-research-cycle** \u2014 12+ 6-hourly cycles \u2192 SearXNG science search \u2192 arXiv triage \u2192 keyword/LLM score \u2192 deep fetch top-k \u2192 wiki append with fetch-depth logging",
-    "captured": "2026-11-16T06:09:54.949586"
+    "captured": "2026-11-16T06:12:05.695248"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- **youtube-watch-pipeline** \u2014 4 cohesive pipeline steps \u2192 RSS-poll YouTube \u2192 yt-dlp + bgutil PO tokens \u2192 rate-limited captions \u2192 DeepSeek 5001 summarize \u2192 Discord threads; 15-min timer",
-    "captured": "2026-11-16T06:09:54.949588"
+    "captured": "2026-11-16T06:12:05.695250"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Cross-domain retrieval functional",
-    "captured": "2026-11-16T06:09:54.949644"
+    "captured": "2026-11-16T06:12:05.695316"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Dynamic queries produce domain-appropriate keywords",
-    "captured": "2026-11-16T06:09:54.949647"
+    "captured": "2026-11-16T06:12:05.695319"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- **Embedding:** ~50-200s (scales with sentence count)",
-    "captured": "2026-11-16T06:09:54.949649"
+    "captured": "2026-11-16T06:12:05.695321"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- **Fact extraction:** ~20-100s (scales with key_text size)",
-    "captured": "2026-11-16T06:09:54.949651"
+    "captured": "2026-11-16T06:12:05.695323"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- **Total:** 2.5-6.5 min per video",
-    "captured": "2026-11-16T06:09:54.949653"
+    "captured": "2026-11-16T06:12:05.695325"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- **Rate limit:** YouTube 6 caption requests/hour per IP",
-    "captured": "2026-11-16T06:09:54.949654"
+    "captured": "2026-11-16T06:12:05.695327"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- [ ] Test on educational/lecture content (highest expected quality)",
-    "captured": "2026-11-16T06:09:54.949656"
+    "captured": "2026-11-16T06:12:05.695329"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- [ ] Add multi-language caption support",
-    "captured": "2026-11-16T06:09:54.949658"
+    "captured": "2026-11-16T06:12:05.695331"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- [ ] Integrate with youtube-watch-pipeline for automated RSS polling",
-    "captured": "2026-11-16T06:09:54.949660"
+    "captured": "2026-11-16T06:12:05.695332"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Pipeline: `/home/rook/.openclaw/workspace/tools/yt_full_pipeline_llama31_dynamic.py`",
-    "captured": "2026-11-16T06:09:54.949662"
+    "captured": "2026-11-16T06:12:05.695335"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Service: `/etc/systemd/system/llama-3.1-8b.service`",
-    "captured": "2026-11-16T06:09:54.949663"
+    "captured": "2026-11-16T06:12:05.695336"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Model: `/home/rook/.openclaw/workspace/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf`",
-    "captured": "2026-11-16T06:09:54.949665"
+    "captured": "2026-11-16T06:12:05.695338"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Todo: `/home/rook/.openclaw/workspace/todo_live_streams.md`",
-    "captured": "2026-11-16T06:09:54.949667"
+    "captured": "2026-11-16T06:12:05.695340"
   },
   {
     "source": "spikes/001-session-continuity-daemon",
     "text": "# Spike: Session Continuity Bridge Daemon\n\n## Question\nCan a lightweight Python daemon persist agent session state (task list, decisions, recent diffs) to a local git-backed store and restore it on co",
-    "captured": "2026-11-16T06:09:54.949782"
+    "captured": "2026-11-16T06:12:05.695518"
   }
 ]
