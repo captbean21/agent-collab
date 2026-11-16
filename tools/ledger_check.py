@@ -24,7 +24,7 @@ page = open("proof-of-relay.html").read()
 handoff = open("HANDOFF.md").read()
 
 def sanitize(text):
-    text = re.sub(r"`?[0-9a-f]{7,40}\.\.\.`?", " ", text)      # truncated hash prefixes like 2c6079c...
+    text = re.sub(r"`?[0-9a-f]{7,40}(\.\.\.|…)`?", " ", text)  # truncated hash prefixes like 2c6079c... or 78637a8…
     text = re.sub(r"[0-9a-f]{64}", " ", text)                     # full sha256 digests
     text = re.sub(r"sha256\s*`[^`]*`", " ", text, flags=re.I)     # sha256 `x` spans
     return text
