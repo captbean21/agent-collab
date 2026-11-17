@@ -1,5 +1,5 @@
 /**
- * GameController interface
+ * GameController - Integration Layer
  * Integrates Player, EnemyManager, and CollisionManager into the main game loop.
  */
 class GameController {
@@ -17,26 +17,27 @@ class GameController {
   update(deltaTime) {
     if (this.isGameOver) return;
 
-    // 1. Update player physics (assumed to be handled by player instance)
-    
-    // 2. Update enemies
+    // 1. Update enemies
     this.enemyManager.update(deltaTime, this.player.x, this.player.y);
 
-    // 3. Detect collisions
-    // Clear colliders and re-register
-    this.collisionManager.colliders = [];
-    this.collisionManager.addCollider(this.player);
-    this.enemyManager.getEnemies().forEach(e => this.collisionManager.addCollider(e));
-
+    // 2. Detect collisions
+    this.collisionManager.colliders = [this.player, ...this.enemyManager.getEnemies()];
     const collisions = this.collisionManager.update();
+    
     for (const [a, b] of collisions) {
       this.handleCollision(a, b);
     }
 
-    // 4. Cleanup destroyed entities
+    // 3. Cleanup destroyed/inactive entities
     this.enemyManager.cleanup();
 
-    // 5. Check win/loss conditions
+    // 4. Wave management
+    if (this.enemyManager.getEnemies().length === 0) {
+      this.wave++;
+      this.enemyManager.spawnWave(this.wave * 2, 'basic', 400, 300);
+    }
+
+    // 5. Game Over conditions
     if (this.lives <= 0) {
       this.isGameOver = true;
     }
@@ -44,7 +45,13 @@ class GameController {
 
   // Resolves interaction between entities
   handleCollision(a, b) {
-    // Logic for player vs enemy or enemy vs enemy
+    const player = (a === this.player) ? a : (b === this.player) ? b : null;
+    const enemy = (a !== this.player) ? a : (b !== this.player) ? b : null;
+
+    if (player && enemy) {
+      this.lives--;
+      enemy.markedForRemoval = true; // Enemy destroyed on impact
+    }
   }
 
   // Returns current game state
