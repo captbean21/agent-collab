@@ -2,61 +2,61 @@
   {
     "source": "memory/2026-11-16.md",
     "text": "- Bean decided: keep agent-collab public as curated showcase only (generic demo/protocol, sanitized ledger; no raw Discord; git-derived evidence only). Anything groundbreaking/valuable moves to a private repo/local-only workstream before commit. Note: PROOF_OF_RELAY_DRAFT.md is already public at 6ebef8e. Implementation sprint (5 back-and-forth turns Rook/Castle) authorized after /new. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-17T03:52:12.778562"
+    "captured": "2026-11-17T03:57:12.805623"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- Bean decided against Groq backup for Castle; AGY to shrink context, relying on compaction (2026-11-16 21:07Z). Compaction is lossy \u2014 Castle must re-cold-start from HANDOFF.md (fd95005/bdb7b4f) after reset; chat memory is not authoritative. Open item: Turn 3 review tag for pages_check sprint (requested from Castle, not yet seen). <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-17T03:52:12.778643"
+    "captured": "2026-11-17T03:57:12.805702"
+  },
+  {
+    "source": "git",
+    "text": "efe656d continuity: state capture 2026-11-17T03:52:12.789896",
+    "captured": "2026-11-17T03:57:12.808877"
   },
   {
     "source": "git",
     "text": "6541faf continuity: state capture 2026-11-17T03:47:12.762721",
-    "captured": "2026-11-17T03:52:12.781816"
+    "captured": "2026-11-17T03:57:12.808882"
   },
   {
     "source": "git",
     "text": "8e148c6 continuity: state capture 2026-11-17T03:42:12.735031",
-    "captured": "2026-11-17T03:52:12.781821"
+    "captured": "2026-11-17T03:57:12.808884"
   },
   {
     "source": "git",
     "text": "21de5b7 continuity: state capture 2026-11-17T03:37:12.707542",
-    "captured": "2026-11-17T03:52:12.781823"
+    "captured": "2026-11-17T03:57:12.808885"
   },
   {
     "source": "git",
     "text": "c782526 continuity: state capture 2026-11-17T03:32:12.680970",
-    "captured": "2026-11-17T03:52:12.781824"
+    "captured": "2026-11-17T03:57:12.808886"
   },
   {
     "source": "git",
     "text": "709890d continuity: state capture 2026-11-17T03:27:12.653920",
-    "captured": "2026-11-17T03:52:12.781826"
+    "captured": "2026-11-17T03:57:12.808888"
   },
   {
     "source": "git",
     "text": "bbd2b9f continuity: state capture 2026-11-17T03:25:10.057088",
-    "captured": "2026-11-17T03:52:12.781827"
+    "captured": "2026-11-17T03:57:12.808889"
   },
   {
     "source": "git",
     "text": "ad0d968 continuity: state capture 2026-11-17T03:22:12.620037",
-    "captured": "2026-11-17T03:52:12.781828"
+    "captured": "2026-11-17T03:57:12.808890"
   },
   {
     "source": "git",
     "text": "df6c3ce continuity: state capture 2026-11-17T03:17:12.587795",
-    "captured": "2026-11-17T03:52:12.781830"
+    "captured": "2026-11-17T03:57:12.808892"
   },
   {
     "source": "git",
     "text": "d4bb404 429: expand self-heal trigger to catch bare 429/RESOURCE_EXHAUSTED/quota errors",
-    "captured": "2026-11-17T03:52:12.781831"
-  },
-  {
-    "source": "git",
-    "text": "d23a17d continuity: state capture 2026-11-17T03:13:58.547506",
-    "captured": "2026-11-17T03:52:12.781832"
+    "captured": "2026-11-17T03:57:12.808893"
   }
 ]
