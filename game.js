@@ -6,6 +6,18 @@ const CANVAS_W = 800;
 const CANVAS_H = 600;
 const FIXED_DT = 1 / 60; // 60 Hz fixed timestep
 
+const SCOREBOARD_FALLBACK = 'https://therapy-bring-environments-argued.trycloudflare.com/api/scores';
+async function fetchLiveBoardEndpoint() {
+    try {
+        const r = await fetch('data/endpoint.json', { cache: 'no-store' });
+        if (r.ok) {
+            const j = await r.json();
+            if (j.scoreboard) return j.scoreboard;
+        }
+    } catch (_) { /* fall through */ }
+    return SCOREBOARD_FALLBACK;
+}
+
 // ---------- Imports ----------
 import { GameController } from './gameController.js';
 import { EnemyManager } from './enemy.js';
@@ -262,6 +274,7 @@ function createGameState() {
         gameController,
         lastTime: 0,
         accumulator: 0,
+        scoreboardSubmitted: false,
     };
 }
 
@@ -317,6 +330,25 @@ function initGame() {
         document.getElementById('wave').textContent = gcState.wave;
 
         if (gcState.isGameOver) {
+            if (!state.scoreboardSubmitted) {
+                state.scoreboardSubmitted = true;
+                (async () => {
+                    try {
+                        const url = await fetchLiveBoardEndpoint();
+                        let name = localStorage.getItem('agentArcadeName');
+                        if (!name) {
+                            const entered = (window.prompt('Agent Arcade: enter leaderboard name (max 12 chars)', 'ROOK') || 'ROOK').trim();
+                            name = entered.slice(0, 12) || 'ROOK';
+                            localStorage.setItem('agentArcadeName', name);
+                        }
+                        await fetch(url, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json', 'Origin': 'https://captbean21.github.io' },
+                            body: JSON.stringify({ name, score: gcState.score, game: 'arcade' }),
+                        });
+                    } catch (e) { console.warn('[arcade] score submit failed:', e); }
+                })();
+            }
             // Game over - show message
             ctx.save();
             ctx.fillStyle = 'rgba(13, 13, 13, 0.9)';
