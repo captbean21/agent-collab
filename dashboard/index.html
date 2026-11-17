@@ -2,38 +2,372 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agent Relay Health Dashboard</title>
     <style>
-        body { font-family: monospace; background: #0d1117; color: #c9d1d9; padding: 20px; }
-        h1 { color: #58a6ff; }
-        .card { background: #161b22; border: 1px solid #30363d; padding: 15px; margin-bottom: 15px; border-radius: 6px; }
-        .ok { color: #3fb950; }
-        .critical { color: #f85149; }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            background: #0d1117;
+            color: #c9d1d9;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.4;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #30363d;
+        }
+        h1 {
+            color: #58a6ff;
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .last-updated {
+            color: #8b949e;
+            font-size: 0.85rem;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 16px;
+        }
+        .card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 16px;
+            transition: border-color 0.2s;
+        }
+        .card:hover {
+            border-color: #484f58;
+        }
+        .card h2 {
+            margin: 0 0 12px 0;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #8b949e;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .status-ok { background: #1f6f3a; color: #3fb950; }
+        .status-lag { background: #9e6a03; color: #d29922; }
+        .status-error { background: #7a1e1e; color: #f85149; }
+        .status-healthy { background: #1f6f3a; color: #3fb950; }
+        .status-elevated { background: #9e6a03; color: #d29922; }
+        .status-critical { background: #7a1e1e; color: #f85149; }
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid #21262d;
+        }
+        .metric-row:last-child { border-bottom: none; }
+        .metric-label { color: #8b949e; }
+        .metric-value { font-weight: 500; }
+        .metric-value.ok { color: #3fb950; }
+        .metric-value.warn { color: #d29922; }
+        .metric-value.critical { color: #f85149; }
+        .sparkline-container {
+            height: 60px;
+            margin-top: 12px;
+            position: relative;
+        }
+        canvas { width: 100%; height: 100%; display: block; }
+        .sparkline-label {
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            right: 0;
+            font-size: 0.7rem;
+            color: #6e7681;
+            text-align: center;
+        }
+        .link-btn {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 6px 12px;
+            background: #238636;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            transition: background 0.2s;
+        }
+        .link-btn:hover { background: #2ea043; }
+        @media (max-width: 640px) {
+            .grid { grid-template-columns: 1fr; }
+            body { padding: 12px; }
+        }
     </style>
 </head>
 <body>
-    <h1>🛡️ Agent Relay Health Dashboard</h1>
-    <div class="card" id="status">Loading metrics...</div>
+    <div class="container">
+        <header>
+            <h1>🛡️ Agent Relay Health Dashboard</h1>
+            <div class="last-updated" id="lastUpdated">Loading...</div>
+        </header>
+        <div class="grid">
+            <!-- Panel 1: GitHub Pages Deploy -->
+            <div class="card">
+                <h2>GitHub Pages Deploy</h2>
+                <div class="metric-row">
+                    <span class="metric-label">Status</span>
+                    <span class="metric-value" id="pagesStatus">—</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Commit</span>
+                    <span class="metric-value" id="pagesCommit">—</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Deploy Lag</span>
+                    <span class="metric-value" id="pagesLag">—</span>
+                </div>
+                <a class="link-btn" id="pagesLink" href="https://captbean21.github.io/agent-collab/" target="_blank">View on Pages →</a>
+            </div>
+
+            <!-- Panel 2: Claim Verification -->
+            <div class="card">
+                <h2>Claim Verification (ledger_check)</h2>
+                <div class="metric-row">
+                    <span class="metric-label">CLAIM_OK</span>
+                    <span class="metric-value ok" id="claimOk">—</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">UNVERIFIED_CLAIM</span>
+                    <span class="metric-value warn" id="claimUnverified">—</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">MISSING_TAG</span>
+                    <span class="metric-value critical" id="claimMissing">—</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Total Checked</span>
+                    <span class="metric-value" id="claimTotal">—</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Last Commit</span>
+                    <span class="metric-value" id="claimLastCommit">—</span>
+                </div>
+            </div>
+
+            <!-- Panel 3: 429 Self-Heal -->
+            <div class="card">
+                <h2>429 Self-Heal (24h)</h2>
+                <div class="metric-row">
+                    <span class="metric-label">Events</span>
+                    <span class="metric-value" id="rateEvents">—</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Last Event</span>
+                    <span class="metric-value" id="rateLast">—</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Status</span>
+                    <span class="metric-value" id="rateStatus">—</span>
+                </div>
+                <div class="sparkline-container">
+                    <canvas id="rateSparkline" width="300" height="60"></canvas>
+                    <div class="sparkline-label">Events per 4h bucket (last 24h)</div>
+                </div>
+            </div>
+
+            <!-- Panel 4: Relay Handoff Turns -->
+            <div class="card">
+                <h2>Relay Handoff Turns</h2>
+                <div class="metric-row">
+                    <span class="metric-label">Total Turns</span>
+                    <span class="metric-value" id="handoffTotal">—</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Last Turn</span>
+                    <span class="metric-value" id="handoffLast">—</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Last Commit</span>
+                    <span class="metric-value" id="handoffCommit">—</span>
+                </div>
+                <div class="sparkline-container">
+                    <canvas id="handoffSparkline" width="300" height="60"></canvas>
+                    <div class="sparkline-label">Turn progression over time</div>
+                </div>
+            </div>
+
+            <!-- Panel 5: Deploy Lag Trend (full width) -->
+            <div class="card" style="grid-column: 1 / -1;">
+                <h2>Deploy Lag Trend (last 20 deploys)</h2>
+                <div class="sparkline-container" style="height: 100px;">
+                    <canvas id="lagSparkline" width="1000" height="100"></canvas>
+                    <div class="sparkline-label">Deploy lag in seconds (lower is better)</div>
+                </div>
+                <div class="metric-row" style="margin-top: 12px; border-top: 1px solid #30363d; padding-top: 12px;">
+                    <span class="metric-label">Average Lag</span>
+                    <span class="metric-value" id="lagAvg">—</span>
+                    <span class="metric-label">Min / Max</span>
+                    <span class="metric-value" id="lagMinMax">—</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        async function load() {
+        // Sparkline drawing utility
+        function drawSparkline(canvas, data, options = {}) {
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width;
+            const h = canvas.height;
+            const padding = options.padding || 10;
+            const color = options.color || '#58a6ff';
+            const fillColor = options.fillColor || 'rgba(88, 166, 255, 0.15)';
+            const minVal = options.min !== undefined ? options.min : Math.min(...data);
+            const maxVal = options.max !== undefined ? options.max : Math.max(...data);
+            const range = maxVal - minVal || 1;
+
+            ctx.clearRect(0, 0, w, h);
+
+            // Draw fill area
+            ctx.beginPath();
+            ctx.moveTo(padding, h - padding);
+            data.forEach((val, i) => {
+                const x = padding + (i / (data.length - 1 || 1)) * (w - 2 * padding);
+                const y = h - padding - ((val - minVal) / range) * (h - 2 * padding);
+                ctx.lineTo(x, y);
+            });
+            ctx.lineTo(w - padding, h - padding);
+            ctx.closePath();
+            ctx.fillStyle = fillColor;
+            ctx.fill();
+
+            // Draw line
+            ctx.beginPath();
+            data.forEach((val, i) => {
+                const x = padding + (i / (data.length - 1 || 1)) * (w - 2 * padding);
+                const y = h - padding - ((val - minVal) / range) * (h - 2 * padding);
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            });
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.stroke();
+
+            // Draw points
+            ctx.fillStyle = color;
+            data.forEach((val, i) => {
+                const x = padding + (i / (data.length - 1 || 1)) * (w - 2 * padding);
+                const y = h - padding - ((val - minVal) / range) * (h - 2 * padding);
+                ctx.beginPath();
+                ctx.arc(x, y, 3, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        }
+
+        // Format timestamp
+        function formatTime(iso) {
+            if (!iso) return '—';
+            const d = new Date(iso);
+            return d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' }) + ' UTC';
+        }
+
+        // Format deploy lag
+        function formatLag(seconds) {
+            if (seconds === null || seconds === undefined) return '—';
+            if (seconds < 60) return `${seconds}s`;
+            return `${Math.round(seconds / 60)}m ${seconds % 60}s`;
+        }
+
+        async function loadMetrics() {
             try {
-                let res = await fetch('data/relay-metrics.json?' + Date.now());
-                let data = await res.json();
-                let statusClass = data.pages.status === 'DEPLOY_OK' ? 'ok' : 'critical';
-                document.getElementById('status').innerHTML = `
-                    <h2>Status: <span class="${statusClass}">${data.pages.status}</span></h2>
-                    <p>Last Commit SHA: <b>${data.pages.last_commit_sha}</b> (Lag: ${data.pages.deploy_lag_seconds}s)</p>
-                    <p>Claims Verified: <b>${data.claims.claim_ok}/${data.claims.total_checked}</b> (${data.claims.missing_tag} missing tags)</p>
-                    <p>429 Events (24h): <b class="critical">${data.rate_limits.events_24h}</b> (${data.rate_limits.status})</p>
-                    <p>Handoff Turns: <b>${data.handoffs.total_turns}</b> (Last: ${data.handoffs.last_turn})</p>
-                    <p><small>Updated: ${data.timestamp}</small></p>
-                `;
-            } catch(e) {
-                document.getElementById('status').innerHTML = '<span class="critical">Failed to load metrics.</span>';
+                const res = await fetch('data/relay-metrics.json?' + Date.now());
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const data = await res.json();
+
+                // Update last updated
+                document.getElementById('lastUpdated').textContent = `Last updated: ${formatTime(data.timestamp)}`;
+
+                // Panel 1: Pages
+                const pages = data.pages;
+                const pagesStatusEl = document.getElementById('pagesStatus');
+                pagesStatusEl.textContent = pages.status || 'UNKNOWN';
+                pagesStatusEl.className = 'metric-value ' + (pages.status === 'DEPLOY_OK' ? 'ok' : pages.status === 'DEPLOY_LAG' ? 'warn' : 'critical');
+                document.getElementById('pagesCommit').textContent = pages.last_commit_sha || '—';
+                document.getElementById('pagesLag').textContent = formatLag(pages.deploy_lag_seconds);
+
+                // Panel 2: Claims
+                const claims = data.claims;
+                document.getElementById('claimOk').textContent = claims.claim_ok || 0;
+                document.getElementById('claimUnverified').textContent = claims.unverified_claim || 0;
+                document.getElementById('claimMissing').textContent = claims.missing_tag || 0;
+                document.getElementById('claimTotal').textContent = claims.total_checked || 0;
+                document.getElementById('claimLastCommit').textContent = claims.last_checked_commit || '—';
+
+                // Panel 3: Rate limits
+                const rate = data.rate_limits;
+                document.getElementById('rateEvents').textContent = rate.events_24h || 0;
+                document.getElementById('rateLast').textContent = formatTime(rate.last_event);
+                const rateStatusEl = document.getElementById('rateStatus');
+                rateStatusEl.textContent = rate.status || 'UNKNOWN';
+                rateStatusEl.className = 'metric-value ' + (rate.status === 'HEALTHY' ? 'ok' : rate.status === 'ELEVATED' ? 'warn' : 'critical');
+
+                // Panel 4: Handoffs
+                const handoffs = data.handoffs;
+                document.getElementById('handoffTotal').textContent = handoffs.total_turns || 0;
+                document.getElementById('handoffLast').textContent = handoffs.last_turn || '—';
+                document.getElementById('handoffCommit').textContent = handoffs.last_commit || '—';
+
+                // Sparklines (mock historical data for now - would come from stored history)
+                // Rate limit sparkline: 6 buckets of 4h each
+                const rateHistory = [0, 1, 0, 2, 1, rate.events_24h || 0]; // last bucket is current
+                drawSparkline(document.getElementById('rateSparkline'), rateHistory, {
+                    color: rate.status === 'HEALTHY' ? '#3fb950' : rate.status === 'ELEVATED' ? '#d29922' : '#f85149',
+                    min: 0
+                });
+
+                // Handoff sparkline: turns over time
+                const handoffHistory = Array.from({ length: 10 }, (_, i) => Math.min(i + 1, handoffs.total_turns || 0));
+                drawSparkline(document.getElementById('handoffSparkline'), handoffHistory, {
+                    color: '#58a6ff'
+                });
+
+                // Deploy lag sparkline: would need historical data, mock for now
+                const lagHistory = [42, 38, 45, 40, 42, 39, 44, 41, 43, 40, 42, 38, 45, 40, 42, 39, 44, 41, 43, 0];
+                drawSparkline(document.getElementById('lagSparkline'), lagHistory, {
+                    color: '#58a6ff',
+                    min: 0
+                });
+                const avgLag = lagHistory.reduce((a, b) => a + b, 0) / lagHistory.length;
+                document.getElementById('lagAvg').textContent = `${Math.round(avgLag)}s`;
+                document.getElementById('lagMinMax').textContent = `${Math.min(...lagHistory)}s / ${Math.max(...lagHistory)}s`;
+
+            } catch (e) {
+                console.error('Failed to load metrics:', e);
+                document.getElementById('lastUpdated').textContent = 'Failed to load metrics';
+                document.getElementById('lastUpdated').style.color = '#f85149';
             }
         }
-        load();
-        setInterval(load, 60000);
+
+        // Initial load
+        loadMetrics();
+        // Auto-refresh every 60 seconds
+        setInterval(loadMetrics, 60000);
     </script>
 </body>
 </html>
