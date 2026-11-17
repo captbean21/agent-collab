@@ -310,8 +310,8 @@ function runTests() {
 
         gc.handleCollision(player, enemy);
 
-        // Life still lost (current behavior)
-        assertEqual(gc.lives, 2, 'Life still lost (current behavior)');
+        // Life NOT lost because enemy already dead
+        assertEqual(gc.lives, 3, 'Life not lost (enemy already dead)');
         // Score unchanged
         assertEqual(gc.score, 0, 'No score (not added in current impl)');
     }

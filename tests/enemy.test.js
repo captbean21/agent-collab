@@ -177,10 +177,10 @@ function runTests() {
         assert(tank.scoreValue > basic.scoreValue, 'Tank enemy worth more points');
     }
 
-    // Test 14: spawnWave(count, type, centerX, centerY) spawns multiple enemies in formation
+    // Test 14: spawnWave(count, centerX, centerY, wave) spawns multiple enemies in formation
     {
         const em = new EnemyManager();
-        em.spawnWave(5, 'basic', 320, 240);
+        em.spawnWave(5, 320, 240, 1);
         assertEqual(em.enemies.length, 5, 'spawnWave creates correct count');
         // Check they're spawned around center
         em.enemies.forEach(e => {

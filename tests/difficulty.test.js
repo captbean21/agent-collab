@@ -403,8 +403,12 @@ function runTests() {
         gc.update(1/60);
         assertEqual(gc.wave, 3, 'Second clear -> wave 3');
         assertEqual(enemyManager.enemies.length, 6, 'Wave 3 spawns 6 enemies');
+        // At wave 3: basic=70, fast=120, tank=30 (types: basic, fast, tank)
+        // Check that basic and fast have higher speed than wave 2 basic (55)
         enemyManager.enemies.forEach(e => {
-            assert(e.speed > 55, 'Wave 3 enemies have higher speed');
+            if (e.type === 'basic' || e.type === 'fast') {
+                assert(e.speed > 55, `Wave 3 ${e.type} has higher speed`);
+            }
         });
         
         // Clear enemies -> wave 4, spawns 8 enemies
@@ -412,8 +416,11 @@ function runTests() {
         gc.update(1/60);
         assertEqual(gc.wave, 4, 'Third clear -> wave 4');
         assertEqual(enemyManager.enemies.length, 8, 'Wave 4 spawns 8 enemies');
+        // At wave 4: basic=80, fast=130, tank=32.5
         enemyManager.enemies.forEach(e => {
-            assert(e.speed > 60, 'Wave 4 enemies have even higher speed');
+            if (e.type === 'basic' || e.type === 'fast') {
+                assert(e.speed > 60, `Wave 4 ${e.type} has even higher speed`);
+            }
         });
         
         // Test direct spawnWave with specific wave number

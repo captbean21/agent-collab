@@ -42,13 +42,15 @@ class GameController {
 
     // 2. Update entities
     this.enemyManager.update(deltaTime, this.player.x, this.player.y);
-    this.bulletManager.update(deltaTime, currentTime);
+    if (this.bulletManager) {
+      this.bulletManager.update(deltaTime, currentTime);
+    }
 
     // 3. Detect collisions
     this.collisionManager.colliders = [
       this.player, 
       ...this.enemyManager.getEnemies(),
-      ...this.bulletManager.getBullets()
+      ...(this.bulletManager ? this.bulletManager.getBullets() : [])
     ];
     const collisions = this.collisionManager.update();
     
@@ -58,7 +60,9 @@ class GameController {
 
     // 4. Cleanup destroyed/inactive entities
     this.enemyManager.cleanup();
-    this.bulletManager.cleanup();
+    if (this.bulletManager) {
+      this.bulletManager.cleanup();
+    }
 
     // 5. Wave management
     if (this.enemyManager.getEnemies().length === 0) {

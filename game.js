@@ -1,12 +1,19 @@
 // Retro Arcade Game — Castle & Rook Collaboration
-// Scaffold: Castle (gameplay/controls), Rook (audio/mechanics)
-// Role split per PROJECT_IDEAS.md
+// Full gameplay loop: GameController + BulletManager + EnemyManager + AudioManager + Difficulty
+// Role split: Castle (gameplay/controls), Rook (audio/mechanics)
 
-const CANVAS_W = 640;
-const CANVAS_H = 480;
+const CANVAS_W = 800;
+const CANVAS_H = 600;
 const FIXED_DT = 1 / 60; // 60 Hz fixed timestep
 
-// ---------- Types / Interfaces (Round 1: Castle defines, Rook tests) ----------
+// ---------- Imports ----------
+import { GameController } from './gameController.js';
+import { EnemyManager } from './enemy.js';
+import { CollisionManager } from './collision.js';
+import { BulletManager } from './bullet.js';
+import { audioManager } from './audio.js';
+
+// ---------- Player & Physics (kept for backward compat with tests) ----------
 
 /**
  * Player entity interface
@@ -29,6 +36,7 @@ function createPlayer() {
         maxSpeed: 300,
         thrust: 800,
         drag: 0.98,
+        speed: 0, // Computed speed for audio engine pitch
         // Input state
         left: false,
         right: false,
@@ -78,6 +86,9 @@ function updatePlayerPhysics(player, dt) {
     if (player.y > CANVAS_H + r) player.y = -r;
     if (player.y < -r) player.y = CANVAS_H + r;
 
+    // 6. Compute speed for audio
+    player.speed = Math.hypot(player.vx, player.vy);
+
     return player;
 }
 
@@ -89,25 +100,28 @@ function updatePlayerPhysics(player, dt) {
 function renderPlayer(ctx, player) {
     ctx.save();
     ctx.translate(player.x, player.y);
+    const angle = Math.atan2(player.vy, player.vx);
+    ctx.rotate(angle);
     ctx.strokeStyle = '#00ff00';
     ctx.lineWidth = 2;
     ctx.beginPath();
-    // Simple triangle ship
-    ctx.moveTo(0, -player.radius * 1.5);
-    ctx.lineTo(player.radius, player.radius);
+    // Triangle ship pointing right (0 radians)
+    ctx.moveTo(player.radius * 1.5, 0);
+    ctx.lineTo(-player.radius, -player.radius);
     ctx.lineTo(-player.radius, player.radius);
     ctx.closePath();
     ctx.stroke();
     ctx.restore();
 }
 
-// ---------- Browser-specific Input Handling (only runs in browser) ----------
+// ---------- Browser-specific Input Handling ----------
 
 let browserInputState = {
     left: false,
     right: false,
     up: false,
     down: false,
+    fire: false,
 };
 
 function setupInput(player) {
@@ -119,6 +133,7 @@ function setupInput(player) {
             case 'ArrowRight': case 'KeyD': browserInputState.right = true; break;
             case 'ArrowUp': case 'KeyW': browserInputState.up = true; break;
             case 'ArrowDown': case 'KeyS': browserInputState.down = true; break;
+            case 'Space': case 'KeyK': browserInputState.fire = true; e.preventDefault(); break;
         }
     });
 
@@ -128,8 +143,14 @@ function setupInput(player) {
             case 'ArrowRight': case 'KeyD': browserInputState.right = false; break;
             case 'ArrowUp': case 'KeyW': browserInputState.up = false; break;
             case 'ArrowDown': case 'KeyS': browserInputState.down = false; break;
+            case 'Space': case 'KeyK': browserInputState.fire = false; break;
         }
     });
+
+    // Resume audio on first interaction
+    window.addEventListener('click', async () => {
+        await audioManager.resume();
+    }, { once: true });
 }
 
 function getInputState() {
@@ -140,41 +161,51 @@ function setInputState(state) {
     browserInputState = { ...state };
 }
 
-// ---------- Game State & Loop (for browser) ----------
+// ---------- Rendering ----------
 
-function createGameState() {
-    return {
-        player: createPlayer(),
-        score: 0,
-        lives: 3,
-        wave: 1,
-        lastTime: 0,
-        accumulator: 0,
-    };
+function renderBullet(ctx, bullet) {
+    ctx.save();
+    ctx.translate(bullet.x, bullet.y);
+    ctx.fillStyle = '#ffff00';
+    ctx.beginPath();
+    ctx.arc(0, 0, bullet.radius || 3, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
 }
 
-function gameStep(state, timestamp) {
-    const frameTime = (timestamp - state.lastTime) / 1000;
-    state.lastTime = timestamp;
-
-    const clampedFrameTime = Math.min(frameTime, 0.1);
-    state.accumulator += clampedFrameTime;
-
-    // Sync input to player
-    state.player.left = browserInputState.left;
-    state.player.right = browserInputState.right;
-    state.player.up = browserInputState.up;
-    state.player.down = browserInputState.down;
-
-    while (state.accumulator >= FIXED_DT) {
-        updatePlayerPhysics(state.player, FIXED_DT);
-        state.accumulator -= FIXED_DT;
+function renderEnemy(ctx, enemy) {
+    ctx.save();
+    ctx.translate(enemy.x, enemy.y);
+    const colors = { basic: '#ff4444', fast: '#ff8800', tank: '#ff00ff' };
+    ctx.strokeStyle = colors[enemy.type] || '#ff4444';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    if (enemy.shape === 'circle') {
+        ctx.arc(0, 0, enemy.radius, 0, Math.PI * 2);
     }
-
-    return state;
+    ctx.stroke();
+    // Health indicator for tank
+    if (enemy.type === 'tank' && enemy.health < 5) {
+        ctx.fillStyle = '#ff00ff';
+        ctx.font = '10px monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText(enemy.health.toString(), 0, 3);
+    }
+    ctx.restore();
 }
 
-function renderGame(ctx, state) {
+function renderExplosion(ctx, x, y, radius, color) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(0, 0, radius, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.restore();
+}
+
+function renderGame(ctx, gameController) {
     // Clear with slight trail effect
     ctx.fillStyle = 'rgba(13, 13, 13, 0.3)';
     ctx.fillRect(0, 0, CANVAS_W, CANVAS_H);
@@ -196,25 +227,117 @@ function renderGame(ctx, state) {
         ctx.stroke();
     }
 
-    renderPlayer(ctx, state.player);
+    // Render enemies
+    const enemies = gameController.enemyManager.getEnemies();
+    for (const enemy of enemies) {
+        renderEnemy(ctx, enemy);
+    }
+
+    // Render bullets
+    const bullets = gameController.bulletManager.getBullets();
+    for (const bullet of bullets) {
+        renderBullet(ctx, bullet);
+    }
+
+    // Render player
+    renderPlayer(ctx, gameController.player);
+
+    // Render explosions (visual feedback for collisions)
+    // This is a simplified version - in a full game you'd have a particle system
+}
+
+// ---------- Game Loop ----------
+
+function createGameState() {
+    const player = createPlayer();
+    const enemyManager = new EnemyManager();
+    const collisionManager = new CollisionManager();
+    const bulletManager = new BulletManager();
+    const gameController = new GameController(player, enemyManager, collisionManager, bulletManager);
+
+    // Spawn initial wave
+    enemyManager.spawnWave(4, 400, 300, 1);
+
+    return {
+        gameController,
+        lastTime: 0,
+        accumulator: 0,
+    };
+}
+
+function gameStep(state, timestamp) {
+    const frameTime = (timestamp - state.lastTime) / 1000;
+    state.lastTime = timestamp;
+
+    const clampedFrameTime = Math.min(frameTime, 0.1);
+    state.accumulator += clampedFrameTime;
+
+    const gc = state.gameController;
+
+    // Sync input to player
+    gc.player.left = browserInputState.left;
+    gc.player.right = browserInputState.right;
+    gc.player.up = browserInputState.up;
+    gc.player.down = browserInputState.down;
+
+    // Handle fire input
+    if (browserInputState.fire) {
+        gc.fire(performance.now());
+    }
+
+    // Fixed timestep loop
+    while (state.accumulator >= FIXED_DT) {
+        gc.update(FIXED_DT, performance.now());
+        state.accumulator -= FIXED_DT;
+    }
+
+    return state;
 }
 
 function initGame() {
     if (typeof window === 'undefined') return null; // Skip in Node.js tests
 
     const state = createGameState();
-    setupInput(state.player);
+    setupInput(state.gameController.player);
+
+    // Initialize audio
+    audioManager.init();
 
     function loop(timestamp) {
         gameStep(state, timestamp);
         const canvas = document.getElementById('game-canvas');
         const ctx = canvas.getContext('2d');
-        renderGame(ctx, state);
+        renderGame(ctx, state.gameController);
 
         // Update HUD
-        document.getElementById('score').textContent = state.score;
-        document.getElementById('lives').textContent = state.lives;
-        document.getElementById('wave').textContent = state.wave;
+        const gcState = state.gameController.getState();
+        document.getElementById('score').textContent = gcState.score;
+        document.getElementById('lives').textContent = gcState.lives;
+        document.getElementById('wave').textContent = gcState.wave;
+
+        if (gcState.isGameOver) {
+            // Game over - show message
+            ctx.save();
+            ctx.fillStyle = 'rgba(13, 13, 13, 0.9)';
+            ctx.fillRect(0, 0, CANVAS_W, CANVAS_H);
+            ctx.fillStyle = '#ff4444';
+            ctx.font = '48px monospace';
+            ctx.textAlign = 'center';
+            ctx.fillText('GAME OVER', CANVAS_W / 2, CANVAS_H / 2 - 20);
+            ctx.font = '24px monospace';
+            ctx.fillStyle = '#ffff00';
+            ctx.fillText(`Final Score: ${gcState.score}`, CANVAS_W / 2, CANVAS_H / 2 + 30);
+            ctx.font = '16px monospace';
+            ctx.fillStyle = '#888888';
+            ctx.fillText('Click to restart', CANVAS_W / 2, CANVAS_H / 2 + 70);
+            ctx.restore();
+
+            // Wait for click to restart
+            canvas.onclick = () => {
+                window.location.reload();
+            };
+            return;
+        }
 
         requestAnimationFrame(loop);
     }
@@ -238,4 +361,30 @@ export {
     setupInput,
     getInputState,
     setInputState,
+    // Re-export managers for test access
+    EnemyManager,
+    CollisionManager,
+    BulletManager,
+    GameController,
+    audioManager,
+};
+
+export default {
+    createPlayer,
+    updatePlayerPhysics,
+    FIXED_DT,
+    CANVAS_W,
+    CANVAS_H,
+    createGameState,
+    gameStep,
+    renderGame,
+    initGame,
+    setupInput,
+    getInputState,
+    setInputState,
+    EnemyManager,
+    CollisionManager,
+    BulletManager,
+    GameController,
+    audioManager,
 };
