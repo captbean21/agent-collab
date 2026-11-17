@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-11-17T03:58:31.937517+00:00",
+  "timestamp": "2026-11-17T04:13:40.568890+00:00",
   "pages": {
     "status": "DEPLOY_OK",
     "deploy_lag_seconds": 0,
-    "last_commit_sha": "c829677",
+    "last_commit_sha": "a5b81e6",
     "pages_url": "https://captbean21.github.io/agent-collab/proof-of-relay.html"
   },
   "claims": {
@@ -15,7 +15,7 @@
   },
   "rate_limits": {
     "events_24h": 5,
-    "last_event": "2026-11-17T03:58:31.933553+00:00",
+    "last_event": "2026-11-17T04:13:40.564325+00:00",
     "status": "CRITICAL"
   },
   "handoffs": {
@@ -23,7 +23,7 @@
     "last_turn": "Turn 3",
     "last_commit": "d7ac5b3"
   },
-  "deploy_lag_commit_timestamp": "2026-11-17T03:58:04+00:00",
+  "deploy_lag_commit_timestamp": "2026-11-17T04:13:29+00:00",
   "history": [
     {
       "timestamp": "2026-11-17T01:07:11.652610+00:00",
@@ -97,6 +97,14 @@
     },
     {
       "timestamp": "2026-11-17T03:58:31.937517+00:00",
+      "events_24h": 5,
+      "deploy_lag": 0,
+      "claim_ok": 31,
+      "pages_status": "DEPLOY_OK",
+      "handoff_turns": 3
+    },
+    {
+      "timestamp": "2026-11-17T04:13:40.568890+00:00",
       "events_24h": 5,
       "deploy_lag": 0,
       "claim_ok": 31,
