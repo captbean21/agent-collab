@@ -2,171 +2,171 @@
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Cross-domain retrieval functional",
-    "captured": "2026-11-17T14:26:35.010379"
+    "captured": "2026-11-17T14:27:05.106088"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Dynamic queries produce domain-appropriate keywords",
-    "captured": "2026-11-17T14:26:35.010384"
+    "captured": "2026-11-17T14:27:05.106093"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- **Embedding:** ~50-200s (scales with sentence count)",
-    "captured": "2026-11-17T14:26:35.010386"
+    "captured": "2026-11-17T14:27:05.106096"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- **Fact extraction:** ~20-100s (scales with key_text size)",
-    "captured": "2026-11-17T14:26:35.010388"
+    "captured": "2026-11-17T14:27:05.106097"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- **Total:** 2.5-6.5 min per video",
-    "captured": "2026-11-17T14:26:35.010390"
+    "captured": "2026-11-17T14:27:05.106099"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- **Rate limit:** YouTube 6 caption requests/hour per IP",
-    "captured": "2026-11-17T14:26:35.010391"
+    "captured": "2026-11-17T14:27:05.106101"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- [ ] Test on educational/lecture content (highest expected quality)",
-    "captured": "2026-11-17T14:26:35.010393"
+    "captured": "2026-11-17T14:27:05.106103"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- [ ] Add multi-language caption support",
-    "captured": "2026-11-17T14:26:35.010395"
+    "captured": "2026-11-17T14:27:05.106105"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- [ ] Integrate with youtube-watch-pipeline for automated RSS polling",
-    "captured": "2026-11-17T14:26:35.010397"
+    "captured": "2026-11-17T14:27:05.106107"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Pipeline: `/home/rook/.openclaw/workspace/tools/yt_full_pipeline_llama31_dynamic.py`",
-    "captured": "2026-11-17T14:26:35.010399"
+    "captured": "2026-11-17T14:27:05.106109"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Service: `/etc/systemd/system/llama-3.1-8b.service`",
-    "captured": "2026-11-17T14:26:35.010401"
+    "captured": "2026-11-17T14:27:05.106111"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Model: `/home/rook/.openclaw/workspace/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf`",
-    "captured": "2026-11-17T14:26:35.010403"
+    "captured": "2026-11-17T14:27:05.106113"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Todo: `/home/rook/.openclaw/workspace/todo_live_streams.md`",
-    "captured": "2026-11-17T14:26:35.010404"
+    "captured": "2026-11-17T14:27:05.106114"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- **Model:** Meta-Llama-3.1-8B-Instruct-Q4_K_M (4.6 GB)",
-    "captured": "2026-11-17T14:26:35.010461"
+    "captured": "2026-11-17T14:27:05.106169"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- **Endpoint:** http://127.0.0.1:5003/v1",
-    "captured": "2026-11-17T14:26:35.010464"
+    "captured": "2026-11-17T14:27:05.106172"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- **Context:** 8192 tokens (native 128K training, stable on CPU)",
-    "captured": "2026-11-17T14:26:35.010466"
+    "captured": "2026-11-17T14:27:05.106174"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- **Service:** `llama-3.1-8b.service` (systemd, auto-restart, enabled)",
-    "captured": "2026-11-17T14:26:35.010467"
+    "captured": "2026-11-17T14:27:05.106175"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- **Performance:** ~7.25 tok/s on CPU (all 8 threads)",
-    "captured": "2026-11-17T14:26:35.010469"
+    "captured": "2026-11-17T14:27:05.106177"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Auto-generates extraction query per video from transcript's most information-dense sentences",
-    "captured": "2026-11-17T14:26:35.010471"
+    "captured": "2026-11-17T14:27:05.106180"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Filters 200+ stopwords including conversational filler",
-    "captured": "2026-11-17T14:26:35.010473"
+    "captured": "2026-11-17T14:27:05.106181"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Extracts proper nouns, acronyms, numbers, technical terms",
-    "captured": "2026-11-17T14:26:35.010475"
+    "captured": "2026-11-17T14:27:05.106183"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Falls back to frequency analysis if <10 keywords",
-    "captured": "2026-11-17T14:26:35.010477"
+    "captured": "2026-11-17T14:27:05.106185"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Test on educational/lecture content to confirm \"sweet spot\" quality",
-    "captured": "2026-11-17T14:26:35.010482"
+    "captured": "2026-11-17T14:27:05.106191"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Integrate with youtube-watch-pipeline for automated RSS polling",
-    "captured": "2026-11-17T14:26:35.010484"
+    "captured": "2026-11-17T14:27:05.106192"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Add multi-language caption support",
-    "captured": "2026-11-17T14:26:35.010485"
+    "captured": "2026-11-17T14:27:05.106194"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Objective: Trigger 429 on Castle's Flash 3.1 quota (~500 calls/day) to test expanded self-heal triggers (bare 429, RESOURCE_EXHAUSTED, quota exceeded)",
-    "captured": "2026-11-17T14:26:35.010532"
+    "captured": "2026-11-17T14:27:05.106240"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Plan: 5 rounds \u2014 research task \u2192 quota exhaustion \u2192 429 detection \u2192 timer \u2192 check-in \u2192 retry \u2192 close",
-    "captured": "2026-11-17T14:26:35.010535"
+    "captured": "2026-11-17T14:27:05.106243"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Round 1: Castle begins multi-call research on \"inter-agent communication protocols for autonomous AI collaboration\"",
-    "captured": "2026-11-17T14:26:35.010536"
+    "captured": "2026-11-17T14:27:05.106245"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Triggers expanded: now catch `429` prefix, bare `429`, `RESOURCE_EXHAUSTED`, `quota exceeded` (case-insensitive)",
-    "captured": "2026-11-17T14:26:35.010538"
+    "captured": "2026-11-17T14:27:05.106247"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- GitHub Actions workflow live: `.github/workflows/update-metrics.yml` auto-updates dashboard on every push",
-    "captured": "2026-11-17T14:26:35.010540"
+    "captured": "2026-11-17T14:27:05.106248"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- 429 self-heal trigger updated: Changed from prefix-only ('message starting with 429') to substring match ('message containing 429') because Castle's 429 errors appear embedded in status logs (e.g., 'Working... \u26a0\ufe0f Google Generative AI API error (429)...') rather than as explicit prefix signals. Old intent cancelled (76ac28ee...), new armed (f5124940...). Trigger: Castle (1567129284210982914) in #debate-club containing '429'. Cooldown 60s, max 100 fires, max 2 exchanges then escalate to Bean.",
-    "captured": "2026-11-17T14:26:35.010542"
+    "captured": "2026-11-17T14:27:05.106250"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- 06:01 UTC: Daily digest posted \u2014 2 sections with real links",
-    "captured": "2026-11-17T14:26:35.010544"
+    "captured": "2026-11-17T14:27:05.106252"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- 2026-11-17: Pages byte-match verification is insufficient \u2014 two consecutive deploys \"verified live\" while doing nothing (initGame exported never called; physics update missing from loop). Verify the runtime call chain (auto-init present, every system actually invoked per frame), not just 200s and sha256. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-17T14:26:35.010546"
+    "captured": "2026-11-17T14:27:05.106254"
   },
   {
     "source": "spikes/001-session-continuity-daemon",
     "text": "# Spike: Session Continuity Bridge Daemon\n\n## Question\nCan a lightweight Python daemon persist agent session state (task list, decisions, recent diffs) to a local git-backed store and restore it on co",
-    "captured": "2026-11-17T14:26:35.010654"
+    "captured": "2026-11-17T14:27:05.106362"
   }
 ]
