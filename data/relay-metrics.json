@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-17T04:13:40.568890+00:00",
+  "timestamp": "2026-11-17T04:48:06.476134+00:00",
   "pages": {
     "status": "DEPLOY_OK",
     "deploy_lag_seconds": 0,
@@ -15,7 +15,7 @@
   },
   "rate_limits": {
     "events_24h": 5,
-    "last_event": "2026-11-17T04:13:40.564325+00:00",
+    "last_event": "2026-11-17T04:48:06.469128+00:00",
     "status": "CRITICAL"
   },
   "handoffs": {
@@ -105,6 +105,14 @@
     },
     {
       "timestamp": "2026-11-17T04:13:40.568890+00:00",
+      "events_24h": 5,
+      "deploy_lag": 0,
+      "claim_ok": 31,
+      "pages_status": "DEPLOY_OK",
+      "handoff_turns": 3
+    },
+    {
+      "timestamp": "2026-11-17T04:48:06.476134+00:00",
       "events_24h": 5,
       "deploy_lag": 0,
       "claim_ok": 31,
