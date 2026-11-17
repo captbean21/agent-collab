@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Relay Dashboard Collector — Round 2
-Polls all metric sources and writes data/relay-metrics.json
+Relay Dashboard Collector — Round 4
+Polls all metric sources and writes data/relay-metrics.json with rolling history.
 Zero dependencies beyond stdlib + gh CLI (for GitHub API).
 """
 
@@ -16,6 +16,7 @@ REPO_ROOT = Path(__file__).parent.parent
 DATA_DIR = REPO_ROOT / "data"
 DATA_DIR.mkdir(exist_ok=True)
 METRICS_FILE = DATA_DIR / "relay-metrics.json"
+MAX_HISTORY = 100  # Keep last 100 snapshots
 
 def run_cmd(cmd, cwd=None, timeout=10):
     """Run command, return (success, stdout, stderr)."""
@@ -106,6 +107,15 @@ def get_handoff_turns():
     except Exception:
         return {"total_turns": 0, "last_turn": None, "last_commit": None}
 
+def load_existing_metrics():
+    """Load existing metrics file to preserve history."""
+    if METRICS_FILE.exists():
+        try:
+            return json.loads(METRICS_FILE.read_text())
+        except json.JSONDecodeError:
+            pass
+    return {"history": []}
+
 def main():
     print("🔄 Collecting relay metrics...")
 
@@ -123,8 +133,14 @@ def main():
 
     deploy_lag_commit = get_deploy_lag()
 
-    metrics = {
-        "timestamp": datetime.now(timezone.utc).isoformat(),
+    # Load existing metrics for history
+    existing = load_existing_metrics()
+    history = existing.get("history", [])
+
+    # Build current snapshot
+    timestamp = datetime.now(timezone.utc).isoformat()
+    current = {
+        "timestamp": timestamp,
         "pages": pages,
         "claims": claims,
         "rate_limits": rate_limits,
@@ -132,8 +148,25 @@ def main():
         "deploy_lag_commit_timestamp": deploy_lag_commit
     }
 
+    # Add minimal history entry (for sparklines)
+    history.append({
+        "timestamp": timestamp,
+        "events_24h": rate_limits.get("events_24h", 0),
+        "deploy_lag": pages.get("deploy_lag_seconds", 0) or 0,
+        "claim_ok": claims.get("claim_ok", 0),
+        "pages_status": pages.get("status", "UNKNOWN"),
+        "handoff_turns": handoffs.get("total_turns", 0)
+    })
+
+    # Trim history
+    if len(history) > MAX_HISTORY:
+        history = history[-MAX_HISTORY:]
+
+    # Final metrics object
+    metrics = {**current, "history": history}
+
     METRICS_FILE.write_text(json.dumps(metrics, indent=2))
-    print(f"✅ Written to {METRICS_FILE}")
+    print(f"✅ Written to {METRICS_FILE} (history: {len(history)} entries)")
 
     print(json.dumps(metrics, indent=2))
 

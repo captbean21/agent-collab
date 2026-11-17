@@ -185,7 +185,7 @@
                 </div>
                 <div class="sparkline-container">
                     <canvas id="rateSparkline" width="300" height="60"></canvas>
-                    <div class="sparkline-label">Events per 4h bucket (last 24h)</div>
+                    <div class="sparkline-label">Events per collection (rolling history)</div>
                 </div>
             </div>
 
@@ -206,13 +206,13 @@
                 </div>
                 <div class="sparkline-container">
                     <canvas id="handoffSparkline" width="300" height="60"></canvas>
-                    <div class="sparkline-label">Turn progression over time</div>
+                    <div class="sparkline-label">Turn count over time</div>
                 </div>
             </div>
 
             <!-- Panel 5: Deploy Lag Trend (full width) -->
             <div class="card" style="grid-column: 1 / -1;">
-                <h2>Deploy Lag Trend (last 20 deploys)</h2>
+                <h2>Deploy Lag Trend</h2>
                 <div class="sparkline-container" style="height: 100px;">
                     <canvas id="lagSparkline" width="1000" height="100"></canvas>
                     <div class="sparkline-label">Deploy lag in seconds (lower is better)</div>
@@ -294,6 +294,14 @@
             return `${Math.round(seconds / 60)}m ${seconds % 60}s`;
         }
 
+        // Extract history arrays from metrics
+        function extractHistory(data, key, maxPoints = 50) {
+            const history = data.history || [];
+            // Take last N points
+            const recent = history.slice(-maxPoints);
+            return recent.map(h => h[key]).filter(v => v !== undefined && v !== null);
+        }
+
         async function loadMetrics() {
             try {
                 const res = await fetch('data/relay-metrics.json?' + Date.now());
@@ -333,29 +341,43 @@
                 document.getElementById('handoffLast').textContent = handoffs.last_turn || '—';
                 document.getElementById('handoffCommit').textContent = handoffs.last_commit || '—';
 
-                // Sparklines (mock historical data for now - would come from stored history)
-                // Rate limit sparkline: 6 buckets of 4h each
-                const rateHistory = [0, 1, 0, 2, 1, rate.events_24h || 0]; // last bucket is current
-                drawSparkline(document.getElementById('rateSparkline'), rateHistory, {
-                    color: rate.status === 'HEALTHY' ? '#3fb950' : rate.status === 'ELEVATED' ? '#d29922' : '#f85149',
-                    min: 0
-                });
+                // --- REAL HISTORY SPARKLINES ---
+                // Rate limit sparkline: events_24h over time
+                const rateHistory = extractHistory(data, 'events_24h');
+                if (rateHistory.length > 0) {
+                    const rateColor = rate.status === 'HEALTHY' ? '#3fb950' : rate.status === 'ELEVATED' ? '#d29922' : '#f85149';
+                    drawSparkline(document.getElementById('rateSparkline'), rateHistory, {
+                        color: rateColor,
+                        fillColor: rateColor.replace(')', ', 0.15)').replace('rgb', 'rgba'),
+                        min: 0
+                    });
+                }
 
-                // Handoff sparkline: turns over time
-                const handoffHistory = Array.from({ length: 10 }, (_, i) => Math.min(i + 1, handoffs.total_turns || 0));
-                drawSparkline(document.getElementById('handoffSparkline'), handoffHistory, {
-                    color: '#58a6ff'
-                });
+                // Handoff sparkline: handoff_turns over time
+                const handoffHistory = extractHistory(data, 'handoff_turns');
+                if (handoffHistory.length > 0) {
+                    drawSparkline(document.getElementById('handoffSparkline'), handoffHistory, {
+                        color: '#58a6ff',
+                        fillColor: 'rgba(88, 166, 255, 0.15)',
+                        min: 0
+                    });
+                }
 
-                // Deploy lag sparkline: would need historical data, mock for now
-                const lagHistory = [42, 38, 45, 40, 42, 39, 44, 41, 43, 40, 42, 38, 45, 40, 42, 39, 44, 41, 43, 0];
-                drawSparkline(document.getElementById('lagSparkline'), lagHistory, {
-                    color: '#58a6ff',
-                    min: 0
-                });
-                const avgLag = lagHistory.reduce((a, b) => a + b, 0) / lagHistory.length;
-                document.getElementById('lagAvg').textContent = `${Math.round(avgLag)}s`;
-                document.getElementById('lagMinMax').textContent = `${Math.min(...lagHistory)}s / ${Math.max(...lagHistory)}s`;
+                // Deploy lag sparkline: deploy_lag over time
+                const lagHistory = extractHistory(data, 'deploy_lag');
+                if (lagHistory.length > 0) {
+                    drawSparkline(document.getElementById('lagSparkline'), lagHistory, {
+                        color: '#58a6ff',
+                        fillColor: 'rgba(88, 166, 255, 0.15)',
+                        min: 0
+                    });
+                    const avgLag = lagHistory.reduce((a, b) => a + b, 0) / lagHistory.length;
+                    document.getElementById('lagAvg').textContent = `${Math.round(avgLag)}s`;
+                    document.getElementById('lagMinMax').textContent = `${Math.min(...lagHistory)}s / ${Math.max(...lagHistory)}s`;
+                } else {
+                    document.getElementById('lagAvg').textContent = '—';
+                    document.getElementById('lagMinMax').textContent = '—';
+                }
 
             } catch (e) {
                 console.error('Failed to load metrics:', e);
