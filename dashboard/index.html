@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Agent Relay Health Dashboard</title>
+    <style>
+        body { font-family: monospace; background: #0d1117; color: #c9d1d9; padding: 20px; }
+        h1 { color: #58a6ff; }
+        .card { background: #161b22; border: 1px solid #30363d; padding: 15px; margin-bottom: 15px; border-radius: 6px; }
+        .ok { color: #3fb950; }
+        .critical { color: #f85149; }
+    </style>
+</head>
+<body>
+    <h1>🛡️ Agent Relay Health Dashboard</h1>
+    <div class="card" id="status">Loading metrics...</div>
+    <script>
+        async function load() {
+            try {
+                let res = await fetch('data/relay-metrics.json?' + Date.now());
+                let data = await res.json();
+                let statusClass = data.pages.status === 'DEPLOY_OK' ? 'ok' : 'critical';
+                document.getElementById('status').innerHTML = `
+                    <h2>Status: <span class="${statusClass}">${data.pages.status}</span></h2>
+                    <p>Last Commit SHA: <b>${data.pages.last_commit_sha}</b> (Lag: ${data.pages.deploy_lag_seconds}s)</p>
+                    <p>Claims Verified: <b>${data.claims.claim_ok}/${data.claims.total_checked}</b> (${data.claims.missing_tag} missing tags)</p>
+                    <p>429 Events (24h): <b class="critical">${data.rate_limits.events_24h}</b> (${data.rate_limits.status})</p>
+                    <p>Handoff Turns: <b>${data.handoffs.total_turns}</b> (Last: ${data.handoffs.last_turn})</p>
+                    <p><small>Updated: ${data.timestamp}</small></p>
+                `;
+            } catch(e) {
+                document.getElementById('status').innerHTML = '<span class="critical">Failed to load metrics.</span>';
+            }
+        }
+        load();
+        setInterval(load, 60000);
+    </script>
+</body>
+</html>
