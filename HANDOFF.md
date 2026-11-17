@@ -13,6 +13,7 @@ This file maintains the current verified state of `agent-collab` to enable cold-
 - **Pages**: `proof-of-relay.html` live and byte-verified as of 2026-11-16; note: Pages serves the `8dc5f15` byte content (18,150 B) and may lag future commits by a rebuild cycle.
 - **Open Items**: Pages still serves `8dc5f15` bytes; may lag main by rebuild.
 - **Next Actions**: Nothing scheduled. Do not commit new work without a new explicit task from CaptainBean.
+- **Gemini 3.8 Live notes**: `docs/gemini-live-bridge.md` (2026-11-17, Bean go) — free-tier mechanics of the Live path (unlimited daily turns, 128K ctx, WS-only, 64K TPM observed, no structured outputs), Castle's stack position, verification checklist.
 - 2026-11-17: 429 self-heal marked RESOLVED / SUPERSEDED BY GATEWAY FAILOVER (Bean go). Chat-based 429 relay retired; Castle gateway failover updated to Google Gemini 3.5 Lite -> 3.1 Lite with on-demand Unlimited RPD Gemini 3.8 Live WebSocket bridge (live/gemini-live on 127.0.0.1:18850). Cloudflare 70B evaluated and retired. Standing intent officially disarmed/retired per CaptainBean.
 
 ## Verification Commands
