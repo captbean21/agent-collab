@@ -287,6 +287,7 @@ function gameStep(state, timestamp) {
 
     // Fixed timestep loop
     while (state.accumulator >= FIXED_DT) {
+        updatePlayerPhysics(gc.player, FIXED_DT);
         gc.update(FIXED_DT, performance.now());
         state.accumulator -= FIXED_DT;
     }
