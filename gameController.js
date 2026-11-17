@@ -5,11 +5,12 @@
 import { audioManager } from './audio.js';
 
 class GameController {
-  constructor(player, enemyManager, collisionManager, bulletManager) {
+  constructor(player, enemyManager, collisionManager, bulletManager, audioManagerInstance = null) {
     this.player = player;
     this.enemyManager = enemyManager;
     this.collisionManager = collisionManager;
     this.bulletManager = bulletManager;
+    this.audioManager = audioManagerInstance || audioManager;
     this.score = 0;
     this.lives = 3;
     this.wave = 1;
@@ -21,13 +22,14 @@ class GameController {
     const bullet = this.bulletManager.fire(
       this.player.x,
       this.player.y,
-      this.player.vx || 0,
-      this.player.vy || -1,
+      this.player.vx ?? 0,
+      this.player.vy ?? 0,
       currentTime
     );
     if (bullet) {
-      // audioManager.playShoot(); // Placeholder for future audio
+      this.audioManager.playShoot();
     }
+    return bullet;
   }
 
   // Orchestrates the core game loop logic
@@ -36,7 +38,7 @@ class GameController {
 
     // 1. Audio: Update engine pitch based on player speed
     const speedRatio = Math.min(this.player.speed / (this.player.maxSpeed || 500), 1);
-    audioManager.setEnginePitch(speedRatio);
+    this.audioManager.setEnginePitch(speedRatio);
 
     // 2. Update entities
     this.enemyManager.update(deltaTime, this.player.x, this.player.y);
@@ -62,24 +64,24 @@ class GameController {
     if (this.enemyManager.getEnemies().length === 0) {
       this.wave++;
       this.enemyManager.spawnWave(this.wave * 2, 400, 300, this.wave);
-      audioManager.playWaveComplete();
+      this.audioManager.playWaveComplete();
     }
 
     // 6. Game Over conditions
     if (this.lives <= 0) {
       this.isGameOver = true;
-      audioManager.playGameOver();
+      this.audioManager.playGameOver();
     }
   }
 
   // Resolves interaction between entities
   handleCollision(a, b) {
-    // Identify bullet-enemy collisions
-    const bullet = (a.vx !== undefined) ? a : (b.vx !== undefined) ? b : null;
-    const enemy = (a.type !== undefined) ? a : (b.type !== undefined) ? b : null;
-    
-    // Identify player-enemy collisions
+    // Identify player (by reference)
     const player = (a === this.player) ? a : (b === this.player) ? b : null;
+    
+    // Identify bullet (has createdAt) and enemy (has health)
+    const bullet = (a.createdAt !== undefined) ? a : (b.createdAt !== undefined) ? b : null;
+    const enemy = (a.health !== undefined) ? a : (b.health !== undefined) ? b : null;
 
     if (bullet && enemy && !bullet.markedForRemoval && !enemy.markedForRemoval) {
       // Bullet hits enemy
@@ -88,13 +90,13 @@ class GameController {
       if (enemy.health <= 0) {
         enemy.markedForRemoval = true;
         this.score += enemy.scoreValue;
-        audioManager.playScore(enemy.scoreValue);
-        audioManager.playEnemyDestroyed(enemy.type);
+        this.audioManager.playScore(enemy.scoreValue);
+        this.audioManager.playEnemyDestroyed(enemy.type);
       }
     } else if (player && enemy && !enemy.markedForRemoval) {
       // Player hits enemy
       this.lives--;
-      audioManager.playPlayerHit();
+      this.audioManager.playPlayerHit();
       enemy.markedForRemoval = true;
     }
   }
@@ -105,7 +107,8 @@ class GameController {
       score: this.score,
       lives: this.lives,
       wave: this.wave,
-      isGameOver: this.isGameOver
+      isGameOver: this.isGameOver,
+      bullets: this.bulletManager ? this.bulletManager.getBullets().length : 0
     };
   }
 }

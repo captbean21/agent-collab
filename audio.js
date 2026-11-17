@@ -20,7 +20,9 @@ class AudioManager {
       || (typeof self !== 'undefined' && (self.AudioContext || self.webkitAudioContext));
 
     if (!AudioContextClass) {
-      throw new Error('AudioContext not available in this environment');
+      // Test/headless environment - disable audio silently
+      this.enabled = false;
+      return null;
     }
 
     this.audioContext = new AudioContextClass();
@@ -54,8 +56,7 @@ class AudioManager {
 
   // Generate a simple tone (sine wave)
   createTone(frequency, duration, type = 'sine', volume = 0.5) {
-    if (!this.enabled || this.isMuted) return;
-    if (!this.audioContext) this.init();
+    if (!this.enabled || this.isMuted || !this.audioContext) return;
 
     const osc = this.audioContext.createOscillator();
     const gain = this.audioContext.createGain();
@@ -76,8 +77,7 @@ class AudioManager {
 
   // Generate a frequency sweep (for thrust/engine sounds)
   createSweep(startFreq, endFreq, duration, type = 'sawtooth', volume = 0.3) {
-    if (!this.enabled || this.isMuted) return;
-    if (!this.audioContext) this.init();
+    if (!this.enabled || this.isMuted || !this.audioContext) return;
 
     const osc = this.audioContext.createOscillator();
     const gain = this.audioContext.createGain();
@@ -102,8 +102,7 @@ class AudioManager {
 
   // Generate noise burst (for explosions/hits)
   createNoiseBurst(duration, volume = 0.5, filterFreq = 2000) {
-    if (!this.enabled || this.isMuted) return;
-    if (!this.audioContext) this.init();
+    if (!this.enabled || this.isMuted || !this.audioContext) return;
 
     const bufferSize = this.audioContext.sampleRate * duration;
     const buffer = this.audioContext.createBuffer(1, bufferSize, this.audioContext.sampleRate);
@@ -196,6 +195,12 @@ class AudioManager {
     if (!this.enabled || this.isMuted) return;
     const freq = Math.min(440 + points, 1200);
     this.createTone(freq, 0.05, 'sine', 0.15);
+  }
+
+  // Player shoot
+  playShoot() {
+    if (!this.enabled || this.isMuted) return;
+    this.createTone(880, 0.05, 'square', 0.15);
   }
 
   // Background engine hum (looped)
