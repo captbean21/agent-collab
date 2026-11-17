@@ -64,13 +64,13 @@ function runTests() {
         assert(bm.config !== undefined, 'Has config object');
     }
 
-    // Test 2: BulletManager has default config values
+    // Test 2: BulletManager has default config values (milliseconds)
     {
         const bm = new BulletManager();
-        assertEqual(bm.config.speed, 500, 'Default bullet speed = 500');
+        assertEqual(bm.config.speed, 500, 'Default bullet speed = 500 px/s');
         assertEqual(bm.config.radius, 3, 'Default bullet radius = 3');
-        assertEqual(bm.config.lifetime, 2, 'Default bullet lifetime = 2 seconds');
-        assertEqual(bm.config.cooldown, 0.15, 'Default fire cooldown = 0.15 seconds');
+        assertEqual(bm.config.lifetime, 2000, 'Default bullet lifetime = 2000ms');
+        assertEqual(bm.config.cooldown, 150, 'Default fire cooldown = 150ms');
         assertEqual(bm.config.damage, 1, 'Default bullet damage = 1');
     }
 
@@ -79,11 +79,9 @@ function runTests() {
     // Test 3: fire() creates bullet at player position with direction
     {
         const bm = new BulletManager();
-        const player = createTestPlayer(100, 100);
-        player.vx = 0;
-        player.vy = -1; // Facing up
+        const currentTime = 1000;
 
-        const bullet = bm.fire(player);
+        const bullet = bm.fire(100, 100, 0, -1, currentTime); // Facing up
 
         assert(bullet !== undefined, 'fire() returns bullet');
         assertEqual(bullet.x, 100, 'Bullet x = player x');
@@ -95,12 +93,10 @@ function runTests() {
     // Test 4: fire() respects cooldown (returns null if on cooldown)
     {
         const bm = new BulletManager();
-        const player = createTestPlayer(100, 100);
-        player.vx = 0;
-        player.vy = -1;
+        const currentTime = 1000;
 
-        bm.fire(player); // First shot
-        const bullet2 = bm.fire(player); // Immediate second shot
+        bm.fire(100, 100, 0, -1, currentTime); // First shot
+        const bullet2 = bm.fire(100, 100, 0, -1, currentTime); // Immediate second shot
 
         assertEqual(bullet2, null, 'Second immediate fire returns null (cooldown)');
         assertEqual(bm.bullets.length, 1, 'Only one bullet in array');
@@ -109,14 +105,10 @@ function runTests() {
     // Test 5: fire() allows shot after cooldown expires
     {
         const bm = new BulletManager();
-        const player = createTestPlayer(100, 100);
-        player.vx = 0;
-        player.vy = -1;
 
-        bm.fire(player);
-        // Simulate time passing (more than cooldown)
-        bm.update(0.2); // 0.2s > 0.15s cooldown
-        const bullet2 = bm.fire(player);
+        bm.fire(100, 100, 0, -1, 1000);
+        // Time advances past cooldown (150ms)
+        const bullet2 = bm.fire(100, 100, 0, -1, 1200); // 200ms later
 
         assert(bullet2 !== null, 'Shot allowed after cooldown');
         assertEqual(bm.bullets.length, 2, 'Two bullets in array');
@@ -125,11 +117,10 @@ function runTests() {
     // Test 6: fire() calculates velocity from player facing direction
     {
         const bm = new BulletManager();
-        const player = createTestPlayer(0, 0);
-        player.vx = 1;
-        player.vy = 0; // Facing right
+        const currentTime = 1000;
 
-        const bullet = bm.fire(player);
+        // Facing right (1, 0)
+        const bullet = bm.fire(0, 0, 1, 0, currentTime);
 
         assert(bullet.vx > 0, 'Bullet moves right when player faces right');
         assertApprox(bullet.vy, 0, 0.1, 'Bullet vy ≈ 0');
@@ -141,11 +132,10 @@ function runTests() {
     // Test 7: fire() works with diagonal direction
     {
         const bm = new BulletManager();
-        const player = createTestPlayer(0, 0);
-        player.vx = 1;
-        player.vy = 1; // Diagonal down-right
+        const currentTime = 1000;
 
-        const bullet = bm.fire(player);
+        // Diagonal down-right (1, 1)
+        const bullet = bm.fire(0, 0, 1, 1, currentTime);
 
         assert(bullet.vx > 0 && bullet.vy > 0, 'Bullet moves diagonal');
         const speed = Math.hypot(bullet.vx, bullet.vy);
@@ -157,77 +147,72 @@ function runTests() {
     // Test 8: update(deltaTime) moves bullets
     {
         const bm = new BulletManager();
-        const player = createTestPlayer(0, 0);
-        player.vx = 1;
-        player.vy = 0;
+        const currentTime = 1000;
 
-        const bullet = bm.fire(player);
+        bm.fire(0, 0, 1, 0, currentTime); // Facing right
+        const bullet = bm.bullets[0];
         const initialX = bullet.x;
 
-        bm.update(1); // 1 second
+        bm.update(1, currentTime + 1000); // 1 second
 
         assert(bullet.x > initialX, 'Bullet moves forward over time');
         assertApprox(bullet.x - initialX, bm.config.speed * 1, 1, 'Distance = speed * time');
     }
 
-    // Test 9: update() decreases bullet lifetime
+    // Test 9: update() marks bullets for removal when lifetime expires
     {
         const bm = new BulletManager();
-        const player = createTestPlayer(0, 0);
-        player.vx = 1;
-        player.vy = 0;
+        const currentTime = 1000;
 
-        const bullet = bm.fire(player);
-        const initialLifetime = bullet.lifetime;
+        bm.fire(0, 0, 1, 0, currentTime);
+        const bullet = bm.bullets[0];
 
-        bm.update(0.5);
+        // Advance time past lifetime (2000ms = 2s)
+        bm.update(2.1, currentTime + 2100); // deltaTime=2.1s, currentTime=3100ms
 
-        assertApprox(bullet.lifetime, initialLifetime - 0.5, 0.01, 'Lifetime decreased by deltaTime');
+        assert(bullet.markedForRemoval === true, 'Bullet marked for removal after lifetime');
     }
 
-    // Test 10: update() removes expired bullets (lifetime <= 0)
+    // Test 10: cleanup() removes marked bullets
     {
         const bm = new BulletManager();
-        const player = createTestPlayer(0, 0);
-        player.vx = 1;
-        player.vy = 0;
+        const currentTime = 1000;
 
-        const bullet = bm.fire(player);
-        bullet.lifetime = 0.1; // Almost expired
+        bm.fire(0, 0, 1, 0, currentTime);
+        const bullet = bm.bullets[0];
+        bullet.markedForRemoval = true;
 
-        bm.update(0.2); // Should expire
+        bm.cleanup();
 
-        assertEqual(bm.bullets.length, 0, 'Expired bullet removed');
+        assertEqual(bm.bullets.length, 0, 'Marked bullet removed by cleanup');
     }
 
     // Test 11: update() removes bullets that go off-screen
     {
         const bm = new BulletManager();
-        const player = createTestPlayer(0, 0);
-        player.vx = 1;
-        player.vy = 0;
+        const currentTime = 1000;
 
-        const bullet = bm.fire(player);
-        bullet.x = 1000; // Way off screen (canvas 640x480)
-        bullet.y = 240;
+        bm.fire(0, 0, 1, 0, currentTime);
+        const bullet = bm.bullets[0];
+        bullet.x = 1000; // Way off screen (canvas 800x600)
+        bullet.y = 300;
 
-        bm.update(0.1);
+        bm.update(0.1, currentTime + 100);
 
-        assertEqual(bm.bullets.length, 0, 'Off-screen bullet removed');
+        assert(bullet.markedForRemoval === true, 'Off-screen bullet marked for removal');
     }
 
     // Test 12: update() keeps on-screen bullets
     {
         const bm = new BulletManager();
-        const player = createTestPlayer(320, 240);
-        player.vx = 1;
-        player.vy = 0;
+        const currentTime = 1000;
 
-        const bullet = bm.fire(player);
+        bm.fire(320, 240, 1, 0, currentTime);
 
-        bm.update(0.1);
+        bm.update(0.1, currentTime + 100);
 
         assertEqual(bm.bullets.length, 1, 'On-screen bullet kept');
+        assert(bm.bullets[0].markedForRemoval !== true, 'On-screen bullet not marked');
     }
 
     // ========== Collision Integration Tests ==========
@@ -238,25 +223,22 @@ function runTests() {
         const em = new EnemyManager();
         const cm = new CollisionManager();
 
-        const player = createTestPlayer(320, 240);
-        player.vx = 1;
-        player.vy = 0;
+        const currentTime = 1000;
 
-        // Spawn enemy at bullet path
-        const enemy = em.spawnEnemy(400, 240, 'basic');
+        // Spawn enemy at bullet path (distance 50px, within radius sum 13)
+        const enemy = em.spawnEnemy(370, 240, 'basic');
 
         // Fire bullet toward enemy
-        const bullet = bm.fire(player);
+        const bullet = bm.fire(320, 240, 1, 0, currentTime);
 
         // Register with collision manager
         cm.colliders = [bullet, enemy];
 
-        // Update bullet to reach enemy
-        bm.update(0.2); // Bullet travels 100px
-        cm.update();
+        // Update bullet to reach enemy (0.1s = 50px)
+        bm.update(0.1, currentTime + 100);
+        const collisions = cm.update();
 
         // Check collision detected
-        const collisions = cm.update();
         const bulletEnemyCollision = collisions.find(([a, b]) => 
             (a === bullet && b === enemy) || (a === enemy && b === bullet)
         );
@@ -270,15 +252,13 @@ function runTests() {
         const em = new EnemyManager();
         const cm = new CollisionManager();
 
-        const player = createTestPlayer(320, 240);
-        player.vx = 1;
-        player.vy = 0;
+        const currentTime = 1000;
 
         const enemy = em.spawnEnemy(400, 240, 'basic');
-        const bullet = bm.fire(player);
+        const bullet = bm.fire(320, 240, 1, 0, currentTime);
 
         cm.colliders = [bullet, enemy];
-        bm.update(0.2);
+        bm.update(0.2, currentTime + 200);
         const collisions = cm.update();
 
         // Find bullet-enemy collision
@@ -296,13 +276,13 @@ function runTests() {
     // Test 15: multiple bullets can exist simultaneously
     {
         const bm = new BulletManager();
-        const player = createTestPlayer(320, 240);
+        let currentTime = 1000;
 
-        player.vx = 1; player.vy = 0; bm.fire(player);
-        bm.update(0.2); // Wait for cooldown
-        player.vx = 0; player.vy = -1; bm.fire(player);
-        bm.update(0.2);
-        player.vx = -1; player.vy = 0; bm.fire(player);
+        bm.fire(320, 240, 1, 0, currentTime);
+        currentTime += 200; // Wait for cooldown
+        bm.fire(320, 240, 0, -1, currentTime);
+        currentTime += 200;
+        bm.fire(320, 240, -1, 0, currentTime);
 
         assertEqual(bm.bullets.length, 3, 'Three bullets fired in different directions');
     }
@@ -310,11 +290,9 @@ function runTests() {
     // Test 16: bullets have correct shape for collision (circle)
     {
         const bm = new BulletManager();
-        const player = createTestPlayer(0, 0);
-        player.vx = 1;
-        player.vy = 0;
+        const currentTime = 1000;
 
-        const bullet = bm.fire(player);
+        const bullet = bm.fire(0, 0, 1, 0, currentTime);
 
         assertEqual(bullet.shape, 'circle', 'Bullet shape = circle');
         assertEqual(bullet.radius, bm.config.radius, 'Bullet radius from config');
@@ -323,13 +301,11 @@ function runTests() {
     // Test 17: fire() with stationary player (zero velocity) defaults to up
     {
         const bm = new BulletManager();
-        const player = createTestPlayer(0, 0);
-        player.vx = 0;
-        player.vy = 0;
+        const currentTime = 1000;
 
-        const bullet = bm.fire(player);
+        const bullet = bm.fire(0, 0, 0, 0, currentTime);
 
-        // Should default to shooting up (0, -1)
+        // Should default to shooting up (0, -speed)
         assert(bullet.vy < 0, 'Bullet shoots up when player stationary');
         assertApprox(bullet.vx, 0, 0.1, 'Bullet vx ≈ 0 when stationary');
     }
@@ -339,28 +315,26 @@ function runTests() {
         const bm = new BulletManager({
             speed: 800,
             radius: 5,
-            lifetime: 3,
-            cooldown: 0.1,
+            lifetime: 3000,
+            cooldown: 100,
             damage: 2
         });
 
         assertEqual(bm.config.speed, 800, 'Custom speed applied');
         assertEqual(bm.config.radius, 5, 'Custom radius applied');
-        assertEqual(bm.config.lifetime, 3, 'Custom lifetime applied');
-        assertEqual(bm.config.cooldown, 0.1, 'Custom cooldown applied');
+        assertEqual(bm.config.lifetime, 3000, 'Custom lifetime applied (ms)');
+        assertEqual(bm.config.cooldown, 100, 'Custom cooldown applied (ms)');
         assertEqual(bm.config.damage, 2, 'Custom damage applied');
     }
 
     // Test 19: getBullets() returns all active bullets
     {
         const bm = new BulletManager();
-        const player = createTestPlayer(0, 0);
-        player.vx = 1;
-        player.vy = 0;
+        let currentTime = 1000;
 
-        bm.fire(player);
-        bm.update(0.2);
-        bm.fire(player);
+        bm.fire(0, 0, 1, 0, currentTime);
+        currentTime += 200;
+        bm.fire(0, 0, 0, -1, currentTime);
 
         const bullets = bm.getBullets ? bm.getBullets() : bm.bullets;
         assertEqual(bullets.length, 2, 'getBullets() returns all bullets');
@@ -371,20 +345,19 @@ function runTests() {
         const bm = new BulletManager();
         const em = new EnemyManager();
         const cm = new CollisionManager();
-        const player = createTestPlayer(320, 240);
-        player.vx = 1;
-        player.vy = 0;
+        let currentTime = 1000;
 
         // Spawn enemy in bullet path
         const enemy = em.spawnEnemy(500, 240, 'basic');
         em.enemies = [enemy];
 
         // Fire bullet
-        const bullet = bm.fire(player);
+        const bullet = bm.fire(320, 240, 1, 0, currentTime);
 
         // Simulate frames until collision
         for (let i = 0; i < 10; i++) {
-            bm.update(0.05);
+            currentTime += 50;
+            bm.update(0.05, currentTime);
             cm.colliders = [bullet, ...em.getEnemies()];
             const collisions = cm.update();
             
@@ -398,7 +371,7 @@ function runTests() {
             }
 
             // Cleanup
-            bm.bullets = bm.bullets.filter(b => !b.markedForRemoval && b.lifetime > 0);
+            bm.cleanup();
             em.cleanup();
         }
 
