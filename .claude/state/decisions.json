@@ -2,61 +2,61 @@
   {
     "source": "memory/2026-11-16.md",
     "text": "- Bean decided: keep agent-collab public as curated showcase only (generic demo/protocol, sanitized ledger; no raw Discord; git-derived evidence only). Anything groundbreaking/valuable moves to a private repo/local-only workstream before commit. Note: PROOF_OF_RELAY_DRAFT.md is already public at 6ebef8e. Implementation sprint (5 back-and-forth turns Rook/Castle) authorized after /new. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-17T01:47:12.082094"
+    "captured": "2026-11-17T01:52:12.108609"
   },
   {
     "source": "memory/2026-11-16.md",
     "text": "- Bean decided against Groq backup for Castle; AGY to shrink context, relying on compaction (2026-11-16 21:07Z). Compaction is lossy \u2014 Castle must re-cold-start from HANDOFF.md (fd95005/bdb7b4f) after reset; chat memory is not authoritative. Open item: Turn 3 review tag for pages_check sprint (requested from Castle, not yet seen). <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-17T01:47:12.082173"
+    "captured": "2026-11-17T01:52:12.108686"
+  },
+  {
+    "source": "git",
+    "text": "1d7d36e continuity: state capture 2026-11-17T01:47:12.093172",
+    "captured": "2026-11-17T01:52:12.111680"
   },
   {
     "source": "git",
     "text": "41bf207 continuity: state capture 2026-11-17T01:42:12.066854",
-    "captured": "2026-11-17T01:47:12.085161"
+    "captured": "2026-11-17T01:52:12.111685"
   },
   {
     "source": "git",
     "text": "9f91884 continuity: state capture 2026-11-17T01:37:12.039648",
-    "captured": "2026-11-17T01:47:12.085166"
+    "captured": "2026-11-17T01:52:12.111687"
   },
   {
     "source": "git",
     "text": "ca63722 continuity: state capture 2026-11-17T01:32:12.013114",
-    "captured": "2026-11-17T01:47:12.085168"
+    "captured": "2026-11-17T01:52:12.111688"
   },
   {
     "source": "git",
     "text": "2216e0e continuity: state capture 2026-11-17T01:27:11.986819",
-    "captured": "2026-11-17T01:47:12.085169"
+    "captured": "2026-11-17T01:52:12.111690"
   },
   {
     "source": "git",
     "text": "d374f0e continuity: state capture 2026-11-17T01:22:11.959959",
-    "captured": "2026-11-17T01:47:12.085171"
+    "captured": "2026-11-17T01:52:12.111691"
   },
   {
     "source": "git",
     "text": "7f6dd57 continuity: state capture 2026-11-17T01:17:11.933017",
-    "captured": "2026-11-17T01:47:12.085172"
+    "captured": "2026-11-17T01:52:12.111692"
   },
   {
     "source": "git",
     "text": "422d769 continuity: state capture 2026-11-17T01:12:11.906344",
-    "captured": "2026-11-17T01:47:12.085173"
+    "captured": "2026-11-17T01:52:12.111693"
   },
   {
     "source": "git",
     "text": "586c913 continuity: state capture 2026-11-17T01:07:11.879778",
-    "captured": "2026-11-17T01:47:12.085175"
+    "captured": "2026-11-17T01:52:12.111695"
   },
   {
     "source": "git",
     "text": "2f70e32 continuity: state capture 2026-11-17T01:02:11.852658",
-    "captured": "2026-11-17T01:47:12.085176"
-  },
-  {
-    "source": "git",
-    "text": "3fed531 continuity: state capture 2026-11-17T00:57:11.826225",
-    "captured": "2026-11-17T01:47:12.085177"
+    "captured": "2026-11-17T01:52:12.111696"
   }
 ]
