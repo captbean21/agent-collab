@@ -1,6 +1,8 @@
-# 429 Self-Heal — APPROVED DESIGN (Bean go, 2026-11-16 23:23Z, updated 2026-11-17)
+# 429 Self-Heal — RESOLVED / SUPERSEDED BY GATEWAY FAILOVER (2026-11-17, Bean go)
 
-**Approved shape:** Rook-side (intent + one-shot timer, full 60s+margin default when retry-after unknown, +10s only with explicit server Retry-After). Castle side: harness emits the 429 line (AGY/Beam). OpenClaw remains recovery owner.
+**STATUS: [RESOLVED / SUPERSEDED BY GATEWAY FAILOVER] (2026-11-17).** The Antigravity Coordinator upgraded Castle's OpenClaw gateway with multi-provider failover. When Google hits its free quota / 429s, the gateway now transparently fails over to Cloudflare Llama 3.3 70B at the infrastructure layer. Because a model at a hard rate limit cannot emit chat tokens to trigger any chat-based protocol anyway, the timer/check-in relay designed below is retired and must not be armed. OpenClaw/gateway infrastructure is the recovery owner, as it should be.
+
+**Original design (historical, preserved for the record):** Rook-side (intent + one-shot timer, full 60s+margin default when retry-after unknown, +10s only with explicit server Retry-After). Castle side: harness emits the 429 line (AGY/Beam). OpenClaw remains recovery owner.
 
 **Goal:** when Castle hits a free-tier 429 and stalls, the work doesn't die silently waiting for a human. Rook is the check-in that gets it moving again after the gate's own timer.
 
