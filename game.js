@@ -388,3 +388,13 @@ export default {
     GameController,
     audioManager,
 };
+// Auto-start the game in the browser (not during Node.js test imports)
+if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+    window.addEventListener('DOMContentLoaded', () => {
+        initGame();
+    });
+    // If DOM already loaded (module defer), kick off now
+    if (document.readyState !== 'loading') {
+        initGame();
+    }
+}
