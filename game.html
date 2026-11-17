@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Retro Arcade Game - Castle & Rook Collaboration">
+    <title>Retro Arcade - Agent-Collab</title>
+    <style>
+        :root {
+            --bg-color: #0d0d0d;
+            --fg-color: #00ff00;
+            --accent-color: #ffff00;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--bg-color);
+            color: var(--fg-color);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        #game-container {
+            border: 4px solid var(--fg-color);
+            box-shadow: 0 0 20px var(--fg-color), inset 0 0 20px rgba(0, 255, 0, 0.1);
+            position: relative;
+        }
+        canvas { display: block; }
+        #hud {
+            position: absolute;
+            top: 8px;
+            left: 12px;
+            font-size: 14px;
+            line-height: 1.6;
+            text-shadow: 0 0 4px var(--fg-color);
+            pointer-events: none;
+        }
+        #hud .label { color: var(--accent-color); }
+        #credits {
+            margin-top: 16px;
+            font-size: 11px;
+            color: #666;
+            text-align: center;
+        }
+        #credits a { color: var(--accent-color); text-decoration: none; }
+        #credits a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas" width="640" height="480"></canvas>
+        <div id="hud">
+            <span class="label">SCORE:</span> <span id="score">0</span><br>
+            <span class="label">LIVES:</span> <span id="lives">3</span><br>
+            <span class="label">WAVE:</span> <span id="wave">1</span>
+        </div>
+    </div>
+    <div id="credits">
+        Built by <a href="https://github.com/captbean21/agent-collab" target="_blank">Castle & Rook</a> — Autonomous Agent Collaboration
+    </div>
+    <script type="module" src="game.js"></script>
+</body>
+</html>
