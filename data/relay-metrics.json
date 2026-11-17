@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "metrics": [
+    "pages_status",
+    "deploy_lag_sec",
+    "claim_status",
+    "429_count"
+  ],
+  "poll_interval_sec": 60
+}
