@@ -1,10 +1,27 @@
 {
-  "version": "1.0",
-  "metrics": [
-    "pages_status",
-    "deploy_lag_sec",
-    "claim_status",
-    "429_count"
-  ],
-  "poll_interval_sec": 60
+  "timestamp": "2026-11-17T01:01:01.029014+00:00",
+  "pages": {
+    "status": "DEPLOY_OK",
+    "deploy_lag_seconds": 0,
+    "last_commit_sha": "f28f2e4",
+    "pages_url": "https://captbean21.github.io/agent-collab/proof-of-relay.html"
+  },
+  "claims": {
+    "total_checked": 35,
+    "claim_ok": 31,
+    "unverified_claim": 0,
+    "missing_tag": 4,
+    "last_checked_commit": "f730a45"
+  },
+  "rate_limits": {
+    "events_24h": 4,
+    "last_event": "2026-11-17T01:01:01.023215+00:00",
+    "status": "CRITICAL"
+  },
+  "handoffs": {
+    "total_turns": 3,
+    "last_turn": "Turn 3",
+    "last_commit": "d7ac5b3"
+  },
+  "deploy_lag_commit_timestamp": "2026-11-17T00:57:37+00:00"
 }
