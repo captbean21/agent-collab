@@ -7,8 +7,8 @@ class BulletManager {
     this.config = {
       speed: config.speed || 500,
       radius: config.radius || 3,
-      lifetime: config.lifetime || 2000, // ms
-      cooldown: config.cooldown || 150, // ms
+      lifetime: config.lifetime || 2000,
+      cooldown: config.cooldown || 150,
       damage: config.damage || 1
     };
     this.lastShotTime = 0;
@@ -20,10 +20,10 @@ class BulletManager {
       return null;
     }
 
-    // Normalize velocity to bullet speed
-    const mag = Math.sqrt(playerVx * playerVx + playerVy * playerVy) || 1;
-    const vx = (playerVx / mag) * this.config.speed;
-    const vy = (playerVy / mag) * this.config.speed;
+    // Default to shooting up if stationary
+    const mag = Math.sqrt(playerVx * playerVx + playerVy * playerVy);
+    const vx = mag === 0 ? 0 : (playerVx / mag) * this.config.speed;
+    const vy = mag === 0 ? -this.config.speed : (playerVy / mag) * this.config.speed;
 
     const bullet = {
       id: Math.random().toString(36).substr(2, 9),
@@ -35,7 +35,8 @@ class BulletManager {
       damage: this.config.damage,
       lifetime: this.config.lifetime,
       createdAt: currentTime,
-      markedForRemoval: false
+      markedForRemoval: false,
+      shape: 'circle' // Explicitly set for CollisionManager
     };
 
     this.bullets.push(bullet);
@@ -50,6 +51,11 @@ class BulletManager {
       bullet.y += bullet.vy * deltaTime;
 
       if (currentTime - bullet.createdAt > bullet.lifetime) {
+        bullet.markedForRemoval = true;
+      }
+
+      // Basic off-screen removal (assuming game bounds 800x600 for now)
+      if (bullet.x < 0 || bullet.x > 800 || bullet.y < 0 || bullet.y > 600) {
         bullet.markedForRemoval = true;
       }
     }
