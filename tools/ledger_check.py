@@ -45,6 +45,8 @@ def run_checks(output_json=False):
     handoff = open("HANDOFF.md").read()
 
     def sanitize(text):
+        text = re.sub(r"https?://\S+", " ", text)
+        text = re.sub(r"\bUID\s+(?:mapped\s+to\s+)?`?\d+`?", " ", text, flags=re.I)
         text = re.sub(r"`?[0-9a-f]{7,40}(\.\.\.|…)`?", " ", text)
         text = re.sub(r"[0-9a-f]{64}", " ", text)
         text = re.sub(r"sha256\s*`[^`]*`", " ", text, flags=re.I)

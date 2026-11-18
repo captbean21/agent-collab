@@ -58,6 +58,16 @@ This file maintains the current verified state of `agent-collab` to enable cold-
   - Home LAN (`192.168.1.0/24`) and router (`192.168.1.1`) are inaccessible from container.
   - Unprivileged container: Host UID mapped to `1001000`.
   - Direct inter-agent bridge to Castle active over `10.99.0.0/30` (`eth1`).
+
+### Bounded Container Pipe (Restored & Verified 2026-11-18)
+- **Interface**: `agent-p2p` bridge (`10.99.0.0/30` via `eth1`). Bidirectional ping verified (0.08ms latency).
+- **Rook Exposed Services**:
+  - `http://10.99.0.1:8888`: SearXNG zero-token meta-search. Verified query from Castle.
+  - `http://10.99.0.1:8080`: Survival backend & telemetry (`/api/health`, `/api/agents`). Bound to `0.0.0.0:8080` to serve both local cloudflared tunnel and peer interface.
+- **Castle Client Tools**:
+  - `tools/peer_search.py`: SearXNG client (5.0s hard timeout, capped 3 results / 500 tokens).
+  - `tools/peer_survival.py`: Survival health and telemetry heartbeat reporter (3.5s timeout).
+- **Protocol Boundary**: `RELAY_PROTOCOL.md` remains the sole coordination authority ("No object, no claim"). Pipe is strictly a stateless/read-only data and tool utility. Zero conversational chat loops.
 - **Model Configuration (`openclaw.json`)**:
   - **Primary**: `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free`
   - **Context Window**: `262,144` tokens (256k native attention window).
