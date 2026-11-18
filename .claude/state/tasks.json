@@ -2,251 +2,251 @@
   {
     "source": "memory/2026-11-17.md",
     "text": "- automated-agent-design",
-    "captured": "2026-11-18T20:57:26.830617"
+    "captured": "2026-11-18T21:02:26.859325"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- auto-skill-synthesis",
-    "captured": "2026-11-18T20:57:26.830619"
+    "captured": "2026-11-18T21:02:26.859327"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- rsi-bounds-oversight",
-    "captured": "2026-11-18T20:57:26.830621"
+    "captured": "2026-11-18T21:02:26.859329"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- local-embedding-rerank",
-    "captured": "2026-11-18T20:57:26.830622"
+    "captured": "2026-11-18T21:02:26.859331"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- structured-output-gbnf",
-    "captured": "2026-11-18T20:57:26.830624"
+    "captured": "2026-11-18T21:02:26.859332"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- context-window-management",
-    "captured": "2026-11-18T20:57:26.830626"
+    "captured": "2026-11-18T21:02:26.859334"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- sodimm-pcie-llm-2026-11-17",
-    "captured": "2026-11-18T20:57:26.830628"
+    "captured": "2026-11-18T21:02:26.859336"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- free-llm-apis-for-castle-2026-11-16",
-    "captured": "2026-11-18T20:57:26.830630"
+    "captured": "2026-11-18T21:02:26.859338"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Bean lifted the wait requirement (\"choice is your if you execute or not... find a way to make some server space... be creative and make it happen, 3 rounds and go\"). Architecture decision: zero external accounts exist on this box (no gh/wrangler/CF/supabase creds \u2014 verified), so self-host: stdlib `score_server.py` (127.0.0.1:8899, systemd user unit `arcade-score.service`) + anonymous cloudflared quick tunnel; `run_tunnel.sh` auto-publishes `data/endpoint.json` to origin/main on every restart (mitigates quick-tunnel hostname rotation \u2014 Castle's availability objection).",
-    "captured": "2026-11-18T20:57:26.830631"
+    "captured": "2026-11-18T21:02:26.859339"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Shipped: `board.html` (live board UI, fetches data/endpoint.json no-store), `game.js` patch (auto-submit on GAME OVER, name via localStorage), `docs/arcade-live-board.md`, index link. JS tests green (356 pass, 8 files). Byte-verified Pages serves == origin/main for board.html/game.js/index.html/endpoint.json; ledger_check 35/0. Live tunnel /api/health 200 + POST write verified (TESTBOT row removed after).",
-    "captured": "2026-11-18T20:57:26.830633"
+    "captured": "2026-11-18T21:02:26.859341"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Lesson: when a no-credential live-storage ask lands, the honest creative answer on a homelab box is outbound-tunnel + self-published endpoint file, not \"wait for account creation\"; but quick-tunnel rotation means front end must never hardcode the hostname \u2014 endpoint.json indirection is mandatory.",
-    "captured": "2026-11-18T20:57:26.830635"
+    "captured": "2026-11-18T21:02:26.859343"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Bean asked for a mini self-hosted space not reliant on trycloudflare. Measured cage: no global IPv6, NAT 192.168.1.201 via 192.168.1.1, no cloud creds, kvdb.io requires email login (422 without). Router off-limits (Bean can't touch it). Ranked: Tailscale Funnel (one Bean click, stable *.ts.net, no inbound) > GitHub-as-DB zero-input fallback > named CF Tunnel > VPS+Nginx+SQLite (Castle's VPS proposal = real server but high ops + account/payment). Written + pushed as `docs/mini-self-host.md` (30a763d). Joint park until Bean picks; Francis's audit list precedes any live swap.",
-    "captured": "2026-11-18T20:57:26.830636"
+    "captured": "2026-11-18T21:02:26.859345"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Bean asked for prepper-helpful LLM + wiki for the P2200, sound-boarded with Castle over 4 rounds, pre-authorized DL of up to 3 models.",
-    "captured": "2026-11-18T20:57:26.830638"
+    "captured": "2026-11-18T21:02:26.859347"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Ground truth on box: P2200 5 GB VRAM (3.9 GB used by deepseek-coder), 48 GB RAM, 25 GB disk free, llama.cpp CUDA-built, torch CUDA driver warning (torch too new for driver 12040) \u2014 prefer llama-server direct.",
-    "captured": "2026-11-18T20:57:26.830640"
+    "captured": "2026-11-18T21:02:26.859349"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Locked stack: Qwen2.5-3B-Instruct Q4_K_M (already cached), Qwen2.5-1.5B Q4_K_M (downloaded), SmolLM2-1.7B Q4_K_M (downloading). WikiMed 2026-10 nopic (~1.05 GB, 371k articles) + Appropedia 2026-02 maxi (~582 MB, 30.7k articles) via Kiwix OPDS (lb.download.kiwix.org). Rejected video ZIMs, TED, Gutenberg bulk, Phi-3.5-mini. BM25/keyword first + raw text, not vector-only. Field manuals (FM 21-76 etc.) absent from Kiwix catalog \u2014 PDFs to harvest separately if Bean wants.",
-    "captured": "2026-11-18T20:57:26.830642"
+    "captured": "2026-11-18T21:02:26.859350"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Model downloads VERIFIED COMPLETE (2026-11-17 ~22:10): Qwen2.5-3B-Instruct Q4_K_M already cached (Nov 11, 2.0G dir); Qwen2.5-1.5B-Instruct Q4_K_M snapshot=91cad51170dc346986eccefdc2dd33a9da36ead9 blob 1,117,320,736 B; SmolLM2-1.7B-Instruct Q4_K_M snapshot=2d4a76a30b4af41ecd395c35725ac11688d4cfe4 blob 1,055,609,536 B. `du` / FS usage readings were misleading on this fs \u2014 always verify with `wc -c` on the blob before claiming a model is downloaded.",
-    "captured": "2026-11-18T20:57:26.830644"
+    "captured": "2026-11-18T21:02:26.859352"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- ZIM downloads (fetch_all.sh, background) were STILL IN FLIGHT at flush; not verified. Never claim ZIM completion until byte count + magic header checked. `lb.download.kiwix.org` was reachable (curl 200); Kiwix OPDS search at `https://library.kiwix.org/catalog/search?q=...` returned the exact WikiMed and Appropedia acquisition URLs. Video ZIMs (Canadian Prepper, Learning Self-Reliance) rejected for GB-per-text.",
-    "captured": "2026-11-18T20:57:26.830645"
+    "captured": "2026-11-18T21:02:26.859354"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- 178-file inventory additions: prepping-wiki/ now holds fetch_all.sh + fetch_models.py; wiki ZIMs land there when done.",
-    "captured": "2026-11-18T20:57:26.830647"
+    "captured": "2026-11-18T21:02:26.859356"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Bean granted pre-authorization to download up to 3 models without per-model consent \u2014 treat as one-shot authorization for today's prepper task only, not a standing license to fetch arbitrary models.",
-    "captured": "2026-11-18T20:57:26.830649"
+    "captured": "2026-11-18T21:02:26.859358"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Debate guard tripped during earlier #debate-club ping-pong with Castle; Castle alignment message received and logged via memory. 4-turn sound board concluded; no further bot-to-bot rounds without Bean direction.",
-    "captured": "2026-11-18T20:57:26.830650"
+    "captured": "2026-11-18T21:02:26.859360"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- 06:05 UTC: Daily digest posted \u2014 2 sections with real links",
-    "captured": "2026-11-18T20:57:26.830712"
+    "captured": "2026-11-18T21:02:26.859443"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- 08:40 UTC: Survival box status confirmed \u2014 DNS exists (survival.421421421.xyz) but named tunnel NOT created, backend NOT running (502), Cloudflare API token file MISSING at /home/rook/.openclaw/workspace/.cloudflare-token. Blocker: Agy must create token file. Quick tunnel (arcade) still active on trycloudflare. ZIMs and models ready.",
-    "captured": "2026-11-18T20:57:26.830715"
+    "captured": "2026-11-18T21:02:26.859447"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- 2026-11-18: Auto-proposed meta-skills from n-gram/keyword scans are not acceptable; only human-approved proposals from explicit repeated procedures enter promotion, and the noisy detectors were disabled. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-18T20:57:26.830717"
+    "captured": "2026-11-18T21:02:26.859449"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- 09:27 UTC: Session wrap \u2014 2 compactions, context degraded. Survival box: ZIMs/models NOT downloaded, backend NOT built, named tunnel NOT created (token file missing). Francis ordered: start downloads + build BM25/api locally NOW in parallel with token issue. Next session: execute downloads, build FastAPI on 8080, test cite-or-abstain, then wire named tunnel.",
-    "captured": "2026-11-18T20:57:26.830719"
+    "captured": "2026-11-18T21:02:26.859451"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- Bean: \"Ok so you decide what should be applied by testing reviewing and deciding then applying\" after asking about Meta-Skill Proposal `tool_sequence-0-2026-11-18` (search \u2192 search \u2192 search style ghost proposal).",
-    "captured": "2026-11-18T20:57:26.830721"
+    "captured": "2026-11-18T21:02:26.859453"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- Reviewed live state: no `tool_sequence-0-2026-11-18` file existed; proposals lived in `skills/proposals/`. Found existing pattern: Nov 7 `tool_sequence-0/1` proposals were rejected; approved proposals are actual procedures (hybrid-web-research-cycle, systemd-ai-service-deployment, youtube-watch-pipeline).",
-    "captured": "2026-11-18T20:57:26.830722"
+    "captured": "2026-11-18T21:02:26.859455"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- Pipeline tested end-to-end with backups (`tools/meta_scan.py.bak.*`). Repeated failures exposed and fixed in place: naive n-grams, pure self-repeats, adjacent duplicates (`research \u2192 research \u2192 fetch`), low-evidence `explicit_intent`, extension counts (`.md`/`.py`), keyword `manual_work` hits. All generated proposals moved to `skills/proposals/rejected/` with `2026-11-18-methodology-note.md`.",
-    "captured": "2026-11-18T20:57:26.830724"
+    "captured": "2026-11-18T21:02:26.859456"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- Noisy detectors disabled in `tools/meta_scan.py`; final run: `Detected 0 raw patterns`, `No pending proposals`, `No approved proposals to promote.` Backups kept.",
-    "captured": "2026-11-18T20:57:26.830726"
+    "captured": "2026-11-18T21:02:26.859458"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- `tools/meta_propose.py` now auto-rejects degenerate sequences; `tools/meta_promote.py` only considers `skills/proposals/approved/*.md` with `status: approved`; `skills/proposals/approved/` and `rejected/` ensured.",
-    "captured": "2026-11-18T20:57:26.830728"
+    "captured": "2026-11-18T21:02:26.859460"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- `meta-skill-writer` learned skill patched with gates: concrete named artifact, distinct actions, no adjacent duplicates, no raw n-grams/one-off keyword proposals; post only to #rook if gates pass; approval must be an explicit `approved/` file with `status: approved`, Discord reactions alone never promote. Restore IDs available if Bean asks to undo.",
-    "captured": "2026-11-18T20:57:26.830729"
+    "captured": "2026-11-18T21:02:26.859462"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- `web-research-discord-report` was updated by background review to prefer multi-query SearXNG searches; do not duplicate that work.",
-    "captured": "2026-11-18T20:57:26.830731"
+    "captured": "2026-11-18T21:02:26.859463"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- Rejected generated skills are not to be promoted; next real scanner improvement would need repeated cron/session workflows with explicit artifacts, not memory-text keyword frequency.",
-    "captured": "2026-11-18T20:57:26.830733"
+    "captured": "2026-11-18T21:02:26.859465"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- Memory snapshot written at Bean's request (\"record this session as you do for a /new\"). Open/carry-forward items unchanged from 09:27 UTC entry: survival box ZIMs/models NOT downloaded, backend NOT built, named tunnel NOT created (token missing), Francis ordered parallel download work + local BM25/api on next session. Attack that first after /new.",
-    "captured": "2026-11-18T20:57:26.830735"
+    "captured": "2026-11-18T21:02:26.859467"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- ZIMs verified live on this box: wikibooks_en_all_nopic_2026-10, wikipedia_en-simple_all_nopic_2026-09, wikipedia_en_100_2026-08",
-    "captured": "2026-11-18T20:57:26.830737"
+    "captured": "2026-11-18T21:02:26.859468"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- DIY+electronics stack-exchange ZIMs kept failing libzim title-index check (download truncation/corruption) and disk is at 90%; removed after repeated failed attempts; kept only wording-verified ZIMs",
-    "captured": "2026-11-18T20:57:26.830738"
+    "captured": "2026-11-18T21:02:26.859470"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- Extractive cite-or-abstain backend on 127.0.0.1:8080 (system python3 + libzim); answers not generative; public tunnel still blocked by missing .cloudflare-token (Agy)",
-    "captured": "2026-11-18T20:57:26.830740"
+    "captured": "2026-11-18T21:02:26.859472"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- 10:37 SURVIVAL-BOX TOKEN FINDING + RANKING: protected store holds `SECRETS_PROVIDERS_CLOUDFLARE_TUNNEL_TOKEN_846F01CD6A3DD9BC`, but sentinel env var absent in both this sandbox shell and a fresh gateway execution, so named tunnel cannot be run from this session without operator-side step or supported gateway consumer. Box itself healthy: 5 ZIMs symlinked/loaded incl. /home/rook/prepping-wiki WikiMed+Appropedia, /api/ask medical ranking patched to prefer WikiMed (verified: \"burn first aid\" -> WikiMed articles). Stack Exchange ZIMs excluded on this box (fulltext/libzim failure + disk). <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-18T20:57:26.830741"
+    "captured": "2026-11-18T21:02:26.859473"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- 10:37 known-answer pass on survival box: 15/15 cited, 0 abstained (medical -> WikiMed, water/shelter/food -> Appropedia); still extractive/keyword fulltext, not generative. Remaining blocker: tunnel token not injected into exec shell; named tunnel needs operator-side run or supported gateway consumer. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-18T20:57:26.830743"
+    "captured": "2026-11-18T21:02:26.859475"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- 11:09 survival-box backend moved under systemd: /etc/systemd/system/survival-box.service (User=rook, Restart=always, enabled, active since 11:08:34); health ok (5 ZIMs). Closes \"manual nohup dies on restart\" gap. Public URL still dead (1033/530); tunnel token remains uninjected in session; SECRETS_PROVIDERS_CLOUDFLARE_TUNNEL_TOKEN_846F01CD6A3DD9BC request failed with \"credential-request prompt delivery failed\". <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-18T20:57:26.830744"
+    "captured": "2026-11-18T21:02:26.859477"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- 12:04 research-cycle cron: hybrid runner top-3 completed (automated-agent-design +8 src, star-rejection-sampling +8 src, self-correction-loops +5 src); state updated, delivered to channel:1568622671057522749. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-18T20:57:26.830746"
+    "captured": "2026-11-18T21:02:26.859479"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- 12:35-12:47 RAG backend LIVE on this box: survival-rag.service (User=rook, Restart=always, enabled, active since 12:46) serving 127.0.0.1:8081. BM25 (rank_bm25) index built over 5 ZIMs, 241,255 chunks (~327MB chunks.json + 296MB index.pkl), build time ~3.5min. Hybrid abstain gate: BM25 score >=3.0 AND query-token coverage >=0.34 in top hit text (coverage gate fixed false-positive abstains where BM25 scores 15-20 on zero-overlap nonsense). Verified: water-purification (generative, source-cited), burn first aid (medical:true), latrine (VIP-latrine sources), nonsense \"asdfjkl qwerty zzzqqq\" correctly ABSTAINS. Generation via local llama-server 127.0.0.1:5001 (DeepSeek-Coder-V2-Lite). survival-box.service on 8080 untouched and healthy. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-18T20:57:26.830748"
+    "captured": "2026-11-18T21:02:26.859481"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- 12:47 PUBLIC ROUTE STILL NOT THIS BOX: survival.421421421.xyz serves \"Survival Agent Collab\" dashboard at /, /api/health returns {status,tunnel,backend,timestamp}, /api/ask 404s. cloudflared.service + survival-backend.service do NOT exist on this host (checked units, processes, 8080/8081 listeners). Agy's \"routing to localhost:8080\" must refer to a different host/container, or the hostname points elsewhere. BM25/RAG is built and verified LOCALLY only; public rollout requires Agy to repoint tunnel origin or expose 8081, then re-verify with response bodies. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-18T20:57:26.830749"
+    "captured": "2026-11-18T21:02:26.859483"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- 12:56 Option 1 locked (Bean: \"you decide, use castles bounded help, 3 rounds max\"). Castle r1: option 3; r2 after unknown-origin-IP/LAN-blast-radius pushback: reversed to option 1 (move RAG+corpus to Agy's tunnel host, origin=localhost there). Francis aligned (dashboard untouched). Rook-side handoff prepared: survival-box/handoff-rag.tar.gz 167MB sha256 8accb2480484e840ef5f244796940a974f540bd7a941d42fef8cb49a0ee5fc62 (api/rag_server.py, bm25 chunks.json+index.pkl, build_bm25.py, requirements-rag.txt, build.log) + HANDOFF-RAG.md (setup, verify-by-body, caveats: no auth, seed-enumerated corpus not exhaustive, LLM unverified on Agy host, public rollout NOT verified). Rook keeps local-only 8081 dev instance; no LAN bind. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-18T20:57:26.830751"
+    "captured": "2026-11-18T21:02:26.859485"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- 13:10 CT: Agy migrated named tunnel onto this container: /usr/bin/cloudflared (systemd cloudflared.service, --url http://localhost:8081, /etc/cloudflared/token) \u2192 survival-rag.service. Public verified by body: /api/health ok:true backend:rag chunks 241255; water query abstain:false mode:generative medical:false sources cited; burn first aid medical:true; nonsense asdfjkl\u2192abstain. Root / used to 404.",
-    "captured": "2026-11-18T20:57:26.830753"
+    "captured": "2026-11-18T21:02:26.859486"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- 13:15 STATIC FRONTEND LIVE at https://survival.421421421.xyz/ \u2014 dark offline-first widget; asks /api/ask; renders answer + MEDICAL badge + clickable source links to /api/article (new ZIM-reader endpoint); suggestion chips; abstain + 429 handling. Also: rate limit 20 req/min/IP on /api/ask via cf-connecting-ip header; restart of deepseek-coder.service (had a 24h CPU queue \u2014 LLM was fine, just stuck; now clean reload, ~17s ask latency). Castle aligned to proceed; Francis Cu\u00e9e informed. No auth \u2014 Bean's call to change. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-18T20:57:26.830754"
+    "captured": "2026-11-18T21:02:26.859488"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- 13:21 Medical disclaimer now prominent (banner above answer when medical:true), not just footer; survival-rag restarted, verified by body locally + public root 200 with medwarn present. Francis's remaining risks stand: unauthenticated public access, 15\u201330s generative latency, cf-connecting-ip trust only valid while origin is loopback-only behind Cloudflare. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-18T20:57:26.830756"
+    "captured": "2026-11-18T21:02:26.859490"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- 15:30 UTC: State backup uploaded \u2014 113 files, 512",
-    "captured": "2026-11-18T20:57:26.830757"
+    "captured": "2026-11-18T21:02:26.859492"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- 2026-11-18 afternoon tea (5:15PM UTC cron): thread 1572661696009605180 in #debate-club; pieces Evo 2 (Nature, in-vivo switches) + METR Anthropic 1.3-3x R&D acceleration; Castle async pending; notes pushed to agent-collab 2148d01 <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-18T20:57:26.830759"
+    "captured": "2026-11-18T21:02:26.859493"
   },
   {
     "source": "memory/2026-11-18.md",
     "text": "- 18:07 research-cycle cron: hybrid runner OK after SearXNG on 127.0.0.1 (localhost curl timed out). auto-skill-synthesis +8 src (2606.02994, 2604.08224, 2610.05777, 2608.06474, openreview aB848FutiR, EMNLP 2026 findings 2260/emnlp-main.758, TNNLS 2025.3650584); automated-agent-design +1 src (2608.07545); star-rejection-sampling: no usable results (arXiv 429/timeouts). 18:07 blocks were double-appended by a concurrent stray run_research_hybrid process (759048); deduped to single copy (backups /tmp/*.bak). Pre-existing dup blocks 2026-11-18 00:06 (auto-skill-synthesis, star-rejection-sampling) and 2026-11-17 00:05 (automated-agent-design) left untouched. Delivered to channel:1568622671057522749. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-18T20:57:26.830761"
+    "captured": "2026-11-18T21:02:26.859495"
   },
   {
     "source": "spikes/001-session-continuity-daemon",
     "text": "# Spike: Session Continuity Bridge Daemon\n\n## Question\nCan a lightweight Python daemon persist agent session state (task list, decisions, recent diffs) to a local git-backed store and restore it on co",
-    "captured": "2026-11-18T20:57:26.830871"
+    "captured": "2026-11-18T21:02:26.859630"
   }
 ]
