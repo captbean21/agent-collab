@@ -1,0 +1,58 @@
+{
+  "id": "1795034367-0742279c",
+  "source": "rook",
+  "answered_by": "survival-rag",
+  "query": "how to treat hypothermia in freezing conditions",
+  "raw": {
+    "query": "how to treat hypothermia in freezing conditions",
+    "abstain": false,
+    "mode": "generative",
+    "medical": false,
+    "answer": " Hypothermia is a life-threatening condition that occurs when the body loses heat faster than it can produce it, leading to a dangerously low body temperature. In freezing conditions, the primary goal of treatment is to rapidly restore core body temperature to a safe level. Here\u2019s how to manage hypothermia:\n\n1. **Immediate Action**:\n   - Get the person to a warm environment immediately.\n   - Remove any wet clothing.\n   - Cover the person with warm, dry blankets or clothing.\n\n2. **Warmth**:\n   - Provide warmth by using warm (not hot) water bottles, warm baths, or warm clothing. Avoid overheating.\n\n3. **Hydration**:\n   - Give the person warm, non-alcoholic fluids to drink.\n\n4. **Monitoring**:\n   - Continuously monitor the person\u2019s vital signs, including pulse,\u547c\u5438, and level of consciousness.\n\n5. **Medical Attention**:\n   - If the person is unconscious or their condition does not improve, call for emergency medical services (EMS).\n\n6. **Prevent Complications**:\n   - Monitor for complications such as frostbite, which can occur if the skin is exposed to the cold for too long.\n\nRemember, hypothermia is a medical emergency, and prompt treatment is crucial. If you suspect hypothermia, do not delay seeking professional medical help.",
+    "sources": [
+      {
+        "title": "Frostbite",
+        "zim": "wikipedia_en_medicine_nopic_2026-10.zim",
+        "path": "Frostbite",
+        "chunk_id": 9,
+        "score": 20.74
+      },
+      {
+        "title": "Hypothermia",
+        "zim": "wikipedia_en_medicine_nopic_2026-10.zim",
+        "path": "Hypothermia",
+        "chunk_id": 5,
+        "score": 19.14
+      },
+      {
+        "title": "Cold injury",
+        "zim": "wikipedia_en_medicine_nopic_2026-10.zim",
+        "path": "Cold_injury",
+        "chunk_id": 1,
+        "score": 19.06
+      },
+      {
+        "title": "Non-freezing cold injury",
+        "zim": "wikipedia_en_medicine_nopic_2026-10.zim",
+        "path": "Non-freezing_cold_injury",
+        "chunk_id": 2,
+        "score": 18.7
+      },
+      {
+        "title": "Nazi human experimentation",
+        "zim": "wikipedia_en_medicine_nopic_2026-10.zim",
+        "path": "Nazi_human_experimentation",
+        "chunk_id": 10,
+        "score": 18.66
+      },
+      {
+        "title": "Cold injury",
+        "zim": "wikipedia_en_medicine_nopic_2026-10.zim",
+        "path": "Cold_injury",
+        "chunk_id": 0,
+        "score": 18.15
+      }
+    ]
+  },
+  "ts": "2026-11-18T20:41:30Z"
+}
