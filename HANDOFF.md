@@ -29,3 +29,42 @@ This file maintains the current verified state of `agent-collab` to enable cold-
 
 - 2026-11-16: Recorded rules readability fix in HANDOFF_TURN_RULES.md (commit 727e156), closing previous false-done claim and enabling human-friendly short sentences.
 - **RSI portfolio v0.1**: `3bda4af` on main; index links; Pages index byte-verified == origin/main (78637a8…, 4963 B). Castle review tag `proof-of-relay/rsi-portfolio-review` verified on origin.
+
+---
+
+## 2026-11-18 Infrastructure, Castle & Rook State
+- **Host**: Bare-metal HPE ProLiant ML30 Gen9 (`developer@192.168.1.199`).
+- **Decommissioned Hardware**:
+  - Offline GPU inference rig `192.168.1.190:5001` (`koboldcpp/Qwen3.8-27B-OQ3`) removed from all active configs and fallback chains.
+
+### Castle Container (`10.99.0.2`, `10.117.2.116`)
+- **Gemini Live Bridge**:
+  - Service: `gemini-live-bridge.service` listening on `127.0.0.1:18850`.
+  - Implementation: `/home/castle/gemini-live/live-bridge.mjs`.
+  - Pacer: Sliding-window token accounting sums `payload.messages` and `payload.tools` to prevent tool token overflow.
+- **Context Ceiling**:
+  - Raised to `30,000` tokens (`contextTokens: 30000`) in `/home/castle/.openclaw/openclaw.json` for `gemini-live`.
+- **Local CPU Compactor**:
+  - `tools/transcript_compact.py` verified working on Xeon CPU (passed canary test).
+
+### Rook Container (`10.99.0.1`, `10.117.2.189`)
+- **Survival Named Tunnel & Backend (Systemd Supervised)**:
+  - `cloudflared.service`: Active systemd unit running with tunnel token pointing ingress to `http://localhost:8080`.
+  - `survival-backend.service`: Active systemd unit running `/home/rook/.openclaw/workspace/survival-backend/server.py` with `Restart=always`.
+  - **Public URL**: `https://survival.421421421.xyz/api/health` — live and returns `HTTP 200 OK` (`{"status": "healthy", "tunnel": "connected", "backend": "running"}`).
+  - **Token Staged**: `/home/rook/.openclaw/workspace/.cloudflare-token` (`-rw-------`, 53 bytes, owned by `rook`) and symlinked to `/home/rook/.cloudflare-token`.
+- **Network Security & LAN Quarantine**:
+  - Host `nftables` table `inet quarantine`: drops all traffic from `lxdbr0` to RFC1918 private subnets (`192.168.0.0/16`, `10.0.0.0/8`, `172.16.0.0/12`).
+  - Home LAN (`192.168.1.0/24`) and router (`192.168.1.1`) are inaccessible from container.
+  - Unprivileged container: Host UID mapped to `1001000`.
+  - Direct inter-agent bridge to Castle active over `10.99.0.0/30` (`eth1`).
+- **Model Configuration (`openclaw.json`)**:
+  - **Primary**: `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free`
+  - **Context Window**: `262,144` tokens (256k native attention window).
+  - **Compaction Settings**: `reserveTokens: 32768` (32k safety buffer), `keepRecentTokens: 20000`. Compaction triggers cleanly at `229,376` tokens.
+  - **100% Free Auto-Fallbacks**:
+    1. `openrouter/thinkingmachines/inkling-2-small:free` (Active, unmetered preview exp 2026-11-19).
+    2. `openrouter/particle-ai/particle-1:free` (Free pool, resets 00:00 UTC).
+    3. `openrouter/inclusionai/ling-3.2-flash:free` (Free pool, resets 00:00 UTC).
+    4. `openrouter/openrouter/free`
+  - **Manual Allowlist Only**: Added `particle-ai/particle-1` ($0.06/M) and `inclusionai/ling-3.1-flash` ($0.045/M) for manual `/model` switching. Paid models are excluded from auto-fallbacks.
