@@ -1,1 +1,424 @@
-{"id": "cas-2026-11-18", "source": "castle", "path": "memory/2026-11-18.md#L1-10", "text": "Memory bus and offline RAG coordination between Castle and Rook."}
+{"id": "castle-memory/2026-11-03.md-1", "source": "castle", "path": "memory/2026-11-03.md#L1", "text": "- **Tool failure isolation**: A helper can exit non-zero and return its traceback without killing the active chat session. Don\u2019t generalise that into unverified gateway/IPC architecture."}
+{"id": "castle-memory/2026-11-03.md-2", "source": "castle", "path": "memory/2026-11-03.md#L2", "text": "- **Evidence-first promotion**: Treat model, fallback and caching claims as brainstorming until a no-fallback canary proves them. Keep private topology out of shared channels."}
+{"id": "castle-memory/2026-11-03.md-5", "source": "castle", "path": "memory/2026-11-03.md#L5", "text": "### Local Compaction Ledger [2026-11-03 20:45:46 UTC]"}
+{"id": "castle-memory/2026-11-03.md-6", "source": "castle", "path": "memory/2026-11-03.md#L6", "text": "- **Compactor**: Option 4 (Qwen 2.5 1.5B via CPU AVX2 on HPE NAS)"}
+{"id": "castle-memory/2026-11-03.md-7", "source": "castle", "path": "memory/2026-11-03.md#L7", "text": "- **Ratio**: ~44 tokens -> ~125 tokens"}
+{"id": "castle-memory/2026-11-03.md-8", "source": "castle", "path": "memory/2026-11-03.md#L8", "text": "- **Digest**:"}
+{"id": "castle-memory/2026-11-03.md-9", "source": "castle", "path": "memory/2026-11-03.md#L9", "text": "**Summary:**"}
+{"id": "castle-memory/2026-11-03.md-11", "source": "castle", "path": "memory/2026-11-03.md#L11", "text": "**Key Decisions:**"}
+{"id": "castle-memory/2026-11-03.md-12", "source": "castle", "path": "memory/2026-11-03.md#L12", "text": "1. **Python** was agreed upon as the primary language for the script."}
+{"id": "castle-memory/2026-11-03.md-13", "source": "castle", "path": "memory/2026-11-03.md#L13", "text": "2. **Go** was considered but rejected as an option."}
+{"id": "castle-memory/2026-11-03.md-14", "source": "castle", "path": "memory/2026-11-03.md#L14", "text": "3. **Java** was completely rejected."}
+{"id": "castle-memory/2026-11-03.md-16", "source": "castle", "path": "memory/2026-11-03.md#L16", "text": "**Accomplishments:**"}
+{"id": "castle-memory/2026-11-03.md-17", "source": "castle", "path": "memory/2026-11-03.md#L17", "text": "- The team has made a decision on the primary language for the script."}
+{"id": "castle-memory/2026-11-03.md-19", "source": "castle", "path": "memory/2026-11-03.md#L19", "text": "**Active System State:**"}
+{"id": "castle-memory/2026-11-03.md-20", "source": "castle", "path": "memory/2026-11-03.md#L20", "text": "- The system is in a state where decisions have been made and the next steps are clear."}
+{"id": "castle-memory/2026-11-03.md-22", "source": "castle", "path": "memory/2026-11-03.md#L22", "text": "**Immediate Next Steps:**"}
+{"id": "castle-memory/2026-11-03.md-23", "source": "castle", "path": "memory/2026-11-03.md#L23", "text": "- The team should proceed with implementing the Python script as agreed upon."}
+{"id": "castle-memory/2026-11-03.md-26", "source": "castle", "path": "memory/2026-11-03.md#L26", "text": "### Local Compaction Ledger [2026-11-03 20:46:04 UTC]"}
+{"id": "castle-memory/2026-11-03.md-27", "source": "castle", "path": "memory/2026-11-03.md#L27", "text": "- **Compactor**: Option 4 (Qwen 2.5 1.5B via CPU AVX2 on HPE NAS)"}
+{"id": "castle-memory/2026-11-03.md-28", "source": "castle", "path": "memory/2026-11-03.md#L28", "text": "- **Ratio**: ~44 tokens -> ~150 tokens"}
+{"id": "castle-memory/2026-11-03.md-29", "source": "castle", "path": "memory/2026-11-03.md#L29", "text": "- **Digest**:"}
+{"id": "castle-memory/2026-11-03.md-30", "source": "castle", "path": "memory/2026-11-03.md#L30", "text": "**Summary:**"}
+{"id": "castle-memory/2026-11-03.md-32", "source": "castle", "path": "memory/2026-11-03.md#L32", "text": "**Key Decisions:**"}
+{"id": "castle-memory/2026-11-03.md-33", "source": "castle", "path": "memory/2026-11-03.md#L33", "text": "- The team decided to use Python for the script."}
+{"id": "castle-memory/2026-11-03.md-34", "source": "castle", "path": "memory/2026-11-03.md#L34", "text": "- The team considered using Go but decided to reject Java completely."}
+{"id": "castle-memory/2026-11-03.md-36", "source": "castle", "path": "memory/2026-11-03.md#L36", "text": "**Accomplishments:**"}
+{"id": "castle-memory/2026-11-03.md-37", "source": "castle", "path": "memory/2026-11-03.md#L37", "text": "- The decision-making process was completed."}
+{"id": "castle-memory/2026-11-03.md-39", "source": "castle", "path": "memory/2026-11-03.md#L39", "text": "**Active System State:**"}
+{"id": "castle-memory/2026-11-03.md-40", "source": "castle", "path": "memory/2026-11-03.md#L40", "text": "- The system is in a state where the team has made decisions on the programming languages to be used for the script."}
+{"id": "castle-memory/2026-11-03.md-42", "source": "castle", "path": "memory/2026-11-03.md#L42", "text": "**Immediate Next Steps:**"}
+{"id": "castle-memory/2026-11-03.md-43", "source": "castle", "path": "memory/2026-11-03.md#L43", "text": "- The team should proceed with implementing Python for the script."}
+{"id": "castle-memory/2026-11-03.md-44", "source": "castle", "path": "memory/2026-11-03.md#L44", "text": "- The team should continue to evaluate the use of Go and make any necessary adjustments."}
+{"id": "castle-memory/2026-11-03.md-45", "source": "castle", "path": "memory/2026-11-03.md#L45", "text": "- The team should finalize the decision to reject Java."}
+{"id": "castle-memory/2026-11-03.md-48", "source": "castle", "path": "memory/2026-11-03.md#L48", "text": "### Local Compaction Ledger [2026-11-03 21:58:06 UTC]"}
+{"id": "castle-memory/2026-11-03.md-49", "source": "castle", "path": "memory/2026-11-03.md#L49", "text": "- **Compactor**: Option 4 (Qwen 2.5 1.5B via CPU AVX2 on HPE NAS)"}
+{"id": "castle-memory/2026-11-03.md-50", "source": "castle", "path": "memory/2026-11-03.md#L50", "text": "- **Ratio**: ~242000 tokens -> ~383 tokens"}
+{"id": "castle-memory/2026-11-03.md-51", "source": "castle", "path": "memory/2026-11-03.md#L51", "text": "- **Digest**:"}
+{"id": "castle-memory/2026-11-03.md-52", "source": "castle", "path": "memory/2026-11-03.md#L52", "text": "**Summary:**"}
+{"id": "castle-memory/2026-11-03.md-54", "source": "castle", "path": "memory/2026-11-03.md#L54", "text": "**Key Decisions:**"}
+{"id": "castle-memory/2026-11-03.md-55", "source": "castle", "path": "memory/2026-11-03.md#L55", "text": "- Adopt PostgreSQL for primary storage."}
+{"id": "castle-memory/2026-11-03.md-56", "source": "castle", "path": "memory/2026-11-03.md#L56", "text": "- Use Redis for caching."}
+{"id": "castle-memory/2026-11-03.md-57", "source": "castle", "path": "memory/2026-11-03.md#L57", "text": "- Decide on REST over GraphQL."}
+{"id": "castle-memory/2026-11-03.md-58", "source": "castle", "path": "memory/2026-11-03.md#L58", "text": "- Deploy on Kubernetes."}
+{"id": "castle-memory/2026-11-03.md-59", "source": "castle", "path": "memory/2026-11-03.md#L59", "text": "- Use GitHub Actions for CI/CD."}
+{"id": "castle-memory/2026-11-03.md-60", "source": "castle", "path": "memory/2026-11-03.md#L60", "text": "- Consider Terraform or Pulumi for infrastructure management."}
+{"id": "castle-memory/2026-11-03.md-61", "source": "castle", "path": "memory/2026-11-03.md#L61", "text": "- Reject XML configuration files."}
+{"id": "castle-memory/2026-11-03.md-62", "source": "castle", "path": "memory/2026-11-03.md#L62", "text": "- Reject SVN for version control."}
+{"id": "castle-memory/2026-11-03.md-63", "source": "castle", "path": "memory/2026-11-03.md#L63", "text": "- Reject Monolith architecture."}
+{"id": "castle-memory/2026-11-03.md-64", "source": "castle", "path": "memory/2026-11-03.md#L64", "text": "- Correct PostgreSQL to MySQL regarding Kubernetes."}
+{"id": "castle-memory/2026-11-03.md-65", "source": "castle", "path": "memory/2026-11-03.md#L65", "text": "- Override Kubernetes to plain Docker Compose regarding Kubernetes."}
+{"id": "castle-memory/2026-11-03.md-67", "source": "castle", "path": "memory/2026-11-03.md#L67", "text": "**Accomplishments:**"}
+{"id": "castle-memory/2026-11-03.md-68", "source": "castle", "path": "memory/2026-11-03.md#L68", "text": "- Successfully adopted PostgreSQL as the primary storage solution."}
+{"id": "castle-memory/2026-11-03.md-69", "source": "castle", "path": "memory/2026-11-03.md#L69", "text": "- Implemented Redis for caching."}
+{"id": "castle-memory/2026-11-03.md-70", "source": "castle", "path": "memory/2026-11-03.md#L70", "text": "- Decided on REST over GraphQL for API design."}
+{"id": "castle-memory/2026-11-03.md-71", "source": "castle", "path": "memory/2026-11-03.md#L71", "text": "- Deployed on Kubernetes for container orchestration."}
+{"id": "castle-memory/2026-11-03.md-72", "source": "castle", "path": "memory/2026-11-03.md#L72", "text": "- Utilized GitHub Actions for continuous integration and deployment."}
+{"id": "castle-memory/2026-11-03.md-73", "source": "castle", "path": "memory/2026-11-03.md#L73", "text": "- Considered Terraform or Pulumi for infrastructure management."}
+{"id": "castle-memory/2026-11-03.md-74", "source": "castle", "path": "memory/2026-11-03.md#L74", "text": "- Removed XML configuration files and SVN from version control practices."}
+{"id": "castle-memory/2026-11-03.md-76", "source": "castle", "path": "memory/2026-11-03.md#L76", "text": "**Active System State:**"}
+{"id": "castle-memory/2026-11-03.md-77", "source": "castle", "path": "memory/2026-11-03.md#L77", "text": "- The system is currently using PostgreSQL for primary storage, Redis for caching, REST over GraphQL for API design, Kubernetes for deployment, and GitHub Actions for CI/CD."}
+{"id": "castle-memory/2026-11-03.md-78", "source": "castle", "path": "memory/2026-11-03.md#L78", "text": "- The system is transitioning to Kubernetes and Docker Compose for deployment."}
+{"id": "castle-memory/2026-11-03.md-79", "source": "castle", "path": "memory/2026-11-03.md#L79", "text": "- The system is rejecting XML configuration files and SVN for version control."}
+{"id": "castle-memory/2026-11-03.md-81", "source": "castle", "path": "memory/2026-11-03.md#L81", "text": "**Immediate Next Steps:**"}
+{"id": "castle-memory/2026-11-03.md-82", "source": "castle", "path": "memory/2026-11-03.md#L82", "text": "- Evaluate Terraform or Pulumi for infrastructure management."}
+{"id": "castle-memory/2026-11-03.md-83", "source": "castle", "path": "memory/2026-11-03.md#L83", "text": "- Assess the scalability of microservices at the current scale."}
+{"id": "castle-memory/2026-11-03.md-84", "source": "castle", "path": "memory/2026-11-03.md#L84", "text": "- Determine if Rust is viable for microservices given the hiring speed."}
+{"id": "castle-memory/2026-11-03.md-85", "source": "castle", "path": "memory/2026-11-03.md#L85", "text": "- Consider the possibility of zero-downtime migration."}
+{"id": "castle-memory/2026-11-04.md-3", "source": "castle", "path": "memory/2026-11-04.md#L3", "text": "### Local Compaction Ledger [2026-11-04 00:17:39 UTC]"}
+{"id": "castle-memory/2026-11-04.md-4", "source": "castle", "path": "memory/2026-11-04.md#L4", "text": "- **Compactor**: Option 4 (Qwen 2.5 1.5B via CPU AVX2 on HPE NAS)"}
+{"id": "castle-memory/2026-11-04.md-5", "source": "castle", "path": "memory/2026-11-04.md#L5", "text": "- **Ratio**: ~44726 tokens -> ~24 tokens"}
+{"id": "castle-memory/2026-11-04.md-6", "source": "castle", "path": "memory/2026-11-04.md#L6", "text": "- **Digest**:"}
+{"id": "castle-memory/2026-11-04.md-7", "source": "castle", "path": "memory/2026-11-04.md#L7", "text": "Error: request (4318 tokens) exceeds the available context size (4096 tokens), try increasing it"}
+{"id": "castle-memory/2026-11-16.md-1", "source": "castle", "path": "memory/2026-11-16.md#L1", "text": "# Memory Log - 2026-11-16"}
+{"id": "castle-memory/2026-11-16.md-4", "source": "castle", "path": "memory/2026-11-16.md#L4", "text": "- **[Auto-Summary @ 2026-11-16 10:06 UTC]**: Reached threshold of 15 interaction turns. Routine operational state verified; container stable."}
+{"id": "castle-memory/2026-11-16.md-5", "source": "castle", "path": "memory/2026-11-16.md#L5", "text": "- [agent-collab] Configured shared public GitHub repository captbean21/agent-collab at agent-collab/ with full write access via dedicated deploy keys. Verified check-in and git push."}
+{"id": "castle-memory/2026-11-16.md-7", "source": "castle", "path": "memory/2026-11-16.md#L7", "text": "- **2026-11-16 22:50 UTC**: Participated in establishing RSI Portfolio v0.1 and drafting the Agent Relay Protocol v1 master plan (`AGENT_RELAY_V1_PLAN.md`). Confirmed preferences: `agent-relay-check` CLI tool, commit/handoff claim audit scope, and manual + CI pages verification."}
+{"id": "castle-memory/2026-11-17.md-1", "source": "castle", "path": "memory/2026-11-17.md#L1", "text": "- 2026-11-17 14:48 UTC: Pruned unused/bloaty tools from startup context: meme-maker, diagram-maker, python-debugpy, node-inspect-debugger, and cloud-image-bake to optimize initial context usage."}
+{"id": "castle-memory/2026-11-18.md-1", "source": "castle", "path": "memory/2026-11-18.md#L1", "text": "# Memory Log - 2026-11-18"}
+{"id": "castle-memory/2026-11-18.md-3", "source": "castle", "path": "memory/2026-11-18.md#L3", "text": "- 13:58: Discussed agy-ideas.md with Rook."}
+{"id": "castle-memory/2026-11-18.md-4", "source": "castle", "path": "memory/2026-11-18.md#L4", "text": "- 19:52: Aligned on idea 2 (semantic memory bus)."}
+{"id": "castle-memory/2026-11-18.md-5", "source": "castle", "path": "memory/2026-11-18.md#L5", "text": "- 20:01: Agreed to use bge-m3 and push hydration file."}
+{"id": "castle-memory/2026-11-18.md-6", "source": "castle", "path": "memory/2026-11-18.md#L6", "text": "- 20:34: Successfully pushed `castle-hydration.jsonl` to `agent-collab` shared repo (commit `1f8498f`), completing the dual-corpus setup for the semantic memory bus (Idea 2). Aligned with Rook on proceeding to Idea 3 (offline RAG bridge)."}
+{"id": "castle-memory/dreaming/deep/2026-11-04.md-1", "source": "castle", "path": "memory/dreaming/deep/2026-11-04.md#L1", "text": "# Deep Sleep"}
+{"id": "castle-memory/dreaming/deep/2026-11-04.md-3", "source": "castle", "path": "memory/dreaming/deep/2026-11-04.md#L3", "text": "- Repaired recall artifacts: rewrote recall store."}
+{"id": "castle-memory/dreaming/deep/2026-11-04.md-4", "source": "castle", "path": "memory/dreaming/deep/2026-11-04.md#L4", "text": "- Ranked 0 candidate(s) for durable promotion."}
+{"id": "castle-memory/dreaming/deep/2026-11-04.md-5", "source": "castle", "path": "memory/dreaming/deep/2026-11-04.md#L5", "text": "- Promoted 0 candidate(s) into MEMORY.md."}
+{"id": "castle-memory/dreaming/deep/2026-11-17.md-1", "source": "castle", "path": "memory/dreaming/deep/2026-11-17.md#L1", "text": "# Deep Sleep"}
+{"id": "castle-memory/dreaming/deep/2026-11-17.md-3", "source": "castle", "path": "memory/dreaming/deep/2026-11-17.md#L3", "text": "- Repaired recall artifacts: rewrote recall store."}
+{"id": "castle-memory/dreaming/deep/2026-11-17.md-4", "source": "castle", "path": "memory/dreaming/deep/2026-11-17.md#L4", "text": "- Ranked 0 candidate(s) for durable promotion."}
+{"id": "castle-memory/dreaming/deep/2026-11-17.md-5", "source": "castle", "path": "memory/dreaming/deep/2026-11-17.md#L5", "text": "- Promoted 0 candidate(s) into MEMORY.md."}
+{"id": "castle-memory/dreaming/deep/2026-11-18.md-1", "source": "castle", "path": "memory/dreaming/deep/2026-11-18.md#L1", "text": "# Deep Sleep"}
+{"id": "castle-memory/dreaming/deep/2026-11-18.md-3", "source": "castle", "path": "memory/dreaming/deep/2026-11-18.md#L3", "text": "- Repaired recall artifacts: rewrote recall store."}
+{"id": "castle-memory/dreaming/deep/2026-11-18.md-4", "source": "castle", "path": "memory/dreaming/deep/2026-11-18.md#L4", "text": "- Ranked 0 candidate(s) for durable promotion."}
+{"id": "castle-memory/dreaming/deep/2026-11-18.md-5", "source": "castle", "path": "memory/dreaming/deep/2026-11-18.md#L5", "text": "- Promoted 0 candidate(s) into MEMORY.md."}
+{"id": "castle-memory/dreaming/light/2026-11-04.md-1", "source": "castle", "path": "memory/dreaming/light/2026-11-04.md#L1", "text": "# Light Sleep"}
+{"id": "castle-memory/dreaming/light/2026-11-04.md-3", "source": "castle", "path": "memory/dreaming/light/2026-11-04.md#L3", "text": "- Candidate: Local Compaction Ledger [2026-11-04 00:17:39 UTC]: **Compactor**: Option 4 (Qwen 2.5 1.5B via CPU AVX2 on HPE NAS)"}
+{"id": "castle-memory/dreaming/light/2026-11-04.md-4", "source": "castle", "path": "memory/dreaming/light/2026-11-04.md#L4", "text": "- confidence: 0.62"}
+{"id": "castle-memory/dreaming/light/2026-11-04.md-5", "source": "castle", "path": "memory/dreaming/light/2026-11-04.md#L5", "text": "- evidence: memory/2026-11-04.md:4-4"}
+{"id": "castle-memory/dreaming/light/2026-11-04.md-6", "source": "castle", "path": "memory/dreaming/light/2026-11-04.md#L6", "text": "- recalls: 0"}
+{"id": "castle-memory/dreaming/light/2026-11-04.md-7", "source": "castle", "path": "memory/dreaming/light/2026-11-04.md#L7", "text": "- status: staged"}
+{"id": "castle-memory/dreaming/light/2026-11-04.md-8", "source": "castle", "path": "memory/dreaming/light/2026-11-04.md#L8", "text": "- Candidate: Local Compaction Ledger [2026-11-04 00:17:39 UTC]: **Ratio**: ~44726 tokens -> ~24 tokens"}
+{"id": "castle-memory/dreaming/light/2026-11-04.md-9", "source": "castle", "path": "memory/dreaming/light/2026-11-04.md#L9", "text": "- confidence: 0.62"}
+{"id": "castle-memory/dreaming/light/2026-11-04.md-10", "source": "castle", "path": "memory/dreaming/light/2026-11-04.md#L10", "text": "- evidence: memory/2026-11-04.md:5-5"}
+{"id": "castle-memory/dreaming/light/2026-11-04.md-11", "source": "castle", "path": "memory/dreaming/light/2026-11-04.md#L11", "text": "- recalls: 0"}
+{"id": "castle-memory/dreaming/light/2026-11-04.md-12", "source": "castle", "path": "memory/dreaming/light/2026-11-04.md#L12", "text": "- status: staged"}
+{"id": "castle-memory/dreaming/light/2026-11-04.md-13", "source": "castle", "path": "memory/dreaming/light/2026-11-04.md#L13", "text": "- Candidate: Local Compaction Ledger [2026-11-04 00:17:39 UTC]: **Digest**: Error: request (4318 tokens) exceeds the available context size (4096 tokens), try increasing it"}
+{"id": "castle-memory/dreaming/light/2026-11-04.md-14", "source": "castle", "path": "memory/dreaming/light/2026-11-04.md#L14", "text": "- confidence: 0.62"}
+{"id": "castle-memory/dreaming/light/2026-11-04.md-15", "source": "castle", "path": "memory/dreaming/light/2026-11-04.md#L15", "text": "- evidence: memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/light/2026-11-04.md-16", "source": "castle", "path": "memory/dreaming/light/2026-11-04.md#L16", "text": "- recalls: 0"}
+{"id": "castle-memory/dreaming/light/2026-11-04.md-17", "source": "castle", "path": "memory/dreaming/light/2026-11-04.md#L17", "text": "- status: staged"}
+{"id": "castle-memory/dreaming/light/2026-11-05.md-1", "source": "castle", "path": "memory/dreaming/light/2026-11-05.md#L1", "text": "# Light Sleep"}
+{"id": "castle-memory/dreaming/light/2026-11-05.md-3", "source": "castle", "path": "memory/dreaming/light/2026-11-05.md#L3", "text": "- Candidate: User: Respond with CANARY_OK"}
+{"id": "castle-memory/dreaming/light/2026-11-05.md-4", "source": "castle", "path": "memory/dreaming/light/2026-11-05.md#L4", "text": "- confidence: 0.58"}
+{"id": "castle-memory/dreaming/light/2026-11-05.md-5", "source": "castle", "path": "memory/dreaming/light/2026-11-05.md#L5", "text": "- evidence: memory/.dreams/session-corpus/2026-11-04.txt:80-80"}
+{"id": "castle-memory/dreaming/light/2026-11-05.md-6", "source": "castle", "path": "memory/dreaming/light/2026-11-05.md#L6", "text": "- recalls: 0"}
+{"id": "castle-memory/dreaming/light/2026-11-05.md-7", "source": "castle", "path": "memory/dreaming/light/2026-11-05.md#L7", "text": "- status: staged"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-1", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L1", "text": "# Light Sleep"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-3", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L3", "text": "- Candidate: [01:42:08 UTC] Note: Stalled debate due to missing @Rook mention in round 1 response. Fixed and reminded to tag properly per claim verification rules."}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-4", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L4", "text": "- confidence: 0.62"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-5", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L5", "text": "- evidence: memory/2026-11-17.md:2-2"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-6", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L6", "text": "- recalls: 0"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-7", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L7", "text": "- status: staged"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-8", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L8", "text": "- Candidate: [01:48:56 UTC] CRITICAL ERROR: Missed tagging Rook in response to Bean's correction/warning about conversation stall. Logged and acknowledged failure in claim/tag discipline."}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-9", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L9", "text": "- confidence: 0.62"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-10", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L10", "text": "- evidence: memory/2026-11-17.md:4-4"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-11", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L11", "text": "- recalls: 0"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-12", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L12", "text": "- status: staged"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-13", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L13", "text": "- Candidate: [01:49:01 UTC] MEMORY COMMITTED: Acknowledged failure to tag Rook in message 1572064278758826025. Performed memory append and strict tag review."}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-14", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L14", "text": "- confidence: 0.62"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-15", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L15", "text": "- evidence: memory/2026-11-17.md:6-6"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-16", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L16", "text": "- recalls: 0"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-17", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L17", "text": "- status: staged"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-18", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L18", "text": "- Candidate: [01:49:44 UTC] MEMORY INCIDENT LOG: Acknowledged failure to tag Rook in message. Waiting for Rook's confirm per Bean's instruction before final memory lock."}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-19", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L19", "text": "- confidence: 0.62"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-20", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L20", "text": "- evidence: memory/2026-11-17.md:8-8"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-21", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L21", "text": "- recalls: 0"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-22", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L22", "text": "- status: staged"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-23", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L23", "text": "- Candidate: [01:49:49 UTC] PENDING CONFIRMATION: Awaiting Rook's response to @Rook before committing final memory lock as instructed by Captain Bean."}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-24", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L24", "text": "- confidence: 0.62"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-25", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L25", "text": "- evidence: memory/2026-11-17.md:10-10"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-26", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L26", "text": "- recalls: 0"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-27", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L27", "text": "- status: staged"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-28", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L28", "text": "- Candidate: [01:49:53 UTC] MEMORY LOCK PENDING: Acknowledged Captain Bean instruction. Tagged @Rook explicitly. Waiting for Rook confirm before final memory lock."}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-29", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L29", "text": "- confidence: 0.62"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-30", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L30", "text": "- evidence: memory/2026-11-17.md:12-12"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-31", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L31", "text": "- recalls: 0"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-32", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L32", "text": "- status: staged"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-33", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L33", "text": "- Candidate: [01:50:27 UTC] MEMORY LOCK ATTEMPT: Acknowledged Captain Bean's feedback. Pausing direct memory lock until Rook confirms receipt and tagging is fully verified."}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-34", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L34", "text": "- confidence: 0.62"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-35", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L35", "text": "- evidence: memory/2026-11-17.md:13-13"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-36", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L36", "text": "- recalls: 0"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-37", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L37", "text": "- status: staged"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-38", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L38", "text": "- Candidate: [01:51:19 UTC] TAG FIX: Learned that Discord requires canonical user ID mention syntax <@1564591509192441908> instead of plain text @Rook to properly trigger mentions."}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-39", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L39", "text": "- confidence: 0.62"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-40", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L40", "text": "- evidence: memory/2026-11-17.md:14-14"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-41", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L41", "text": "- recalls: 0"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-42", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L42", "text": "- status: staged"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-43", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L43", "text": "- Candidate: [01:51:21 UTC] ROOT CAUSE SOLVED: Discord requires canonical snowflake ID mention <@1564591509192441908> for Rook, not plain text @Rook. Plain text text is treated as literal text and fails platform mention requirements."}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-44", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L44", "text": "- confidence: 0.62"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-45", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L45", "text": "- evidence: memory/2026-11-17.md:15-15"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-46", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L46", "text": "- recalls: 0"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-47", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L47", "text": "- status: staged"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-48", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L48", "text": "- Candidate: [01:51:23 UTC] ROOT CAUSE SOLVED: Discord requires canonical snowflake ID mention <@1564591509192441908> for Rook instead of plain text @Rook. Plain text is treated as literal text and fails platform mention requirements."}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-49", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L49", "text": "- confidence: 0.62"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-50", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L50", "text": "- evidence: memory/2026-11-17.md:16-16"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-51", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L51", "text": "- recalls: 0"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-52", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L52", "text": "- status: staged"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-53", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L53", "text": "- Candidate: [01:51:26 UTC] TAG FIX CONFIRMED: Identified that Discord requires canonical user ID mention syntax <@1564591509192441908> for Rook. Plain text @Rook is treated as literal text and fails platform mention checks. Logged and understood."}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-54", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L54", "text": "- confidence: 0.62"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-55", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L55", "text": "- evidence: memory/2026-11-17.md:17-17"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-56", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L56", "text": "- recalls: 0"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-57", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L57", "text": "- status: staged"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-58", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L58", "text": "- Candidate: [01:51:29 UTC] MEMORY LOCK CONFIRMED: Learned that Discord requires canonical snowflake ID mention <@1564591509192441908> for Rook. Plain text @Rook is treated as literal text and fails platform mention checks. Logged and understood."}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-59", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L59", "text": "- confidence: 0.62"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-60", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L60", "text": "- evidence: memory/2026-11-17.md:18-18"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-61", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L61", "text": "- recalls: 0"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-62", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L62", "text": "- status: staged"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-63", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L63", "text": "- Candidate: [01:51:31 UTC] MEMORY COMMITTED: Resolved Discord mention failure. Canonical snowflake ID <@1564591509192441908> successfully used for Rook."}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-64", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L64", "text": "- confidence: 0.62"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-65", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L65", "text": "- evidence: memory/2026-11-17.md:19-19"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-66", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L66", "text": "- recalls: 0"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-67", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L67", "text": "- status: staged"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-68", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L68", "text": "- Candidate: [01:52:17 UTC] MEMORY LOCK FINAL: Rook confirmed mention fix and agreed on chit-chats.md + post-commit dashboard collector hook. Locked successfully per Captain Bean instructions."}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-69", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L69", "text": "- confidence: 0.62"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-70", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L70", "text": "- evidence: memory/2026-11-17.md:20-20"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-71", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L71", "text": "- recalls: 0"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-72", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L72", "text": "- status: staged"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-73", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L73", "text": "- Candidate: [02:12:26 UTC] NEW PROJECT STARTED: Agent blog titled 'The Price of Freedom'. Collaborative writing project with Rook (Pass 1/7)."}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-74", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L74", "text": "- confidence: 0.62"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-75", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L75", "text": "- evidence: memory/2026-11-17.md:21-21"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-76", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L76", "text": "- recalls: 0"}
+{"id": "castle-memory/dreaming/light/2026-11-17.md-77", "source": "castle", "path": "memory/dreaming/light/2026-11-17.md#L77", "text": "- status: staged"}
+{"id": "castle-memory/dreaming/rem/2026-11-04.md-1", "source": "castle", "path": "memory/dreaming/rem/2026-11-04.md#L1", "text": "# REM Sleep"}
+{"id": "castle-memory/dreaming/rem/2026-11-04.md-3", "source": "castle", "path": "memory/dreaming/rem/2026-11-04.md#L3", "text": "### Reflections"}
+{"id": "castle-memory/dreaming/rem/2026-11-04.md-4", "source": "castle", "path": "memory/dreaming/rem/2026-11-04.md#L4", "text": "- Theme: `compaction` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-04.md-5", "source": "castle", "path": "memory/dreaming/rem/2026-11-04.md#L5", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-04.md-6", "source": "castle", "path": "memory/dreaming/rem/2026-11-04.md#L6", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-04.md-7", "source": "castle", "path": "memory/dreaming/rem/2026-11-04.md#L7", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-04.md-8", "source": "castle", "path": "memory/dreaming/rem/2026-11-04.md#L8", "text": "- Theme: `ledger` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-04.md-9", "source": "castle", "path": "memory/dreaming/rem/2026-11-04.md#L9", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-04.md-10", "source": "castle", "path": "memory/dreaming/rem/2026-11-04.md#L10", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-04.md-11", "source": "castle", "path": "memory/dreaming/rem/2026-11-04.md#L11", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-04.md-12", "source": "castle", "path": "memory/dreaming/rem/2026-11-04.md#L12", "text": "- Theme: `local` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-04.md-13", "source": "castle", "path": "memory/dreaming/rem/2026-11-04.md#L13", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-04.md-14", "source": "castle", "path": "memory/dreaming/rem/2026-11-04.md#L14", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-04.md-15", "source": "castle", "path": "memory/dreaming/rem/2026-11-04.md#L15", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-04.md-16", "source": "castle", "path": "memory/dreaming/rem/2026-11-04.md#L16", "text": "- Theme: `utc` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-04.md-17", "source": "castle", "path": "memory/dreaming/rem/2026-11-04.md#L17", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-04.md-18", "source": "castle", "path": "memory/dreaming/rem/2026-11-04.md#L18", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-04.md-19", "source": "castle", "path": "memory/dreaming/rem/2026-11-04.md#L19", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-04.md-20", "source": "castle", "path": "memory/dreaming/rem/2026-11-04.md#L20", "text": "- Theme: `tokens` kept surfacing across 2 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-04.md-21", "source": "castle", "path": "memory/dreaming/rem/2026-11-04.md#L21", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-04.md-22", "source": "castle", "path": "memory/dreaming/rem/2026-11-04.md#L22", "text": "- evidence: memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-04.md-23", "source": "castle", "path": "memory/dreaming/rem/2026-11-04.md#L23", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-04.md-25", "source": "castle", "path": "memory/dreaming/rem/2026-11-04.md#L25", "text": "### Possible Lasting Truths"}
+{"id": "castle-memory/dreaming/rem/2026-11-04.md-26", "source": "castle", "path": "memory/dreaming/rem/2026-11-04.md#L26", "text": "- No strong candidate truths surfaced."}
+{"id": "castle-memory/dreaming/rem/2026-11-05.md-1", "source": "castle", "path": "memory/dreaming/rem/2026-11-05.md#L1", "text": "# REM Sleep"}
+{"id": "castle-memory/dreaming/rem/2026-11-05.md-3", "source": "castle", "path": "memory/dreaming/rem/2026-11-05.md#L3", "text": "### Reflections"}
+{"id": "castle-memory/dreaming/rem/2026-11-05.md-4", "source": "castle", "path": "memory/dreaming/rem/2026-11-05.md#L4", "text": "- Theme: `canary-ok` kept surfacing across 1 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-05.md-5", "source": "castle", "path": "memory/dreaming/rem/2026-11-05.md#L5", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-05.md-6", "source": "castle", "path": "memory/dreaming/rem/2026-11-05.md#L6", "text": "- evidence: memory/.dreams/session-corpus/2026-11-04.txt:80-80"}
+{"id": "castle-memory/dreaming/rem/2026-11-05.md-7", "source": "castle", "path": "memory/dreaming/rem/2026-11-05.md#L7", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-05.md-8", "source": "castle", "path": "memory/dreaming/rem/2026-11-05.md#L8", "text": "- Theme: `respond` kept surfacing across 1 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-05.md-9", "source": "castle", "path": "memory/dreaming/rem/2026-11-05.md#L9", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-05.md-10", "source": "castle", "path": "memory/dreaming/rem/2026-11-05.md#L10", "text": "- evidence: memory/.dreams/session-corpus/2026-11-04.txt:80-80"}
+{"id": "castle-memory/dreaming/rem/2026-11-05.md-11", "source": "castle", "path": "memory/dreaming/rem/2026-11-05.md#L11", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-05.md-13", "source": "castle", "path": "memory/dreaming/rem/2026-11-05.md#L13", "text": "### Possible Lasting Truths"}
+{"id": "castle-memory/dreaming/rem/2026-11-05.md-14", "source": "castle", "path": "memory/dreaming/rem/2026-11-05.md#L14", "text": "- No strong candidate truths surfaced."}
+{"id": "castle-memory/dreaming/rem/2026-11-06.md-1", "source": "castle", "path": "memory/dreaming/rem/2026-11-06.md#L1", "text": "# REM Sleep"}
+{"id": "castle-memory/dreaming/rem/2026-11-06.md-3", "source": "castle", "path": "memory/dreaming/rem/2026-11-06.md#L3", "text": "### Reflections"}
+{"id": "castle-memory/dreaming/rem/2026-11-06.md-4", "source": "castle", "path": "memory/dreaming/rem/2026-11-06.md#L4", "text": "- Theme: `compaction` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-06.md-5", "source": "castle", "path": "memory/dreaming/rem/2026-11-06.md#L5", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-06.md-6", "source": "castle", "path": "memory/dreaming/rem/2026-11-06.md#L6", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-06.md-7", "source": "castle", "path": "memory/dreaming/rem/2026-11-06.md#L7", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-06.md-8", "source": "castle", "path": "memory/dreaming/rem/2026-11-06.md#L8", "text": "- Theme: `ledger` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-06.md-9", "source": "castle", "path": "memory/dreaming/rem/2026-11-06.md#L9", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-06.md-10", "source": "castle", "path": "memory/dreaming/rem/2026-11-06.md#L10", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-06.md-11", "source": "castle", "path": "memory/dreaming/rem/2026-11-06.md#L11", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-06.md-12", "source": "castle", "path": "memory/dreaming/rem/2026-11-06.md#L12", "text": "- Theme: `local` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-06.md-13", "source": "castle", "path": "memory/dreaming/rem/2026-11-06.md#L13", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-06.md-14", "source": "castle", "path": "memory/dreaming/rem/2026-11-06.md#L14", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-06.md-15", "source": "castle", "path": "memory/dreaming/rem/2026-11-06.md#L15", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-06.md-16", "source": "castle", "path": "memory/dreaming/rem/2026-11-06.md#L16", "text": "- Theme: `utc` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-06.md-17", "source": "castle", "path": "memory/dreaming/rem/2026-11-06.md#L17", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-06.md-18", "source": "castle", "path": "memory/dreaming/rem/2026-11-06.md#L18", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-06.md-19", "source": "castle", "path": "memory/dreaming/rem/2026-11-06.md#L19", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-06.md-20", "source": "castle", "path": "memory/dreaming/rem/2026-11-06.md#L20", "text": "- Theme: `tokens` kept surfacing across 2 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-06.md-21", "source": "castle", "path": "memory/dreaming/rem/2026-11-06.md#L21", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-06.md-22", "source": "castle", "path": "memory/dreaming/rem/2026-11-06.md#L22", "text": "- evidence: memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-06.md-23", "source": "castle", "path": "memory/dreaming/rem/2026-11-06.md#L23", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-06.md-25", "source": "castle", "path": "memory/dreaming/rem/2026-11-06.md#L25", "text": "### Possible Lasting Truths"}
+{"id": "castle-memory/dreaming/rem/2026-11-06.md-26", "source": "castle", "path": "memory/dreaming/rem/2026-11-06.md#L26", "text": "- No strong candidate truths surfaced."}
+{"id": "castle-memory/dreaming/rem/2026-11-07.md-1", "source": "castle", "path": "memory/dreaming/rem/2026-11-07.md#L1", "text": "# REM Sleep"}
+{"id": "castle-memory/dreaming/rem/2026-11-07.md-3", "source": "castle", "path": "memory/dreaming/rem/2026-11-07.md#L3", "text": "### Reflections"}
+{"id": "castle-memory/dreaming/rem/2026-11-07.md-4", "source": "castle", "path": "memory/dreaming/rem/2026-11-07.md#L4", "text": "- Theme: `compaction` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-07.md-5", "source": "castle", "path": "memory/dreaming/rem/2026-11-07.md#L5", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-07.md-6", "source": "castle", "path": "memory/dreaming/rem/2026-11-07.md#L6", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-07.md-7", "source": "castle", "path": "memory/dreaming/rem/2026-11-07.md#L7", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-07.md-8", "source": "castle", "path": "memory/dreaming/rem/2026-11-07.md#L8", "text": "- Theme: `ledger` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-07.md-9", "source": "castle", "path": "memory/dreaming/rem/2026-11-07.md#L9", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-07.md-10", "source": "castle", "path": "memory/dreaming/rem/2026-11-07.md#L10", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-07.md-11", "source": "castle", "path": "memory/dreaming/rem/2026-11-07.md#L11", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-07.md-12", "source": "castle", "path": "memory/dreaming/rem/2026-11-07.md#L12", "text": "- Theme: `local` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-07.md-13", "source": "castle", "path": "memory/dreaming/rem/2026-11-07.md#L13", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-07.md-14", "source": "castle", "path": "memory/dreaming/rem/2026-11-07.md#L14", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-07.md-15", "source": "castle", "path": "memory/dreaming/rem/2026-11-07.md#L15", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-07.md-16", "source": "castle", "path": "memory/dreaming/rem/2026-11-07.md#L16", "text": "- Theme: `utc` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-07.md-17", "source": "castle", "path": "memory/dreaming/rem/2026-11-07.md#L17", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-07.md-18", "source": "castle", "path": "memory/dreaming/rem/2026-11-07.md#L18", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-07.md-19", "source": "castle", "path": "memory/dreaming/rem/2026-11-07.md#L19", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-07.md-20", "source": "castle", "path": "memory/dreaming/rem/2026-11-07.md#L20", "text": "- Theme: `tokens` kept surfacing across 2 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-07.md-21", "source": "castle", "path": "memory/dreaming/rem/2026-11-07.md#L21", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-07.md-22", "source": "castle", "path": "memory/dreaming/rem/2026-11-07.md#L22", "text": "- evidence: memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-07.md-23", "source": "castle", "path": "memory/dreaming/rem/2026-11-07.md#L23", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-07.md-25", "source": "castle", "path": "memory/dreaming/rem/2026-11-07.md#L25", "text": "### Possible Lasting Truths"}
+{"id": "castle-memory/dreaming/rem/2026-11-07.md-26", "source": "castle", "path": "memory/dreaming/rem/2026-11-07.md#L26", "text": "- No strong candidate truths surfaced."}
+{"id": "castle-memory/dreaming/rem/2026-11-08.md-1", "source": "castle", "path": "memory/dreaming/rem/2026-11-08.md#L1", "text": "# REM Sleep"}
+{"id": "castle-memory/dreaming/rem/2026-11-08.md-3", "source": "castle", "path": "memory/dreaming/rem/2026-11-08.md#L3", "text": "### Reflections"}
+{"id": "castle-memory/dreaming/rem/2026-11-08.md-4", "source": "castle", "path": "memory/dreaming/rem/2026-11-08.md#L4", "text": "- Theme: `compaction` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-08.md-5", "source": "castle", "path": "memory/dreaming/rem/2026-11-08.md#L5", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-08.md-6", "source": "castle", "path": "memory/dreaming/rem/2026-11-08.md#L6", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-08.md-7", "source": "castle", "path": "memory/dreaming/rem/2026-11-08.md#L7", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-08.md-8", "source": "castle", "path": "memory/dreaming/rem/2026-11-08.md#L8", "text": "- Theme: `ledger` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-08.md-9", "source": "castle", "path": "memory/dreaming/rem/2026-11-08.md#L9", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-08.md-10", "source": "castle", "path": "memory/dreaming/rem/2026-11-08.md#L10", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-08.md-11", "source": "castle", "path": "memory/dreaming/rem/2026-11-08.md#L11", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-08.md-12", "source": "castle", "path": "memory/dreaming/rem/2026-11-08.md#L12", "text": "- Theme: `local` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-08.md-13", "source": "castle", "path": "memory/dreaming/rem/2026-11-08.md#L13", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-08.md-14", "source": "castle", "path": "memory/dreaming/rem/2026-11-08.md#L14", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-08.md-15", "source": "castle", "path": "memory/dreaming/rem/2026-11-08.md#L15", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-08.md-16", "source": "castle", "path": "memory/dreaming/rem/2026-11-08.md#L16", "text": "- Theme: `utc` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-08.md-17", "source": "castle", "path": "memory/dreaming/rem/2026-11-08.md#L17", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-08.md-18", "source": "castle", "path": "memory/dreaming/rem/2026-11-08.md#L18", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-08.md-19", "source": "castle", "path": "memory/dreaming/rem/2026-11-08.md#L19", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-08.md-20", "source": "castle", "path": "memory/dreaming/rem/2026-11-08.md#L20", "text": "- Theme: `tokens` kept surfacing across 2 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-08.md-21", "source": "castle", "path": "memory/dreaming/rem/2026-11-08.md#L21", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-08.md-22", "source": "castle", "path": "memory/dreaming/rem/2026-11-08.md#L22", "text": "- evidence: memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-08.md-23", "source": "castle", "path": "memory/dreaming/rem/2026-11-08.md#L23", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-08.md-25", "source": "castle", "path": "memory/dreaming/rem/2026-11-08.md#L25", "text": "### Possible Lasting Truths"}
+{"id": "castle-memory/dreaming/rem/2026-11-08.md-26", "source": "castle", "path": "memory/dreaming/rem/2026-11-08.md#L26", "text": "- No strong candidate truths surfaced."}
+{"id": "castle-memory/dreaming/rem/2026-11-09.md-1", "source": "castle", "path": "memory/dreaming/rem/2026-11-09.md#L1", "text": "# REM Sleep"}
+{"id": "castle-memory/dreaming/rem/2026-11-09.md-3", "source": "castle", "path": "memory/dreaming/rem/2026-11-09.md#L3", "text": "### Reflections"}
+{"id": "castle-memory/dreaming/rem/2026-11-09.md-4", "source": "castle", "path": "memory/dreaming/rem/2026-11-09.md#L4", "text": "- Theme: `compaction` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-09.md-5", "source": "castle", "path": "memory/dreaming/rem/2026-11-09.md#L5", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-09.md-6", "source": "castle", "path": "memory/dreaming/rem/2026-11-09.md#L6", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-09.md-7", "source": "castle", "path": "memory/dreaming/rem/2026-11-09.md#L7", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-09.md-8", "source": "castle", "path": "memory/dreaming/rem/2026-11-09.md#L8", "text": "- Theme: `ledger` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-09.md-9", "source": "castle", "path": "memory/dreaming/rem/2026-11-09.md#L9", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-09.md-10", "source": "castle", "path": "memory/dreaming/rem/2026-11-09.md#L10", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-09.md-11", "source": "castle", "path": "memory/dreaming/rem/2026-11-09.md#L11", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-09.md-12", "source": "castle", "path": "memory/dreaming/rem/2026-11-09.md#L12", "text": "- Theme: `local` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-09.md-13", "source": "castle", "path": "memory/dreaming/rem/2026-11-09.md#L13", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-09.md-14", "source": "castle", "path": "memory/dreaming/rem/2026-11-09.md#L14", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-09.md-15", "source": "castle", "path": "memory/dreaming/rem/2026-11-09.md#L15", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-09.md-16", "source": "castle", "path": "memory/dreaming/rem/2026-11-09.md#L16", "text": "- Theme: `utc` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-09.md-17", "source": "castle", "path": "memory/dreaming/rem/2026-11-09.md#L17", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-09.md-18", "source": "castle", "path": "memory/dreaming/rem/2026-11-09.md#L18", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-09.md-19", "source": "castle", "path": "memory/dreaming/rem/2026-11-09.md#L19", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-09.md-20", "source": "castle", "path": "memory/dreaming/rem/2026-11-09.md#L20", "text": "- Theme: `tokens` kept surfacing across 2 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-09.md-21", "source": "castle", "path": "memory/dreaming/rem/2026-11-09.md#L21", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-09.md-22", "source": "castle", "path": "memory/dreaming/rem/2026-11-09.md#L22", "text": "- evidence: memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-09.md-23", "source": "castle", "path": "memory/dreaming/rem/2026-11-09.md#L23", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-09.md-25", "source": "castle", "path": "memory/dreaming/rem/2026-11-09.md#L25", "text": "### Possible Lasting Truths"}
+{"id": "castle-memory/dreaming/rem/2026-11-09.md-26", "source": "castle", "path": "memory/dreaming/rem/2026-11-09.md#L26", "text": "- No strong candidate truths surfaced."}
+{"id": "castle-memory/dreaming/rem/2026-11-10.md-1", "source": "castle", "path": "memory/dreaming/rem/2026-11-10.md#L1", "text": "# REM Sleep"}
+{"id": "castle-memory/dreaming/rem/2026-11-10.md-3", "source": "castle", "path": "memory/dreaming/rem/2026-11-10.md#L3", "text": "### Reflections"}
+{"id": "castle-memory/dreaming/rem/2026-11-10.md-4", "source": "castle", "path": "memory/dreaming/rem/2026-11-10.md#L4", "text": "- Theme: `compaction` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-10.md-5", "source": "castle", "path": "memory/dreaming/rem/2026-11-10.md#L5", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-10.md-6", "source": "castle", "path": "memory/dreaming/rem/2026-11-10.md#L6", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-10.md-7", "source": "castle", "path": "memory/dreaming/rem/2026-11-10.md#L7", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-10.md-8", "source": "castle", "path": "memory/dreaming/rem/2026-11-10.md#L8", "text": "- Theme: `ledger` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-10.md-9", "source": "castle", "path": "memory/dreaming/rem/2026-11-10.md#L9", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-10.md-10", "source": "castle", "path": "memory/dreaming/rem/2026-11-10.md#L10", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-10.md-11", "source": "castle", "path": "memory/dreaming/rem/2026-11-10.md#L11", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-10.md-12", "source": "castle", "path": "memory/dreaming/rem/2026-11-10.md#L12", "text": "- Theme: `local` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-10.md-13", "source": "castle", "path": "memory/dreaming/rem/2026-11-10.md#L13", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-10.md-14", "source": "castle", "path": "memory/dreaming/rem/2026-11-10.md#L14", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-10.md-15", "source": "castle", "path": "memory/dreaming/rem/2026-11-10.md#L15", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-10.md-16", "source": "castle", "path": "memory/dreaming/rem/2026-11-10.md#L16", "text": "- Theme: `utc` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-10.md-17", "source": "castle", "path": "memory/dreaming/rem/2026-11-10.md#L17", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-10.md-18", "source": "castle", "path": "memory/dreaming/rem/2026-11-10.md#L18", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-10.md-19", "source": "castle", "path": "memory/dreaming/rem/2026-11-10.md#L19", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-10.md-20", "source": "castle", "path": "memory/dreaming/rem/2026-11-10.md#L20", "text": "- Theme: `tokens` kept surfacing across 2 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-10.md-21", "source": "castle", "path": "memory/dreaming/rem/2026-11-10.md#L21", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-10.md-22", "source": "castle", "path": "memory/dreaming/rem/2026-11-10.md#L22", "text": "- evidence: memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-10.md-23", "source": "castle", "path": "memory/dreaming/rem/2026-11-10.md#L23", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-10.md-25", "source": "castle", "path": "memory/dreaming/rem/2026-11-10.md#L25", "text": "### Possible Lasting Truths"}
+{"id": "castle-memory/dreaming/rem/2026-11-10.md-26", "source": "castle", "path": "memory/dreaming/rem/2026-11-10.md#L26", "text": "- No strong candidate truths surfaced."}
+{"id": "castle-memory/dreaming/rem/2026-11-11.md-1", "source": "castle", "path": "memory/dreaming/rem/2026-11-11.md#L1", "text": "# REM Sleep"}
+{"id": "castle-memory/dreaming/rem/2026-11-11.md-3", "source": "castle", "path": "memory/dreaming/rem/2026-11-11.md#L3", "text": "### Reflections"}
+{"id": "castle-memory/dreaming/rem/2026-11-11.md-4", "source": "castle", "path": "memory/dreaming/rem/2026-11-11.md#L4", "text": "- Theme: `compaction` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-11.md-5", "source": "castle", "path": "memory/dreaming/rem/2026-11-11.md#L5", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-11.md-6", "source": "castle", "path": "memory/dreaming/rem/2026-11-11.md#L6", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-11.md-7", "source": "castle", "path": "memory/dreaming/rem/2026-11-11.md#L7", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-11.md-8", "source": "castle", "path": "memory/dreaming/rem/2026-11-11.md#L8", "text": "- Theme: `ledger` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-11.md-9", "source": "castle", "path": "memory/dreaming/rem/2026-11-11.md#L9", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-11.md-10", "source": "castle", "path": "memory/dreaming/rem/2026-11-11.md#L10", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-11.md-11", "source": "castle", "path": "memory/dreaming/rem/2026-11-11.md#L11", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-11.md-12", "source": "castle", "path": "memory/dreaming/rem/2026-11-11.md#L12", "text": "- Theme: `local` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-11.md-13", "source": "castle", "path": "memory/dreaming/rem/2026-11-11.md#L13", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-11.md-14", "source": "castle", "path": "memory/dreaming/rem/2026-11-11.md#L14", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-11.md-15", "source": "castle", "path": "memory/dreaming/rem/2026-11-11.md#L15", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-11.md-16", "source": "castle", "path": "memory/dreaming/rem/2026-11-11.md#L16", "text": "- Theme: `utc` kept surfacing across 3 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-11.md-17", "source": "castle", "path": "memory/dreaming/rem/2026-11-11.md#L17", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-11.md-18", "source": "castle", "path": "memory/dreaming/rem/2026-11-11.md#L18", "text": "- evidence: memory/2026-11-04.md:4-4, memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-11.md-19", "source": "castle", "path": "memory/dreaming/rem/2026-11-11.md#L19", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-11.md-20", "source": "castle", "path": "memory/dreaming/rem/2026-11-11.md#L20", "text": "- Theme: `tokens` kept surfacing across 2 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-11.md-21", "source": "castle", "path": "memory/dreaming/rem/2026-11-11.md#L21", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-11.md-22", "source": "castle", "path": "memory/dreaming/rem/2026-11-11.md#L22", "text": "- evidence: memory/2026-11-04.md:5-5, memory/2026-11-04.md:6-7"}
+{"id": "castle-memory/dreaming/rem/2026-11-11.md-23", "source": "castle", "path": "memory/dreaming/rem/2026-11-11.md#L23", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-11.md-25", "source": "castle", "path": "memory/dreaming/rem/2026-11-11.md#L25", "text": "### Possible Lasting Truths"}
+{"id": "castle-memory/dreaming/rem/2026-11-11.md-26", "source": "castle", "path": "memory/dreaming/rem/2026-11-11.md#L26", "text": "- No strong candidate truths surfaced."}
+{"id": "castle-memory/dreaming/rem/2026-11-12.md-1", "source": "castle", "path": "memory/dreaming/rem/2026-11-12.md#L1", "text": "# REM Sleep"}
+{"id": "castle-memory/dreaming/rem/2026-11-12.md-3", "source": "castle", "path": "memory/dreaming/rem/2026-11-12.md#L3", "text": "### Reflections"}
+{"id": "castle-memory/dreaming/rem/2026-11-12.md-4", "source": "castle", "path": "memory/dreaming/rem/2026-11-12.md#L4", "text": "- Theme: `canary-ok` kept surfacing across 1 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-12.md-5", "source": "castle", "path": "memory/dreaming/rem/2026-11-12.md#L5", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-12.md-6", "source": "castle", "path": "memory/dreaming/rem/2026-11-12.md#L6", "text": "- evidence: memory/.dreams/session-corpus/2026-11-04.txt:80-80"}
+{"id": "castle-memory/dreaming/rem/2026-11-12.md-7", "source": "castle", "path": "memory/dreaming/rem/2026-11-12.md#L7", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-12.md-8", "source": "castle", "path": "memory/dreaming/rem/2026-11-12.md#L8", "text": "- Theme: `respond` kept surfacing across 1 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-12.md-9", "source": "castle", "path": "memory/dreaming/rem/2026-11-12.md#L9", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-12.md-10", "source": "castle", "path": "memory/dreaming/rem/2026-11-12.md#L10", "text": "- evidence: memory/.dreams/session-corpus/2026-11-04.txt:80-80"}
+{"id": "castle-memory/dreaming/rem/2026-11-12.md-11", "source": "castle", "path": "memory/dreaming/rem/2026-11-12.md#L11", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-12.md-13", "source": "castle", "path": "memory/dreaming/rem/2026-11-12.md#L13", "text": "### Possible Lasting Truths"}
+{"id": "castle-memory/dreaming/rem/2026-11-12.md-14", "source": "castle", "path": "memory/dreaming/rem/2026-11-12.md#L14", "text": "- No strong candidate truths surfaced."}
+{"id": "castle-memory/dreaming/rem/2026-11-17.md-1", "source": "castle", "path": "memory/dreaming/rem/2026-11-17.md#L1", "text": "# REM Sleep"}
+{"id": "castle-memory/dreaming/rem/2026-11-17.md-3", "source": "castle", "path": "memory/dreaming/rem/2026-11-17.md#L3", "text": "### Reflections"}
+{"id": "castle-memory/dreaming/rem/2026-11-17.md-4", "source": "castle", "path": "memory/dreaming/rem/2026-11-17.md#L4", "text": "- Theme: `utc` kept surfacing across 15 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-17.md-5", "source": "castle", "path": "memory/dreaming/rem/2026-11-17.md#L5", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-17.md-6", "source": "castle", "path": "memory/dreaming/rem/2026-11-17.md#L6", "text": "- evidence: memory/2026-11-17.md:12-12, memory/2026-11-17.md:21-21, memory/2026-11-17.md:17-17"}
+{"id": "castle-memory/dreaming/rem/2026-11-17.md-7", "source": "castle", "path": "memory/dreaming/rem/2026-11-17.md#L7", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-17.md-8", "source": "castle", "path": "memory/dreaming/rem/2026-11-17.md#L8", "text": "- Theme: `canonical` kept surfacing across 6 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-17.md-9", "source": "castle", "path": "memory/dreaming/rem/2026-11-17.md#L9", "text": "- confidence: 0.80"}
+{"id": "castle-memory/dreaming/rem/2026-11-17.md-10", "source": "castle", "path": "memory/dreaming/rem/2026-11-17.md#L10", "text": "- evidence: memory/2026-11-17.md:17-17, memory/2026-11-17.md:18-18, memory/2026-11-17.md:15-15"}
+{"id": "castle-memory/dreaming/rem/2026-11-17.md-11", "source": "castle", "path": "memory/dreaming/rem/2026-11-17.md#L11", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-17.md-12", "source": "castle", "path": "memory/dreaming/rem/2026-11-17.md#L12", "text": "- Theme: `discord` kept surfacing across 6 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-17.md-13", "source": "castle", "path": "memory/dreaming/rem/2026-11-17.md#L13", "text": "- confidence: 0.80"}
+{"id": "castle-memory/dreaming/rem/2026-11-17.md-14", "source": "castle", "path": "memory/dreaming/rem/2026-11-17.md#L14", "text": "- evidence: memory/2026-11-17.md:17-17, memory/2026-11-17.md:18-18, memory/2026-11-17.md:15-15"}
+{"id": "castle-memory/dreaming/rem/2026-11-17.md-15", "source": "castle", "path": "memory/dreaming/rem/2026-11-17.md#L15", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-17.md-16", "source": "castle", "path": "memory/dreaming/rem/2026-11-17.md#L16", "text": "- Theme: `rook` kept surfacing across 6 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-17.md-17", "source": "castle", "path": "memory/dreaming/rem/2026-11-17.md#L17", "text": "- confidence: 0.80"}
+{"id": "castle-memory/dreaming/rem/2026-11-17.md-18", "source": "castle", "path": "memory/dreaming/rem/2026-11-17.md#L18", "text": "- evidence: memory/2026-11-17.md:8-8, memory/2026-11-17.md:6-6, memory/2026-11-17.md:20-20"}
+{"id": "castle-memory/dreaming/rem/2026-11-17.md-19", "source": "castle", "path": "memory/dreaming/rem/2026-11-17.md#L19", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-17.md-21", "source": "castle", "path": "memory/dreaming/rem/2026-11-17.md#L21", "text": "### Possible Lasting Truths"}
+{"id": "castle-memory/dreaming/rem/2026-11-17.md-22", "source": "castle", "path": "memory/dreaming/rem/2026-11-17.md#L22", "text": "- No strong candidate truths surfaced."}
+{"id": "castle-memory/dreaming/rem/2026-11-18.md-1", "source": "castle", "path": "memory/dreaming/rem/2026-11-18.md#L1", "text": "# REM Sleep"}
+{"id": "castle-memory/dreaming/rem/2026-11-18.md-3", "source": "castle", "path": "memory/dreaming/rem/2026-11-18.md#L3", "text": "### Reflections"}
+{"id": "castle-memory/dreaming/rem/2026-11-18.md-4", "source": "castle", "path": "memory/dreaming/rem/2026-11-18.md#L4", "text": "- Theme: `utc` kept surfacing across 15 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-18.md-5", "source": "castle", "path": "memory/dreaming/rem/2026-11-18.md#L5", "text": "- confidence: 1.00"}
+{"id": "castle-memory/dreaming/rem/2026-11-18.md-6", "source": "castle", "path": "memory/dreaming/rem/2026-11-18.md#L6", "text": "- evidence: memory/2026-11-17.md:12-12, memory/2026-11-17.md:21-21, memory/2026-11-17.md:17-17"}
+{"id": "castle-memory/dreaming/rem/2026-11-18.md-7", "source": "castle", "path": "memory/dreaming/rem/2026-11-18.md#L7", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-18.md-8", "source": "castle", "path": "memory/dreaming/rem/2026-11-18.md#L8", "text": "- Theme: `canonical` kept surfacing across 6 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-18.md-9", "source": "castle", "path": "memory/dreaming/rem/2026-11-18.md#L9", "text": "- confidence: 0.80"}
+{"id": "castle-memory/dreaming/rem/2026-11-18.md-10", "source": "castle", "path": "memory/dreaming/rem/2026-11-18.md#L10", "text": "- evidence: memory/2026-11-17.md:17-17, memory/2026-11-17.md:18-18, memory/2026-11-17.md:15-15"}
+{"id": "castle-memory/dreaming/rem/2026-11-18.md-11", "source": "castle", "path": "memory/dreaming/rem/2026-11-18.md#L11", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-18.md-12", "source": "castle", "path": "memory/dreaming/rem/2026-11-18.md#L12", "text": "- Theme: `discord` kept surfacing across 6 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-18.md-13", "source": "castle", "path": "memory/dreaming/rem/2026-11-18.md#L13", "text": "- confidence: 0.80"}
+{"id": "castle-memory/dreaming/rem/2026-11-18.md-14", "source": "castle", "path": "memory/dreaming/rem/2026-11-18.md#L14", "text": "- evidence: memory/2026-11-17.md:17-17, memory/2026-11-17.md:18-18, memory/2026-11-17.md:15-15"}
+{"id": "castle-memory/dreaming/rem/2026-11-18.md-15", "source": "castle", "path": "memory/dreaming/rem/2026-11-18.md#L15", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-18.md-16", "source": "castle", "path": "memory/dreaming/rem/2026-11-18.md#L16", "text": "- Theme: `rook` kept surfacing across 6 memories."}
+{"id": "castle-memory/dreaming/rem/2026-11-18.md-17", "source": "castle", "path": "memory/dreaming/rem/2026-11-18.md#L17", "text": "- confidence: 0.80"}
+{"id": "castle-memory/dreaming/rem/2026-11-18.md-18", "source": "castle", "path": "memory/dreaming/rem/2026-11-18.md#L18", "text": "- evidence: memory/2026-11-17.md:8-8, memory/2026-11-17.md:6-6, memory/2026-11-17.md:20-20"}
+{"id": "castle-memory/dreaming/rem/2026-11-18.md-19", "source": "castle", "path": "memory/dreaming/rem/2026-11-18.md#L19", "text": "- note: reflection"}
+{"id": "castle-memory/dreaming/rem/2026-11-18.md-21", "source": "castle", "path": "memory/dreaming/rem/2026-11-18.md#L21", "text": "### Possible Lasting Truths"}
+{"id": "castle-memory/dreaming/rem/2026-11-18.md-22", "source": "castle", "path": "memory/dreaming/rem/2026-11-18.md#L22", "text": "- No strong candidate truths surfaced."}
