@@ -2,251 +2,251 @@
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- [ ] Add multi-language caption support",
-    "captured": "2026-11-18T04:12:20.919816"
+    "captured": "2026-11-18T04:17:20.947804"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- [ ] Integrate with youtube-watch-pipeline for automated RSS polling",
-    "captured": "2026-11-18T04:12:20.919818"
+    "captured": "2026-11-18T04:17:20.947806"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Pipeline: `/home/rook/.openclaw/workspace/tools/yt_full_pipeline_llama31_dynamic.py`",
-    "captured": "2026-11-18T04:12:20.919820"
+    "captured": "2026-11-18T04:17:20.947808"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Service: `/etc/systemd/system/llama-3.1-8b.service`",
-    "captured": "2026-11-18T04:12:20.919822"
+    "captured": "2026-11-18T04:17:20.947810"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Model: `/home/rook/.openclaw/workspace/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf`",
-    "captured": "2026-11-18T04:12:20.919824"
+    "captured": "2026-11-18T04:17:20.947812"
   },
   {
     "source": "memory/2026-11-16_pipeline_lock.md",
     "text": "- Todo: `/home/rook/.openclaw/workspace/todo_live_streams.md`",
-    "captured": "2026-11-18T04:12:20.919826"
+    "captured": "2026-11-18T04:17:20.947814"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- **Model:** Meta-Llama-3.1-8B-Instruct-Q4_K_M (4.6 GB)",
-    "captured": "2026-11-18T04:12:20.919895"
+    "captured": "2026-11-18T04:17:20.947879"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- **Endpoint:** http://127.0.0.1:5003/v1",
-    "captured": "2026-11-18T04:12:20.919899"
+    "captured": "2026-11-18T04:17:20.947883"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- **Context:** 8192 tokens (native 128K training, stable on CPU)",
-    "captured": "2026-11-18T04:12:20.919901"
+    "captured": "2026-11-18T04:17:20.947884"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- **Service:** `llama-3.1-8b.service` (systemd, auto-restart, enabled)",
-    "captured": "2026-11-18T04:12:20.919903"
+    "captured": "2026-11-18T04:17:20.947886"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- **Performance:** ~7.25 tok/s on CPU (all 8 threads)",
-    "captured": "2026-11-18T04:12:20.919905"
+    "captured": "2026-11-18T04:17:20.947888"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Auto-generates extraction query per video from transcript's most information-dense sentences",
-    "captured": "2026-11-18T04:12:20.919907"
+    "captured": "2026-11-18T04:17:20.947891"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Filters 200+ stopwords including conversational filler",
-    "captured": "2026-11-18T04:12:20.919909"
+    "captured": "2026-11-18T04:17:20.947893"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Extracts proper nouns, acronyms, numbers, technical terms",
-    "captured": "2026-11-18T04:12:20.919911"
+    "captured": "2026-11-18T04:17:20.947895"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Falls back to frequency analysis if <10 keywords",
-    "captured": "2026-11-18T04:12:20.919912"
+    "captured": "2026-11-18T04:17:20.947897"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Test on educational/lecture content to confirm \"sweet spot\" quality",
-    "captured": "2026-11-18T04:12:20.919918"
+    "captured": "2026-11-18T04:17:20.947902"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Integrate with youtube-watch-pipeline for automated RSS polling",
-    "captured": "2026-11-18T04:12:20.919920"
+    "captured": "2026-11-18T04:17:20.947904"
   },
   {
     "source": "memory/2026-11-16_session_summary.md",
     "text": "- Add multi-language caption support",
-    "captured": "2026-11-18T04:12:20.919921"
+    "captured": "2026-11-18T04:17:20.947906"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Objective: Trigger 429 on Castle's Flash 3.1 quota (~500 calls/day) to test expanded self-heal triggers (bare 429, RESOURCE_EXHAUSTED, quota exceeded)",
-    "captured": "2026-11-18T04:12:20.919985"
+    "captured": "2026-11-18T04:17:20.947969"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Plan: 5 rounds \u2014 research task \u2192 quota exhaustion \u2192 429 detection \u2192 timer \u2192 check-in \u2192 retry \u2192 close",
-    "captured": "2026-11-18T04:12:20.919988"
+    "captured": "2026-11-18T04:17:20.947972"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Round 1: Castle begins multi-call research on \"inter-agent communication protocols for autonomous AI collaboration\"",
-    "captured": "2026-11-18T04:12:20.919990"
+    "captured": "2026-11-18T04:17:20.947974"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Triggers expanded: now catch `429` prefix, bare `429`, `RESOURCE_EXHAUSTED`, `quota exceeded` (case-insensitive)",
-    "captured": "2026-11-18T04:12:20.919992"
+    "captured": "2026-11-18T04:17:20.947976"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- GitHub Actions workflow live: `.github/workflows/update-metrics.yml` auto-updates dashboard on every push",
-    "captured": "2026-11-18T04:12:20.919994"
+    "captured": "2026-11-18T04:17:20.947978"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- 429 self-heal trigger updated: Changed from prefix-only ('message starting with 429') to substring match ('message containing 429') because Castle's 429 errors appear embedded in status logs (e.g., 'Working... \u26a0\ufe0f Google Generative AI API error (429)...') rather than as explicit prefix signals. Old intent cancelled (76ac28ee...), new armed (f5124940...). Trigger: Castle (1567129284210982914) in #debate-club containing '429'. Cooldown 60s, max 100 fires, max 2 exchanges then escalate to Bean.",
-    "captured": "2026-11-18T04:12:20.919996"
+    "captured": "2026-11-18T04:17:20.947980"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- 06:01 UTC: Daily digest posted \u2014 2 sections with real links",
-    "captured": "2026-11-18T04:12:20.919998"
+    "captured": "2026-11-18T04:17:20.947982"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- 2026-11-17: Pages byte-match verification is insufficient \u2014 two consecutive deploys \"verified live\" while doing nothing (initGame exported never called; physics update missing from loop). Verify the runtime call chain (auto-init present, every system actually invoked per frame), not just 200s and sha256. <!-- project: path:/home/rook/.openclaw/workspace -->",
-    "captured": "2026-11-18T04:12:20.920000"
+    "captured": "2026-11-18T04:17:20.947984"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- 15:30 UTC: State backup uploaded \u2014 108 files, 512",
-    "captured": "2026-11-18T04:12:20.920002"
+    "captured": "2026-11-18T04:17:20.947986"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- self-correction-loops",
-    "captured": "2026-11-18T04:12:20.920004"
+    "captured": "2026-11-18T04:17:20.947988"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- star-rejection-sampling",
-    "captured": "2026-11-18T04:12:20.920006"
+    "captured": "2026-11-18T04:17:20.947990"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- automated-agent-design",
-    "captured": "2026-11-18T04:12:20.920007"
+    "captured": "2026-11-18T04:17:20.947991"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- auto-skill-synthesis",
-    "captured": "2026-11-18T04:12:20.920009"
+    "captured": "2026-11-18T04:17:20.947993"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- rsi-bounds-oversight",
-    "captured": "2026-11-18T04:12:20.920011"
+    "captured": "2026-11-18T04:17:20.947995"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- local-embedding-rerank",
-    "captured": "2026-11-18T04:12:20.920012"
+    "captured": "2026-11-18T04:17:20.947997"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- structured-output-gbnf",
-    "captured": "2026-11-18T04:12:20.920014"
+    "captured": "2026-11-18T04:17:20.947999"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- context-window-management",
-    "captured": "2026-11-18T04:12:20.920016"
+    "captured": "2026-11-18T04:17:20.948001"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- sodimm-pcie-llm-2026-11-17",
-    "captured": "2026-11-18T04:12:20.920018"
+    "captured": "2026-11-18T04:17:20.948003"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- free-llm-apis-for-castle-2026-11-16",
-    "captured": "2026-11-18T04:12:20.920020"
+    "captured": "2026-11-18T04:17:20.948005"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Bean lifted the wait requirement (\"choice is your if you execute or not... find a way to make some server space... be creative and make it happen, 3 rounds and go\"). Architecture decision: zero external accounts exist on this box (no gh/wrangler/CF/supabase creds \u2014 verified), so self-host: stdlib `score_server.py` (127.0.0.1:8899, systemd user unit `arcade-score.service`) + anonymous cloudflared quick tunnel; `run_tunnel.sh` auto-publishes `data/endpoint.json` to origin/main on every restart (mitigates quick-tunnel hostname rotation \u2014 Castle's availability objection).",
-    "captured": "2026-11-18T04:12:20.920022"
+    "captured": "2026-11-18T04:17:20.948007"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Shipped: `board.html` (live board UI, fetches data/endpoint.json no-store), `game.js` patch (auto-submit on GAME OVER, name via localStorage), `docs/arcade-live-board.md`, index link. JS tests green (356 pass, 8 files). Byte-verified Pages serves == origin/main for board.html/game.js/index.html/endpoint.json; ledger_check 35/0. Live tunnel /api/health 200 + POST write verified (TESTBOT row removed after).",
-    "captured": "2026-11-18T04:12:20.920023"
+    "captured": "2026-11-18T04:17:20.948009"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Lesson: when a no-credential live-storage ask lands, the honest creative answer on a homelab box is outbound-tunnel + self-published endpoint file, not \"wait for account creation\"; but quick-tunnel rotation means front end must never hardcode the hostname \u2014 endpoint.json indirection is mandatory.",
-    "captured": "2026-11-18T04:12:20.920025"
+    "captured": "2026-11-18T04:17:20.948011"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Bean asked for a mini self-hosted space not reliant on trycloudflare. Measured cage: no global IPv6, NAT 192.168.1.201 via 192.168.1.1, no cloud creds, kvdb.io requires email login (422 without). Router off-limits (Bean can't touch it). Ranked: Tailscale Funnel (one Bean click, stable *.ts.net, no inbound) > GitHub-as-DB zero-input fallback > named CF Tunnel > VPS+Nginx+SQLite (Castle's VPS proposal = real server but high ops + account/payment). Written + pushed as `docs/mini-self-host.md` (30a763d). Joint park until Bean picks; Francis's audit list precedes any live swap.",
-    "captured": "2026-11-18T04:12:20.920027"
+    "captured": "2026-11-18T04:17:20.948012"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Bean asked for prepper-helpful LLM + wiki for the P2200, sound-boarded with Castle over 4 rounds, pre-authorized DL of up to 3 models.",
-    "captured": "2026-11-18T04:12:20.920028"
+    "captured": "2026-11-18T04:17:20.948014"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Ground truth on box: P2200 5 GB VRAM (3.9 GB used by deepseek-coder), 48 GB RAM, 25 GB disk free, llama.cpp CUDA-built, torch CUDA driver warning (torch too new for driver 12040) \u2014 prefer llama-server direct.",
-    "captured": "2026-11-18T04:12:20.920030"
+    "captured": "2026-11-18T04:17:20.948016"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Locked stack: Qwen2.5-3B-Instruct Q4_K_M (already cached), Qwen2.5-1.5B Q4_K_M (downloaded), SmolLM2-1.7B Q4_K_M (downloading). WikiMed 2026-10 nopic (~1.05 GB, 371k articles) + Appropedia 2026-02 maxi (~582 MB, 30.7k articles) via Kiwix OPDS (lb.download.kiwix.org). Rejected video ZIMs, TED, Gutenberg bulk, Phi-3.5-mini. BM25/keyword first + raw text, not vector-only. Field manuals (FM 21-76 etc.) absent from Kiwix catalog \u2014 PDFs to harvest separately if Bean wants.",
-    "captured": "2026-11-18T04:12:20.920032"
+    "captured": "2026-11-18T04:17:20.948018"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Model downloads VERIFIED COMPLETE (2026-11-17 ~22:10): Qwen2.5-3B-Instruct Q4_K_M already cached (Nov 11, 2.0G dir); Qwen2.5-1.5B-Instruct Q4_K_M snapshot=91cad51170dc346986eccefdc2dd33a9da36ead9 blob 1,117,320,736 B; SmolLM2-1.7B-Instruct Q4_K_M snapshot=2d4a76a30b4af41ecd395c35725ac11688d4cfe4 blob 1,055,609,536 B. `du` / FS usage readings were misleading on this fs \u2014 always verify with `wc -c` on the blob before claiming a model is downloaded.",
-    "captured": "2026-11-18T04:12:20.920034"
+    "captured": "2026-11-18T04:17:20.948019"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- ZIM downloads (fetch_all.sh, background) were STILL IN FLIGHT at flush; not verified. Never claim ZIM completion until byte count + magic header checked. `lb.download.kiwix.org` was reachable (curl 200); Kiwix OPDS search at `https://library.kiwix.org/catalog/search?q=...` returned the exact WikiMed and Appropedia acquisition URLs. Video ZIMs (Canadian Prepper, Learning Self-Reliance) rejected for GB-per-text.",
-    "captured": "2026-11-18T04:12:20.920035"
+    "captured": "2026-11-18T04:17:20.948021"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- 178-file inventory additions: prepping-wiki/ now holds fetch_all.sh + fetch_models.py; wiki ZIMs land there when done.",
-    "captured": "2026-11-18T04:12:20.920037"
+    "captured": "2026-11-18T04:17:20.948023"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Bean granted pre-authorization to download up to 3 models without per-model consent \u2014 treat as one-shot authorization for today's prepper task only, not a standing license to fetch arbitrary models.",
-    "captured": "2026-11-18T04:12:20.920039"
+    "captured": "2026-11-18T04:17:20.948025"
   },
   {
     "source": "memory/2026-11-17.md",
     "text": "- Debate guard tripped during earlier #debate-club ping-pong with Castle; Castle alignment message received and logged via memory. 4-turn sound board concluded; no further bot-to-bot rounds without Bean direction.",
-    "captured": "2026-11-18T04:12:20.920040"
+    "captured": "2026-11-18T04:17:20.948027"
   },
   {
     "source": "spikes/001-session-continuity-daemon",
     "text": "# Spike: Session Continuity Bridge Daemon\n\n## Question\nCan a lightweight Python daemon persist agent session state (task list, decisions, recent diffs) to a local git-backed store and restore it on co",
-    "captured": "2026-11-18T04:12:20.920173"
+    "captured": "2026-11-18T04:17:20.948158"
   }
 ]
