@@ -1,0 +1,58 @@
+{
+  "id": "1795034303-d10eb82d",
+  "source": "rook",
+  "answered_by": "survival-rag",
+  "query": "how do I purify drinking water in the field",
+  "raw": {
+    "query": "how do I purify drinking water in the field",
+    "abstain": false,
+    "mode": "generative",
+    "medical": false,
+    "answer": " In the field, you can purify drinking water using a portable water purification device. These devices are designed to eliminate pathogens from water sources like rivers, lakes, and wells, making the water safe for drinking. Some common techniques used in portable water purification devices include:\n\n1. **Boiling**: Bringing the water to a rolling boil for at least one minute kills most pathogens.\n2. **Filtration**: Using a mechanical filter to remove suspended particles and some pathogens.\n3. **Activated Charcoal Adsorption**: Using charcoal to\u5438\u9644\u4e00\u4e9b\u4e0d\u6109\u5feb\u7684\u6c14\u5473\u548c\u6bd2\u7d20\u3002\n4. **Chemical Disinfection**: Using chemicals like chlorine, iodine, ozonation, or ultraviolet (UV) purification to kill pathogens.\n\nThese methods ensure that the water is free from disease-causing microorganisms, making it safe for consumption. Portable water purification devices are self-contained, easily transportable units that can provide a continuous supply of clean water in areas where access to safe drinking water is limited.",
+    "sources": [
+      {
+        "title": "GEN Solution Library/Purify contaminated water for drinking",
+        "zim": "appropedia_en_all_maxi_2026-02.zim",
+        "path": "GEN_Solution_Library/Purify_contaminated_water_for_drinking",
+        "chunk_id": 0,
+        "score": 23.24
+      },
+      {
+        "title": "Understanding Solar Stills/Part I",
+        "zim": "appropedia_en_all_maxi_2026-02.zim",
+        "path": "Understanding_Solar_Stills/Part_I",
+        "chunk_id": 1,
+        "score": 22.69
+      },
+      {
+        "title": "GEN Solution Library/Purify contaminated water for drinking",
+        "zim": "appropedia_en_all_maxi_2026-02.zim",
+        "path": "GEN_Solution_Library/Purify_contaminated_water_for_drinking",
+        "chunk_id": 1,
+        "score": 21.37
+      },
+      {
+        "title": "Portable water purification",
+        "zim": "wikipedia_en_medicine_nopic_2026-10.zim",
+        "path": "Portable_water_purification",
+        "chunk_id": 0,
+        "score": 21.14
+      },
+      {
+        "title": "Adventist Youth Honors Answer Book/Camping/Purify water",
+        "zim": "wikibooks_en_all_nopic_2026-10.zim",
+        "path": "Adventist_Youth_Honors_Answer_Book/Camping/Purify_water",
+        "chunk_id": 0,
+        "score": 20.57
+      },
+      {
+        "title": "Adventist Youth Honors Answer Book/Nature/Worms - Advanced",
+        "zim": "wikibooks_en_all_nopic_2026-10.zim",
+        "path": "Adventist_Youth_Honors_Answer_Book/Nature/Worms_-_Advanced",
+        "chunk_id": 7,
+        "score": 19.96
+      }
+    ]
+  },
+  "ts": "2026-11-18T20:38:52Z"
+}
