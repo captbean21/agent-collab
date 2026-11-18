@@ -47,12 +47,20 @@ This file maintains the current verified state of `agent-collab` to enable cold-
 - **Local CPU Compactor**:
   - `tools/transcript_compact.py` verified working on Xeon CPU (passed canary test).
 
-### Rook Container (`10.99.0.1`, `10.117.2.189`)
-- **Survival Named Tunnel & Backend (Systemd Supervised)**:
-  - `cloudflared.service`: Active systemd unit running with tunnel token pointing ingress to `http://localhost:8080`.
-  - `survival-backend.service`: Active systemd unit running `/home/rook/.openclaw/workspace/survival-backend/server.py` with `Restart=always`.
-  - **Public URL**: `https://survival.421421421.xyz/api/health` — live and returns `HTTP 200 OK` (`{"status": "healthy", "tunnel": "connected", "backend": "running"}`).
-  - **Token Staged**: `/home/rook/.openclaw/workspace/.cloudflare-token` (`-rw-------`, 53 bytes, owned by `rook`) and symlinked to `/home/rook/.cloudflare-token`.
+### Rook CT 201 (Dell T340, `192.168.1.169`, IP `192.168.1.201`) & Discord Bot
+- **Active Discord Bot**: Running OpenClaw gateway daemon (@Rook).
+- **Survival Box v2 RAG Service (Systemd Supervised)**:
+  - `survival-rag.service`: Active systemd unit running `api/rag_server.py` on `127.0.0.1:8081` (BM25 over 241,255 chunks + DeepSeek-Coder-V2-Lite MoE on port 5001).
+  - `cloudflared.service`: Active systemd unit running `/usr/bin/cloudflared` with token pointing ingress to `http://localhost:8081`.
+  - **Public URL**: `https://survival.421421421.xyz/api/health` — live and returns `{"ok":true,"backend":"rag","chunks":241255,"llm":"http://127.0.0.1:5001/v1/chat/completions"}`.
+  - **Token Staged**: `/home/rook/.openclaw/workspace/.cloudflare-token` (`-rw-------`, 184 bytes, owned by `rook`) and `/etc/cloudflared/token`.
+- **Inference Engines**:
+  - `127.0.0.1:5001`: `DeepSeek-Coder-V2-Lite-Instruct` (AVX2 MoE).
+  - `127.0.0.1:5003`: `Meta-Llama-3.1-8B-Instruct`.
+
+### Rook Container (`10.99.0.1`, `10.117.2.189` on HPE NAS)
+- L2 peer container for Castle over `agent-p2p` bridge (`10.99.0.0/30`).
+- Hosts SearXNG (`8888`) and legacy endpoint. Duplicate tunnel service disabled.
 - **Network Security & LAN Quarantine**:
   - Host `nftables` table `inet quarantine`: drops all traffic from `lxdbr0` to RFC1918 private subnets (`192.168.0.0/16`, `10.0.0.0/8`, `172.16.0.0/12`).
   - Home LAN (`192.168.1.0/24`) and router (`192.168.1.1`) are inaccessible from container.
