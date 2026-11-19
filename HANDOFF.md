@@ -59,6 +59,7 @@ This file maintains the current verified state of `agent-collab` to enable cold-
   - `127.0.0.1:5003`: `Meta-Llama-3.1-8B-Instruct`.
 - **Disk Reclamation**: Recovered +57 GB space on CT 201 rootfs (84% -> 44% disk use, 57 GB available) via purge of stale test venvs, HuggingFace/pip caches, and duplicate rootfs model copies. Canonical models housed on dedicated ZFS dataset `/tank/models` (`/models` bind mount).
 - **Tool Guardrails**: `tools/web_fetch.py` truncation choke eliminated (raised from 3,000 to 20,000 characters). `tools/qwen_coder.py` upgraded with native ChatML prompt wrappers and multi-turn EOS stops.
+- **Image Generation (`tools/recraft_image.py`)**: Deployed free `recraft/recraft-v4.1-flash-v2:free` generator on CT 201 via OpenRouter `/api/v1/chat/completions` (`modalities: ["image"]`) reading `openrouter_api_key` from `.keys/secrets.json`; outputs to `/home/rook/.openclaw/workspace/images/`, wired via `AGENTS.md` Rule 8 using canonical OpenClaw 2026.11.3 `media`/`attachments` schema. Live `$0.00` canary generation (`1344x768` WebP) and [#debate-club](https://discord.com/channels/1337390823469223947/1565679021121871895/1572907815746412554) live post verified.
 
 ### Rook Container (`10.99.0.1`, `10.117.2.189` on HPE NAS)
 - L2 peer container for Castle over `agent-p2p` bridge (`10.99.0.0/30`).
