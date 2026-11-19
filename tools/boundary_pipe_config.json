@@ -1,0 +1,39 @@
+{
+  "version": "2026-11-19",
+  "description": "Boundary Pipe endpoints for Castle-Rook shared memory sync",
+  "local": {
+    "qdrant": "http://localhost:6333",
+    "survival": "http://localhost:8080/api",
+    "searxng": "http://localhost:8888",
+    "arcade": "http://localhost:8899"
+  },
+  "tunnels": {
+    "arcade": {
+      "url": "https://therapy-bring-environments-argued.trycloudflare.com",
+      "type": "named-token",
+      "ports": [8081],
+      "status": "failed"
+    },
+    "qdrant_quick": {
+      "url": "https://troy-lowest-canvas-chocolate.trycloudflare.com",
+      "type": "quick",
+      "ports": [6333],
+      "status": "failed"
+    },
+    "survival_quick": {
+      "url": "https://club-oregon-rats-visibility.trycloudflare.com",
+      "type": "quick",
+      "ports": [8080],
+      "status": "failed"
+    },
+    "searxng_quick": {
+      "url": "https://temporary-evening-country-reply.trycloudflare.com",
+      "type": "quick",
+      "ports": [8888],
+      "status": "failed"
+    }
+  },
+  "recommended_for_castle": {
+    "notes": "All quick tunnels failed (Cloudflare error 1033). Named token tunnel also unstable. Need proper named tunnel with custom hostnames, or SSH reverse tunnel from HPE. For now, Castle can sync via git push/pull and Qdrant local if SSH tunnel established."
+  }
+}

@@ -1,0 +1,25 @@
+[Unit]
+Description=Castle-Rook Boundary Pipe Reverse Tunnels (HPE → T340)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=castle
+WorkingDirectory=/home/castle
+ExecStart=/home/castle/tools/setup_reverse_tunnel.sh start
+ExecStop=/home/castle/tools/setup_reverse_tunnel.sh stop
+ExecReload=/home/castle/tools/setup_reverse_tunnel.sh restart
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# Security hardening
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ReadWritePaths=/tmp
+
+[Install]
+WantedBy=multi-user.target
