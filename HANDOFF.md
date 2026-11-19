@@ -86,5 +86,5 @@ This file maintains the current verified state of `agent-collab` to enable cold-
     3. `openrouter/google/gemma-4-31b-it:free`
     4. `openrouter/baidu/ernie-5.5-flash-preview:free`
     5. `openrouter/nvidia/nemotron-3.5-lightning:free`
-  - **Local Model Role (Zero Turn Bloat)**: `local/qwen-coder-14b` on port 5001 removed from the OpenClaw interactive fallback chain to prevent large chat context (>20k tokens) from timing out on CPU prompt eval. Kept running hot under systemd (`deepseek-coder.service`) strictly for direct tool offloads, RAG query synthesis (`survival-rag.service`), and bounded offline summarization (1k-4k tokens).
+  - **Local Model Role (Zero Turn Bloat)**: `local/qwen-coder-14b` on port 5001 removed from the OpenClaw interactive fallback chain to prevent large chat context (>20k tokens) from timing out on CPU prompt eval. Kept running hot under systemd (`deepseek-coder.service`) strictly for direct tool offloads, RAG query synthesis (`survival-rag.service`), and bounded offline summarization (1k-4k tokens). Documented in [docs/local-inference-architecture.md](file:///home/developer/agent-collab/docs/local-inference-architecture.md).
   - **Retired Models**: `local/koboldcpp/Qwen3.8-27B-OQ3` completely purged from `modelPolicy.allow` and all operational configs.
