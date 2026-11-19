@@ -8,11 +8,12 @@
     "arcade": "http://localhost:8899"
   },
   "tunnels": {
-    "arcade": {
+    "arcade_named": {
       "url": "https://therapy-bring-environments-argued.trycloudflare.com",
       "type": "named-token",
       "ports": [8081],
-      "status": "failed"
+      "status": "stable",
+      "notes": "Token-based named tunnel, single service via --url"
     },
     "qdrant_quick": {
       "url": "https://troy-lowest-canvas-chocolate.trycloudflare.com",
@@ -33,7 +34,20 @@
       "status": "failed"
     }
   },
+  "named_tunnel_attempt": {
+    "tunnel_id": "d7bac951-a066-4315-b8fe-f42106a8ee68",
+    "config": "/etc/cloudflared/config.yml",
+    "status": "credentials_file_missing",
+    "notes": "Token-only auth supports --url (single service). Custom hostnames via ingress rules require credentials-file which is not available. Would need Cloudflare dashboard access to download credentials."
+  },
   "recommended_for_castle": {
-    "notes": "All quick tunnels failed (Cloudflare error 1033). Named token tunnel also unstable. Need proper named tunnel with custom hostnames, or SSH reverse tunnel from HPE. For now, Castle can sync via git push/pull and Qdrant local if SSH tunnel established."
+    "path": "SSH reverse tunnel from HPE → T340",
+    "scripts": [
+      "tools/setup_reverse_tunnel.sh",
+      "tools/castle_sync.sh",
+      "tools/castle-rook-tunnel.service",
+      "tools/castle_cron_setup.sh"
+    ],
+    "notes": "Git sync already works. SSH reverse tunnel is the rock-solid path for Qdrant + Survival + SearXNG."
   }
 }
