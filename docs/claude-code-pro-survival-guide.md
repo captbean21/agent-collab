@@ -98,3 +98,23 @@ Context drops from 60,000 tokens back down to 2,000 tokens. You use ~95% fewer t
 - **Paste Error Snippets:** Paste only the relevant 10-line traceback, not 300 lines of compilation output.
 - **Cancel Runaway Streams:** Hit `Ctrl+C` immediately if a tool begins streaming massive log outputs.
 - **Compact Early:** Use `/compact` before the system forces truncation.
+
+---
+
+## 6. Battle-Tested Lessons from Real Homelab Ops
+
+These are direct, concrete discoveries from running continuous autonomous agent clusters:
+
+1. **The 16k Context Tax (Tool Schema Overhead):**  
+   Claude Code injects tool schemas (bash, edit, read, grep, git, lsp) into the system prompt. Even before you type turn #1, your session is sitting on **~10,000 to 16,000 preloaded tokens**. You never start at zero, so your headroom before hitting the 5-hour cutoff is narrower than expected.
+2. **Whole-File Rewrites Burn Output Quotas 10x Faster:**  
+   Output tokens carry a 3x–5x penalty against rate limits compared to input tokens. If Claude rewrites an entire 400-line file to change one line, you burn ~2,000 output tokens. Explicitly instruct it: *"Make surgical, targeted block edits only — never rewrite whole files."*
+3. **"No Object, No Claim" (Stop Hallucination Spirals):**  
+   Never let Claude say *"I completed the fix"* without running a verification command (`npm test -- <path>` or `tsc --noEmit`) in the exact same turn. If it doesn't verify, you end up doing 3 follow-up turns diagnosing hallucinations.
+4. **Why `/clear` + `STATE.md` Beats `/compact`:**  
+   Auto-compaction (`/compact`) is lossy—it strips away specific variable names, line numbers, and file paths. By turn 40, Claude gets "brain fog". A hard `/clear` paired with a crisp 20-line `STATE.md` gives you a 100% fresh, sharp model with zero token bloat.
+5. **The Log-Dump Poison Pill:**  
+   One noisy `npm install`, `pip install`, or `cargo build` dumping 400 lines of progress bars permanently poisons your conversation context for every message that follows. Always use quiet flags (`npm i --silent`) or pipe through `| tail -n 25`.
+6. **The Zombie Process Trap:**  
+   Background servers or hanging test processes can hold file locks or saturate CPU, causing subsequent tool calls to time out. Always wrap test commands with a timeout guard (e.g., `timeout 30s npm test`).
+
