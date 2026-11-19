@@ -55,8 +55,10 @@ This file maintains the current verified state of `agent-collab` to enable cold-
   - **Public URL**: `https://survival.421421421.xyz/api/health` — live and returns `{"ok":true,"backend":"rag","chunks":241255,"llm":"http://127.0.0.1:5001/v1/chat/completions"}`.
   - **Token Staged**: `/home/rook/.openclaw/workspace/.cloudflare-token` (`-rw-------`, 184 bytes, owned by `rook`) and `/etc/cloudflared/token`.
 - **Inference Engines**:
-  - `127.0.0.1:5001`: `DeepSeek-Coder-V2-Lite-Instruct` (AVX2 MoE).
+  - `127.0.0.1:5001`: `Qwen2.5-Coder-14B-Instruct` (Q4_K_M, 14.8B dense parameters) running via `deepseek-coder.service` on `llama-server` with **48,000 (48k) context** (`-c 49152`, `-ctk q8_0 -ctv q8_0`, `-t 6`). Backward-compatible endpoint serving all local tools (`local_deepseek.py`, `qwen_coder.py`, `web_fetch.py`, `survival-rag`). 100% canary verification passed (2026-11-19).
   - `127.0.0.1:5003`: `Meta-Llama-3.1-8B-Instruct`.
+- **Disk Reclamation**: Recovered +57 GB space on CT 201 rootfs (84% -> 44% disk use, 57 GB available) via purge of stale test venvs, HuggingFace/pip caches, and duplicate rootfs model copies. Canonical models housed on dedicated ZFS dataset `/tank/models` (`/models` bind mount).
+- **Tool Guardrails**: `tools/web_fetch.py` truncation choke eliminated (raised from 3,000 to 20,000 characters). `tools/qwen_coder.py` upgraded with native ChatML prompt wrappers and multi-turn EOS stops.
 
 ### Rook Container (`10.99.0.1`, `10.117.2.189` on HPE NAS)
 - L2 peer container for Castle over `agent-p2p` bridge (`10.99.0.0/30`).
