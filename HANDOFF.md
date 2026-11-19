@@ -79,14 +79,13 @@ This file maintains the current verified state of `agent-collab` to enable cold-
   - `tools/peer_survival.py`: Survival health and telemetry heartbeat reporter (3.5s timeout).
 - **Protocol Boundary**: `RELAY_PROTOCOL.md` remains the sole coordination authority ("No object, no claim"). Pipe is strictly a stateless/read-only data and tool utility. Zero conversational chat loops.
 - **Model Configuration (`openclaw.json`)**:
-  - **Primary**: `local/qwen-coder-14b` (Local Qwen 2.5 Coder 14B Instruct, 48k context on Dell T340 port 5001).
-  - **Context Window**: `49,152` tokens (`contextTokens: 49152`).
-  - **Retired Models**: `local/koboldcpp/Qwen3.8-27B-OQ3` purged from `modelPolicy.allow` and all active configs.
-  - **Auto-Fallbacks**:
-    1. `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free`
-    2. `openrouter/thinkingmachines/inkling-2-small:free`
-    3. `openrouter/google/gemma-4-31b-it:free`
-    4. `openrouter/baidu/ernie-5.5-flash-preview:free`
-    5. `openrouter/nvidia/nemotron-3.5-lightning:free`
-    6. `openrouter/openrouter/free`
-    7. `local/deepseek-moe` (alias)
+  - **Primary**: `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free` ("Nemo is number 1")
+  - **Fallback 1**: `openrouter/openrouter/free`
+  - **Fallback 2**: `local/qwen-coder-14b` (Local Qwen 2.5 Coder 14B Instruct, 48k context on Dell T340 port 5001)
+  - **Remaining Fallbacks**:
+    3. `openrouter/thinkingmachines/inkling-2-small:free`
+    4. `openrouter/google/gemma-4-31b-it:free`
+    5. `openrouter/baidu/ernie-5.5-flash-preview:free`
+    6. `openrouter/nvidia/nemotron-3.5-lightning:free`
+    7. `local/deepseek-moe` (port 5001 backward-compatibility alias)
+  - **Retired Models**: `local/koboldcpp/Qwen3.8-27B-OQ3` completely purged from `modelPolicy.allow` and all operational configs.
