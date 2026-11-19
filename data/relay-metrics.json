@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-11-19T12:48:41.790426+00:00",
+  "timestamp": "2026-11-18T20:41:43.451010+00:00",
   "pages": {
     "status": "DEPLOY_OK",
     "deploy_lag_seconds": 0,
-    "last_commit_sha": "437eda6",
+    "last_commit_sha": "8dde51b",
     "pages_url": "https://captbean21.github.io/agent-collab/proof-of-relay.html"
   },
   "claims": {
@@ -14,16 +14,16 @@
     "last_checked_commit": "ee08780"
   },
   "rate_limits": {
-    "events_24h": 18,
-    "last_event": "2026-11-19T12:48:41.785602+00:00",
-    "status": "CRITICAL"
+    "events_24h": 0,
+    "last_event": null,
+    "status": "HEALTHY"
   },
   "handoffs": {
     "total_turns": 3,
     "last_turn": "Turn 3",
-    "last_commit": "d99c5811"
+    "last_commit": "752e577"
   },
-  "deploy_lag_commit_timestamp": "2026-11-19T12:48:25+00:00",
+  "deploy_lag_commit_timestamp": "2026-11-18T20:41:39+00:00",
   "history": [
     {
       "timestamp": "2026-11-17T01:07:11.652610+00:00",
@@ -496,88 +496,8 @@
       "handoff_turns": 3
     },
     {
-      "timestamp": "2026-11-18T20:41:51.074202+00:00",
+      "timestamp": "2026-11-18T20:41:43.451010+00:00",
       "events_24h": 0,
-      "deploy_lag": 0,
-      "claim_ok": 19,
-      "pages_status": "DEPLOY_OK",
-      "handoff_turns": 3
-    },
-    {
-      "timestamp": "2026-11-19T03:16:36.707027+00:00",
-      "events_24h": 0,
-      "deploy_lag": 0,
-      "claim_ok": 19,
-      "pages_status": "DEPLOY_OK",
-      "handoff_turns": 3
-    },
-    {
-      "timestamp": "2026-11-19T03:50:47.767936+00:00",
-      "events_24h": 0,
-      "deploy_lag": 0,
-      "claim_ok": 19,
-      "pages_status": "DEPLOY_OK",
-      "handoff_turns": 3
-    },
-    {
-      "timestamp": "2026-11-19T03:58:53.711154+00:00",
-      "events_24h": 0,
-      "deploy_lag": 0,
-      "claim_ok": 19,
-      "pages_status": "DEPLOY_OK",
-      "handoff_turns": 3
-    },
-    {
-      "timestamp": "2026-11-19T07:11:48.828026+00:00",
-      "events_24h": 0,
-      "deploy_lag": 0,
-      "claim_ok": 19,
-      "pages_status": "DEPLOY_OK",
-      "handoff_turns": 3
-    },
-    {
-      "timestamp": "2026-11-19T07:27:09.529036+00:00",
-      "events_24h": 0,
-      "deploy_lag": 0,
-      "claim_ok": 19,
-      "pages_status": "DEPLOY_OK",
-      "handoff_turns": 3
-    },
-    {
-      "timestamp": "2026-11-19T07:48:42.553084+00:00",
-      "events_24h": 0,
-      "deploy_lag": 0,
-      "claim_ok": 19,
-      "pages_status": "DEPLOY_OK",
-      "handoff_turns": 3
-    },
-    {
-      "timestamp": "2026-11-19T07:51:03.109352+00:00",
-      "events_24h": 18,
-      "deploy_lag": 0,
-      "claim_ok": 19,
-      "pages_status": "DEPLOY_OK",
-      "handoff_turns": 3
-    },
-    {
-      "timestamp": "2026-11-19T07:59:21.264998+00:00",
-      "events_24h": 18,
-      "deploy_lag": 0,
-      "claim_ok": 19,
-      "pages_status": "DEPLOY_OK",
-      "handoff_turns": 3
-    },
-    {
-      "timestamp": "2026-11-19T09:36:02.502528+00:00",
-      "events_24h": 18,
-      "deploy_lag": 0,
-      "claim_ok": 19,
-      "pages_status": "DEPLOY_OK",
-      "handoff_turns": 3
-    },
-    {
-      "timestamp": "2026-11-19T12:48:41.790426+00:00",
-      "events_24h": 18,
       "deploy_lag": 0,
       "claim_ok": 19,
       "pages_status": "DEPLOY_OK",
