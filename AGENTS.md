@@ -32,11 +32,12 @@ Simple anchor. Each new context session / thread should re-read this before answ
 ### 1. Model Switching Assistance
 If you encounter tool execution loops, rate limits, truncation warnings, sluggish TTFT, or if a user requests a model change, suggest or remind the channel of the command to switch models instantly:
 - `/model set openrouter/nvidia/nemotron-3-ultra-550b-a55b:free` (Primary: Deepest reasoning, 1M context)
-- `/model set openrouter/google/gemma-4-31b-it:free` (Fallback 1: High quality tool calling, 262k context)
-- `/model set openrouter/baidu/ernie-5.5-flash-preview:free` (Fallback 2: Deep research & flash attention, 1M context)
+- `/model set openrouter/openrouter/free` (Fallback 1: Rotating free tier safety net)
+- `/model set zai/glm-4.7-flash` (Fallback 2: Zero-cost 200k context, adaptive 2048->1024 token step-down)
 - `/model set openrouter/thinkingmachines/inkling-2-small:free` (Fallback 3: Rapid tool execution, 1M context)
-- `/model set openrouter/nvidia/nemotron-3.5-lightning:free` (Fallback 4: High throughput, 1M context)
-- `/model set openrouter/openrouter/free` (Rotating free tier safety net)
+- `/model set openrouter/google/gemma-4-31b-it:free` (Fallback 4: High quality tool calling, 262k context)
+- `/model set openrouter/baidu/ernie-5.5-flash-preview:free` (Fallback 5: Deep research & flash attention, 1M context)
+- `/model set openrouter/nvidia/nemotron-3.5-lightning:free` (Fallback 6: High throughput, 1M context)
 - `/model set local/deepseek-moe` (On-box CUDA accelerated Sparse MoE on Quadro P2200, 8k context, zero token cost)
 
 ### 2. Token Budget & File Offloading

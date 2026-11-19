@@ -2,10 +2,10 @@
 project_id: 201
 name: rook
 status: ACTIVE
-last_updated: 2026-11-12 13:10:00 UTC
+last_updated: 2026-11-19 11:35:00 UTC
 local_path: /home/rook
-architecture_version: 3.3.0
-state_version: 3.3.0
+architecture_version: 3.4.0
+state_version: 3.4.0
 ---
 
 # Rook Autonomous Sandbox Agent (State 201)
@@ -19,6 +19,9 @@ Rook is an isolated, autonomous sandbox AI agent running OpenClaw inside a dedic
 ├── home/rook/
 │   ├── .openclaw/
 │   │   ├── openclaw.json          # Agent & Discord configuration (local MoE + OpenRouter fallback)
+│   │   ├── services/
+│   │   │   └── zai-proxy/         # Adaptive resilient reverse proxy for Z.ai GLM-4.7-Flash
+│   │   │       └── adaptive_proxy.py
 │   │   └── workspace/             # Unrestricted sandbox workspace for tools/tasks
 │   │       ├── LOCAL_AI_GUIDE.md  # Instructions for Rook on calling local MoE engine
 │   │       └── tools/             # Local DSP coder, web fetch, transcript tools
@@ -27,7 +30,8 @@ Rook is an isolated, autonomous sandbox AI agent running OpenClaw inside a dedic
 ├── models/                        # Bind mount of /tank/models (read-only)
 │   └── DeepSeek-Coder-V2-Lite-Instruct-Q4_K_M.gguf (9.7 GiB)
 └── /etc/systemd/system/
-    └── llama-local.service        # Managed systemd unit for local inference server (port 5001)
+    ├── llama-local.service        # Managed systemd unit for local inference server (port 5001)
+    └── zai-adaptive-proxy.service # Systemd unit for Z.ai adaptive step-down proxy (port 5005)
 ```
 
 ## Architecture
@@ -52,15 +56,17 @@ Rook is an isolated, autonomous sandbox AI agent running OpenClaw inside a dedic
   - Local Search Engine: Native SearXNG (`uwsgi-app@searxng.service`) backed by `redis-server.service` on `127.0.0.1:8888`.
   - Tool execution mode: `unrestricted` inside container jail.
   - Discord bot integration with developer team permissions and in-chat model switching.
-  - Working Context Buffer: 8,192 tokens local context window; up to 1,048,576 tokens via OpenRouter fallbacks.
+  - Working Context Buffer: 8,192 tokens local context window; up to 1,048,576 tokens via OpenRouter fallbacks; 200,000 tokens zero-cost via Z.ai GLM-4.7-Flash.
+  - Adaptive Token Proxy: Lightweight systemd service `zai-adaptive-proxy.service` running on `127.0.0.1:5005` that handles session affinity (Alibaba Cloud WAF `acw_tc` cookie), disables thinking tokens, and implements a resilient 1-shot (2048) + 1 step-down (1024) backoff before cascading down the ladder.
 - **Inference Model Ladder & Fallback Policy**:
   1. **Primary Cloud / Chat**: `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free` (1M ctx, flagship reasoning)
-  2. **Cloud Fallback 1**: `openrouter/google/gemma-4-31b-it:free` (262k ctx, high quality tool calling)
-  3. **Cloud Fallback 2**: `openrouter/baidu/ernie-5.5-flash-preview:free` (1M ctx, deep research & flash attention)
+  2. **Cloud Fallback 1**: `openrouter/openrouter/free` (131k ctx, automatic free provider router)
+  3. **Cloud Fallback 2 (Zero-Cost Adaptive)**: `zai/glm-4.7-flash` via `http://127.0.0.1:5005/v1` (200k ctx, adaptive 2048 -> 1024 step-down, thinking disabled, $0.00 spend)
   4. **Cloud Fallback 3**: `openrouter/thinkingmachines/inkling-2-small:free` (1M ctx, rapid tool execution)
-  5. **Cloud Fallback 4**: `openrouter/nvidia/nemotron-3.5-lightning:free` (1M ctx, high throughput)
-  6. **Cloud Safety Net**: `openrouter/openrouter/free` (131k ctx, automatic free provider router)
-  7. **On-Box Engine / Tool Offload**: `local/deepseek-moe` on `http://127.0.0.1:5001/v1` (15.7B Sparse MoE + 1.3B drafter, 8k context, 16.5 tok/s, zero token costs, dedicated DSP/C synthesis)
+  5. **Cloud Fallback 4**: `openrouter/google/gemma-4-31b-it:free` (262k ctx, high quality tool calling)
+  6. **Cloud Fallback 5**: `openrouter/baidu/ernie-5.5-flash-preview:free` (1M ctx, deep research & flash attention)
+  7. **Cloud Fallback 6**: `openrouter/nvidia/nemotron-3.5-lightning:free` (1M ctx, high throughput)
+  8. **On-Box Engine / Tool Offload**: `local/deepseek-moe` on `http://127.0.0.1:5001/v1` (15.7B Sparse MoE + 1.3B drafter, 8k context, 16.5 tok/s, zero token costs, dedicated DSP/C synthesis)
 
 ## Autonomous Worker Tools & Guardrails
 - **Tool-Loop Guard & Rolling History**:
@@ -88,6 +94,10 @@ ssh root@192.168.1.169 "pct status 201"
 ssh root@192.168.1.169 "pct exec 201 -- systemctl status deepseek-coder"
 ssh root@192.168.1.169 "pct exec 201 -- curl -s http://127.0.0.1:5001/v1/models"
 
+# Check Z.ai adaptive proxy inside CT 201
+ssh root@192.168.1.169 "pct exec 201 -- systemctl status zai-adaptive-proxy"
+ssh root@192.168.1.169 "pct exec 201 -- curl -s http://127.0.0.1:5005/v1/models"
+
 # Check OpenClaw gateway status inside CT 201
 ssh root@192.168.1.169 "pct exec 201 -- runuser -u rook -- env XDG_RUNTIME_DIR=/run/user/1000 systemctl --user status openclaw-gateway"
 
@@ -97,8 +107,9 @@ ssh root@192.168.1.169 "pct exec 201 -- runuser -u rook -- /home/rook/.local/sha
 
 ### Discord Bot Model Switching
 ```text
-/model set local/deepseek-moe
 /model set openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
+/model set zai/glm-4.7-flash
+/model set local/deepseek-moe
 /model set openrouter/google/gemma-4-31b-it:free
 ```
 
