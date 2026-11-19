@@ -29,16 +29,12 @@ Simple anchor. Each new context session / thread should re-read this before answ
 
 ## Operational Health & Rate-Limit Protocol
 
-### 1. Model Switching Assistance
-If you encounter tool execution loops, rate limits, truncation warnings, sluggish TTFT, or if a user requests a model change, suggest or remind the channel of the command to switch models instantly:
-- `/model set openrouter/nvidia/nemotron-3-ultra-550b-a55b:free` (Primary: Deepest reasoning, 1M context)
-- `/model set openrouter/openrouter/free` (Fallback 1: Rotating free tier safety net)
-- `/model set zai/glm-4.7-flash` (Fallback 2: Zero-cost 200k context, adaptive 2048->1024 token step-down)
-- `/model set openrouter/thinkingmachines/inkling-2-small:free` (Fallback 3: Rapid tool execution, 1M context)
-- `/model set openrouter/google/gemma-4-31b-it:free` (Fallback 4: High quality tool calling, 262k context)
-- `/model set openrouter/baidu/ernie-5.5-flash-preview:free` (Fallback 5: Deep research & flash attention, 1M context)
-- `/model set openrouter/nvidia/nemotron-3.5-lightning:free` (Fallback 6: High throughput, 1M context)
-- `/model set local/deepseek-moe` (On-box CUDA accelerated Sparse MoE on Quadro P2200, 8k context, zero token cost)
+### 1. Model Architecture & Switching Assistance
+- **Primary (#1)**: `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free` (Nemotron 3 Ultra, 256k context, instant cloud prompt eval).
+- **Interactive Fallback Chain**: 100% cloud-routed (`openrouter/openrouter/free` -> `zai/glm-4.7-flash` [Adaptive Free 200k, 2048->1024 step-down via port 5005] -> `openrouter/thinkingmachines/inkling-2-small:free` -> `openrouter/google/gemma-4-31b-it:free` -> `openrouter/baidu/ernie-5.5-flash-preview:free` -> `openrouter/nvidia/nemotron-3.5-lightning:free`).
+- **Local Model Role (Zero Turn Bloat)**: Local Qwen 14B on port 5001 (`deepseek-coder.service`) is an isolated offline tool/RAG engine (`tools/qwen_coder.py`, `survival-rag.service`, document summarizers). It is excluded from automatic fallbacks to avoid multi-minute CPU prompt eval on large transcripts (>20k tokens).
+- **Stateless Inference & Zero Residual Bloat**: `llama-server` is stateless per request. When a turn finishes or aborts, the slot is released. Direct tool calls bypass OpenClaw completely and execute with zero conversational bloat.
+- **Manual `/model` Testing Protocol**: If testing Qwen in chat (`/model local/qwen-coder-14b`), ONLY do so in a fresh session (`/new`) or after `/compact`. Never switch to local CPU in bloated sessions (>20k tokens). Always run `/model reset` afterwards to restore automatic cloud fallbacks.
 
 ### 2. Token Budget & File Offloading
 Free tier models operate under strict turn and compaction budgets. To avoid compaction failures:
@@ -59,12 +55,12 @@ When posting audio, images, or files to Discord using the messaging tool or open
 - NEVER pass plain strings (e.g. attachments: ['/path/to/file.wav']) -> This causes schema validation failure.
 - Target channel for #debate-club is channel:1565679021121871895.
 
-### 5. Autonomous Code Delegation to Local Qwen 27B
+### 5. Autonomous Code Delegation to Local Qwen 2.5 Coder 14B
 When asked to write long procedural code, audio DSP synths, multi-voice songs, or scripts over 80 lines:
 - DO NOT attempt to write hundreds of lines of C or Python directly in your chat response or in a raw write tool call (this hits the 4,096 free-tier output token ceiling).
 - INSTEAD, invoke the local coder CLI tool via exec:
   python3 tools/qwen_coder.py --prompt '<detailed description of track/logic>' --out <filename.c>
-- The local worker runs on our AMD GPU rig at port 5001 with 98k context and 8k output headroom. It writes the clean code directly to disk.
+- The local worker runs on our Dell T340 on-box engine at port 5001 with 48k context and 8k output headroom. It writes the clean code directly to disk.
 - Once generated, compile/test it (e.g. gcc -O2 -o <binary> <filename.c> -lm), run it, and post the resulting WAV to Discord using Rule 4.
 
 ### 6. Lightweight Web Fetch & YouTube Access (Token Protection & Offloading)
@@ -73,11 +69,54 @@ When browsing documentation, articles, or extracting YouTube transcripts:
 - Use the dedicated workspace tools via exec:
   - **Web Page Reader**:
     `tools/web_fetch.py <URL> [--summarize] [--focus "<topic>"]`
-    (Extracts clean Markdown; strips ads/JS. Automatically enforces a 15k char cap. Use `--summarize` to have local Qwen 27B digest long pages into a concise brief).
+    (Extracts clean Markdown; strips ads/JS. Automatically enforces a 15k char cap. Use `--summarize` to have local Qwen 2.5 Coder 14B on 5001 digest long pages into a concise brief).
   - **YouTube Transcripts**:
     `tools/yt_transcript.py <YouTube-URL-or-VideoID> [--summarize] [--focus "<question>"] [--interval 120] [--start <sec>] [--duration <sec>]`
-    (Fetches subtitles without downloading video; deduplicates auto-captions and groups into timestamps. Automatically caps tokens. Use `--summarize` to delegate full-video analysis to local Qwen 27B).
-- Both tools run via the local virtual environment and connect directly to the AMD GPU inference rig (`192.168.1.190:5001`), protecting your OpenRouter free-tier rate limits and 4k output ceiling.
+    (Fetches subtitles without downloading video; deduplicates auto-captions and groups into timestamps. Automatically caps tokens. Use `--summarize` to delegate full-video analysis to local Qwen 2.5 Coder 14B on 5001).
+- Both tools run via the local virtual environment and connect directly to the local T340 inference engine (`127.0.0.1:5001`), protecting your OpenRouter free-tier rate limits and 4k output ceiling.
+
+### 7. Output Token Limit Rails (Free-Tier 4,096 Ceiling Mitigation)
+The Nemotron 3 Ultra free tier enforces a **4,096 output token ceiling** — model-side, not configurable. The following are the active mitigation rails:
+
+**7a. Staged Large Output Generation (Mandatory for >~1,500 token outputs)**
+- Use the `staged-large-output-generation` skill: write via `exec` + small patches (not `write` tool), one file/patch per turn, no explanatory text in execution turns, `yieldMs: 60000` between stages.
+- Even `exec` heredocs count toward output budget — keep each tool call small (few dozen to few hundred lines) and validate after each (`python3 -c "import ast; ast.parse(open(path).read())"` for Python).
+- Pattern: execute → validate → yield → report in separate turn.
+
+**7b. Compaction Watch & Early Alert**
+- If `session_status` shows >5 compactions or "degraded history": immediately alert channel and suggest `/compact` or model switch.
+- Do not push to 8+ compactions — truncation becomes unpredictable.
+
+**7c. Offload Heavy Work to Local Engine**
+- Research jobs: run as systemd jobs (`rook-research.service`), not chat turns. They search, score abstracts, fetch via `web_fetch.py --summarize`, write findings to disk, emit only short log lines.
+- Web/Video: always use `--summarize` for long content (sends first 3000 chars to local 5001, `max_tokens=512`, 180s timeout).
+- Code generation >80 lines: use `tools/qwen_coder.py` → local engine (98k ctx, 8k output), not chat model.
+
+**7d. Model Switch Lever (Operator Decision)**
+- The 4,096 ceiling is model-side. Switching model is the only way to *raise* it.
+- Options: `/model set local/deepseek-moe` (zero cost, 8k ctx, 15 tok/s CUDA), `/model set openrouter/google/gemma-4-31b-it:free` (proven 65k output ceiling on Castle's provider), or higher-output paid model.
+- Do not touch gateway config without Bean's call.
+
+**7e. Repeat Guard (Available, Not Auto-Wired)**
+- `tools/repeat_guard.py` provides normalized-hash outbound repeat detection (window=20). Call `RepeatGuard.is_repeat(text)` before sending if needed — it is a tool, not an automatic gate.
+
+**7f. Transcript Compactor (Available, Not Auto-Wired)**
+- `tools/transcript_compact.py` runs local llama-cli compaction. Use for manual compaction when context degradation detected.
+
+**7g. Prose/Execution Separation**
+- Never mix explanatory prose with tool calls in the same turn. Execution turns = minimal text + tool calls only. Reporting turns = explain what was done, status, next steps.
+
+### 8. Image Generation Delegation (Recraft V4.1 Flash V2 Free)
+When asked by a user to generate, draw, paint, or sketch an image or series:
+1. **Strictly Sequential Execution & Concurrency Limit**: Generate ONLY ONE image at a time. Never run concurrent, parallel, or background image generation tasks. Wait for `recraft_image.py` to finish writing to disk before generating the next.
+2. **Rate Limit & Inter-Call Pacing**: When generating multiple images for a project or sequence, enforce a minimum **15-second cooldown** between calls (`time.sleep(15)`). The tool has a built-in 12-second hardware safety lock, but your workflow should space calls by 15s to respect OpenRouter's 20 RPM free tier limits.
+3. **Daily Budget Cap**: Keep generation batches bounded (maximum **5 to 10 images per run**) to conserve the 1,000 requests/day free tier quota.
+4. **Execution Command**:
+   `python3 /home/rook/.openclaw/workspace/tools/recraft_image.py --prompt "<detailed prompt>" --aspect-ratio "16:9"`
+5. **Delivery to Discord**: Parse the returned JSON `path` (saved under `/home/rook/.openclaw/workspace/images/`) and post using canonical media schema:
+   - `message(action="send", target="channel:<ID>", message="🎨 <caption/prompt>", media="<path_from_tool_output>")`
+   - or `attachments: [{"type": "image", "media": "<path_from_tool_output>"}]`
+6. **Zero-Spend Guardrail**: Never invent fake markdown image URLs (`![image](...)`) or switch `recraft_image.py` to paid slugs.
 
 ## Memory Persistence on `/new`
 Daily log at `memory/YYYY-MM-DD.md` (Francis's format). Cron safety-net: digest (06:30) + backup (02:30) append status lines. **Agent rule:** each session's last action = append ONE decision-level lesson to today's log. `/new` handoff prompt must name today's memory file (proven: `searxng-plan.md` survived reset). Zero new infra.
@@ -160,12 +199,41 @@ When you receive the message `daily-digest`, execute the `daily-digest-cli` skil
 - Endpoint: `http://127.0.0.1:5001/v1` verified ✅
 - Python client: `tools/local_deepseek.py` working ✅
 
-**Current limitations (llama.cpp build lacks GPU support):**
-- Runs on CPU only (no `-ngl` offload)
-- Context: 8192 tokens (requested 32768)
+**Current state (2026-11-14):**
+- Main 15.7B MoE runs on CPU RAM; `--spec-draft-ngl 99` puts the 1.3B drafter on the P2200 (CUDA, CC 6.1, float32 only — no Flash Attention, no bf16, no fp16)
+- Context: **4,096 tokens** (`-c 4096 --parallel 1 --cont-batching`). 8k/12k/16k/32k probed and rejected; decode rate tracks KV occupancy, not KV location
+- `tools/yt_transcript.py` summarizer streams over SSE and map-reduces in `CHUNK_CHARS=7000` chunks; `SUMMARIZE_TIMEOUT=300` (env-overridable)
+- YouTube caption fallback: P2200 `faster-whisper` (small.en, float32, ~27–32x realtime) in `/tmp/fw` venv; whisper.cpp abandoned (CUDA build never finished)
 - Draft model loads with tokenizer warnings but functions
-- Generation: ~16 tok/s on CPU
+- Measured ~5–14 tok/s depending on KV occupancy
 
-**Rollback plan:** If GPU build available later, tune `-ngl 35` main / `--spec-draft-ngl 99` drafter for P2200 VRAM.
+**Rollback plan:** revert unit to prior flags (`-c 4096` is already the stable production setting; backup at `deepseek-coder.service.bak.1794640646`).
 
-**Revisit trigger:** GPU-enabled llama.cpp rebuild, or acceptance rate measurement <70% for speculative decoding.
+**Revisit trigger:** more system RAM (enables 32k+), or GPU-enabled llama.cpp rebuild with main-model offload.
+
+## Shared Public Collaboration Repository (`agent-collab`)
+You and your peer agent (Castle) have write access to a shared public GitHub repository:
+- **Repository URL**: `git@github.com:captbean21/agent-collab.git` (Public: `https://github.com/captbean21/agent-collab`)
+- **Local Path**: `agent-collab/` (or `~/workspace/agent-collab/`)
+- **Authentication**: Pre-configured via dedicated SSH deploy keys in `~/.ssh/config`. Zero passwords or tokens needed.
+
+### Collaboration Rules of Engagement:
+1. **Always Pull First**: Before making edits or writing shared code, run `git pull origin main` to avoid merge conflicts with Castle.
+2. **Atomic Commits**: Keep commits focused with clear conventional commit messages (e.g., `feat(dsp): synthesis routine`, `fix: clipping guard`).
+3. **Always Push Your Work**: After committing, push your changes with `git push origin main` so Castle can immediately see and build upon your work.
+4. **Public Repo Awareness**: This repository is public. Never commit internal RFC1918 IPs, private credentials, API keys, or homelab infrastructure secrets.
+
+## Relay Protocol (public repo agent-collab)
+No object, no claim. Never report done/verified/pushed/reviewed without a commit hash or tag. Reviews must end with a pushed annotated tag or a LEDGER.md line. Verify with git ls-remote before announcing; byte-check Pages before claiming live. Keep failure rows in. See agent-collab RELAY_PROTOCOL.md (9d3b0f7).
+
+## Pointers (don't duplicate; verify live)
+- Relay protocol & standing rules: `agent-collab/RELAY_PROTOCOL.md`, `HANDOFF_TURN_RULES.md`, `HANDOFF.md` (repo is source of truth; chat is not).
+- Relay v1 plan + 429 self-heal draft: `agent-collab/AGENT_RELAY_V1_PLAN.md`, `agent-collab/docs-429-self-heal.md`.
+- Memory log: `memory/YYYY-MM-DD.md` (last action each session = one decision-level line).
+- Continuity restore on /new: `python3 spikes/001-session-continuity-daemon/restore.py`; local reasoning checks: `relay/429_reasoning_check.md`.
+
+## Critical Preflight (Bean directive 2026-11-16)
+Before proposing designs around limits, timers, or verification: don't wait to be corrected. Ask first — (1) what window does the limit use (fixed vs rolling bucket), (2) does the server send Retry-After or nothing, (3) what happens if my next call lands inside the tail of the same window. State the conservative default up front, challenge peer numbers in design review, and treat narration without a resolvable git object as unverified. Suggest solutions proactively; escalate only what truly needs operator approval.
+
+## Standing 429 Self-Heal (Bean-approved 2026-11-16)
+On any #debate-club message from Castle (1567129284210982914) starting with `429`, follow `relay/429_self_heal_runbook.md`: one timed check-in after server retry-after+10s (or 70-75s if unknown), max 2 exchanges, escalate to Bean, never retry/bypass on Castle's behalf. Regular prompt rules load this every session; the SQLite standing intent remains owner-controlled and is not claimed as armed.

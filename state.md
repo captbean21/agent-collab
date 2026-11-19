@@ -2,7 +2,7 @@
 project_id: 201
 name: rook
 status: ACTIVE
-last_updated: 2026-11-19 11:35:00 UTC
+last_updated: 2026-11-19 12:13:00 UTC
 local_path: /home/rook
 architecture_version: 3.4.0
 state_version: 3.4.0
@@ -81,7 +81,11 @@ Rook is an isolated, autonomous sandbox AI agent running OpenClaw inside a dedic
 - **Lightweight Web Fetch & YouTube Transcript Tools**:
   - Summarization pipeline routed to local engine without consuming external tokens.
 - **Discord Media Attachment Contract**:
-  - Pinned in `AGENTS.md`: `attachments` MUST be an array of objects `[{"path": "/path/to/file.wav"}]`.
+  - Pinned in `AGENTS.md`: `attachments` MUST be an array of objects `[{"path": "/path/to/file.wav"}]` or canonical `message(media=...)`.
+- **Zero-Cost Image Generation & Rate Guardrail**:
+  - Tool: `/home/rook/.openclaw/workspace/tools/recraft_image.py` (uses OpenRouter `recraft/recraft-v4.1-flash-v2:free` at $0.00 spend).
+  - Hardware Cooldown Lock: Built-in 12-second inter-call throttle via `/tmp/recraft_last_run.ts` to strictly prevent 429 burst rate limits on OpenRouter free tier (20 RPM).
+  - Rule 8 in `AGENTS.md`: Strictly sequential execution (1 image at a time, 15s inter-call pacing, max batch size 5-10 images per run).
 
 ## Operator Runbook (Manual Controls)
 
