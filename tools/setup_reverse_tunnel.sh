@@ -13,7 +13,7 @@ set -euo pipefail
 
 T340_HOST="192.168.1.201"      # Rook's T340 container IP
 T340_USER="rook"                # SSH user on T340
-SSH_KEY="$HOME/.ssh/id_ed25519_castle_to_rook"  # Dedicated key (generate if needed)
+SSH_KEY="$HOME/.ssh/id_ed25519_castle_to_rook_v2"  # Dedicated key v2 (rotated 2026-11-19)
 
 # Tunnel mappings: LOCAL_PORT:REMOTE_HOST:REMOTE_PORT
 TUNNELS=(
@@ -36,7 +36,7 @@ check_prereqs() {
     
     if [[ ! -f "$SSH_KEY" ]]; then
         log "Generating dedicated SSH key for Castle→Rook tunnel..."
-        ssh-keygen -t ed25519 -f "$SSH_KEY" -N "" -C "castle-rook-boundary-pipe"
+        ssh-keygen -t ed25519 -f "$SSH_KEY" -N "" -C "castle-rook-boundary-pipe-v2"
         log "Public key (add to T340 ~/.ssh/authorized_keys):"
         cat "${SSH_KEY}.pub"
         return 1
