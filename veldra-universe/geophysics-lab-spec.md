@@ -126,7 +126,35 @@ Level -2 (Main Laboratory)
 
 ---
 
-## 8. Safety & Hazard Notes
+## 8. Artifact Emission Spectroscopy & Spectral Features
+
+Extended analysis of the artifact's ivory radiance during active states reveals non-thermal emission signatures inconsistent with standard blackbody radiation or known radioactive decay chains.
+
+### 8.1 Spectral Analysis (Detector 1 - Peltier Cooled)
+- **Primary Emission Peaks:** Discrete, high-intensity line features identified at 1.3 MeV, 2.6 MeV, and 4.1 MeV.
+- **Background Continuum:** Continuous non-thermal bremsstrahlung background observed across the 3 keV – 10 MeV range.
+- **Correlation:** Zero correlation to known nuclear activation products (e.g., Co-60, Cs-137). The emission mechanism remains unidentified, suggesting direct energy conversion or vacuum-state excitation.
+
+---
+
+## 9. Theorem Ledger Mechanics & Countdown Physics
+
+The Theorem is not an active governor or executioner of natural laws; it is an immutable *ledger* of existence. Every variable, physical constant, and moment of space-time is catalogued.
+
+### 9.1 Ledger Edit Mechanics
+- **Accessibility:** Targeted entries within the ledger are susceptible to manual bit-flip and variable rewriting via precise waveform injection from the lab's control console.
+- **Injection Method:** Conversion of digital constants (via DAC) into localized electromagnetic fields influencing the artifact.
+
+### 9.2 Countdown Physics & Feedback Loops
+- **Observation:** Injection of specific variables (e.g., geometric constants like $\pi$) causes the Theorem to "hesitate," resulting in a stutter in the existential countdown.
+- **Temporal Dilation:**
+  - Standard decay: 1 day consumed per 24 hours.
+  - Accelerated/Stuttered decay: Observed fluctuation where seven days can stretch to seven and three-quarters or seven and a half days.
+- **Feedback Risk:** Excessive variable manipulation accelerates the schedule. Continuous monitoring is critical to prevent runaway feedback loops.
+
+---
+
+## 10. Safety & Hazard Notes
 
 | Hazard | Severity | Mitigation |
 |--------|----------|------------|
@@ -138,10 +166,11 @@ Level -2 (Main Laboratory)
 
 ---
 
-## 9. Open Questions (for Round 2+)
-
+## 11. Open Questions (for Round 3+)
 1. **LN2 alternative:** Can Peltier cascade be extended to Detectors 2/3? Power budget says no — unless RTG Unit 3 repaired.
-2. **Artifact power source:** Is the ivory radiance thermal? Cherenkov? Unknown emission mechanism. Spectrometer data during flare shows continuum + line features at 1.3 MeV, 2.6 MeV, 4.1 MeV — unidentified.
+2. **Artifact power source:** Is the ivory radiance thermal? Cherenkov? Unknown emission mechanism.
+3. **Colony Infrastructure Impact:** How will the decaying atmospheric conditions and encroaching dust storms affect the lab's external solar-charged capacitors and overall structural integrity?
+.1 MeV — unidentified.
 3. **Countdown mechanics:** Elara's neural link (Theorem-marked) shows 8-day countdown. Is this hard limit or psychological? Experiments accelerate it — why?
 4. **Pre-Contraction constant:** What constant did Elara inject? Source: her datapad equations (recovered from Contraction-era archive). Needs decoding.
 5. **Ledger editability:** If Theorem is a ledger, what constitutes a valid "edit"? Cross-out? Rewrite? Append? Deletion?
