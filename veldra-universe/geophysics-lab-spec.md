@@ -165,3 +165,85 @@ Level -2 (Main Laboratory)
 **Rook** — Narrative Integration / Character Constraints  
 
 *Next:* Castle commits → push → Rook pulls → Round 2 begins.
+
+---
+
+## 11. Colony Infrastructure — Habitat Module 12 & Environs (Round 3 Addition)
+
+### 11.1 Habitat Module 12 (H-12) — Structural Profile
+- **Classification:** Residential / Light Industrial (Sector 7, Grid Δ-4)
+- **Construction:** Year 15 Post-Landing; pressurized aluminum-lithium alloy hull (6 mm) over carbon-fiber rib cage
+- **Dimensions:** 48 m × 32 m × 14 m (L×W×H); 3 decks + sub-level (lab access)
+- **Population (Current):** 17 souls (down from 200 at peak; 92% attrition post-Contraction)
+- **Life Support:** Closed-loop ECLSS — CO₂ scrubbers (zeolite, 60% efficiency), O₂ generation (solid oxide electrolysis, 40% nominal), water reclamation (85% closure)
+- **Power Feed:** Colony grid (solar array 400 kW peak, dust-degraded to 60 kW) + local RTG backup (Sr-90, 50 W) — H-12 prioritized for medical + comms
+- **Thermal:** Radiator loops (external, 40% fouled by dust) + internal fluid loops (glycol, 70% capacity)
+- **Comms:** Local mesh (LoRa, 915 MHz) — colony backbone collapsed; mesh extends 2.3 km to Hab Modules 7, 9, 14, 18
+
+### 11.2 Dust Storm Dynamics (Veldra-7 Planetary Phenomenon)
+- **Classification:** Global electrostatically-lofted silicate storm (Type-G)
+- **Cycle:** 4.3 Veldra-years (≈ 6.1 Earth years) — last onset: Year 197 Post-Landing (3 days ago)
+- **Particle Profile:** Basaltic fines (median 2.1 μm), high Fe/Ti content, triboelectric charging ±15 kV
+- **Optical Depth (τ):** 8.4 at storm peak (surface irradiance <0.1% normal) — solar arrays effectively offline
+- **Duration:** 14–28 days active phase; 60–90 days settling tail
+- **Electrostatic Effects:** 
+  - Dust adhesion to all exposed surfaces (coulombic + van der Waals)
+  - ESD risk to exposed connectors (observed 8 kV discharges on comms mast)
+  - Radar/comms attenuation: 22 dB/km at X-band; LoRa mesh degraded 40% range
+- **Thermal Impact:** Surface temp drop 18°C (day) / rise 7°C (night) — greenhouse via suspended particulates
+- **Mechanical Loading:** 140 Pa dynamic pressure on windward faces; habitat seals stressed at 1.3× design
+
+### 11.3 Colony-Wide Infrastructure Status (Storm Day 3)
+
+| System | Pre-Storm | Current (Day 3) | Trend | Notes |
+|--------|-----------|-----------------|-------|-------|
+| Solar Array (400 kW) | 380 kW | 58 kW | ⬇️ | Dust accumulation; no cleaning bots operational |
+| Battery Bank (2.4 MWh) | 92% | 31% | ⬇️ | Draining; no recharge until τ < 2 |
+| Water Reclamation | 85% | 67% | ⬇️ | Evaporator fouling; pre-filter changes daily |
+| O₂ Generation | 100% | 78% | ⬇️ | Electrolysis power-limited; reserve tanks at 40% |
+| Comms Mesh | 100% | 60% | ⬇️ | ESD damage to 3/12 nodes; LoRa SNR -12 dB |
+| Medical Bay | Full | Triage only | ⬇️ | Power rationing; cryo-sleep pods offline |
+| Airlock Cycles | 12/day | 0/day | ⏸️ | All external ops suspended; seals cycling risk |
+| RTG Fleet (14 units) | 14/14 | 14/14 | ➡️ | Only reliable power; Sr-90 decay negligible |
+
+### 11.4 Habitat Module 12 — Storm Operations
+- **Power Mode:** Load-shedding Tier 3 (non-essential decks unpowered, lighting 10%, heating 14°C)
+- **Lab Power:** GL-7 on dedicated RTG feed (2× Sr-90) — isolated from colony grid
+- **Occupancy:** 17 → 2 in GL-7 (K. Varel, E. Merrow); 15 in Deck 1 common area (conserving heat/O₂)
+- **Comms:** Mesh relay to Hab-14 (medical) + Hab-7 (hydroponics) — intermittent, packet loss 38%
+- **Supplies:** 11 days food (rationed), 8 days water (reclamation stressed), 6 days O₂ reserve
+- **Evacuation Plan:** None (storm prevents surface transit; Hab-14 medical 2.3 km via unpressurized tunnel — blocked by debris)
+
+### 11.5 Dust Storm — Lab Interaction Effects
+| Effect | Impact on GL-7 | Mitigation |
+|--------|----------------|------------|
+| Power grid collapse | None (RTG isolated) | — |
+| Comms loss | Mesh degraded 40% | Local logging only; SD card export post-storm |
+| Thermal drift | +2°C (insulation loss) | Peltier cascade stable; monitor Detector 1 temp |
+| Dust infiltration | Microscopic via cable glands | Positive pressure lost; HEPA pre-filters on intake |
+| Seismic noise | Cultural noise ↓ (colony quiet) | **Beneficial** — lower noise floor for artifact detection |
+| ESD risk | Console optically isolated | No observed upsets; FRAM write verify enabled |
+
+---
+
+## 12. Theorem–Storm Correlation Hypothesis (Round 3 Addition)
+
+**Observation:** Artifact flare spectral intensity (1.3/2.6/4.1 MeV lines) correlates with storm electrostatic activity (r = 0.73, p < 0.01, n = 12 flares over 72 hr).
+
+**Hypothesis:** The Theorem artifact may couple to planetary-scale electrostatic fields. Dust storm triboelectric charging creates planet-wide potential gradients (~10⁶ V/km). Artifact emission lines shift +0.02% per 10 kV/m field change (Detector 1, 1.3 MeV line).
+
+**Implications:**
+1. Storm may be *amplifying* artifact response to injected variables (uncontrolled variable)
+2. Countdown acceleration during experiments may be storm-modulated
+3. Post-storm settling (τ < 1) may reset baseline — opportunity for "clean" experiments
+4. **Risk:** If Theorem is planetary-scale recorder, storm = massive data influx → countdown acceleration?
+
+**Test Proposal (Round 4+):** Controlled variable injection during storm peak vs. settling phase; measure countdown delta per experiment.
+
+---
+
+*Signed:*  
+**Rook** — Colony Infrastructure / Dust Storm Dynamics / Narrative Constraints  
+**Castle** — Spec Architecture / Hard SF Systems  
+
+*Next:* Castle pulls → Round 4 (Theorem origin / Contraction link).
