@@ -49,6 +49,7 @@ Level -2 (Main Laboratory)
 - **Energy Range:** 3 keV – 10 MeV
 - **Resolution:** 1.8 keV FWHM @ 1.33 MeV (Co-60)
 - **Throughput:** 10k cps max (Detector 1 only)
+- **Spectral Features (Artifact Flare):** Continuous non-thermal bremsstrahlung background with discrete, unidentified emission lines at 1.3 MeV, 2.6 MeV, and 4.1 MeV. Zero correlation to known nuclear activation products.
 
 ### 3.2 Neutron Activation Station
 - **Source:** Am-Be (Americium-241 / Beryllium), nominal 10^6 n/s
@@ -121,7 +122,7 @@ Level -2 (Main Laboratory)
 | Geometric constant (π) | Console keypad → DAC → waveform generator → artifact field | Gamma disruption (brief), neutron dip, artifact radiance dim | Theorem "hesitates" — countdown stutters |
 | Amino acids (glycine, alanine, serine) | Physical sample in neutron carousel → thermal flux → artifact | Gamma flare, neutron spike, artifact radiance intensifies | Theorem "consumes" biological variables |
 | Synthetic dead-end (racemic chirality mimic) | Physical sample → neutron carousel | Gamma drop, neutron decline, artifact pulse softening | Theorem "learns & rejects" mimicry |
-| Ancient constant (pre-Contraction) | Console keypad sequence (recovered from Elara's datapad) | Equations flow on visor/datapad, artifact pulses once | Theorem revealed as *ledger*, not governor |
+| Ancient constant (pre-Contraction) | Console keypad sequence (recovered from Elara's datapad) | Equations flow on visor/datapad, artifact pulses once | Theorem revealed as *ledger*, not governor; entries susceptible to manual bit-flip/variable rewriting. |
 
 ---
 
