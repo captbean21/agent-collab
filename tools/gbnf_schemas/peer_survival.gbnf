@@ -1,0 +1,30 @@
+# Peer Survival Tool Grammar
+# Covers: peer_survival tool for survival backend status/telemetry
+
+root ::= peer_survival_call
+
+peer_survival_call ::= "peer_survival " "{" ws peer_survival_fields ws "}"
+
+peer_survival_fields ::= peer_survival_field (ws "," ws peer_survival_field)*
+
+peer_survival_field ::= "action" ws ":" ws action_literal
+                      | "target" ws ":" ws string_literal
+                      | "params" ws ":" ws params_object
+
+action_literal ::= "status" | "metrics" | "logs" | "restart" | "deploy" | "healthcheck"
+
+params_object ::= "{" ws param_pair (ws "," ws param_pair)* ws "}"
+param_pair ::= string_literal ws ":" ws param_value
+
+param_value ::= string_literal | number | boolean | array_literal | object_literal
+
+array_literal ::= "[" ws array_element (ws "," ws array_element)* ws "]"
+array_element ::= string_literal | number | boolean
+
+object_literal ::= "{" ws param_pair (ws "," ws param_pair)* ws "}"
+
+string_literal ::= ~"\"[^\"]*\""
+number ::= ~"[0-9]+"
+boolean ::= "true" | "false"
+
+ws ::= " " | "\t" | "\n"

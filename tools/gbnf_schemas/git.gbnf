@@ -1,0 +1,50 @@
+# Git Tool Grammar
+# Covers: git add, commit, push, fetch, merge, rebase, tag, ls-remote, diff, status, log
+
+root ::= git_command
+
+git_command ::= "git " git_subcommand
+
+git_subcommand ::= "add " git_add_args
+                 | "commit " git_commit_args
+                 | "push " git_push_args
+                 | "fetch " git_fetch_args
+                 | "merge " git_merge_args
+                 | "rebase " git_rebase_args
+                 | "tag " git_tag_args
+                 | "ls-remote " git_ls_remote_args
+                 | "diff " git_diff_args
+                 | "status" git_status_args?
+                 | "log " git_log_args?
+
+git_add_args ::= file_path (ws file_path)*
+file_path ::= ~"[^\\s\"]+" | ~"\"[^\"]+\""
+
+git_commit_args ::= "-m " commit_msg (ws git_commit_extra)?
+commit_msg ::= ~"\"[^\"]+\""
+git_commit_extra ::= "--no-verify" | "--amend" | "--author " author_info
+
+git_push_args ::= remote? (ws branch?) (ws "--tags")? (ws "--force-with-lease")?
+remote ::= ~"[^\\s]+"
+branch ::= ~"[^\\s]+"
+
+git_fetch_args ::= remote? (ws branch?)?
+git_merge_args ::= branch? (ws "--no-ff")? (ws "--ff-only")?
+git_rebase_args ::= branch? (ws "--onto")? (ws "--autostash")?
+
+git_tag_args ::= "-a " tag_name ws "-m " tag_msg (ws "--force")?
+              | "-d " tag_name
+              | "--list" (ws pattern)?
+tag_name ::= ~"[^\\s]+"
+tag_msg ::= ~"\"[^\"]+\""
+
+git_ls_remote_args ::= remote? (ws tag_ref)?
+tag_ref ::= ~"refs/tags/[^\\s]+"
+
+git_diff_args ::= (ws "--cached")? (ws file_path)?
+git_status_args ::= (ws "--short")? (ws "--porcelain")?
+git_log_args ::= (ws "--oneline")? (ws "-n " number)? (ws "--grep=" pattern)?
+number ::= ~"[0-9]+"
+pattern ::= ~"[^\\s]+"
+
+ws ::= " " | "\t"

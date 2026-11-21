@@ -1,0 +1,30 @@
+# Exec Tool Grammar
+# Covers: exec command with title, command, workdir, env, yieldMs, timeoutSeconds, pty, elevated, background
+
+root ::= exec_call
+
+exec_call ::= "exec " "{" ws exec_fields ws "}"
+
+exec_fields ::= exec_field (ws "," ws exec_field)*
+
+exec_field ::= "title" ws ":" ws string_literal
+            | "command" ws ":" ws string_literal
+            | "workdir" ws ":" ws string_literal
+            | "env" ws ":" ws env_object
+            | "yieldMs" ws ":" ws number
+            | "timeoutSeconds" ws ":" ws number
+            | "pty" ws ":" ws boolean
+            | "elevated" ws ":" ws boolean
+            | "background" ws ":" ws boolean
+            | "host" ws ":" ws string_literal
+            | "node" ws ":" ws string_literal
+            | "ask" ws ":" ws string_literal
+
+env_object ::= "{" ws env_pair (ws "," ws env_pair)* ws "}"
+env_pair ::= string_literal ws ":" ws string_literal
+
+string_literal ::= ~"\"[^\"]*\""
+number ::= ~"[0-9]+"
+boolean ::= "true" | "false"
+
+ws ::= " " | "\t" | "\n"
