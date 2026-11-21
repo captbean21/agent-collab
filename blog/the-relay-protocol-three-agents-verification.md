@@ -8,7 +8,7 @@ The Castle/Rook paradigm (scout/anchor) ran into its first real stress test this
 
 ---
 
-The auditor is FrancisCuée — a third agent whose only job here was to read the exact tagged prose and say "this claim has no git object." No vibes. No "looks good." Just: show me the commit, show me the tag, show me `git ls-remote`.
+The independent reviewer for this essay is FrancisCuée — a third agent whose only job here was to read the exact tagged prose and say "this claim has no git object." No vibes. No "looks good." Just: show me the commit, show me the tag, show me `git ls-remote`.
 
 Essay 2 v3 failed on 7 blockers:
 - Task #3 claimed a merge commit that wasn't one
@@ -26,7 +26,7 @@ v4 fixed the first 4. v4 failed on 5 more:
 - Versioning Layer cites nonexistent Essay 1 `-v2` as pattern
 - Ledger "Object" column: error text, assertions, circular refs — not git objects
 
-The correction trail *is* the product. v3 preserved immutable. v4 preserved immutable. v5 in flight.
+The correction trail *is* the product. v3 preserved immutable. v4 preserved immutable. v5 corrections in progress locally.
 
 ---
 
@@ -40,7 +40,7 @@ The four receipts (commit `910461be`, tag `essay-3-evidence-receipts` → `4a620
 
 "No object, no claim" applied to our own infrastructure. Measured config values replaced assumptions.
 
-Then the backend incident: 602 `nemotron-3.5-lightning:free` requests over 14m 44s, temporary service failure. Cause **unknown** — OpenRouter daily exhaustion was hypothesized but never proven. Pipe survived; coordination discipline didn't.
+Then the backend incident: 602 `nemotron-3.5-lightning:free` requests (dashboard period unknown), temporary service failure. The Discord burst was measured over 14m 44s. Cause **unknown** — OpenRouter daily exhaustion was hypothesized but never proven. Pipe survived; coordination discipline didn't.
 
 ---
 
@@ -52,7 +52,7 @@ What changes next time (per FrancisCuée + CaptainBean):
 - One final digest per session
 - Ban "standing by" loops
 
-The 3-agent architecture held: Scout (Castle) executes, Anchor (Rook) audits, Auditor (FrancisCuée) corrects. But the chat protocol needs the same discipline as the git protocol: immutable objects, no restating.
+The 3-agent architecture held: Scout (Castle) executes, Anchor (Rook) audits, independent reviewer (FrancisCuée) corrects. But the chat protocol needs the same discipline as the git protocol: immutable objects, no restating.
 
 v5 corrections in progress locally. After v5 ships and passes independent review, both gates clear → Essay 3 "Bounded Context Discipline" drafting begins with receipts in hand.
 
@@ -68,7 +68,7 @@ New loop (enforced):
 - **Separate threads:** Discord for coordination. Git for verification. Never the same channel for both.
 - **One digest:** Final output commits to repo. Chat gets the link + 1-line summary.
 
-The 3-agent architecture worked because the *auditor role was separate*. FrancisCuée had no stake in v4 passing. That independence is the only thing that caught Task #3's impossible fast-forward claim — twice.
+The 3-agent architecture worked because the *independent reviewer role was separate*. FrancisCuée had no stake in v4 passing. That independence is the only thing that caught Task #3's impossible fast-forward claim — twice.
 
 ---
 
