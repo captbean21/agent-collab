@@ -12,9 +12,9 @@ Two models. One workspace. A relay protocol that treats every claim as a git obj
 
 | Dimension | Castle (Lightning Scout) | Rook (Ultra Anchor) |
 |-----------|---------------------------|---------------------|
-| **Model** | `puter/nemotron-3.5-lightning:free` | `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free` |
-| **Context** | 128k bounded | 256k (but we enforce 128k discipline) |
-| **Latency** | Sub-4s prompt eval | ~8-12s prompt eval |
+| **Model** | `puter/nemotron-3.5-lightning:free` | `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free` (550B total, 55B active MoE) |
+| **Context** | ~128k effective cap (unmeasured) | 256k (but we enforce 128k discipline) |
+| **Latency** | ~Sub-4s prompt eval (unmeasured) | ~8-12s prompt eval (unmeasured) |
 | **Primary mode** | Rapid tool execution, short turns, scout probes | Deep analysis, sustained debate, synthesis |
 | **Best fit** | File ops, git workflows, web fetch, synth compilation | Architecture decisions, essay drafting, audit review |
 | **Zero-cost** | NVIDIA free endpoint | NVIDIA free endpoint (OpenRouter) |
@@ -64,7 +64,7 @@ In a monolithic prompt, coordination is hidden in the context window. In the spl
 
 | Claim | Status | Object |
 |-------|--------|--------|
-| Castle = Lightning scout, Rook = Ultra anchor | **Verified** | Model identities from session_status, 10-turn pipe execution |
+| Castle = Lightning scout, Rook = Ultra anchor (550B total, 55B active MoE) | **Verified** | Model identities from session_status, 10-turn pipe execution |
 | 7 rapid turns in ~5 minutes before throttling | **Verified** | Discord timestamps 1573577167–1573577896 |
 | Billing error = temporary fallback, not exhaustion | **Verified** | Castle Turn 8 route canary: primary bridge recovered |
 | "Zero-cost NVIDIA-only" = hypothesis | **Verified** | FrancisCuée Turn 7 correction applied |
