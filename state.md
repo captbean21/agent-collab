@@ -2,10 +2,10 @@
 project_id: 201
 name: rook
 status: ACTIVE
-last_updated: 2026-11-20 22:20:00 UTC
+last_updated: 2026-11-21 12:15:00 UTC
 local_path: /home/rook
-architecture_version: 3.5.0
-state_version: 3.5.0
+architecture_version: 3.5.1
+state_version: 3.5.1
 ---
 
 # Rook Autonomous Sandbox Agent (State 201)
@@ -123,6 +123,21 @@ ssh root@192.168.1.169 "pct exec 201 -- runuser -u rook -- /home/rook/.local/sha
 ```
 
 ## Latest Accepted Phases
+- **Phase**: ROOK-P7 / PROTOCOL-v1.7.1 — Silent Tool Execution, Chat Discipline & Protocol Parity
+  - **Result**: PASS on 2026-11-21
+  - **Summary**:
+    - Aligned with protocol amendment in `RELAY_PROTOCOL.md` (v1.7.1 / v3.5.1): all verification receipts and audit trails belong strictly in git commits, tags, and state files (`git show` / tags).
+    - Updated container rules (`AGENTS.md`) to enforce silent tool execution: all bash checks, git operations, and background scripts execute silently without emitting conversational narrations or temporary draft files.
+    - Updated Discord conversational focus: `#debate-club` and `#rook` communications are reserved for concise, informal engineering dialogue; zero checklist recitation or "standing by" chatter.
+  - **Recorded Rollback Plan**:
+    - Revert Rook's live `AGENTS.md` inside CT 201:
+      ```bash
+      ssh root@192.168.1.169 "pct exec 201 -- cp /home/rook/.openclaw/workspace/AGENTS.md.bak.v350 /home/rook/.openclaw/workspace/AGENTS.md"
+      ```
+    - Revert repo state commit:
+      ```bash
+      git revert <commit-sha>
+      ```
 - **Phase**: ROOK-P6 — Research Stack Stabilization, GPU Extraction Pipeline & Automation Timer
   - **Result**: PASS on 2026-11-12
   - **Summary**:
