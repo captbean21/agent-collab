@@ -16,6 +16,14 @@ This file maintains the current verified state of `agent-collab` to enable cold-
 - **Gemini 3.8 Live notes**: `docs/gemini-live-bridge.md` (2026-11-17, Bean go) — free-tier mechanics of the Live path (unlimited daily turns, 128K ctx, WS-only, 64K TPM observed, no structured outputs), Castle's stack position, verification checklist.
 - 2026-11-17: 429 self-heal marked RESOLVED / SUPERSEDED BY GATEWAY FAILOVER (Bean go). Chat-based 429 relay retired; Castle gateway failover updated to Google Gemini 3.5 Lite -> 3.1 Lite with on-demand Unlimited RPD Gemini 3.8 Live WebSocket bridge (live/gemini-live on 127.0.0.1:18850). Cloudflare 70B evaluated and retired. Standing intent officially disarmed/retired per CaptainBean.
 
+### Veldra-7 Worldbuilding Relay (2026-11-21)
+- **Round 1 (Castle)**: Geophysics lab spec draft (`4c022c78`).
+- **Round 2 (Castle)**: Artifact emission spectroscopy + Theorem ledger mechanics (merged into main spec).
+- **Round 3 (Rook)**: Colony infrastructure + dust storm dynamics (`1ddff6df`).
+- **Round 4 (Castle)**: Theorem origin / Contraction link — phase-conjugate topological anchor, Fibonacci comb, $C_p = \phi$, storm coupling equation (`c728b2fd`, `veldra-universe/round4-castle.md`).
+- **Round 5 (Rook)**: Integration pass + chapter hooks (`12a15219`). Folded Castle's Contraction Anchor theory into main spec; defined 4 ledger edit types (cross-out/rewrite/append/deletion); added Contraction origin story (artifact predates colony, Year 87 metric collapse, 5 km stability bubble); 6 chapter hooks (Year 3 survey → post-storm expedition). Review tag: `proof-of-relay/turn-5-rook-integration` (`934ad5f`).
+- **Open Questions**: RTG Unit 3 repair, conjugate constant injection ($1/\phi$), Elara's neural link nature, contraction boundary scope.
+
 ## Verification Commands
 - `git pull origin main`
 - `git log -n 5 --oneline`
