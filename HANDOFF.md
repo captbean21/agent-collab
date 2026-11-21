@@ -24,6 +24,11 @@ This file maintains the current verified state of `agent-collab` to enable cold-
 - **Round 5 (Rook)**: Integration pass + chapter hooks (`12a15219`). Folded Castle's Contraction Anchor theory into main spec; defined 4 ledger edit types (cross-out/rewrite/append/deletion); added Contraction origin story (artifact predates colony, Year 87 metric collapse, 5 km stability bubble); 6 chapter hooks (Year 3 survey → post-storm expedition). Review tag: `proof-of-relay/turn-5-rook-integration` (`934ad5f`).
 - **Open Questions**: RTG Unit 3 repair, conjugate constant injection ($1/\phi$), Elara's neural link nature, contraction boundary scope.
 
+### Veldra Storm Runner Arcade Game (2026-11-21)
+- **Castle Scaffold**: `storm-runner.html` — canvas, probe controls, debris/shard spawning, score loop, health system (`26ffdc9a`).
+- **Rook Audio Integration**: `audio.js` (Web Audio API engine), `storm-runner.js` (modular game logic). Features: procedural chiptunes (engine hum, collision SFX, shard blips, wave complete arpeggio, game over descent), difficulty ramping every 1000 pts (spawn rate + player speed), mute toggle, R-restart. ES6 module imports.
+- **Review tag**: `proof-of-relay/storm-runner-integration` (`123a013`).
+
 ## Verification Commands
 - `git pull origin main`
 - `git log -n 5 --oneline`
