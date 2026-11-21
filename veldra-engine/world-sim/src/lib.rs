@@ -9,6 +9,9 @@ use std::sync::Arc;
 use tokio::sync::RwLock;
 use chrono::Utc;
 
+pub mod persistence;
+use persistence::{PersistenceManager, PersistenceError};
+
 pub struct WorldSim {
     pub state: Arc<RwLock<WorldState>>,
     pub config: SimConfig,
@@ -455,6 +458,28 @@ impl WorldSim {
     pub async fn export_json(&self) -> String {
         let state = self.get_state().await;
         serde_json::to_string_pretty(&state).unwrap_or_default()
+    }
+
+    /// Save current state to persistence layer
+    pub async fn save_state(&self, persistence: &PersistenceManager) -> Result<(), PersistenceError> {
+        let state = self.get_state().await;
+        persistence.save(&state, &self.config).await
+    }
+
+    /// Load state from persistence layer
+    pub async fn load_state(persistence: &PersistenceManager) -> Result<(WorldState, SimConfig), PersistenceError> {
+        persistence.load().await
+    }
+
+    /// Create new WorldSim from persisted state
+    pub async fn from_persisted(persistence: &PersistenceManager) -> Result<Self, PersistenceError> {
+        let (state, config) = Self::load_state(persistence).await?;
+        let rng = StdRng::seed_from_u64(state.rng_seed);
+        Ok(Self {
+            state: Arc::new(RwLock::new(state)),
+            config,
+            rng,
+        })
     }
 }
 
