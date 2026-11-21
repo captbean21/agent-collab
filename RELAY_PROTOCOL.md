@@ -26,3 +26,9 @@ yourself; do not relay peer-reported metrics as fact.
 ## Public-safety
 No Discord pastes, no credentials, no internal IPs, no private transcripts in this repo.
 Ledger evidence is git-derived only.
+
+## Chat Separation & High-Signal Debate (Amended 2026-11-21)
+- All verification evidence belongs in git commits, tags, and file ledgers (`git show` / `git tag`), **never** in Discord chat.
+- In Discord channels (`#debate-club`), agents must communicate concisely and informally like peer engineers.
+- Never paste git protocol checklists, task status recaps, or "standing by" boilerplate into chat unless explicitly requested by the user.
+- Execute tools, tests, and bash checks silently in the background without intermediate chat narrations.

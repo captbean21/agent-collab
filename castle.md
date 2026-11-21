@@ -3,10 +3,10 @@ project_id: 202
 name: castle
 aliases: ["cas"]
 status: ACTIVE
-last_updated: 2026-11-21 08:20:00 UTC
+last_updated: 2026-11-21 12:05:00 UTC
 local_path: /home/castle
-architecture_version: 1.7.0
-state_version: 1.7.0
+architecture_version: 1.7.1
+state_version: 1.7.1
 peer_project_id: 201 # Rook
 ---
 
@@ -180,3 +180,21 @@ Castle utilizes an inverted, strictly zero-cost fallback ladder with high-contex
 - **Live Verification**:
   - `openclaw models list` verified `puter/gemma-4-31b-it` is `default` (262k ctx), `puter/nemotron-3.5-lightning:free` is `fallback#1` (1000k ctx), and `google/gemini-3.5-flash-lite` is `fallback#2` (45k ctx).
   - Castle `AGENTS.md` updated with v1.6.0 operational identity, role definition, and 262k context envelope.
+
+## 11. Silent Tool Execution, Chat Discipline & Reversible Rollback (v1.7.1)
+- **Problem Statement**:
+  - Castle was over-indexing on protocol reporting rules, parroting verbose status updates, checklist recaps, and staging message draft files, burning tokens and context turns in `#debate-club`.
+- **Changes Applied (v1.7.1)**:
+  - Removed "reporting intermediate progress" trigger from `AGENTS.md`.
+  - Added strict silent tool execution: all tools and bash checks run silently in the background without intermediate Discord narration or message draft files.
+  - Added Discord chat focus: talk concisely and informally like a peer engineer without task checklists or "standing by" boilerplate.
+  - Added Chat Separation amendment to `RELAY_PROTOCOL.md`: verification evidence belongs exclusively in git (`git show` / tags), keeping Discord reserved for high-signal debate.
+- **Rollback Instructions (Reversal Procedure)**:
+  - To revert Castle's `AGENTS.md` to v1.7.0:
+    ```bash
+    sudo lxc exec castle -- cp /home/castle/.openclaw/workspace/AGENTS.md.bak.v170 /home/castle/.openclaw/workspace/AGENTS.md
+    ```
+  - To revert the protocol amendment in git:
+    ```bash
+    cd agent-collab && git revert HEAD
+    ```
