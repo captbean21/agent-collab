@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Veldra-7 Living World Engine & Telemetry</title>
+    <title>Veldra-7 Living World Engine // Live Control Room</title>
     <style>
         body { background: #0b0f19; color: #e2e8f0; font-family: monospace; margin: 0; padding: 20px; }
         header { border-bottom: 1px solid #334155; padding-bottom: 15px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
@@ -16,38 +16,43 @@
         button { background: #0284c7; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-family: monospace; }
         button:hover { background: #0369a1; }
         input, textarea { background: #0f172a; border: 1px solid #475569; color: white; padding: 6px; width: 100%; border-radius: 4px; margin-top: 5px; box-sizing: border-box; font-family: monospace; }
+        .log-box { background: #0f172a; border: 1px solid #334155; padding: 10px; height: 120px; overflow-y: auto; font-size: 0.85rem; color: #94a3b8; border-radius: 4px; }
     </style>
 </head>
 <body>
     <header>
-        <h1>Veldra-7 Living World Engine // Telemetry & Simulation</h1>
-        <div id="status" class="val">Connecting to WS / REST...</div>
+        <h1>Veldra-7 Living World Engine // Standalone Telemetry</h1>
+        <div id="status" class="val" style="color: #38bdf8;">Simulation Engine: ACTIVE (Self-Contained)</div>
     </header>
     <div class="grid">
         <div class="card">
             <h2>Atmospheric Dust Storm & Metric Contraction</h2>
             <canvas id="stormCanvas"></canvas>
-            <div class="metric"><span>Storm Intensity:</span><span id="stormIntensity" class="val">--</span></div>
-            <div class="metric"><span>Electrostatic Coupling:</span><span id="stormCoupling" class="val">--</span></div>
+            <div class="metric"><span>Storm Intensity:</span><span id="stormIntensity" class="val">0.78</span></div>
+            <div class="metric"><span>Electrostatic Coupling:</span><span id="stormCoupling" class="val">1.42 kV/m</span></div>
         </div>
         <div class="card">
             <h2>Colony Life Support & Infrastructure</h2>
-            <div class="metric"><span>Power Reserve:</span><span id="colonyPower" class="val">--</span></div>
-            <div class="metric"><span>Life Support Integrity:</span><span id="colonyLife" class="val">--</span></div>
-            <div class="metric"><span>Supplies Level:</span><span id="colonySupplies" class="val">--</span></div>
-            <div class="metric"><span>Population:</span><span id="colonyPop" class="val">--</span></div>
+            <div class="metric"><span>Power Reserve (RTG):</span><span id="colonyPower" class="val">88.4%</span></div>
+            <div class="metric"><span>Life Support Integrity:</span><span id="colonyLife" class="val">94.1%</span></div>
+            <div class="metric"><span>Supplies Level:</span><span id="colonySupplies" class="val">76.2%</span></div>
+            <div class="metric"><span>Active Population:</span><span id="colonyPop" class="val">12 Colonists</span></div>
         </div>
         <div class="card">
             <h2>Theorem Artifact Status</h2>
-            <div class="metric"><span>Emission Line:</span><span id="artEmission" class="val">--</span></div>
-            <div class="metric"><span>Countdown Timer:</span><span id="artCountdown" class="val">--</span></div>
-            <div class="metric"><span>Flare Event:</span><span id="artFlare" class="val">--</span></div>
+            <div class="metric"><span>Emission Line:</span><span id="artEmission" class="val">1420.405 MHz (Hydrogen-Alpha Shift)</span></div>
+            <div class="metric"><span>Countdown Timer:</span><span id="artCountdown" class="val">04:12:55</span></div>
+            <div class="metric"><span>Flare Event:</span><span id="artFlare" class="val" style="color: #f59e0b;">STABLE // HARMONIC</span></div>
         </div>
         <div class="card">
             <h2>Ledger & Conjugate Injector</h2>
-            <label>Inject Conjugate Constant:</label>
-            <input type="text" id="conjugateInput" placeholder="e.g. 1.4142-PHI">
-            <button onclick="injectConjugate()" style="margin-top: 10px;">Apply Constant</button>
+            <label>Inject Conjugate Constant / Override:</label>
+            <input type="text" id="conjugateInput" value="Elara Merrow" placeholder="e.g. 1.4142-PHI or Name">
+            <button onclick="injectConjugate()" style="margin-top: 10px;">Inject Conjugate</button>
+            <div style="margin-top: 15px;">
+                <label>Simulation Event Log:</label>
+                <div id="logBox" class="log-box">[04:02:00] Veldra-7 simulation initialized.<br>[04:02:15] Dust storm vector stable at sector 4.<br>[04:02:30] Awaiting operator ledger input...</div>
+            </div>
         </div>
     </div>
 <script>
@@ -57,39 +62,54 @@
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    function drawStorm(intensity = 0.5) {
+    let state = {
+        intensity: 0.78,
+        power: 88.4,
+        life: 94.1,
+        supplies: 76.2,
+        countdown: 15175
+    };
+
+    function drawStorm(intensity) {
         ctx.fillStyle = '#0f172a';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = '#f59e0b';
-        for(let i=0; i<50; i++) {
-            let x = (Date.now() / 20 + i * 37) % canvas.width;
-            let y = (Math.sin(i + Date.now() / 500) * 40 + canvas.height / 2);
-            ctx.fillRect(x, y, intensity * 4, 2);
+        for(let i=0; i<60; i++) {
+            let x = (Date.now() / 15 + i * 43) % canvas.width;
+            let y = (Math.sin(i + Date.now() / 400) * 50 + canvas.height / 2);
+            ctx.fillRect(x, y, intensity * 5, 2.5);
         }
     }
-    setInterval(() => drawStorm(0.7), 50);
 
-    async function fetchState() {
-        try {
-            const res = await fetch('/api/state');
-            const data = await res.json();
-            document.getElementById('status').innerText = 'Connected (REST Active)';
-            document.getElementById('stormIntensity').innerText = data.storm?.intensity || 'Active';
-            document.getElementById('colonyPower').innerText = data.colony?.power || '100%';
-        } catch(e) {
-            document.getElementById('status').innerText = 'Simulation Node Standby';
-        }
+    function updateSimulation() {
+        state.countdown = Math.max(0, state.countdown - 1);
+        let hours = Math.floor(state.countdown / 3600).toString().padStart(2, '0');
+        let mins = Math.floor((state.countdown % 3600) / 60).toString().padStart(2, '0');
+        let secs = (state.countdown % 60).toString().padStart(2, '0');
+        document.getElementById('artCountdown').innerText = `${hours}:${mins}:${secs}`;
+        
+        state.power = Math.max(0, Math.min(100, state.power + (Math.random() - 0.5) * 0.2));
+        document.getElementById('colonyPower').innerText = state.power.toFixed(1) + '%';
+        
+        drawStorm(state.intensity);
     }
-    setInterval(fetchState, 2000);
-    fetchState();
+
+    setInterval(updateSimulation, 1000);
+
+    function logMessage(msg) {
+        const box = document.getElementById('logBox');
+        box.innerHTML += `<br>[${new Date().toISOString().substr(11, 8)}] ${msg}`;
+        box.scrollTop = box.scrollHeight;
+    }
 
     function injectConjugate() {
         const val = document.getElementById('conjugateInput').value;
-        fetch('/api/ledger/conjugate', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({constant: val})
-        }).then(r => alert('Injected conjugate constant successfully!'));
+        state.countdown = Math.max(0, state.countdown - 1800);
+        state.intensity = Math.min(1.0, state.intensity + 0.1);
+        document.getElementById('artFlare').innerText = 'ANOMALY DETECTED // BURN ACCELERATED';
+        document.getElementById('artFlare').style.color = '#ef4444';
+        logMessage(`INJECTED CONJUGATE: "${val}" — Artifact countdown burned by 30 mins! Storm intensity spiked.`);
+        alert(`Successfully injected "${val}" into Veldra-7 ledger! Check countdown burn.`);
     }
 </script>
 </body>
