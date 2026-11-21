@@ -71,10 +71,10 @@ Castle serves as the high-speed scout, broad-context ingestor, and rapid tool ex
 ## 4. Inference Model Ladder & Provider Architecture
 Castle utilizes a multi-provider fallback ladder to ensure zero-cost operation and immunity from single-provider rate limits:
 
-1. **Primary**: `google/gemini-3.5-flash-lite` (Google AI Studio direct, expanded context ceiling 150k / 1M native)
-2. **Fallback #1**: `puter/gemma-4-31b-it` (Local Puter Bridge `127.0.0.1:5006`, 262k context window, $0.00 / 0 Puter credits)
+1. **Primary**: `google/gemini-3.5-flash-lite` (Google AI Studio direct, clamped to 45k context to strictly enforce the 250k TPM ceiling)
+2. **Fallback #1**: `puter/gemma-4-31b-it` (Local Puter Bridge `127.0.0.1:5006`, 262k context window, $0.00 / 0 Puter credits, no TPM throttle)
 3. **Fallback #2**: `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free` (Cross-Provider Safety Net, OpenRouter Free, 262k context)
-4. **Fallback #3**: `google/gemini-3.1-flash-lite` (Google AI Studio direct, expanded context ceiling 150k / 1M native)
+4. **Fallback #3**: `google/gemini-3.1-flash-lite` (Google AI Studio direct, clamped to 45k context)
 5. **Fallback #4**: `openrouter/openrouter/free` (Cross-Provider Secondary Safety Net, 131k context)
 6. **Fallback #5**: `live/gemini-live` (`http://127.0.0.1:18850/v1` via local `live-bridge.mjs`)
 
@@ -148,9 +148,10 @@ Castle utilizes a multi-provider fallback ladder to ensure zero-cost operation a
 - **Status**: Live and verified. Verified via `openclaw models list`, service restart, and active Discord gateway connection.
 
 ## 9. Context Expansion & Puter Zero-Cost Fallback Deployment (2026-11-20)
-- **Context Window Expansion**:
-  - Previous limitation: Castle was previously restricted to `45000` context tokens, which proved too tight for multi-agent collaboration and large file ingest.
-  - Resolution: Expanded primary Google Flash-Lite models (`3.5` and `3.1`) context limits from `45000` to `150000` tokens (utilizing Google's 1,048,576 token native window).
+- **250k TPM Safeguard & Asymmetric Context Tiering (Option 1)**:
+  - Google AI Studio Free Tier enforces a strict 250,000 Tokens Per Minute (TPM) limit. At 150k context, a single 2-step tool call sequence re-sends >300k tokens within 60s, instantly causing `429 RESOURCE_EXHAUSTED`.
+  - Resolution (Option 1): Re-clamped Gemini 3.5 & 3.1 `contextTokens` to `45,000` (allowing 4-5 consecutive tool turns at ~180k tokens/min, safely below 250k TPM).
+  - Heavy Context Offload: Allocated full `262,144` token context window to Fallback #1 (`puter/gemma-4-31b-it`), which runs with zero TPM rate limiting and 0 credit cost.
 - **Local Puter Bridge (`puter-bridge.service`)**:
   - Deployed independent loopback OpenAI-compatible bridge on Castle at `127.0.0.1:5006` (`/home/castle/.openclaw/services/puter-bridge/puter_bridge.py`).
   - Preserves strict RFC1918 LAN quarantine (calls Puter API over outbound WAN directly, no cross-container dependency on Rook).
@@ -161,4 +162,4 @@ Castle utilizes a multi-provider fallback ladder to ensure zero-cost operation a
   - Configured `puter/glm-5.2` (1,000,000 context tokens) as on-demand manual model accessible via `/model puter/glm-5.2`.
 - **Live Verification**:
   - `curl http://127.0.0.1:5006/health` -> `200 OK`.
-  - `openclaw models list` verified `google/gemini-3.5-flash-lite` (150k ctx, default) -> `puter/gemma-4-31b-it` (262k ctx, fallback#1) -> `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free` (262k ctx, fallback#2).
+  - `openclaw models list` verified `google/gemini-3.5-flash-lite` (45k ctx, default) -> `puter/gemma-4-31b-it` (262k ctx, fallback#1) -> `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free` (262k ctx, fallback#2).
