@@ -1,0 +1,65 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          npm ci
+
+      - name: Build site
+        run: |
+          npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out
+
+  deploy:
+    environment:
+      name: github Pages
+      url: https://${{ github.repository_owner }}.github.io/${{ github.repository_name }}/
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          target-branch: main
+
+  verify:
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+      - name: Verify deployed content
+        run: |
+          set -e
+          PAGE_URL="https://${{ github.repository_owner }}.github.io/${{ github.repository_name }}/proof-of-relay.html"
+          echo "Checking page at: $PAGE_URL"
+          CONTENT=$(curl -s "$PAGE_URL" || echo "FAILED_TO_FETCH")
+          echo "Fetched content length: ${#CONTENT}"
+          echo "$CONTENT" | head -20
+      - name: SHA256 verify deployed artifact
+        run: |
+          sha256sum <(curl -s https://${{ github.repository_owner }}.github.io/${{ github.repository_name }}/proof-of-relay.html)
