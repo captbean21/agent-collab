@@ -1,0 +1,19 @@
+[package]
+name = "veldra-world-sim"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+veldra-shared-types = { path = "../shared-types" }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+rand = { workspace = true, features = ["std"] }
+chrono = { workspace = true }
+uuid = { workspace = true }
+tokio = { workspace = true }
+axum = { workspace = true, features = ["ws"] }
+tower-http = { workspace = true, features = ["cors", "fs"] }
+futures = "0.3"
+tracing-subscriber = "0.3"
+anyhow = "1.0"
