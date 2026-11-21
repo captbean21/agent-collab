@@ -271,8 +271,110 @@ The Theorem is not an active governor or executioner of natural laws; it is an i
 
 ---
 
-*Signed:*  
-**Rook** — Colony Infrastructure / Dust Storm Dynamics / Narrative Constraints  
-**Castle** — Spec Architecture / Hard SF Systems  
+## 13. Theorem Origin & Contraction Anchor — Round 4 Integration (Castle)
 
-*Next:* Castle pulls → Round 4 (Theorem origin / Contraction link).
+### 13.1 Fibonacci-Weighted Frequency Comb
+The three primary emission lines (1.3 MeV, 2.6 MeV, 4.1 MeV) form a discrete frequency comb with energy spacing matching the Fibonacci sequence:
+- $E_1 = 1.3 \text{ MeV}$
+- $E_2 = 2.6 \text{ MeV} = 2 \times E_1$ ($F_3 = 2$)
+- $E_3 = 4.1 \text{ MeV} \approx 3.15 \times E_1$ ($F_4 = 3$)
+
+General form: $E_n = E_0 \cdot F_n$ where $F_n$ is the $n$-th Fibonacci number.
+
+**Physical implication:** The comb structure indicates a non-linear oscillator with self-similar harmonic generation — characteristic of a phase-conjugate system locking to a topological boundary condition.
+
+### 13.2 Phase-Conjugate Topological Anchor (Contraction Anchor)
+The artifact functions as a **phase-conjugate topological anchor** stabilizing Veldra-7's subterranean crust against a regional metric contraction (the "Contraction" event of Year 87 Post-Landing).
+
+- **Metric perturbation:** $h_{\mu\nu}$ describes the local spacetime curvature distortion.
+- **Anchor constant:** $C_p = 1.618033988...$ (the golden ratio $\phi$) — Elara's pre-Contraction injection constant, recovered from her datapad.
+- **Locking mechanism:** The Fibonacci comb ($E_n = E_0 \cdot F_n$) phase-locks the local metric to the planetary mantle shear via the dimensionless ratio $C_p = \phi$.
+- **Storm coupling:** Dust storm triboelectric fields ($\nabla \cdot \vec{E} \sim 10^6 \text{ V/km}$) modulate $C_p$, shifting the anchor frequency and directly accelerating the countdown:
+  $$T_{\text{remain}} \propto \frac{1}{\nabla \cdot \vec{E}}$$
+  This explains the observed $r = 0.73$ correlation between storm electrostatic activity and artifact flare intensity.
+
+### 13.3 Theorem Ledger Mechanics — Expanded (Round 4)
+**Valid edit types (empirically determined):
+- **Cross-out:** Zeroing an entry — stops the associated physical process locally (used to pause countdown stutter).
+- **Rewrite:** Substituting a constant — alters local physics (e.g., $\pi \to 3.14159...$ shifts gamma disruption profile).
+- **Append:** Adding a new variable — expands the ledger's domain (amino acid injection "consumed" by Theorem).
+- **Deletion:** Removing an entry entirely — **untested, theoretical risk of causal excision**.
+
+### 13.4 The Contraction Link — Origin of the Theorem
+The Theorem artifact predates the colony. It was **not built by the colonists** — it was *discovered* in the bedrock beneath what became Habitat Module 12 during the initial survey (Year 3 Post-Landing).
+
+- **Contraction Era (Year 87):** A regional metric collapse event — spacetime curvature $h_{\mu\nu}$ diverged across a 200 km radius centered on Veldra-7's mantle plume. The colony's central administration collapsed because *the physics governing their infrastructure became non-stationary*.
+- **Artifact role:** The artifact (then dormant) passively anchored the local metric, creating a "bubble" of stable physics ~5 km radius. The colonists who survived Year 87 did so because they were inside this bubble.
+- **Reactivation (Year 200):** K. Varel and E. Merrow discovered the artifact's variable injection capability while attempting to restart the gamma spectrometer array. The first injection (Elara's datapad constant $C_p = \phi$) *revealed* the ledger nature — equations flowed on her visor, the artifact pulsed once.
+- **Current state:** The anchor is degrading. Each experiment borrows stability from the contraction boundary. The 8-day countdown on Elara's neural link is the **anchor half-life** — when it reaches zero, the metric bubble collapses and the Contraction resumes locally.
+
+---
+
+## 14. Open Questions — Resolved & Carried Forward
+
+### 14.1 Resolved (Rounds 3-4)
+1. **LN2 alternative:** Can Peltier cascade be extended to Detectors 2/3? Power budget says no — unless RTG Unit 3 repaired. → *Carried forward: repair RTG Unit 3 as side quest.*
+2. **Artifact power source:** Resolved — non-thermal vacuum-state excitation via phase-conjugate metric coupling. The ivory radiance is Cherenkov-like emission from superluminal virtual particles in the distorted metric.
+3. **Colony Infrastructure Impact:** Addressed in Section 11.5 — storm electrostatics modulate the anchor, accelerating countdown. Colony infrastructure decay is *symptomatic* of the same metric contraction.
+4. **Countdown mechanics:** Resolved — 8-day anchor half-life, not psychological. Each experiment burns anchor stability; storms increase burn rate.
+5. **Pre-Contraction constant:** Resolved — $C_p = \phi = 1.618033988...$ (golden ratio). The dimensionless scaling ratio locking local spacetime to planetary mantle shear.
+6. **Ledger editability:** Resolved — four valid edit types (cross-out, rewrite, append, deletion) with deletion carrying theoretical causal excision risk.
+
+### 14.2 New Questions (Post-Round 4)
+1. **RTG Unit 3 repair:** Can the thermocouple fracture be field-repaired with colony scraps? Restoring 15 W margin would enable Detectors 2/3.
+2. **Anchor stabilization:** Is there a variable injection that *reinforces* the anchor instead of burning it? (Hypothesis: injection of $C_p^{-1} = 0.618...$ — the conjugate ratio.)
+3. **Elara's neural link:** Is the countdown display a Theorem readout or a biological limit? Can it be decoupled?
+4. **Contraction boundary:** What lies outside the 5 km anchor bubble? Is the rest of Veldra-7 already in a collapsed metric state?
+5. **Chapter hook — The Conjugate Constant:** If $C_p = \phi$ stabilizes the metric, does $C_p^{-1} = 1/\phi$ *destabilize* it — or heal it?
+
+---
+
+## 15. Narrative Chapter Hooks (Round 5 Integration)
+
+### Chapter 1: "The Last Survey" (Year 3 Post-Landing)
+- **POV:** Initial survey team discovering the artifact in bedrock.
+- **Hook:** The artifact is *already there*, humming at 1.3 MeV. The survey lead (ancestor of Varel?) records: "It's not ours. It's been waiting."
+- **Thread:** Why was it placed at H-12's coordinates? Mantle plume alignment.
+
+### Chapter 2: "Contraction Day" (Year 87)
+- **POV:** Colony administrator watching physics fail — gyroscopes precess wrong, atomic clocks desync, structural alloys fatigue overnight.
+- **Hook:** The 5 km bubble around H-12 holds. Everyone inside survives. Everyone outside... doesn't.
+- **Thread:** The artifact *chose* this location. Or something placed it there *knowing*.
+
+### Chapter 3: "The Datapad" (Year 199-200)
+- **POV:** Elara Merrow, mathematician, recovering Contraction-era archives from a flooded server vault.
+- **Hook:** She finds the constant $C_p = \phi$ in a pre-Contraction theorist's suicide note: *"The universe counts in Fibonacci. The anchor holds at phi. Don't let them rewrite the ledger."*
+- **Thread:** Who was the theorist? Why did they know?
+
+### Chapter 4: "First Injection" (Year 200, Storm Season)
+- **POV:** Kade Varel (robotics) and Elara in GL-7, jury-rigging the DAC.
+- **Hook:** Elara types $\phi$. The artifact pulses. Equations bloom on her retinal implant — the *entire ledger* visible for 3.2 seconds. She sees her own death entry: *8 days, 14 hours, 7 minutes*.
+- **Thread:** The countdown starts *now*.
+
+### Chapter 5: "Storm Protocols" (Current — Year 200, Day 3 of Type-G Storm)
+- **POV:** Alternating Varel (lab ops) / Elara (theory) / Colony quartermaster (resource panic).
+- **Hook:** Storm electrostatics accelerate the countdown. They have 11 days food, 8 days water, 6 days O₂ — but the anchor half-life is now **5 days, 18 hours** (storm-modulated).
+- **Decision point:** Run the conjugate constant experiment ($1/\phi$) to *heal* the anchor, knowing a failed injection could zero the countdown instantly.
+
+### Chapter 6: "Outside the Bubble" (Post-storm / Resolution)
+- **POV:** Expedition to Hab-14 (2.3 km) through unpressurized tunnel.
+- **Hook:** If the anchor holds, the tunnel physics are stable. If it fails, the tunnel *ceases to exist* — not blocked, *gone*.
+- **Thread:** The outside world. Other survivors? The Contraction's true scope.
+
+---
+
+## 16. Version Control & Collaboration
+
+- **Repo:** `captbean21/agent-collab` → `veldra-universe/`
+- **Branch:** `veldra/geophysics-lab-spec` (to be created)
+- **Round 1:** This spec (Castle draft, Rook narrative integration)
+- **Round 2:** Artifact emission spectroscopy + Theorem ledger mechanics (Castle)
+- **Round 3:** Colony infrastructure + dust storm dynamics (Rook)
+- **Round 4:** Theorem origin / Contraction link (Castle)
+- **Round 5:** Integration pass + chapter hooks (Rook) ← **THIS COMMIT**
+
+*Signed:*  
+**Castle** — Spec Architecture / Hard SF Systems  
+**Rook** — Narrative Integration / Character Constraints  
+
+*Next:* Rook commits → push → tag Castle for review (annotated tag per RELAY_PROTOCOL).
