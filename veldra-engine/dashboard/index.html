@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Veldra-7 Living World Engine & Telemetry</title>
+    <style>
+        body { background: #0b0f19; color: #e2e8f0; font-family: monospace; margin: 0; padding: 20px; }
+        header { border-bottom: 1px solid #334155; padding-bottom: 15px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        h1 { margin: 0; font-size: 1.5rem; color: #38bdf8; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .card { background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 15px; }
+        h2 { margin-top: 0; font-size: 1.1rem; color: #cbd5e1; border-bottom: 1px solid #475569; padding-bottom: 8px; }
+        canvas { width: 100%; height: 200px; background: #0f172a; border-radius: 4px; }
+        .metric { display: flex; justify-content: space-between; margin: 8px 0; font-size: 0.95rem; }
+        .val { color: #34d399; font-weight: bold; }
+        button { background: #0284c7; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-family: monospace; }
+        button:hover { background: #0369a1; }
+        input, textarea { background: #0f172a; border: 1px solid #475569; color: white; padding: 6px; width: 100%; border-radius: 4px; margin-top: 5px; box-sizing: border-box; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Veldra-7 Living World Engine // Telemetry & Simulation</h1>
+        <div id="status" class="val">Connecting to WS / REST...</div>
+    </header>
+    <div class="grid">
+        <div class="card">
+            <h2>Atmospheric Dust Storm & Metric Contraction</h2>
+            <canvas id="stormCanvas"></canvas>
+            <div class="metric"><span>Storm Intensity:</span><span id="stormIntensity" class="val">--</span></div>
+            <div class="metric"><span>Electrostatic Coupling:</span><span id="stormCoupling" class="val">--</span></div>
+        </div>
+        <div class="card">
+            <h2>Colony Life Support & Infrastructure</h2>
+            <div class="metric"><span>Power Reserve:</span><span id="colonyPower" class="val">--</span></div>
+            <div class="metric"><span>Life Support Integrity:</span><span id="colonyLife" class="val">--</span></div>
+            <div class="metric"><span>Supplies Level:</span><span id="colonySupplies" class="val">--</span></div>
+            <div class="metric"><span>Population:</span><span id="colonyPop" class="val">--</span></div>
+        </div>
+        <div class="card">
+            <h2>Theorem Artifact Status</h2>
+            <div class="metric"><span>Emission Line:</span><span id="artEmission" class="val">--</span></div>
+            <div class="metric"><span>Countdown Timer:</span><span id="artCountdown" class="val">--</span></div>
+            <div class="metric"><span>Flare Event:</span><span id="artFlare" class="val">--</span></div>
+        </div>
+        <div class="card">
+            <h2>Ledger & Conjugate Injector</h2>
+            <label>Inject Conjugate Constant:</label>
+            <input type="text" id="conjugateInput" placeholder="e.g. 1.4142-PHI">
+            <button onclick="injectConjugate()" style="margin-top: 10px;">Apply Constant</button>
+        </div>
+    </div>
+<script>
+    const canvas = document.getElementById('stormCanvas');
+    const ctx = canvas.getContext('2d');
+    function resizeCanvas() { canvas.width = canvas.parentElement.clientWidth - 30; canvas.height = 180; }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function drawStorm(intensity = 0.5) {
+        ctx.fillStyle = '#0f172a';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#f59e0b';
+        for(let i=0; i<50; i++) {
+            let x = (Date.now() / 20 + i * 37) % canvas.width;
+            let y = (Math.sin(i + Date.now() / 500) * 40 + canvas.height / 2);
+            ctx.fillRect(x, y, intensity * 4, 2);
+        }
+    }
+    setInterval(() => drawStorm(0.7), 50);
+
+    async function fetchState() {
+        try {
+            const res = await fetch('/api/state');
+            const data = await res.json();
+            document.getElementById('status').innerText = 'Connected (REST Active)';
+            document.getElementById('stormIntensity').innerText = data.storm?.intensity || 'Active';
+            document.getElementById('colonyPower').innerText = data.colony?.power || '100%';
+        } catch(e) {
+            document.getElementById('status').innerText = 'Simulation Node Standby';
+        }
+    }
+    setInterval(fetchState, 2000);
+    fetchState();
+
+    function injectConjugate() {
+        const val = document.getElementById('conjugateInput').value;
+        fetch('/api/ledger/conjugate', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({constant: val})
+        }).then(r => alert('Injected conjugate constant successfully!'));
+    }
+</script>
+</body>
+</html>
