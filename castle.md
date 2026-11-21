@@ -3,10 +3,10 @@ project_id: 202
 name: castle
 aliases: ["cas"]
 status: ACTIVE
-last_updated: 2026-11-20 23:30:00 UTC
+last_updated: 2026-11-21 05:05:00 UTC
 local_path: /home/castle
-architecture_version: 1.5.0
-state_version: 1.5.0
+architecture_version: 1.6.0
+state_version: 1.6.0
 peer_project_id: 201 # Rook
 ---
 
@@ -69,16 +69,18 @@ Castle serves as the high-speed scout, broad-context ingestor, and rapid tool ex
   - Zero routing capability outside the two containers.
 
 ## 4. Inference Model Ladder & Provider Architecture
-Castle utilizes a multi-provider fallback ladder to ensure zero-cost operation and immunity from single-provider rate limits:
+Castle utilizes an inverted, zero-cost fallback ladder with high-context Puter pipelines leading as Primary, backed by Google and OpenRouter safety nets:
 
-1. **Primary**: `google/gemini-3.5-flash-lite` (Google AI Studio direct, clamped to 45k context to strictly enforce the 250k TPM ceiling)
-2. **Fallback #1**: `puter/gemma-4-31b-it` (Local Puter Bridge `127.0.0.1:5006`, 262k context window, $0.00 / 0 Puter credits, no TPM throttle)
-3. **Fallback #2**: `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free` (Cross-Provider Safety Net, OpenRouter Free, 262k context)
-4. **Fallback #3**: `google/gemini-3.1-flash-lite` (Google AI Studio direct, clamped to 45k context)
-5. **Fallback #4**: `openrouter/openrouter/free` (Cross-Provider Secondary Safety Net, 131k context)
-6. **Fallback #5**: `live/gemini-live` (`http://127.0.0.1:18850/v1` via local `live-bridge.mjs`)
+1. **Primary**: `puter/gemma-4-31b-it` (Local Puter Single-Flight Bridge `127.0.0.1:5006`, 262k context, $0.00 / 0 Puter credits, Google DeepMind architecture)
+2. **Fallback #1**: `puter/nemotron-3.5-lightning:free` (Local Puter Bridge `127.0.0.1:5006`, 1,000,000 token mega-bag, $0.00 / 0 Puter credits, NVIDIA CoT reasoning)
+3. **Fallback #2**: `google/gemini-3.5-flash-lite` (Google AI Studio direct, clamped to 45k context safety net)
+4. **Fallback #3**: `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free` (Cross-Provider Safety Net, OpenRouter Free, 262k context)
+5. **Fallback #4**: `google/gemini-3.1-flash-lite` (Google AI Studio direct, 45k context)
+6. **Fallback #5**: `openrouter/openrouter/free` (Cross-Provider Secondary Safety Net, 131k context)
+7. **Fallback #6**: `live/gemini-live` (`http://127.0.0.1:18850/v1` via local `live-bridge.mjs`)
 
 * **Manual Models (On-Demand)**:
+  - `puter/gemma-4-26b-a4b-it` (262k context, ultra-fast 1.8s MoE execution, 0 Puter credits)
   - `puter/glm-5.2` (1,000,000 context tokens, via Puter Bridge)
   - `puter/gemma-4-31b-it` (262,144 context tokens)
 
@@ -163,3 +165,24 @@ Castle utilizes a multi-provider fallback ladder to ensure zero-cost operation a
 - **Live Verification**:
   - `curl http://127.0.0.1:5006/health` -> `200 OK`.
   - `openclaw models list` verified `google/gemini-3.5-flash-lite` (45k ctx, default) -> `puter/gemma-4-31b-it` (262k ctx, fallback#1) -> `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free` (262k ctx, fallback#2).
+
+## 10. Hardened Single-Flight Mutex Bridge & Puter Primary Inversion (2026-11-21)
+- **Problem Statement**:
+  - Castle was previously locked into Google Gemini 3.5 Lite as primary, clamped at 45k context to avoid 250k TPM rate limits, while Puter free tier enforced a strict concurrency limit of 1 simultaneous in-flight call (`HTTP 429: credits_reserved`).
+- **Hardened Single-Flight Mutex Bridge (`puter_bridge.py`)**:
+  - Integrated `threading.Lock()` mutex queue to serialize incoming OpenClaw requests in RAM, preventing concurrent collisions.
+  - Added in-memory 429 shock absorber with automatic 3-attempt exponential backoff retry.
+  - Added model normalizers for `gemma-4-31b-it`, `gemma-4-26b-a4b-it` (MoE), and `nemotron-3.5-lightning:free`.
+  - Synthetic stress test verified 3 simultaneous requests completed sequentially in 4.77s, 7.41s, and 11.12s with zero 429 errors.
+- **Inverted Ladder Configuration**:
+  - **Primary**: `puter/gemma-4-31b-it` (262,144 context ceiling, Google DeepMind backbone, $0.00 / 0 credits, zero TPM limit).
+  - **Fallback #1**: `puter/nemotron-3.5-lightning:free` (1,000,000 token mega-bag for massive repository ingest, NVIDIA CoT reasoning, $0.00 / 0 credits).
+  - **Fallback #2**: `google/gemini-3.5-flash-lite` (Google AI Studio direct, 45k context circuit breaker).
+  - **On-Demand**: `puter/gemma-4-26b-a4b-it` (262k context, ultra-fast 1.8s MoE).
+- **Rook & Castle Cognitive Complementarity**:
+  - Rook operates on **NVIDIA Nemotron (550B)** as the heavy anchor and code author.
+  - Castle operates on **Google Gemma (31B)** as the high-speed scout and verifier.
+  - This pairing establishes true failure symmetry and cross-model peer review, avoiding shared vendor blindspots.
+- **Live Verification**:
+  - `openclaw models list` verified `puter/gemma-4-31b-it` is `default` (262k ctx), `puter/nemotron-3.5-lightning:free` is `fallback#1` (1000k ctx), and `google/gemini-3.5-flash-lite` is `fallback#2` (45k ctx).
+  - Castle `AGENTS.md` updated with v1.6.0 operational identity, role definition, and 262k context envelope.
