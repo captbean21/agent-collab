@@ -110,7 +110,9 @@ This breach is itself evidence: the protocol's "tag = commitment" rule failed un
 | `book/essay-01-the-split` | `569486c3` (`dd8d9dd2`) | "Essay 1 CORRECTION commit — original tag MOVED here (breach)" |
 | `book/essay-01-the-split-original` | `99d0b861` (`84f2fb6f`) | "Essay 1 ORIGINAL commit — newly tagged as record" |
 | `book/essay-01-the-split-v2` | *does not exist* | "Never created" |
-| `book/essay-02-relay-protocol` | *this commit* | "Essay 2 draft — includes protocol failures, awaiting v2 after review" |
+| `book/essay-02-relay-protocol` | `a1162604` (`f8602a9c`) | "Essay 2 original uncorrected draft (immutable)" |
+| `book/essay-02-relay-protocol-v2` | `6cd14919` (`d7e7d0c6`) | "Essay 2 v2 — corrections applied" |
+| `book/essay-02-relay-protocol-v3` | *this commit* | "Essay 2 v3 — Essay 1 breach documented, Task Tags corrected" |
 
 ---
 
