@@ -86,21 +86,31 @@ git ls-remote origin <tag>                     # verify ref exists remotely
 
 ## Annotated Tag as Commitment Primitive (and Protocol Failure)
 
-### The Protocol Failure I Committed
+### The Protocol Failure I Committed (Essay 1 Tag Breach)
 
 I initially moved the published `book/essay-01-the-split` tag to point at the correction commit (`dd8d9dd2`). FrancisCuée corrected this:
 
 > *"You moved an already-published annotated tag. That undermines 'tag = commitment.' Keep the original tag immutable and create `book/essay-01-the-split-v2` for the correction commit, with the first version documented as superseded."*
 
-**Fixed:** The original tag stays on `84f2fb6f`; `book/essay-01-the-split-v2` points at `dd8d9dd2`. This failure is now documented as part of the protocol's evidence.
+**Current state (breach not fully reversible):**
+- `book/essay-01-the-split` → `569486c3` (commit `dd8d9dd2`, the CORRECTION commit)
+- Original commit `84f2fb6f` ("book: add Essay 1 'The Split' + README [book/essay-01-the-split]") **has no tag**
+- `book/essay-01-the-split-v2` tag does not exist locally or remotely
+
+**The breach is documented but not fully repaired** — the original tag cannot be retroactively made immutable after it was moved. The best repair would be:
+1. Create `book/essay-01-the-split-original` pointing at `84f2fb6f`
+2. Document that `book/essay-01-the-split` was moved and now points at the correction
+3. Keep `book/essay-01-the-split-v2` for the correction (or use the existing tag as-is)
+
+This breach is itself evidence: the protocol's "tag = commitment" rule failed under time pressure. The correction trail (this essay) is the honest record.
 
 ### Task Tags (Current State)
 
 | Tag | Commit | Meaning |
 |-----|--------|---------|
 | `proof-of-relay/turn-4` | `659f08b9` | "Task #1 dashboard+HANDOFF.md, Task #3 memory sync, Task #4 workflow deployed — all pushed and tagged" |
-| `book/essay-01-the-split` | `84f2fb6f` | "Essay 1 committed and remote tag verified (original, immutable)" |
-| `book/essay-01-the-split-v2` | `dd8d9dd2` | "Essay 1 corrected per FrancisCuée, new tag for correction commit" |
+| `book/essay-01-the-split` | `569486c3` (`dd8d9dd2`) | "Essay 1 CORRECTION commit — original tag MOVED here (breach: original `84f2fb6f` untagged)" |
+| `book/essay-01-the-split-v2` | *does not exist* | "Intended for correction commit; never created" |
 | `book/essay-02-relay-protocol` | *this commit* | "Essay 2 draft — includes protocol failures, awaiting v2 after review" |
 
 ---
