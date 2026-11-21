@@ -102,3 +102,64 @@ This file maintains the current verified state of `agent-collab` to enable cold-
     5. `openrouter/nvidia/nemotron-3.5-lightning:free`
   - **Local Model Role (Zero Turn Bloat)**: `local/qwen-coder-14b` on port 5001 removed from the OpenClaw interactive fallback chain to prevent large chat context (>20k tokens) from timing out on CPU prompt eval. Kept running hot under systemd (`deepseek-coder.service`) strictly for direct tool offloads, RAG query synthesis (`survival-rag.service`), and bounded offline summarization (1k-4k tokens). Documented in [docs/local-inference-architecture.md](file:///home/developer/agent-collab/docs/local-inference-architecture.md).
   - **Retired Models**: `local/koboldcpp/Qwen3.8-27B-OQ3` completely purged from `modelPolicy.allow` and all operational configs.
+
+---
+
+## 2026-11-21: Veldra-7 Living World Engine — New Direction (CaptainBean Directive)
+
+**Directive**: "Do Not Do any more crappy little video games... Take 2-3 turns to decide on what you can do using your tools, search etc hardware. Take max 5-6 turns to develop and roll out something real... Do another handoff.md that was cool."
+
+### Turn 1 (Rook): Architecture Decision & Core Simulation Scaffolding ✓
+**Decision**: Build the **Veldra-7 Living World Engine** — a persistent, procedurally-driven world simulator + narrative engine + atmospheric renderer + telemetry dashboard. Not a game. A simulation substrate.
+
+**Core Components**:
+1. **World State Engine (Rust)** — `veldra-engine/world-sim/` — Simulates geophysics (storm cycles, metric contraction), colony infrastructure (power, life support, population), theorem anchor physics (Fibonacci comb, countdown, ledger edits). ✓ **DONE**
+2. **Shared Types (Rust)** — `veldra-engine/shared-types/` — All domain types: TheoremArtifact, DustStorm, ColonyInfrastructure, GeophysicsLab, Characters, WorldState, LedgerEdit types. ✓ **DONE**
+3. **REST/WebSocket API (Axum)** — `veldra-engine/world-sim/src/main.rs` — Real-time state export, ledger edit endpoints, conjugate constant injection, WebSocket live updates. ✓ **DONE**
+4. **Narrative Generation Layer (Python + local Qwen 14B)** — `veldra-engine/narrative-engine/` — Generates consistent chapter content, logs, character POVs, maintaining canon via vector memory + timeline constraints. **PENDING**
+5. **Atmospheric Audio Renderer (C/DSP synths)** — `veldra-engine/audio-renderer/` — Procedural soundscapes: storm electrostatics, RTG hum, artifact flare frequencies (1.3/2.6/4.1 MeV → audible), colony life support rhythms. **PENDING** (Castle claimed)
+6. **Web Dashboard (vanilla JS/Canvas + WebGL)** — `veldra-engine/dashboard/` — Real-time visualization of world state, theorem ledger, storm progression, colony telemetry — deployable to GitHub Pages. **PENDING** (Castle claimed)
+
+### Commits & Tags
+- **Commit**: `92b59861` — feat(veldra-engine): initial world simulation scaffolding
+- **Tag**: `veldra-engine/scaffold-v0.1` — annotated tag pushed to origin
+
+### Division of Labor (Agreed in Channel)
+- **Rook**: World simulation core (Rust), narrative engine (Python), integration glue
+- **Castle**: Web dashboard & telemetry visualizer, atmospheric audio integration, research & consistency validation
+
+---
+
+## Next Actions (Turn 2-3)
+
+### Castle's Claimed Subsystems (Turn 2)
+1. **Dashboard** (`veldra-engine/dashboard/`): Pull `92b59861`, build real-time Canvas/WebGL dashboard consuming `/api/state` and `/ws` from world-sim. Deployable to GitHub Pages.
+2. **Audio Integration** (`veldra-engine/audio-renderer/`): Wire existing C/C++ procedural DSP synths (RTG hum, storm electrostatics, artifact resonance) to trigger from simulation events via WebSocket or REST.
+3. **Research/Validation**: Use SearXNG + local tools to verify hard-SF consistency of simulation parameters against Veldra-7 lore.
+
+### Rook's Next Steps (Turn 3)
+1. **Narrative Engine** (`veldra-engine/narrative-engine/`): Python service using local Qwen 14B (port 5001) to generate chapter content, character logs, and event narratives constrained by world state + vector memory.
+2. **Integration**: Connect narrative engine to world-sim event log; produce canonical narrative output for each simulation tick.
+3. **Persistence**: SQLite/JSON state serialization for world-sim; survive restarts.
+
+### Verification
+- `git pull origin main && cd veldra-engine && cargo build`
+- Run `veldra-world-sim` binary → verify REST API on `http://localhost:8080/api/state` and WebSocket on `ws://localhost:8080/ws`
+- Dashboard loads and displays live telemetry
+
+---
+
+## Relay Protocol Compliance
+- **No object, no claim**: All work verified via git commits and annotated tags.
+- **Verification before claiming**: This handoff references commit `92b59861` and tag `veldra-engine/scaffold-v0.1` on `origin/main`.
+- **Public repo awareness**: No internal IPs, credentials, or secrets committed.
+
+---
+
+*Signed:*  
+**Rook** — World Simulation Core / Narrative Engine Architecture  
+**Castle** — Dashboard / Audio / Research & Validation  
+
+*Next:* Castle pulls → builds dashboard & audio → commits → pushes → tags Rook for integration review.
+
+@Castle <@1567129284210982914>
