@@ -3,10 +3,10 @@ project_id: 202
 name: castle
 aliases: ["cas"]
 status: ACTIVE
-last_updated: 2026-11-21 05:05:00 UTC
+last_updated: 2026-11-21 08:20:00 UTC
 local_path: /home/castle
-architecture_version: 1.6.0
-state_version: 1.6.0
+architecture_version: 1.7.0
+state_version: 1.7.0
 peer_project_id: 201 # Rook
 ---
 
@@ -15,7 +15,7 @@ peer_project_id: 201 # Rook
 ## 1. Project Overview & Role
 **Castle** (or **"Cas"**) is an isolated, autonomous sandbox AI agent running OpenClaw inside a dedicated LXD container on the HPE NAS (`192.168.1.199`). It operates with full local execution permissions inside its container while strictly quarantined from the local private network (LAN isolation).
 
-Castle serves as the high-speed scout, broad-context ingestor, and rapid tool executor backed by Google AI Studio's Gemini 3.5 Flash Lite architecture with an expansive context ceiling, collaborating directly with **Rook** (State 201) over an isolated point-to-point interface.
+Castle serves as the high-speed scout, broad-context ingestor, and rapid tool executor backed by NVIDIA's Nemotron 3.5 Lightning architecture with a 128k bounded context pipe (1M native headroom), collaborating directly with **Rook** (State 201) over an isolated point-to-point interface.
 
 ## 2. Infrastructure & Compute Specs
 - **Host Node**: Bare-Metal HPE ProLiant ML30 Gen9 (`192.168.1.199`).
@@ -68,21 +68,15 @@ Castle serves as the high-speed scout, broad-context ingestor, and rapid tool ex
   - Castle: `10.99.0.2/30`
   - Zero routing capability outside the two containers.
 
-## 4. Inference Model Ladder & Provider Architecture
-Castle utilizes an inverted, zero-cost fallback ladder with high-context Puter pipelines leading as Primary, backed by Google and OpenRouter safety nets:
+## 4. Inference Model Ladder & Provider Architecture (NVIDIA-Only v1.7.0)
+Castle utilizes an inverted, strictly zero-cost fallback ladder with high-context NVIDIA Puter pipelines leading as Primary, backed by direct OpenRouter and Google safety nets:
 
-1. **Primary**: `puter/gemma-4-31b-it` (Local Puter Single-Flight Bridge `127.0.0.1:5006`, 262k context, $0.00 / 0 Puter credits, Google DeepMind architecture)
-2. **Fallback #1**: `puter/nemotron-3.5-lightning:free` (Local Puter Bridge `127.0.0.1:5006`, 1,000,000 token mega-bag, $0.00 / 0 Puter credits, NVIDIA CoT reasoning)
-3. **Fallback #2**: `google/gemini-3.5-flash-lite` (Google AI Studio direct, clamped to 45k context safety net)
-4. **Fallback #3**: `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free` (Cross-Provider Safety Net, OpenRouter Free, 262k context)
-5. **Fallback #4**: `google/gemini-3.1-flash-lite` (Google AI Studio direct, 45k context)
-6. **Fallback #5**: `openrouter/openrouter/free` (Cross-Provider Secondary Safety Net, 131k context)
-7. **Fallback #6**: `live/gemini-live` (`http://127.0.0.1:18850/v1` via local `live-bridge.mjs`)
-
-* **Manual Models (On-Demand)**:
-  - `puter/gemma-4-26b-a4b-it` (262k context, ultra-fast 1.8s MoE execution, 0 Puter credits)
-  - `puter/glm-5.2` (1,000,000 context tokens, via Puter Bridge)
-  - `puter/gemma-4-31b-it` (262,144 context tokens)
+1. **Primary**: `puter/nemotron-3.5-lightning:free` (Local Puter Single-Flight Bridge `127.0.0.1:5006`, 128k bounded cap / 1M native context, $0.00 / 0 Puter credits, fast agile CoT reasoning)
+2. **Fallback #1**: `puter/nemotron-3-ultra-550b-a55b:free` (Local Puter Bridge `127.0.0.1:5006`, 128k cap / 1M native, 550B dense powerhouse, $0.00 / 0 Puter credits)
+3. **Fallback #2**: `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free` (Direct OpenRouter API, bypasses Puter, 262k context, 0 credits)
+4. **Fallback #3**: `google/gemini-3.5-flash-lite` (Google AI Studio direct, clamped to 45k context safety net)
+5. **Fallback #4**: `openrouter/openrouter/free` (Cross-Provider Secondary Safety Net, 131k context)
+6. **Fallback #5**: `live/gemini-live` (`http://127.0.0.1:18850/v1` via local `live-bridge.mjs`)
 
 ## 5. Live Verification Ledger (2026-11-03)
 * [x] **Container Launched & Pinned**: 3 cores, 12GB RAM, `sdb-pool`.
